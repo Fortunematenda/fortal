@@ -59,7 +59,7 @@ $(document).on('click','.view_lead',function() {
     details = 'There is an error : '+error;  // Handle the error here
 });    
    $("#show_details").html(details);
-});
+}); 
 
 $(document).on('click','#add_note',function() {
     var _token = $('input[name="_token"]').val();
