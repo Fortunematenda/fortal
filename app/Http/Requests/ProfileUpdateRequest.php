@@ -20,14 +20,20 @@ class ProfileUpdateRequest extends FormRequest
             'last_name' => ['required', 'string', 'max:255'],
             'company_name' => ['nullable', 'string', 'max:255'],
             'company_registration_number' => ['nullable', 'string', 'max:50'],
-            'logo' => ['logo'],
-            'location'=> ['required','string','max:255'],
+            'profile_picture' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Not always required
+            'logo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Not always required
+            'location' => ['required', 'string', 'max:255'],
             'is_company_website' => ['boolean'],
             'company_size' => ['nullable', 'string', 'max:255'],
             'is_company_sales_team' => ['boolean'],
             'contact_number' => ['nullable', 'string', 'max:15'],
-            'company_registration_number' => ['nullable', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique(User::class)->ignore($this->user()->id),
+            ],
         ];
     }
 }

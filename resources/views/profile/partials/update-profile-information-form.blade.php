@@ -11,11 +11,7 @@
 
 <div class="uk-section uk-section-default">
     <div class="uk-container">
-        <header>
-            <h2 class="text-lg font-medium text-gray-900">
-                <b>{{ __("Update your account's profile information") }}</b>
-            </h2>
-        </header>
+        
 
         <form id="send-verification" method="post" action="{{ route('verification.send') }}">
             @csrf
@@ -27,8 +23,8 @@
 
             <div class="uk-grid-match uk-child-width-1-2@m uk-margin" uk-grid>
                 <div>
-                    <img src="{{ $user->profile_picture_url ?? asset('build/assets/img/profile_avatar.png') }}" 
-                         alt="Profile Picture" class="rounded-full w-20 h-32 object-cover">
+                <img src="{{ asset($user->profile_picture) }}" alt="Profile Picture" class="rounded-full w-20 h-32 object-cover">
+
                 </div>
                 <div>
                     <label for="profile_picture" class="block text-sm font-medium text-gray-700">

@@ -31,7 +31,9 @@ class User extends Authenticatable
         'is_company_social_media',
         'is_company_sales_team',
         'company_name',
-        'company_registration_number'
+        'company_registration_number',
+        'profile_picture', // Corrected from 'profile-picture' to 'profile_picture'
+        'logo',
     ];
 
     /**
@@ -51,6 +53,17 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        // Remove 'password' from casting since it's already hashed
     ];
+
+    /**
+     * Get the full URL for the user's profile picture.
+     *
+     * @return string|null
+     */
+    public function getProfilePictureUrlAttribute()
+    {
+        return $this->profile_picture 
+            ? asset('storage/' . $this->profile_picture) 
+            : asset('build/assets/img/profile_avatar.png');
+    }
 }

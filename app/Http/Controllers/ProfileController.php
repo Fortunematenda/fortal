@@ -17,10 +17,12 @@ class ProfileController extends Controller
   
      public function openDashboard(Request $request)
      {
+        $user = Auth::user();
         $user = $request->user();
         $first_name = $user->first_name;
         $email = $user->email;
         $logo = $user->logo;
+        $profile_picture = $user->profile_picture;
         $contact_number=$user->contact_number;
         $is_company_website=$user->is_company_website;
         $company_size=$user->company_size;
@@ -38,7 +40,7 @@ class ProfileController extends Controller
         $service_badge = count($latest_services)-2;
         $unread_leads = count($this->getUnreadLeads($user->id));
         
-        return view("dashboard",compact(["first_name","login_at","greetings","contact_number","company_name","is_company_website","company_size","is_company_sales_team","logo","location","company_registration_number","latest_services_limited","service_badge","email","number_of_leads","unread_leads","credits_balance"]));
+        return view("dashboard",compact(["first_name","login_at","greetings","profile_picture","contact_number","company_name","is_company_website","company_size","is_company_sales_team","logo","location","company_registration_number","latest_services_limited","service_badge","email","number_of_leads","unread_leads","credits_balance"]));
      }
      public function edit(Request $request): View
      {
@@ -57,47 +59,39 @@ class ProfileController extends Controller
              'company_registration_number' => $user->company_registration_number,
              'location'=>$user->location,
              'latest_services' => $latest_services,
+             'profile_picture' =>$user->profile_picture,
+             'logo' =>$user->logo,
          ]);
      }
      
 
-   
      public function update(ProfileUpdateRequest $request): RedirectResponse
-     {
-         
-         $request->user()->fill($request->validated());
-     
-        
-         if ($request->user()->isDirty('email')) {
-             $request->user()->email_verified_at = null;
-         }
-     
-         
-         if ($request->user()->isDirty()) {
-             
-             $request->user()->save();
-     
-             
-             $first_name = $request->first_name;
-             $company_name = $request->company_name;
-             $company_registration_number = $request->company_registration_number;
-             $logo = $request->logo;
-     
-           
-             return Redirect::route('profile.edit')
-                 ->with('status', 'profile-updated')
-                 ->with('success', 'Profile updated successfully!')
-                 ->with([
-                     'user' => $first_name,
-                     'company_name' => $company_name,
-                     'company_registration_number' => $company_registration_number,
-                     'logo' => $logo
-                 ]);
-         }
-     
-         
-         return Redirect::route('profile.edit')->with('status', 'No changes were made.');
-     }
+{
+    $user = $request->user();
+
+    // Handle profile picture upload
+    if ($request->hasFile('profile_picture')) {
+        // Store the image in the 'public/profile_pictures' directory
+        $path = $request->file('profile_picture')->store('profile_pictures', 'public');
+        $user->profile_picture = $path;  // Save the file path to the user's profile
+    }
+
+    // Fill in other user data from validated request
+    $user->fill($request->validated());
+    if ($user->isDirty('email')) {
+        $user->email_verified_at = null; // Reset verification if email has changed
+    }
+
+    if ($user->isDirty()) {
+        $user->save(); // Save the changes
+        return redirect()->route('profile.edit')->with('status', 'profile-updated')->with('success', 'Profile updated successfully!');
+    }
+
+    return redirect()->route('profile.edit')->with('status', 'No changes were made.');
+}
+
+
+
      
 
     public function updateServices(Request $request): RedirectResponse
@@ -257,4 +251,20 @@ class ProfileController extends Controller
 
     return $results;
     }
+
+public function updatep(Request $request)
+{
+    // Check if the cropped image is present in the request
+    if ($request->hasFile('cropped_image')) {
+        $file = $request->file('cropped_image');
+        $path = $file->store('profile_pictures', 'public'); // Store image in 'public/profile_pictures' folder
+
+        // Update user's profile picture URL
+        $user = auth()->user();
+        $user->profile_picture = $path;
+        $user->save();
+    }
+
+    return redirect()->back()->with('status', 'Profile updated successfully!');
+}
 }
