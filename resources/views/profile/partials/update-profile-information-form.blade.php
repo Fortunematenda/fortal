@@ -23,7 +23,7 @@
 
             <div class="uk-grid-match uk-child-width-1-2@m uk-margin" uk-grid>
                 <div>
-                <img src="{{ asset($user->profile_picture) }}" alt="Profile Picture" class="rounded-full w-20 h-32 object-cover">
+                <img src="{{ asset($user->profile_picture) }}" alt="Profile Picture" class="rounded-full w-20 h-20 object-cover">
 
                 </div>
                 <div>
