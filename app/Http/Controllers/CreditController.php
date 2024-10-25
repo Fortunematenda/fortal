@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Models\ServicesModel;
+use App\Models\ContactedLeadsModel;
+use App\Models\UserServicesModel;
+use App\Models\LeadsModel;
 use App\Models\User;
 use App\Models\CreditsTrailModel; // Correct model import
 

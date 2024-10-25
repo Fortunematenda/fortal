@@ -13,6 +13,7 @@ $(document).on("keyup", "#serviceTxt", function() {
                 $("#search-service").show(); // Show loading or search div
             },
             success: function(data) {
+                
                 let services = data.services; // Simplified access to services array
                 $.each(services, function(index, service) {
                     let serviceName = service.service_name;
@@ -26,7 +27,7 @@ $(document).on("keyup", "#serviceTxt", function() {
                 console.error('Error:', status, error); // Improved error logging
             },
             complete: function() {
-                $("#search-service").hide(); // Hide loading or search div after request completes
+            $("#search-service").hide(); // Hide loading or search div after request completes
             }
         });
     }
