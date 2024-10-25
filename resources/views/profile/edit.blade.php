@@ -1,28 +1,33 @@
 <x-app-layout>
+<div class="sticky-top enquiriesbanner">
+        <div class="flex-fill d-flex">
+            <div id="__rctSellerEnquiriesBanner" class="w-100"></div>
+        </div>
+    </div>
     <div class="main-tab-holder main-tab-holder-with-spaces pt-2 pb-3 px-2">
         <ul class="flex flex-wrap border-b flex items-center">
             <li class="-mb-px mr-1">
-                <button class="bg-white inline-block py-2 px-4 text-gray-500 font-semibold border-b-2 border-blue-500 tab-button" onclick="showContent('profile', this)">
+                <button class="bg-white inline-block pt-2 pb-3 py-2 px-4 text-gray-500 font-semibold border-b-2 border-blue-500 tab-button" onclick="showContent('profile', this)">
                     <i class="bi bi-person-badge"></i> Profile Settings
                 </button>
             </li>
             <li class="mr-1">
-                <button class="bg-white inline-block py-2 px-4 text-gray-500 hover:text-blue-500 tab-button" onclick="showContent('services', this)">
+                <button class="bg-white inline-block pt-2 pb-3 py-2 px-4 text-gray-500 hover:text-blue-500 tab-button" onclick="showContent('services', this)">
                     <i class="bi bi-gear"></i> Services
                 </button>
             </li>
             <li class="mr-1">
-                <button class="bg-white inline-block py-2 px-4 text-gray-500 hover:text-blue-500 tab-button" onclick="showContent('buy-credits', this)">
+                <button class="bg-white inline-block pt-2 pb-3 py-2 px-4 text-gray-500 hover:text-blue-500 tab-button" onclick="showContent('buy-credits', this)">
                     <i class="bi bi-credit-card"></i> Buy More Credits
                 </button>
             </li>
             <li class="mr-1">
-                <button class="bg-white inline-block py-2 px-4 text-gray-500 hover:text-blue-500 tab-button" onclick="showContent('password', this)">
+                <button class="bg-white inline-block pt-2 pb-3 py-2 px-4 text-gray-500 hover:text-blue-500 tab-button" onclick="showContent('password', this)">
                     <i class="bi bi-arrow-down-up"></i> Update Password
                 </button>
             </li>
             <li class="mr-1">
-                <button class="bg-white inline-block py-2 px-4 text-gray-500 hover:text-blue-500 tab-button" onclick="showContent('notifications', this)">
+                <button class="bg-white inline-block pt-2 pb-3 py-2 px-4 text-gray-500 hover:text-blue-500 tab-button" onclick="showContent('notifications', this)">
                     <i class="bi bi-bell"></i> Notifications
                 </button>
             </li>

@@ -1,34 +1,75 @@
-
 <div class="row section-header">
     <div class="col-12">
         <div class="row settings-back">
             <div class="col-12 d-flex">
                 <a class="d-flex text-grey-400" href="/settings">
                     <span class="bark-svg-icon bsi-primary-grey-400 align-self-center bsi-sm">
-                        <!--?xml version="1.0" encoding="UTF-8"?-->
-                        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <g transform="translate(4.000000, 5.000000)" class="primary-color">
-                                    <path d="M4.41421356,6 L15,6 L15,8 L4.41421356,8 L8.70710678,12.2928932 L7.29289322,13.7071068 L0.585786438,7 L7.29289322,0.292893219 L8.70710678,1.70710678 L4.41421356,6 Z"></path>
-                                </g>
-                            </g>
-                        </svg>
+                        <!-- SVG icon code -->
                     </span>
-                  
                 </a>
             </div>
         </div>
+
+
+
+        <div class="row section-header">
+    <div class="col-12">
+        <h4>Your Credit Transaction History:</h4>
+        <ul id="credit-history-list">
+            @forelse($transactions as $transaction)
+                <li>
+                    <strong>{{ $transaction->transaction_type }}</strong>: {{ $transaction->credits_changed }} credits
+                    <span> - {{ $transaction->created_at->format('d M Y H:i') }}</span>
+                </li>
+            @empty
+                <li>No transactions found.</li>
+            @endforelse
+        </ul>
+
         <div class="row" style="font-weight:bold">
-         <h2 class="col-12 subsection-title">My credits</h2>
+            <h2 class="col-12 subsection-title">My Credits</h2>
         </div>
-        <div class='modal-footer justify-content-between'>
-        <button class='btn btn-success credit-upsell-topup-submit mx-auto'>
-            <span >You have {{$credits_balance}} Credits</span>
-          <span class='loading-text'><span class='spinner spinner-border d-none'></span></span>
-        </button>
-    </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <h4>Your Credit Transaction History:</h4>
+        <ul id="credit-history-list">
+            @foreach($transactions as $transaction)
+                <li>
+                    <strong>{{ $transaction->transaction_type }}</strong>: {{ $transaction->credits_changed }} credits
+                    <span> - {{ $transaction->created_at->format('d M Y H:i') }}</span>
+                </li>
+            @endforeach
+
+            @if($transactions->isEmpty())
+                <li class="text-center">No transactions found.</li>
+            @endif
+        </ul>
+
+        <div class="row" style="font-weight:bold">
+            <h2 class="col-12 subsection-title">My Credits</h2>
+        </div>
+        <div class='modal-footer justify-content-between'>
+            <button class='btn btn-success credit-upsell-topup-submit mx-auto'>
+                <span>You have {{$creditHistory}} Credits</span>
+                <span class='loading-text'><span class='spinner spinner-border d-none'></span></span>
+            </button>
+        </div>
+    </div>
+</div>
+
 <div class='modal-alerts px-2'></div>
 <div class='container'>
     <div id='credit-pack-row-332821855' class='credit-pack-row row js-credit-pack-row rounded credit-pack-option-container mb-4 p-2 p-md-4 border position-relative' data-plan-id='332821855' data-discount='0' data-discountprice='202.50' data-ncredits='15' data-sales-team-quote-id='0' data-price-per-credit='13.50' data-cy='credit-pack-top-up-row'>
@@ -151,5 +192,49 @@
             <span class='loading-text'><span class='spinner spinner-border d-none'></span></span>
         </button>
     </div>
-
+<hr>
+    <div class="transaction-log-table mt-4">
+        <h4 class="mb-3">Credit Transaction Log</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Description</th>
+                    <th>Credits</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>38104132</td>
+                    <td>8 credits used to reply to customer</td>
+                    <td>-8</td>
+                    <td>23 Sept 2024</td>
+                </tr>
+                <tr>
+                    <td>38104131</td>
+                    <td>15 credits purchased</td>
+                    <td>15</td>
+                    <td>23 Sept 2024</td>
+                </tr>
+                <tr>
+                    <td>37977539</td>
+                    <td>5 credits used to reply to customer</td>
+                    <td>-5</td>
+                    <td>17 Sept 2024</td>
+                </tr>
+                <!-- Additional rows can be added here -->
+            </tbody>
+        </table>
+        <!-- Pagination -->
+        <nav>
+            <ul class="pagination">
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+            </ul>
+        </nav>
+    </div>
     
+    
+</div>

@@ -66,32 +66,32 @@ class ProfileController extends Controller
      
 
      public function update(ProfileUpdateRequest $request): RedirectResponse
-     {
-         $user = $request->user();
-     
-         // Handle profile picture upload
-         if ($request->hasFile('profile_picture')) {
-             // Store the image in the 'public/profile_pictures' directory and get the path
-             $path = $request->file('profile_picture')->store('profile_pictures', 'public');
-             $user->profile_picture = $path;  // Save the file path to the user's profile in the database
-         }
-     
-         // Fill in other user data from the validated request
-         $user->fill($request->validated());
-     
-         // Reset email verification if the email is changed
-         if ($user->isDirty('email')) {
-             $user->email_verified_at = null;
-         }
-     
-         if ($user->isDirty()) {
-             $user->save(); // Save the changes to the database
-             return redirect()->route('profile.edit')->with('success', 'Profile updated successfully!');
-         }
-     
-         return redirect()->route('profile.edit')->with('status', 'No changes were made.');
-     }
-     
+{
+    $user = $request->user();
+
+    // Handle profile picture upload
+    if ($request->hasFile('profile_picture')) {
+        // Store the image in the 'public/profile_pictures' directory
+        $path = $request->file('profile_picture')->store('profile_pictures', 'public');
+        $user->profile_picture = $path;  // Save the file path to the user's profile
+    }
+
+    // Fill in other user data from validated request
+    $user->fill($request->validated());
+    if ($user->isDirty('email')) {
+        $user->email_verified_at = null; // Reset verification if email has changed
+    }
+
+    if ($user->isDirty()) {
+        $user->save(); // Save the changes
+        return redirect()->route('profile.edit')->with('status', 'profile-updated')->with('success', 'Profile updated successfully!');
+    }
+
+    return redirect()->route('profile.edit')->with('status', 'No changes were made.');
+}
+
+
+
      
 
     public function updateServices(Request $request): RedirectResponse

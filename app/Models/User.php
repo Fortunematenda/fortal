@@ -32,7 +32,7 @@ class User extends Authenticatable
         'is_company_sales_team',
         'company_name',
         'company_registration_number',
-        'profile_picture', // Corrected from 'profile-picture' to 'profile_picture'
+        'profile_picture',
         'logo',
     ];
 
@@ -53,6 +53,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'credits_balance' => 'float', // example of casting if it's a number
     ];
 
     /**
@@ -60,10 +61,15 @@ class User extends Authenticatable
      *
      * @return string|null
      */
-    public function getProfilePictureUrlAttribute()
+    /*
+*/
+    /**
+     * Get the user's full name.
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
     {
-        return $this->profile_picture 
-            ? asset('storage/' . $this->profile_picture)  // Correct path to the storage folder
-            : asset('build/assets/img/profile_avatar.png');  // Default image if no profile picture exists
+        return "{$this->first_name} {$this->last_name}";
     }
 }    

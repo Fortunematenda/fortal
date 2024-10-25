@@ -1,15 +1,10 @@
 <style>
     @media (min-width: 300px) {
         .uk-child-width-1-2@m > * {
-           
-           
-            border-radius: 50%;
-            border: 50px solid #4CAF50;
             width: 15% !important;
         }
         img, video {
             max-width: fit-content;
-            object-fit: cover;
         }
     }
 </style>
@@ -26,12 +21,9 @@
             @csrf
             @method('patch')
 
-            <div class="uk-grid-match uk-child-width-1-2@m uk-margin" uk-grid>
+            <div >
                 <div>
-                <img src="{{ $user->profile_picture_url }}" alt="Profile Picture" class="rounded-full w-10 h-10 object-cover" style="
-            border: 3px solid #4CAF50;
-            width: 50% !important;">
-
+                <img src="{{ asset($user->profile_picture) }}" alt="Profile Picture" class="rounded-full w-20 h-32 object-cover">
 
                 </div>
                 <div>
@@ -41,6 +33,7 @@
                     <input type="file" id="profile_picture" name="profile_picture" 
                            class="block w-full focus:ring focus:ring-indigo-200" accept="image/*" />
                 </div>
+                
             </div>
 
             <div>
@@ -77,7 +70,7 @@
                 <x-input-error class="mt-2" :messages="$errors->get('company_registration_number')" />
             </div>
 
-            <h2><b>{{ __('Contact Information*') }}</b></h2>
+            <h2>{{ __('Contact Information*') }}</h2>
             <div class="mb-4">
                 <label class="block text-gray-700" for="contact_number">{{ __('Contact Number (optional)') }}</label>
                 <input type="text" id="contact_number" name="contact_number" 
@@ -107,7 +100,7 @@
                 </div>
             @endif
 
-            <h3><b>{{ __('Location Information') }}</b></h3>
+            <h2>{{ __('Location Information') }}</h2>
             <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
                 <div class="uk-margin">
                     <x-input-label for="location" :value="__('Address')" />
