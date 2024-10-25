@@ -1,10 +1,15 @@
 <style>
     @media (min-width: 300px) {
         .uk-child-width-1-2@m > * {
+           
+           
+            border-radius: 50%;
+            border: 50px solid #4CAF50;
             width: 15% !important;
         }
         img, video {
             max-width: fit-content;
+            object-fit: cover;
         }
     }
 </style>
@@ -23,7 +28,10 @@
 
             <div class="uk-grid-match uk-child-width-1-2@m uk-margin" uk-grid>
                 <div>
-                <img src="{{ asset($user->profile_picture) }}" alt="Profile Picture" class="rounded-full w-20 h-32 object-cover">
+                <img src="{{ $user->profile_picture_url }}" alt="Profile Picture" class="rounded-full w-10 h-10 object-cover" style="
+            border: 3px solid #4CAF50;
+            width: 50% !important;">
+
 
                 </div>
                 <div>

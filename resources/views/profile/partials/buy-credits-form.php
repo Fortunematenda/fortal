@@ -151,49 +151,5 @@
             <span class='loading-text'><span class='spinner spinner-border d-none'></span></span>
         </button>
     </div>
-<hr>
-    <div class="transaction-log-table mt-4">
-        <h4 class="mb-3">Credit Transaction Log</h4>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Description</th>
-                    <th>Credits</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>38104132</td>
-                    <td>8 credits used to reply to customer</td>
-                    <td>-8</td>
-                    <td>23 Sept 2024</td>
-                </tr>
-                <tr>
-                    <td>38104131</td>
-                    <td>15 credits purchased</td>
-                    <td>15</td>
-                    <td>23 Sept 2024</td>
-                </tr>
-                <tr>
-                    <td>37977539</td>
-                    <td>5 credits used to reply to customer</td>
-                    <td>-5</td>
-                    <td>17 Sept 2024</td>
-                </tr>
-                <!-- Additional rows can be added here -->
-            </tbody>
-        </table>
-        <!-- Pagination -->
-        <nav>
-            <ul class="pagination">
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-            </ul>
-        </nav>
-    </div>
+
     
-    
-</div>

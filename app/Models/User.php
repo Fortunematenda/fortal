@@ -63,7 +63,7 @@ class User extends Authenticatable
     public function getProfilePictureUrlAttribute()
     {
         return $this->profile_picture 
-            ? asset('storage/' . $this->profile_picture) 
-            : asset('build/assets/img/profile_avatar.png');
+            ? asset('storage/' . $this->profile_picture)  // Correct path to the storage folder
+            : asset('build/assets/img/profile_avatar.png');  // Default image if no profile picture exists
     }
-}
+}    
