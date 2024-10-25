@@ -11,6 +11,7 @@ use Illuminate\View\View;
 use App\Models\ServicesModel;
 use App\Models\UserServicesModel;
 use App\Models\LeadsModel;
+use App\Models\CreditsTrailModel;
 
 class ProfileController extends Controller
 {
@@ -47,6 +48,7 @@ class ProfileController extends Controller
          $user = $request->user();
          $services = ServicesModel::pluck('service_name')->toArray();
          $latest_services = $this->getUserServices($user->id);
+         $transactions = $this->getCreditHistory($user->id);
      
          return view('profile.edit', [
              'user' => $user,
@@ -61,6 +63,8 @@ class ProfileController extends Controller
              'latest_services' => $latest_services,
              'profile_picture' =>$user->profile_picture,
              'logo' =>$user->logo,
+             'transactions'=>$transactions,
+             'credits_balance'=>$user->credits_balance
          ]);
      }
      
@@ -254,19 +258,11 @@ class ProfileController extends Controller
     return $results;
     }
 
-public function updatep(Request $request)
-{
-    // Check if the cropped image is present in the request
-    if ($request->hasFile('cropped_image')) {
-        $file = $request->file('cropped_image');
-        $path = $file->store('profile_pictures', 'public'); // Store image in 'public/profile_pictures' folder
-
-        // Update user's profile picture URL
-        $user = auth()->user();
-        $user->profile_picture = $path;
-        $user->save();
+    private function getCreditHistory($userId)
+    {
+        // Retrieve user credit transactions
+        return CreditsTrailModel::where('user_id', $userId) // Use the correct model name here
+            ->orderBy('date_entered', 'desc')
+            ->get();
     }
-
-    return redirect()->back()->with('status', 'Profile updated successfully!');
-}
 }

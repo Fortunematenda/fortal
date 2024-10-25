@@ -16,4 +16,8 @@ class CreditsTrailModel extends Model
 'credits',
 'entered_by'
     ];
+
+    protected $casts = [
+        'date_entered' => 'datetime',
+    ];
 }

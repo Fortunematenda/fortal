@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\CreditTransactionModel; // Correct model import
+use App\Models\CreditsTrailModel; // Correct model import
 
-class UserController extends Controller
+class CreditController extends Controller
 {
     public function buyCredits(Request $request)
     {
@@ -25,37 +25,14 @@ class UserController extends Controller
         $user->save();
 
         // Record the credit transaction in the credits table
-        CreditTransactionModel::create([ // Use the correct model name here
-            'user_id' => $user->id, // Foreign key to the user
-            'credits_changed' => $creditsToBuy,
-            'transaction_type' => 'purchase',
-            'description' => 'User purchased ' . $creditsToBuy . ' credits',
-            // No need to set created_at if timestamps are managed automatically
-        ]);
+        $trail = CreditsTrailModel::create(["user_id"=>$user->id,"lead_id"=>0,"credits"=>$creditsToBuy,"entered_by"=>$user->id]);
+               
 
         // Return the updated credits
         return response()->json(['credits' => $user->credits_balance,]);
     }
 
-    public function getCreditHistory($userId)
-    {
-        // Fetch the user's credit transactions
-        $creditHistory = CreditTransactionModel::where('user_id', $userId) // Use the correct model name here
-            ->orderBy('created_at', 'desc')
-            ->get();
 
-        return response()->json(['creditHistory' => $creditHistory]);
-    }
 
-    public function showCreditHistory($userId)
-    {
-        // Retrieve user credit transactions
-        $transactions = CreditTransactionModel::where('user_id', $userId) // Use the correct model name here
-            ->orderBy('created_at', 'desc')
-            ->get();
-        
-            dd($transactions);
-        // Pass transactions to the view
-        return view('profile.partials.buy-credits-form', compact('transactions'));
-    }
+  
 }

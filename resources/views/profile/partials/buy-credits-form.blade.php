@@ -11,59 +11,12 @@
         </div>
 
 
-
-        <div class="row section-header">
-    <div class="col-12">
-        <h4>Your Credit Transaction History:</h4>
-        <ul id="credit-history-list">
-            @forelse($transactions as $transaction)
-                <li>
-                    <strong>{{ $transaction->transaction_type }}</strong>: {{ $transaction->credits_changed }} credits
-                    <span> - {{ $transaction->created_at->format('d M Y H:i') }}</span>
-                </li>
-            @empty
-                <li>No transactions found.</li>
-            @endforelse
-        </ul>
-
-        <div class="row" style="font-weight:bold">
-            <h2 class="col-12 subsection-title">My Credits</h2>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <h4>Your Credit Transaction History:</h4>
-        <ul id="credit-history-list">
-            @foreach($transactions as $transaction)
-                <li>
-                    <strong>{{ $transaction->transaction_type }}</strong>: {{ $transaction->credits_changed }} credits
-                    <span> - {{ $transaction->created_at->format('d M Y H:i') }}</span>
-                </li>
-            @endforeach
-
-            @if($transactions->isEmpty())
-                <li class="text-center">No transactions found.</li>
-            @endif
-        </ul>
-
         <div class="row" style="font-weight:bold">
             <h2 class="col-12 subsection-title">My Credits</h2>
         </div>
         <div class='modal-footer justify-content-between'>
             <button class='btn btn-success credit-upsell-topup-submit mx-auto'>
-                <span>You have {{$creditHistory}} Credits</span>
+                <span>You have {{$credits_balance}} Credits</span>
                 <span class='loading-text'><span class='spinner spinner-border d-none'></span></span>
             </button>
         </div>
@@ -88,9 +41,9 @@
                 @foreach($transactions as $transaction)
                     <tr>
                         <td>{{ $transaction->id }}</td>
-                        <td>{{ $transaction->description }}</td>
-                        <td>{{ $transaction->credits_changed }}</td>
-                        <td>{{ $transaction->created_at->format('d M Y H:i') }}</td>
+                        <td>{{ $transaction->transaction_type }}</td>
+                        <td>{{ $transaction->credits }}</td>
+                        <td>{{ $transaction->date_entered->format('d M Y H:i') }}</td>
                     </tr>
                 @endforeach
                 @if($transactions->isEmpty())
@@ -103,7 +56,7 @@
         <!-- Pagination -->
         <nav>
             <ul class="pagination">
-                {{ $transactions->links() }} <!-- Laravel pagination links -->
+           
             </ul>
         </nav>
     </div>
