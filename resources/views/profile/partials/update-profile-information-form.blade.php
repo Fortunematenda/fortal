@@ -1,17 +1,15 @@
-<style>
-    @media (min-width: 300px) {
-        .uk-child-width-1-2@m > * {
-            width: 15% !important;
-        }
-        img, video {
-            max-width: fit-content;
-        }
-    }
-</style>
 
-<div class="uk-section uk-section-default">
-    <div class="uk-container">
-        
+
+<div class="py-12">
+
+    <div class="container px-0 px-xl-6">
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
 
         <form id="send-verification" method="post" action="{{ route('verification.send') }}">
             @csrf
@@ -23,7 +21,7 @@
 
             <div >
                 <div>
-                <img src="{{ asset($user->profile_picture) }}" alt="Profile Picture" class="rounded-full w-20 h-32 object-cover">
+                <img src="{{ asset('storage/profile_pictures/'.$user->profile_picture) }}" alt="Profile Picture" class="rounded-full w-20 h-20 object-cover">
 
                 </div>
                 <div>
