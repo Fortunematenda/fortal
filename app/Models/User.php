@@ -61,13 +61,8 @@ class User extends Authenticatable
      *
      * @return string|null
      */
-    public function getProfilePictureUrlAttribute()
-    {
-        return $this->profile_picture 
-            ? asset('storage/app/public/profile_pictures/' . $this->profile_picture) 
-            : asset('build/assets/img/profile_avatar.png');
-    }
-
+    /*
+*/
     /**
      * Get the user's full name.
      *

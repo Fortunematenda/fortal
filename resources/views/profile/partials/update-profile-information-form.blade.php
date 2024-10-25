@@ -1,17 +1,15 @@
-<style>
-    @media (min-width: 300px) {
-        .uk-child-width-1-2@m > * {
-            width: 15% !important;
-        }
-        img, video {
-            max-width: fit-content;
-        }
-    }
-</style>
 
-<div class="uk-section uk-section-default">
-    <div class="uk-container">
-        
+
+<div class="py-12">
+
+    <div class="container px-0 px-xl-6">
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
 
         <form id="send-verification" method="post" action="{{ route('verification.send') }}">
             @csrf
@@ -21,9 +19,9 @@
             @csrf
             @method('patch')
 
-            <div class="uk-grid-match uk-child-width-1-2@m uk-margin" uk-grid>
+            <div >
                 <div>
-                <img src="{{ asset($user->profile_picture) }}" alt="Profile Picture" class="rounded-full w-20 h-20 object-cover">
+                <img src="{{ asset('storage/profile_pictures/'.$user->profile_picture) }}" alt="Profile Picture" class="rounded-full w-20 h-20 object-cover">
 
                 </div>
                 <div>
@@ -33,6 +31,7 @@
                     <input type="file" id="profile_picture" name="profile_picture" 
                            class="block w-full focus:ring focus:ring-indigo-200" accept="image/*" />
                 </div>
+                
             </div>
 
             <div>
@@ -69,7 +68,7 @@
                 <x-input-error class="mt-2" :messages="$errors->get('company_registration_number')" />
             </div>
 
-            <h2><b>{{ __('Contact Information*') }}</b></h2>
+            <h2>{{ __('Contact Information*') }}</h2>
             <div class="mb-4">
                 <label class="block text-gray-700" for="contact_number">{{ __('Contact Number (optional)') }}</label>
                 <input type="text" id="contact_number" name="contact_number" 
@@ -99,7 +98,7 @@
                 </div>
             @endif
 
-            <h3><b>{{ __('Location Information') }}</b></h3>
+            <h2>{{ __('Location Information') }}</h2>
             <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
                 <div class="uk-margin">
                     <x-input-label for="location" :value="__('Address')" />

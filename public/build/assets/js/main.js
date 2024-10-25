@@ -13,18 +13,20 @@ $(document).on("keyup", "#serviceTxt", function() {
                 $("#search-service").show(); // Show loading or search div
             },
             success: function(data) {
-                let services = data["services"];
+                let services = data.services; // Simplified access to services array
                 $.each(services, function(index, service) {
                     let serviceName = service.service_name;
                     let serviceId = service.id;
-                    $("#inner-service").append(`<li class='service' id='${serviceId}' service_name='${serviceName}'>${serviceName}</li>`);
+                    $("#inner-service").append(`
+                        <li class='service' id='${serviceId}' service_name='${serviceName}'>${serviceName}</li>
+                    `);
                 });
             },
             error: function(xhr, status, error) {
                 console.error('Error:', status, error); // Improved error logging
             },
             complete: function() {
-                // Optional complete action
+                $("#search-service").hide(); // Hide loading or search div after request completes
             }
         });
     }
@@ -36,8 +38,7 @@ $(document).on("click", ".service", function() {
     let serviceName = $(this).attr("service_name");
     $("#serviceTxt").val(serviceName);
     $("#serviceID").val(serviceId);
-    $("#search-service").hide();
-    $("#inner-service").empty();
+    $("#inner-service").empty(); // Clear the service list
     $("#step").attr("href", `/profession/create-account/${serviceId}?service=${serviceName}`);
 });
 
@@ -49,7 +50,7 @@ $(document).ready(function() {
 
     function showNextImage() {
         images.eq(currentIndex).removeClass('active').fadeOut(1000);
-        currentIndex = (currentIndex + 1) % imageCount;
+        currentIndex = (currentIndex + 1) % imageCount; // Cycle through images
         images.eq(currentIndex).addClass('active').fadeIn(1000);
     }
 
@@ -57,15 +58,30 @@ $(document).ready(function() {
     setInterval(showNextImage, 3000); // Change image every 3 seconds
 });
 
-// Profile picture preview on change
-document.getElementById('profile_picture').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('profilePicturePreview').src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    }
-});
+// Function to load credit history
+function loadCreditHistory(userId) {
+    fetch(`/credit/${userId}/credit-history`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                throw new Error(data.error); // Handle any server-side errors
+            }
+            let history = data.creditHistory; // Assuming 'creditHistory' is the correct property
+            let historyList = document.getElementById('credit-history-list');
+            historyList.innerHTML = ''; // Clear existing history
 
+            history.forEach(transaction => {
+                let listItem = document.createElement('li');
+                listItem.innerHTML = `Credits Changed: ${transaction.credits_changed} | Type: ${transaction.transaction_type} | Description: ${transaction.description} | Date: ${new Date(transaction.created_at).toLocaleString()}`;
+                historyList.appendChild(listItem);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching credit history:', error);
+        });
+}
