@@ -107,6 +107,23 @@ $(document).ready(function() {
 
     images.eq(currentIndex).addClass('active').fadeIn(1000);
     setInterval(showNextImage, 3000); // Change image every 3 seconds
+
+    $(document).ready(function() {
+        // Get the current URL path
+        var currentPath = window.location.pathname;
+    
+        // Loop through each nav item and compare the href with the current URL
+        $('.navbar-nav .nav-item a').each(function() {
+            var linkPath = $(this).attr('href');
+            
+            // If the href matches the current URL path, add 'active' to the parent <li>
+            if (currentPath === linkPath) {
+                $(this).closest('li').addClass('active');
+            } else {
+                $(this).closest('li').removeClass('active');
+            }
+        });
+    });
 });
 
 // Function to load credit history
