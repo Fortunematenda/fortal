@@ -269,4 +269,13 @@ class ProfileController extends Controller
             ->orderBy('date_entered', 'desc')
             ->get();
     }
+
+    public function transactionHistory()
+{
+    $userId = auth()->user()->id; // Get the authenticated user's ID
+    $transactions = $this->getCreditHistory($userId); // Call the private function to get transactions
+
+    return view('transaction-history', compact('transactions')); // Ensure this view exists
+}
+
 }

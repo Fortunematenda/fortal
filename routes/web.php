@@ -25,9 +25,23 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/profile', [ProfileController::class, 'notifications'])->name('profile.notifications');
     
+    
+    
+    
     // Credit Routes
-    Route::post('/credit/buy-credits', [CreditController::class, 'buyCredits'])->name('credit.buy');
+    Route::post('/buy-credits', [CreditController::class, 'buyCredits']);
+    Route::get('/buy-credits', [CreditController::class, 'showBuyCreditsPage'])->name('credits.buy');
     Route::get('/credit/{userId}/credit-history', [CreditController::class, 'getCreditHistory'])->name('credit.history');
+    Route::get('/credit/packages', [CreditController::class, 'showPackages'])->name('credit.packages');
+    Route::get('/credit-packages', [CreditController::class, 'showCreditPackages'])->name('credit.packages');
+    Route::get('/transaction-history', [ProfileController::class, 'transactionHistory'])->name('transaction.history');
+    
+   
+    
+    
+    
+ 
+  
 });
 
 // Group routes for guest users

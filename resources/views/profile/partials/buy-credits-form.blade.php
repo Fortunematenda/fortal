@@ -123,53 +123,67 @@
             </div>
         </div>
     </div>
-    <div class='modal-footer justify-content-between'>
-        <button class='btn btn-success credit-upsell-topup-submit mx-auto'>
-            <span class='submit-text' data-cy='credit-upsell-topup-cta'>Top up and contact <span class='response-modal-name'>$first_name</span></span>
-            <span class='loading-text'><span class='spinner spinner-border d-none'></span></span>
-        </button>
-    </div>
+    
 </div>
 
 
-       
-
-<div class='modal-alerts px-2'></div>
-<div class='container'>
-    <hr>
-    <div class="transaction-log-table mt-4">
-        <h4 class="mb-3">Credit Transaction Log</h4>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Description</th>
-                    <th>Credits</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($transactions as $transaction)
-                    <tr>
-                        <td>{{ $transaction->id }}</td>
-                        <td>{{ $transaction->transaction_type }}</td>
-                        <td>{{ $transaction->credits }}</td>
-                        <td>{{ $transaction->date_entered->format('d M Y H:i') }}</td>
-                    </tr>
-                @endforeach
-                @if($transactions->isEmpty())
-                    <tr>
-                        <td colspan="4" class="text-center">No transactions found.</td>
-                    </tr>
-                @endif
-            </tbody>
-        </table>
-        <!-- Pagination -->
-        <nav>
-            <ul class="pagination">
-           
-            </ul>
-        </nav>
-    </div>
+<div class='modal-footer justify-content-between'>
+    <button class='btn btn-success credit-upsell-topup-submit mx-auto' id="transaction-history-button">
+        <span class='submit-text' data-cy='credit-upsell-topup-cta'>Transaction History <span class='response-modal-name'></span></span>
+        <span class='loading-text'><span class='spinner spinner-border d-none'></span></span>
+    </button>
 </div>
-<input type="hidden" id="user-id" value="{{ auth()->user()->id }}"> <!-- Example User ID -->
+
+<div class="transaction-log-section" style="display: none;"> <!-- Hidden by default -->
+    <div class='modal-alerts px-2'></div>
+    <div class='container'>
+        <hr>
+        <div class="transaction-log-table mt-4">
+            <h4 class="mb-3">Credit Transaction Log</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Credits</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($transactions as $transaction)
+                        <tr>
+                            <td>{{ $transaction->id }}</td>
+                            <td>{{ $transaction->transaction_type }}</td>
+                            <td>{{ $transaction->credits }}</td>
+                            <td>{{ $transaction->date_entered->format('d M Y H:i') }}</td>
+                        </tr>
+                    @endforeach
+                    @if($transactions->isEmpty())
+                        <tr>
+                            <td colspan="4" class="text-center">No transactions found.</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
+            <!-- Pagination -->
+            <nav>
+                <ul class="pagination"></ul>
+            </nav>
+        </div>
+    </div>
+    <input type="hidden" id="user-id" value="{{ auth()->user()->id }}"> <!-- Example User ID -->
+</div>
+<script>document.addEventListener('DOMContentLoaded', function () {
+    const button = document.getElementById('transaction-history-button');
+    const transactionLogSection = document.querySelector('.transaction-log-section');
+
+    button.addEventListener('click', function () {
+        // Toggle visibility of the transaction log section
+        if (transactionLogSection.style.display === 'none') {
+            transactionLogSection.style.display = 'block';
+        } else {
+            transactionLogSection.style.display = 'none';
+        }
+    });
+});
+</script>

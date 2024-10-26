@@ -1,37 +1,44 @@
-<!--<section class="p-6 bg-white rounded-lg">
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Business Information') }}
-        </h2>
-    </header>
 
-    <div class="p-4 sm:p-8 sm:rounded-lg">
-        <div class="max-w-xl">
-            <form>
-                <div class="mb-4">
-                    <label class="block text-gray-700" for="business-name">{{ __('Business Name') }}</label>
-                    <input type="text" id="business-name" name="business-name" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
-                </div>
-                
-                <div class="mb-4">
-                    <label class="block text-gray-700" for="business-registration-number">{{ __('Business Registration Number') }}</label>
-                    <input type="email" id="business-registration-number" name="business-registration-number" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700" for="business-phone">{{ __('Business Phone') }}</label>
-                    <input type="tel" id="business-phone" name="business-phone" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700" for="business-address">{{ __('Business Address') }}</label>
-                    <textarea id="business-address" name="business-address" class="mt-1 block w-full p-2 border border-gray-300 rounded" required></textarea>
-                </div>
-            Save button placed at the end for visibility -->
-               <!-- <div class="mt-6">
-                    <button type="submit" class="w-full p-2 bg-blue-600 text-black rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 btn btn-info">
-                        {{ __('Save Business Information') }}
-                    </button>
-                </div>
-            </form>
-        </div>
+@section('head')
+    <meta charset="UTF-8"> <!-- Character encoding declaration -->
+@endsection
+
+@section('content')
+<div class='modal-alerts px-2'></div>
+<div class='container'>
+    <hr>
+    <div class="transaction-log-table mt-4">
+        <h4 class="mb-3">Credit Transaction Log</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Description</th>
+                    <th>Credits</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($transactions as $transaction)
+                    <tr>
+                        <td>{{ $transaction->id }}</td>
+                        <td>{{ $transaction->transaction_type }}</td>
+                        <td>{{ $transaction->credits }}</td>
+                        <td>{{ $transaction->date_entered->format('d M Y H:i') }}</td>
+                    </tr>
+                @endforeach
+                @if($transactions->isEmpty())
+                    <tr>
+                        <td colspan="4" class="text-center">No transactions found.</td>
+                    </tr>
+                @endif
+            </tbody>
+        </table>
+        <!-- Pagination (optional) -->
+        <nav>
+            <ul class="pagination"></ul>
+        </nav>
     </div>
-</section>-->
+</div>
+<input type="hidden" id="user-id" value="{{ auth()->user()->id }}">
+@endsection
