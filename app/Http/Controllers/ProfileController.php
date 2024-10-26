@@ -24,6 +24,10 @@ class ProfileController extends Controller
         $email = $user->email;
         $logo = $user->logo;
         $profile_picture = $user->profile_picture;
+        $subscribed_services_notifications = $user->subscribed_services_notifications;
+        $new_leads_notifications = $user->new_leads_notifications;
+        $weekly_newsletter_notifications = $user->weekly_newsletter_notifications;
+        $sms_notifications = $user->sms_notifications;
         $contact_number=$user->contact_number;
         $is_company_website=$user->is_company_website;
         $company_size=$user->company_size;
@@ -41,7 +45,7 @@ class ProfileController extends Controller
         $service_badge = count($latest_services)-2;
         $unread_leads = count($this->getUnreadLeads($user->id));
         
-        return view("dashboard",compact(["first_name","login_at","greetings","profile_picture","contact_number","company_name","is_company_website","company_size","is_company_sales_team","logo","location","company_registration_number","latest_services_limited","service_badge","email","number_of_leads","unread_leads","credits_balance"]));
+        return view("dashboard",compact(["first_name","login_at","greetings","profile_picture","contact_number","company_name","is_company_website","company_size","is_company_sales_team","logo","location","company_registration_number","latest_services_limited","service_badge","email","number_of_leads","unread_leads","credits_balance","new_leads_notifications","weekly_newsletter_notifications","subscribed_services_notifications","sms_notifications",]));
      }
      public function edit(Request $request): View
      {

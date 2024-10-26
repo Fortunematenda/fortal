@@ -27,11 +27,7 @@ class ProfileUpdateRequest extends FormRequest
             'company_size' => ['nullable', 'string', 'max:255'],
             'is_company_sales_team' => ['boolean'],
             'contact_number' => ['nullable', 'string', 'max:15'],
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
+            'email' => ['required','string','email','max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
         ];

@@ -11,48 +11,23 @@
 
             <h4 class="text-md font-semibold mt-4">Services Alerts</h4>
             <label class="flex items-center mb-2">
-                <input type="checkbox" class="mr-2">
+                <input type="checkbox" id="subscribed_services_notifications" name="subscribed_services_notifications" class="mr-2">
                 {{ __('Real-Time Alerts for Subscribed Services') }}
             </label>
             <label class="flex items-center mb-2">
-                <input type="checkbox" class="mr-2">
+                <input type="checkbox" id="new_leads_notifications" name="new_leads_notifications" class="mr-2">
                 {{ __('Email Notifications for New Leads') }}
             </label>
             <label class="flex items-center mb-2">
-                <input type="checkbox" class="mr-2">
+                <input type="checkbox" id="weekly_newsletter_notifications" name="weekly_newsletter_notifications"class="mr-2">
                 {{ __('Weekly Newsletter') }}
             </label>
 
             <h4 class="text-md font-semibold mt-4">SMS Notifications</h4>
             <label class="flex items-center mb-2">
-                <input type="checkbox" class="mr-2">
+                <input type="checkbox" id="sms_notifications" name="sms_notifications" class="mr-2">
                 {{ __('Enable SMS Notifications') }}
             </label>
-            <textarea class="mt-1 block w-full p-2 border border-gray-300 rounded" placeholder="{{ __('Comments') }}" rows="3"></textarea>
-
-           <!-- <h4 class="text-md font-semibold mt-4">Updates From People</h4>
-            <label class="flex items-center mb-2">
-                <input type="checkbox" class="mr-2">
-                {{ __('Receive updates from people you follow') }}
-            </label>
-
-            <h4 class="text-md font-semibold mt-4">Reminders</h4>
-            <label class="flex items-center mb-2">
-                <input type="checkbox" class="mr-2">
-                {{ __('Enable reminders') }}
-            </label>
-
-            <h4 class="text-md font-semibold mt-4">Events</h4>
-            <label class="flex items-center mb-2">
-                <input type="checkbox" class="mr-2">
-                {{ __('Notify me about upcoming events') }}
-            </label>
-
-            <h4 class="text-md font-semibold mt-4">Services You Follow</h4>
-            <label class="flex items-center mb-2">
-                <input type="checkbox" class="mr-2">
-                {{ __('Receive notifications from services you follow') }}
-            </label>-->
 
             <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                 {{ __('Save') }}

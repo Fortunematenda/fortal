@@ -34,6 +34,11 @@ class User extends Authenticatable
         'company_registration_number',
         'profile_picture',
         'logo',
+        'subscribed_services_notifications',
+        'new_leads_notifications',
+        'weekly_newsletter_notifications',
+        'sms_notifications'
+
     ];
 
     /**
