@@ -19,6 +19,7 @@ use App\Models\ServiceQuestion;
 use App\Models\LeadsTrailModel;
 use App\Models\TrailsModel;
 use App\Models\LeadsNotesModel;
+use App\Models\ContactedLeadModel;
 use Exception;
 
 class LeadsController extends Controller
@@ -109,6 +110,8 @@ public function getResponseDetails(Request $request)
     $email = $lead->email;
     $contact_number = $lead->contact_number;
     $lead_status = $lead->status;
+    $conl = $this->contactedLead($user->id,$lead_id);
+    $lead_status = $conl["status"];
     $leads_trail = $this->getLeadsTrail($lead_id,$user->id);
     $leads_notes = $this->getLeadsNotes($lead_id,$user->id);
    
@@ -237,6 +240,11 @@ private function arrLeads($leads = array())
         // Return the possible answers as a JSON response
         return response()->json($answers);
     }
+    private function contactedLead($user_id,$lead_id)
+    {
+        $lead = ContactedLeadModel::where('lead_id','=',$lead_id)->where('user_id','=',$user_id)->first();
+    return $lead;
+    }
     public function openContacts(Request $request)
     {
         try{
@@ -254,6 +262,11 @@ private function arrLeads($leads = array())
                 $user->save();
                 $trail = CreditsTrailModel::create(["user_id"=>$user->id,"lead_id"=>$lead_id,"credits"=>$credits,"entered_by"=>$user->id]);
                 $arr = array("email"=>$lead->email,"contact_number"=>$lead->contact_number);
+                $conl = $this->contactedLead($user->id,$lead_id);
+                if($conl == false)
+                {
+                    ContactedLeadModel::create(["user_id"=>$user->id,"lead_id"=>$lead_id,"entered_by"=>$user->id]);
+                }                
                 return response()->json(["message"=>"Okay","details"=>$arr,"button"=>""],200);
             }
             else{
@@ -364,14 +377,14 @@ private function arrLeads($leads = array())
     public function updateStatus(Request $request)
     {
         try{ 
-           
+            $user = $request->user();           
             $lead_id = (int)$request->lead_id;
             $status = $request->status;
-            $lead = LeadsModel::find($lead_id);
+            $lead = ContactedLeadModel::where('lead_id','=',$lead_id)->where('user_id','=',$user->id)->first();
             $lead->status = $status;
             $lead->save();
         
-         return response()->json(["message"=>"Lead updated successfully".$status,"lead"=>$lead],200);
+         return response()->json(["message"=>"Lead updated successfully","lead"=>$lead],200);
     }
     catch(Exception $e){
         return response()->json(["message"=>"There is an error : ".$e->getMessage()],500);

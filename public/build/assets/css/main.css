@@ -373,3 +373,9 @@ body{
 .m-border{
     border-left: 4px solid purple;
 }
+.navbar-nav .nav-item.active .nav-link {
+    color: purple !important; /* Change to your preferred active color */
+    font-weight: bold;
+    border-bottom: 2px solid purple;
+    padding-bottom: 5px !important;
+}
