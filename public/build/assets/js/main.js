@@ -1,4 +1,4 @@
-// Event listener for keyup on #serviceTxt
+// Event listener for keyup on #serviceTxt 
 $(document).on("keyup", "#serviceTxt", function() {
     let serviceTxt = $(this).val();
     let _token = $('input[name="_token"]').val(); // CSRF token
@@ -13,7 +13,6 @@ $(document).on("keyup", "#serviceTxt", function() {
                 $("#search-service").show(); // Show loading or search div
             },
             success: function(data) {
-                
                 let services = data.services; // Simplified access to services array
                 $.each(services, function(index, service) {
                     let serviceName = service.service_name;
@@ -27,7 +26,7 @@ $(document).on("keyup", "#serviceTxt", function() {
                 console.error('Error:', status, error); // Improved error logging
             },
             complete: function() {
-            $("#search-service").hide(); // Hide loading or search div after request completes
+                $("#search-service").hide(); // Hide loading or search div after request completes
             }
         });
     }
@@ -42,6 +41,57 @@ $(document).on("click", ".service", function() {
     $("#inner-service").empty(); // Clear the service list
     $("#step").attr("href", `/profession/create-account/${serviceId}?service=${serviceName}`);
 });
+
+// Function to purchase credits when a package is clicked
+function purchaseCredits(element) {
+    const planId = element.getAttribute('data-plan-id');
+    const discount = element.getAttribute('data-discount');
+    const discountPrice = element.getAttribute('data-discountprice');
+    const nCredits = element.getAttribute('data-ncredits');
+    const pricePerCredit = element.getAttribute('data-price-per-credit');
+    let _token = $('input[name="_token"]').val(); // CSRF token
+
+    // Logging the values for debugging
+    console.log('Plan ID:', planId);
+    console.log('Discount:', discount);
+    console.log('Discount Price:', discountPrice);
+    console.log('Number of Credits:', nCredits);
+    console.log('Price per Credit:', pricePerCredit);
+
+    // Check if any required field is not defined
+    if (!planId || !discount || !discountPrice || !nCredits || !pricePerCredit) {
+        alert("All fields are required!"); // Notify user about the missing fields
+        return; // Stop further execution
+    }
+
+    // AJAX request to purchase credits
+    $.ajax({
+        url: '/buy-credits', // Your backend endpoint for purchasing credits
+        type: 'POST',
+        data: {
+            package_id: planId, // Ensure you're sending package_id
+            discount: discount,
+            discount_price: discountPrice,
+            ncredits: nCredits,
+            price_per_credit: pricePerCredit,
+            _token // CSRF token for Laravel
+        },
+        success: function(data) {
+            if (data.success) {
+                alert('Credits purchased successfully!');
+                // Redirect or update UI as necessary
+                window.location.href = "/user/dashboard"; // Adjust as needed
+            } else {
+                alert("Error: " + data.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', status, error); // Improved error logging
+            alert('An error occurred while purchasing credits. Please try again.');
+        }
+    });
+}
+
 
 // Slideshow for images
 $(document).ready(function() {
@@ -70,11 +120,11 @@ function loadCreditHistory(userId) {
         })
         .then(data => {
             if (data.error) {
-                throw new Error(data.error); // Handle any server-side errors
+                throw new Error(data.error);
             }
-            let history = data.creditHistory; // Assuming 'creditHistory' is the correct property
+            let history = data.creditHistory; 
             let historyList = document.getElementById('credit-history-list');
-            historyList.innerHTML = ''; // Clear existing history
+            historyList.innerHTML = ''; 
 
             history.forEach(transaction => {
                 let listItem = document.createElement('li');
@@ -86,3 +136,8 @@ function loadCreditHistory(userId) {
             console.error('Error fetching credit history:', error);
         });
 }
+
+
+$(document).on("click", ".credit-pack-option-container", function() {
+    purchaseCredits(this); 
+});
