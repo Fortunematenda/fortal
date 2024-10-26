@@ -101,92 +101,22 @@
                             <div class="sticky-top">
                             <div id="leads-filter-header">
             <div data-testid="leads-filter-header">
-                <div class="tw-p-4 tw-flex tw-bg-dark-blue-500 tw-w-full tw-justify-between">
-                    <div class="tw-text-white">
-                        <div class="tw-flex tw-flex-wrap">
-                            <div class="tw-text-sm tw-font-gordita-regular tw-flex tw-mt-2">
-                                <a href="/profile"
-                                    class="Button_base__5Wcwx Button_sm__RWLp1 Button_smWithIcon__y3vYd Button_minWidth__WGVzH Button_textWhite__9w5Wn Button_bgDarkBlue__9V6YV !tw-no-underline tw-drop-shadow-[unset] !tw-px-2 !tw-min-h-[unset] tw-text-sm !tw-text-white"
-                                    data-cy="dashboard-filters-edit"
-                                    data-cham="dashboard-filters-edit">
-                                    <span class="tw-flex tw-justify-center">
-                                        <span
-                                            class="button-main tw-flex tw-items-center tw-flex-row-reverse">
-                                            <span class="icon tw-text-current tw-inline-flex">
-                                                <i class="fa-solid fa-bars-progress"></i>
-                                                <span
-                                                    class="tw-icon-spacer tw-block tw-w-[8px]"></span>
-                                                <span
-                                                    class="child-container Button_childContainer__YG7FP">
-                                                    <span class="!tw-text-sm">
-                                                     Pending
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                </a>
-                            </div>
-                            <div class="tw-flex tw-items-center tw-px-2 tw-mt-2">
-                                <span
-                                    class="tw-inline-flex tw-rounded-full tw-w-1 tw-h-1 tw-bg-gray-600"></span>
-                            </div>
-                            <div class="tw-text-sm tw-font-gordita-regular tw-flex tw-mt-2">
-                                <a href="/profile"
-                                    class="Button_base__5Wcwx Button_sm__RWLp1 Button_smWithIcon__y3vYd Button_minWidth__WGVzH Button_textWhite__9w5Wn Button_bgDarkBlue__9V6YV !tw-no-underline tw-drop-shadow-[unset] !tw-px-2 !tw-min-h-[unset] tw-text-sm !tw-text-white"
-                                    data-cy="dashboard-filters-edit"
-                                    data-cham="dashboard-filters-edit">
-                                    <span class="tw-flex tw-justify-center">
-                                        <span
-                                            class="button-main tw-flex tw-items-center tw-flex-row-reverse">
-                                            <span class="icon tw-text-current tw-inline-flex">
-                                                <i class="fa-solid fa-address-book"></i>
-                                                <span
-                                                    class="tw-icon-spacer tw-block tw-w-[8px]"></span>
-                                                <span
-                                                    class="child-container Button_childContainer__YG7FP">
-                                                    <span class="!tw-text-sm">
-                                                        Hired
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tw-flex tw-items-end tw-pl-1 tw-flex-row">
-                        <a href="/profile"
-                            class="Button_base__5Wcwx Button_sm__RWLp1 Button_smWithIcon__y3vYd Button_minWidth__WGVzH Button_textWhite__9w5Wn Button_bgDarkBlue__9V6YV !tw-no-underline tw-drop-shadow-[unset] !tw-px-2 !tw-min-h-[unset] tw-text-sm !tw-text-white"
-                            data-cy="dashboard-filters-edit" data-cham="dashboard-filters-edit">
-                            <span class="tw-flex tw-justify-center">
-                                <span
-                                    class="button-main tw-flex tw-items-center tw-flex-row-reverse">
-                                    <span class="icon tw-text-current tw-inline-flex">
-                                        <i class="fa-solid fa-list-check"></i>
-                                        <span class="tw-icon-spacer tw-block tw-w-[8px]"></span>
-                                        <span
-                                            class="child-container Button_childContainer__YG7FP">
-                                            <span class="!tw-text-sm">
-                                                View All
-                                            </span>
-                                        </span>
-                                    </span>
-                                </span>
-                        </a>
-                    </div>
-                </div>
+               
            
     
     
 
                                         </div>
-                                        <div class="tw-py-2 tw-px-4 tw-bg-gray-300 tw-flex tw-justify-between">
+                                        <div class="tw-py-2 tw-px-4 tw-bg-gray-300 tw-flex tw-justify-between tw-bg-dark-blue-500">
                                             <div
-                                                class="tw-flex tw-items-center tw-text-sm tw-font-gordita-regular tw-justify-between tw-w-full tw-pr-3">
-                                               <span class="contacted_lead">pending responses</span>                                             
+                                                class="tw-flex tw-items-center tw-text-sm  tw-font-gordita-regular tw-justify-between tw-w-full tw-pr-3">
+                                                 
+                                               <button class="uk-button uk-button-danger uk-button-small"><i class="bi bi-card-checklist"></i> All</button>   
+                                               <button class="uk-button uk-button-primary uk-button-small"><i class="bi bi-yelp"></i> Pending</button>
+                                               <button class="uk-button uk-button-primary uk-button-small"><i class="bi bi-person-check-fill"></i> Hired</button>                                       
                                             
                                             <div>
-                                            <span class="tw-text-gray-600">Updated <span class="time"> 1m ago </span> Refresh</span>
+                                            
                                              </div>
                                              </div>
                                             <div class="tw-pl-3 tw-border-l tw-border-gray-400"><button
