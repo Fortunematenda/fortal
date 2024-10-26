@@ -14,7 +14,8 @@ class CreditsTrailModel extends Model
 'user_id', 
 'lead_id', 
 'credits',
-'entered_by'
+'entered_by',
+'transaction_type'
     ];
 
     protected $casts = [

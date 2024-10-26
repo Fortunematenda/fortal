@@ -14,8 +14,10 @@ class TemplatesController extends Controller
     $details = "<p class='text-grey-600 w-100 mt-1 modal-subtitle subtitle-lg'>You need <span class='response-modal-current-required'>$lead_credits credits</span> <span class='response-modal-credits-text navy-blue'></span> to contact <span class='response-modal-name'>$first_name</span>. You currently have <span class='response-modal-credit-balance-text'>$credits_balance credits</span>.</p>
         <div class='modal-body'>
                 <div class='modal-alerts px-2'></div>
-                <div class='container'>
-    <div id='credit-pack-row-332821855' class='credit-pack-row row js-credit-pack-row rounded credit-pack-option-container  mb-4  p-2 p-md-4 border position-relative ' data-plan-id='332821855' data-discount='0' data-discountprice='202.50' data-ncredits='15' data-sales-team-quote-id='0' data-price-per-credit='13.50' data-cy='credit-pack-top-up-row'>
+                <div class='container'><form method='POST' action='/purchase'>
+    <input type='hidden' name='_token' value='" . csrf_token() . "'>
+    <input type='hidden' name='product_id' value='1'>
+    <button id='credit-pack-row-332821855' class='credit-pack-row row js-credit-pack-row rounded credit-pack-option-container  mb-4  p-2 p-md-4 border position-relative ' data-plan-id='332821855' data-discount='0' data-discountprice='202.50' data-ncredits='15' data-sales-team-quote-id='0' data-price-per-credit='13.50' data-cy='credit-pack-top-up-row'>
                 <div class='col-12 mt-3 mt-md-0 px-1 px-md-3'>
             <div class='row'>
                                     <div class='col-12 px-md-2'>
@@ -45,8 +47,12 @@ class TemplatesController extends Controller
                     </div>
                             </div>
         </div>
-    </div>
-    <div id='credit-pack-row-332821856' class='credit-pack-row row js-credit-pack-row rounded credit-pack-option-container  mb-4  p-2 p-md-4 border position-relative ' data-plan-id='332821856' data-discount='5' data-discountprice='384.75' data-ncredits='30' data-sales-team-quote-id='0' data-price-per-credit='12.83' data-cy='credit-pack-top-up-row'>
+    </button>
+    </form>
+    <form method='POST' action='/purchase'>
+    <input type='hidden' name='_token' value='" . csrf_token() . "'>
+    <input type='hidden' name='product_id' value='2'>
+    <button id='credit-pack-row-332821856' class='credit-pack-row row js-credit-pack-row rounded credit-pack-option-container  mb-4  p-2 p-md-4 border position-relative ' data-plan-id='332821856' data-discount='5' data-discountprice='384.75' data-ncredits='30' data-sales-team-quote-id='0' data-price-per-credit='12.83' data-cy='credit-pack-top-up-row'>
                     <div class='credits-pill text-xs position-absolute'>
                 <span class='xl-rounded-left xl-rounded-right px-2 py-1 text-primary pill-light-blue'>
                     5% OFF
@@ -81,7 +87,11 @@ class TemplatesController extends Controller
                     </div>
                             </div>
         </div>
-    </div>
+    </button>
+    </form>
+    <form method='POST' action='/purchase'>
+    <input type='hidden' name='_token' value='" . csrf_token() . "'>
+    <input type='hidden' name='product_id' value='3'>
     <div id='credit-pack-row-332821857' class='credit-pack-row row js-credit-pack-row rounded credit-pack-option-container  selected-pack  p-2 p-md-4 border position-relative ' data-plan-id='332821857' data-discount='15' data-discountprice='688.50' data-ncredits='60' data-sales-team-quote-id='0' data-price-per-credit='11.48' data-cy='credit-pack-top-up-row'>
                     <div class='credits-pill text-xs position-absolute'>
                 <span class='xl-rounded-left  px-2 py-1 text-primary pill-light-blue'>
@@ -119,7 +129,8 @@ class TemplatesController extends Controller
                     </div>
                             </div>
         </div>
-    </div>
+    </button>
+    </form>
                 <div class='row card-details-row js-card-details-row mt-4'>
         <div class='p-4 p-md-3 d-block d-md-flex rounded justify-content-between bg-grey-25'>
             <div class='card-brand-image-container flex-grow-0 flex-shrink-0 pr-2 response-modal-card-brand'><img src='https://d1w7gvu0kpf6fl.cloudfront.net/img/billing/card-logos/mastercard-logo.png' style='height: 22px; width: 65px;'></div>

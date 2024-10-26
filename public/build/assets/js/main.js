@@ -103,3 +103,26 @@ function loadCreditHistory(userId) {
             console.error('Error fetching credit history:', error);
         });
 }
+
+
+$(document).on("click", ".credits", function() {
+    let product_id = $(this).attr("identity");
+    let _token = $('input[name="_token"]').val(); // CSRF token
+
+        $.ajax({
+            url: '/purchase',
+            type: 'POST',
+            data: { product_id, _token }, // Send data in one object
+            beforeSend: function() {               
+            },
+            success: function(data) {                
+               console.log(data);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', status, error); // Improved error logging
+            },
+            complete: function() {
+           
+            }
+        });    
+});

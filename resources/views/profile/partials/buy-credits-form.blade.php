@@ -25,10 +25,13 @@
 <div class='modal-body'>
     <div class='modal-alerts px-2'></div>
     <div class='container'>
-        <div id='credit-pack-row-332821855' class='credit-pack-row row js-credit-pack-row rounded credit-pack-option-container mb-4 p-2 p-md-4 border position-relative' data-plan-id='332821855' data-discount='0' data-discountprice='202.50' data-ncredits='15' data-sales-team-quote-id='0' data-price-per-credit='13.50' data-cy='credit-pack-top-up-row'>
+    <form method="POST" action="{{ route('purchase') }}">
+    @csrf
+    <input type="hidden" name="product_id" value="1">
+        <button type="submit" id='credit-pack-row-332821855' class='credit-pack-row row js-credit-pack-row rounded credit-pack-option-container mb-4 p-2 p-md-4 border position-relative' data-plan-id='332821855' data-discount='0' data-discountprice='202.50' data-ncredits='15' data-sales-team-quote-id='0' data-price-per-credit='13.50' data-cy='credit-pack-top-up-row'>
             <div class='col-12 mt-3 mt-md-0 px-1 px-md-3'>
                 <div class='row'>
-                    <div class='col-12 px-md-2'>
+                    <div class='col-12 px-md-2' >
                         <div class='d-flex flex-row justify-content-between'>
                             <p class='pr-3 text-dark-blue'>About 5 responses</p>
                             <p class='m-0'>R100 <small class='js-vat-toggle'>(ex VAT)</small></p>
@@ -45,8 +48,12 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div id='credit-pack-row-332821856' class='credit-pack-row row js-credit-pack-row rounded credit-pack-option-container mb-4 p-2 p-md-4 border position-relative' data-plan-id='332821856' data-discount='5' data-discountprice='384.75' data-ncredits='30' data-sales-team-quote-id='0' data-price-per-credit='12.83' data-cy='credit-pack-top-up-row'>
+        </button>
+        </form>
+        <form method="POST" action="{{ route('purchase') }}">
+    @csrf
+    <input type="hidden" name="product_id" value="2">
+        <<button type="submit"  id='credit-pack-row-332821856' class='credit-pack-row row js-credit-pack-row rounded credit-pack-option-container mb-4 p-2 p-md-4 border position-relative' data-plan-id='332821856' data-discount='5' data-discountprice='384.75' data-ncredits='30' data-sales-team-quote-id='0' data-price-per-credit='12.83' data-cy='credit-pack-top-up-row'>
             <div class='credits-pill text-xs position-absolute'>
                 <span class='xl-rounded-left xl-rounded-right px-2 py-1 text-primary pill-light-blue'>5% OFF</span>
             </div>
@@ -55,7 +62,7 @@
                     <div class='col-12 px-md-2'>
                         <div class='d-flex flex-row justify-content-between'>
                             <p class='pr-3 text-dark-blue'>About 10 responses</p>
-                            <p class='m-0'>R200 <small class='js-vat-toggle'>(ex VAT)</small></p>
+                            <p class='m-0'>R180 <small class='js-vat-toggle'>(ex VAT)</small></p>
                         </div>
                     </div>
                     <div class='col-12 px-md-2 pt-2'>
@@ -70,7 +77,11 @@
                 </div>
             </div>
         </div>
-        <div id='credit-pack-row-332821857' class='credit-pack-row row js-credit-pack-row rounded credit-pack-option-container selected-pack p-2 p-md-4 border position-relative' data-plan-id='332821857' data-discount='15' data-discountprice='688.50' data-ncredits='60' data-sales-team-quote-id='0' data-price-per-credit='11.48' data-cy='credit-pack-top-up-row'>
+        </form>
+        <form method="POST" action="{{ route('purchase') }}">
+    @csrf
+    <input type="hidden" name="product_id" value="3">
+        <button type="submit" id='credit-pack-row-332821857' class='credit-pack-row row js-credit-pack-row rounded credit-pack-option-container selected-pack p-2 p-md-4 border position-relative' data-plan-id='332821857' data-discount='15' data-discountprice='688.50' data-ncredits='60' data-sales-team-quote-id='0' data-price-per-credit='11.48' data-cy='credit-pack-top-up-row'>
             <div class='credits-pill text-xs position-absolute'>
                 <span class='xl-rounded-left px-2 py-1 text-primary pill-light-blue'>15% OFF</span>
                 <span class='xl-rounded-right px-2 py-1 bg-primary text-white'>BEST VALUE</span>
@@ -94,7 +105,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </button>
+        </form>
         <div class='row card-details-row js-card-details-row mt-4'>
             <div class='p-4 p-md-3 d-block d-md-flex rounded justify-content-between bg-grey-25'>
                 <div class='card-brand-image-container flex-grow-0 flex-shrink-0 pr-2 response-modal-card-brand'>

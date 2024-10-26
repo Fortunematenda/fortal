@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LeadsController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CreditController; 
+use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\Route;
 
 // Home route
@@ -54,6 +55,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/addleadstrail', [LeadsController::class, 'addLeadsTrail'])->name('addleadstrail');
     Route::post('/addleadnote', [LeadsController::class, 'postNote'])->name('addleadnote');
     Route::post('/updatestatus', [LeadsController::class, 'updateStatus'])->name('updatestatus');
+    Route::post('/purchase', [PurchaseController::class,'purchase'])->name('purchase');
+    Route::get('/purchase/success', [PurchaseController::class, 'successPurchase'])->name('purchase.success');
+    Route::get('/purchase/cancel', [PurchaseController::class, 'failedPurchase'])->name('purchase.cancel');    
+    
 });
 
 // Load authentication routes
