@@ -191,15 +191,15 @@ $details .= " <span class='fortai-svg-icon bsi-primary-dark-blue bsi-xs'>
         $details .= "<div class='response-status-select-bar  '>"; 
 
         $details .= "<span class='last-activity-container'>
-                        <span class='js-last-activity'>Last activity $time ago</span>
-                        <span class='last-activity-copy'>Current status:</span>
+                        <span class='js-last-activity'>Last activity $time</span>
+                        <span class='last-activity-copy' style='margin-right:10px'>Current status : </span>
                     </span>"; 
         
         $details .= "<div class='status-container'>
-                        <span class='status-copy'>Current status:</span>
+                        <span class='status-copy' style='margin-right:10px'>Current status : </span>
                         <div class='status-wrapper'>";
         
-        $details .= "<select class='select-selected' id='status-select'>
+        $details .= " <select class='select-selected' id='status-select' m='$lead_id'>
                         <option value='$lead_status'>$lead_status</option>
                         <option value='Pending'>Pending</option>
                         <option value='Hired'>Hired</option>
@@ -230,7 +230,7 @@ $details .= " <span class='fortai-svg-icon bsi-primary-dark-blue bsi-xs'>
                                     </h4>
                                 </div>
                                 <div class='responded-ago text-xs-14 text-light-grey pt-2'>
-                                    Responded $time ago
+                                    Responded $time 
                                 </div>
                             </div>
                             <div class='project-title strong mb-0 lh-md text-xs-16'>
@@ -388,23 +388,23 @@ $details .= "<div class='toolbar-container my-4 pt-1 text-md-sm w-100 w-md-auto'
 
         $details .= "
         <div id='response-sections' class='mt-4'>
-            <ul class='nav nav-tabs mb-3 uk-tab' id='response-sections-tabs' role='tablist' data-uk-tab='{connect:'#my-id'}'>
-                <li class='nav-item pr-1 pr-sm-2 mr-1 mr-sm-3'>
-                    <a class='nav-link active px-1 text-sm text-sm-md' id='activity-tab' data-toggle='tab' href='#response-activity' role='tab' aria-controls='home' aria-selected='true'>Activity</a>
+            <ul class='nav nav-tabs mb-3 uk-tab tab-container' id='response-sections-tabs' role='tablist'>
+                <li class='pr-1 pr-sm-2 mr-1 mr-sm-3'>
+                    <span class='nav-link nav-item active px-1 text-sm text-sm-md' data-tab='activities'>Activity</span>
                 </li>
-                <li class='nav-item pr-1 pr-sm-2 mr-1 mr-sm-3'>
-                    <a class='nav-link px-1 text-sm text-sm-md' id='details-tab' data-toggle='tab' href='#response-project-details' role='tab' aria-controls='profile' aria-selected='false'>Lead Details</a>
+                <li class='pr-1 pr-sm-2 mr-1 mr-sm-3'>
+                    <span class='nav-link nav-item px-1 text-sm text-sm-md' data-tab='details'>Lead Details</span>
                 </li>
-                <li class='nav-item'>
-                    <a class='nav-link px-1 text-sm text-sm-md' id='notes-tab' data-toggle='tab' href='#response-notes' role='tab' aria-controls='contact' aria-selected='false'>My Notes</a>
+                <li class='pr-1 pr-sm-2 mr-1 mr-sm-3'>
+                    <span class='nav-link nav-item px-1 text-sm text-sm-md' data-tab='notes' role='tab'>My Notes</span>
                 </li>
             </ul>";
 
-         $details .="<ul class='tab-content uk-switcher uk-margin' id='my-id'><li class='tab-pane fade show active' id='response-activity' data-uk-switcher-item='next'>";   
+         $details .="<ul class='uk-margin' id='my-id'><li class='tab-content active' id='activities'>";   
          $details .= $this->trail($leads_trail); 
-         $details .= "</li><li class='tab-pane fade' id='response-project-details'>";  
+         $details .= "</li><li class='tab-content' id='details'>";  
          $details .= $this->details(); 
-         $details .= "</li><li class='tab-pane fade' id='response-notes'>";
+         $details .= "</li><li class='tab-content' id='notes'>";
          $details .= $this->notes($lead_id,$leads_notes);
          $details .= "</li></ul></div>";
    
@@ -506,7 +506,7 @@ return $details;
                 </h4>
             </div>
             <div class='posted-ago for-leads text-xs text-light-grey pt-2'>
-                $time ago
+                $time 
             </div>
         </div>
     ";
@@ -836,20 +836,20 @@ public function details($arr=[])
 }
 public function notes($lead_id,$arr=[])
 {
-    $details = "";
+     $details = "";
 
-    foreach($arr as $trail)
+    foreach($arr as $note)
     {
-        $first_name = $trail["first_name"];
-        $description = $trail["description"];
-        $date_entered = $trail["date_entered"];
+        $first_name = $note["first_name"];
+        $description = $note["description"];
+        $date_entered = $note["date_entered"];
     $details .= "
     <div class='activity-log-item d-flex justify-content-between first' data-hash='ca53df1ebe434b6f14bd02c0fe7694ad'>
         <div class='left-track flex-grow-0 d-flex flex-column align-items-center'>
             <div class='line top'></div>
             <div class='item-icon item-icon-called_alt'>
                 <div class='icon-border border rounded-circle d-flex justify-content-center align-items-center' style='background-color:#111637'>
-                    <i class='bi bi-person-lines-fill'></i>
+                    <i class='bi bi-envelop'></i>
                 </div>
             </div>
             <div class='line bottom flex-fill'></div>
@@ -869,11 +869,11 @@ public function notes($lead_id,$arr=[])
         </div>
     </div>
 ";
-
-$details .= " <div class='uk-margin'>";
-$details .=  "<textarea class='uk-textarea' rows='5' placeholder='Enter your notes' aria-label='Textarea'></textarea>";
-$details .=  "</div><p uk-margin><button class='uk-button uk-button-primary' m='$lead_id' id='add_note'>Enter Notes</button></p>";
     }
+    $details .= " <div class='uk-margin'>";
+    $details .= "<div id='ininfo'></div>";
+$details .=  "<textarea class='uk-textarea' id='note_description' rows='5' placeholder='Enter your notes'></textarea>";
+$details .=  "</div><p uk-margin><button class='uk-button uk-button-primary' m='$lead_id' id='add_note'>Enter Notes</button></p>";
  
 return $details;
 }

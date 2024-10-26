@@ -55,6 +55,8 @@ $(document).on('click','.view_lead',function() {
    getHTMLResponse("getresponsedetails",obj).then((data) => {
     details = data;
     $("#show_details").html(details);
+    $('.view_lead').removeClass('m-border');
+    $(this).addClass('m-border');
 }).catch((error) => {
     details = 'There is an error : '+error;  // Handle the error here
 });    
@@ -64,13 +66,30 @@ $(document).on('click','.view_lead',function() {
 $(document).on('click','#add_note',function() {
     var _token = $('input[name="_token"]').val();
    let lead_id = $(this).attr("m");  
-   const obj = {_token,lead_id};
-   getHTMLResponse("addleadnote",obj).then((data) => {
-    console.log(data);
+   let description=$('#note_description').val();
+   const obj = {_token,lead_id,description};
+   getJSONResponse("addleadnote",obj).then((data) => {
+    toast("success",data.message,5000);
+    $('#ininfo').html(data.message);
+    $('#note_description').val("");
 }).catch((error) => {
     console.log('There is an error : '+error);  // Handle the error here
 }); 
 }); 
+
+$(document).on('change','#status-select',function() {
+    var _token = $('input[name="_token"]').val();
+   let lead_id = $(this).attr("m");
+   let status = $(this).val();   
+   const obj = {_token,lead_id,status};
+   console.log(obj)
+   getJSONResponse("updatestatus",obj).then((data) => {
+    console.log(data)
+    toast("success",data.message,5000);
+}).catch((error) => {
+    console.log('There is an error : '+error);  // Handle the error here
+}); 
+});
 
 const displayLeads = (json) =>{
     const beFirstArr = $.grep(leadsArr, function(obj) {
@@ -102,6 +121,24 @@ const displayLeads = (json) =>{
             let credits = json[key]["credits"];
             $("#myleads").append(leadsTemplate(lead_id,first_letter,first_name,location,time,urgent,is_phone_verified,additional_details,frequent,description,contacted,remender,service_name,credits,hiring_decision));
           
+        }
+        if(json.length>0)
+        {
+           
+            let _token = $('input[name="_token"]').val();
+            let lead_idu =json[0]["lead_id"];
+            
+            let details = "";
+
+            getHTMLResponse("getresponsedetails",{_token,lead_id:lead_idu}).then((data) => {
+                details = data;
+                $("#show_details").html(details);
+                $('.view_lead').removeClass('m-border');
+                $('.view_lead:first-child').addClass('m-border');
+            }).catch((error) => {
+                details = 'There is an error : '+error;  // Handle the error here
+            });    
+               $("#show_details").html(details);
         }
         $(".loader").hide();
 }
@@ -256,3 +293,15 @@ $(document).on('click','.whatsap',function(){
 let contact_number = $(this).attr("contact_number").replace('+','');
 window.open('https://api.whatsapp.com/send/?phone='+contact_number+'&text&type=phone_number&app_absent=0', '_blank');
 })
+
+function toast(icon,txt,time)
+{
+    yoyoToast.fire({
+        type: icon,
+        title: 'Status',
+        message: txt,
+        timeout: time,
+        position: 'top-right',
+        timeoutFunction: ()=> {},   
+    });
+}

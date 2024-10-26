@@ -1,5 +1,29 @@
 <x-app-layout>
-
+<style>
+    .tab-container {
+      display: flex;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    .tab {
+      padding: 10px 20px;
+      background: #f0f0f0;
+      margin-right: 5px;
+    }
+    .tab.active {
+      background: #1890ff;
+      color: #fff;
+    }
+    .tab-content {
+      display: none;
+      padding: 20px;
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+    }
+    .tab-content.active {
+      display: block;
+    }
+</style>
     <div class="sticky-top enquiriesbanner">
         <div class="flex-fill d-flex">
             <div id="__rctSellerEnquiriesBanner" class="w-100"></div>
@@ -298,3 +322,14 @@
 </x-app-layout>
 
 <script src="{{asset('build/assets/js/response.js')}}"></script>
+<script>
+$(document).on('click','.nav-item',function() {
+      // Remove active class from all tabs and contents
+      $('.nav-item').removeClass('active');
+      $('.tab-content').removeClass('active');
+
+      // Add active class to the clicked tab and related content
+      $(this).addClass('active');
+      $('#' + $(this).data('tab')).addClass('active');
+    });
+</script>

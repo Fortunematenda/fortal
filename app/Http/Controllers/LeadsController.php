@@ -340,6 +340,7 @@ private function arrLeads($leads = array())
         return $notes;
     }
     catch(Exception $e){
+        
         return [];
     }
     }
@@ -353,10 +354,27 @@ private function arrLeads($leads = array())
             $description = $request->description;
         
         $note = LeadsNotesModel::create(["lead_id"=>$lead_id,"description"=>$description,"entered_by"=>$user_id,"user_id"=>$user_id]);
-        return response()->json(["message"=>"Successfully added","note"=>$note],200);
+        return response()->json(["message"=>"Note Successfully added","note"=>$note],200);
     }
     catch(Exception $e){
-        return response()->json(["message"=>"There is an error"],500);
+        return response()->json(["message"=>"There is an error : ".$e->getMessage()],500);
+    }
+    }
+
+    public function updateStatus(Request $request)
+    {
+        try{ 
+           
+            $lead_id = (int)$request->lead_id;
+            $status = $request->status;
+            $lead = LeadsModel::find($lead_id);
+            $lead->status = $status;
+            $lead->save();
+        
+         return response()->json(["message"=>"Lead updated successfully".$status,"lead"=>$lead],200);
+    }
+    catch(Exception $e){
+        return response()->json(["message"=>"There is an error : ".$e->getMessage()],500);
     }
     }
     

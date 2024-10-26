@@ -52,6 +52,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/gotoemail', [LeadsController::class, 'goToEmail'])->name('gotoemail');
     Route::post('/addleadstrail', [LeadsController::class, 'addLeadsTrail'])->name('addleadstrail');
     Route::post('/addleadnote', [LeadsController::class, 'postNote'])->name('addleadnote');
+    Route::post('/updatestatus', [LeadsController::class, 'updateStatus'])->name('updatestatus');
 });
 
 // Load authentication routes

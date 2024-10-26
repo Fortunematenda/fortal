@@ -62,6 +62,8 @@ $(document).on('click','.view_lead',function() {
    getHTMLResponse("leaddetails",obj).then((data) => {
     details = data;
     $("#show_details").html(details);
+    $('.view_lead').removeClass('m-border');
+    $(this).addClass('m-border');
 }).catch((error) => {
     details = 'There is an error : '+error;  // Handle the error here
 });    
@@ -99,6 +101,24 @@ const displayLeads = (json) =>{
             $("#myleads").append(leadsTemplate(lead_id,first_letter,first_name,location,time,urgent,is_phone_verified,additional_details,frequent,description,contacted,remender,service_name,credits,hiring_decision));
           
         }
+        if(json.length>0)
+            {
+               
+                let _token = $('input[name="_token"]').val();
+                let lead_idu =json[0]["lead_id"];
+                
+                let details = "";
+    
+                getHTMLResponse("leaddetails",{_token,lead_id:lead_idu}).then((data) => {
+                    details = data;
+                    $("#show_details").html(details);
+                }).catch((error) => {
+                    details = 'There is an error : '+error;  // Handle the error here
+                });    
+                   $("#show_details").html(details);
+                   $('.view_lead').removeClass('m-border');
+                   $('.view_lead:first-child').addClass('m-border');
+            }
         $(".loader").hide();
 }
 

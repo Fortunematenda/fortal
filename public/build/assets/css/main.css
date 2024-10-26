@@ -365,11 +365,11 @@ body{
 
 .bold-text {
     font-weight: bold;
-<<<<<<< HEAD
 }
 .whatsapp-div{
     display: flex;
     gap: 20px;
-=======
->>>>>>> upstream/main
+}
+.m-border{
+    border-left: 4px solid purple;
 }
