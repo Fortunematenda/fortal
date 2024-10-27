@@ -379,3 +379,31 @@ body{
     border-bottom: 2px solid purple;
     padding-bottom: 5px !important;
 }
+
+
+
+.package-container {
+    width: 100%; /* Ensures full width */
+    display: flex; /* Flexbox for alignment */
+    flex-direction: column; /* Vertical stacking */
+    align-items: center; /* Center aligns items */
+    margin-bottom: 20px; /* Space between packages */
+}
+
+.package-basic {
+    background-color: white; /* White background for Basic package */
+    color: black; /* Black text color for Basic package */
+    border: 2px solid #ccc; /* Optional: light gray border for the Basic package */
+}
+
+.package-standard {
+    background-color: #c0c0c0; /* Silver background for Standard package */
+    color: white; /* White text color for Standard package */
+    border: 2px solid #a56db2; /* Example border color */
+}
+
+.package-premium {
+    background-color: #AF42FF; /* Gold background for Premium package */
+    color: white; /* White text color for Premium package */
+    border: 2px solid #a56db2; /* Example border color */
+}
