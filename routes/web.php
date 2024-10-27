@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/credit/packages', [CreditController::class, 'showPackages'])->name('credit.packages');
     Route::get('/credit-packages', [CreditController::class, 'showCreditPackages'])->name('credit.packages');
     Route::get('/transaction-history', [ProfileController::class, 'transactionHistory'])->name('transaction.history');
+    Route::post('/help/submit', [HelpController::class, 'submit'])->name('help.submit');
     
    
     

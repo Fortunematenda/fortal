@@ -1,32 +1,37 @@
-// Event listener for keyup on #serviceTxt 
+// Event listener for keyup on #serviceTxt
 $(document).on("keyup", "#serviceTxt", function() {
-    let serviceTxt = $(this).val();
+    let serviceTxt = $(this).val().trim();
     let _token = $('input[name="_token"]').val(); // CSRF token
     $("#inner-service").empty();
 
+    // Proceed with AJAX only if input has more than 2 characters
     if (serviceTxt.length > 2) {
         $.ajax({
             url: '/getservices',
             type: 'POST',
             data: { serviceTxt, _token }, // Send data in one object
             beforeSend: function() {
-                $("#search-service").show(); // Show loading or search div
+                $("#search-service").show(); // Show loading or search indicator
             },
             success: function(data) {
-                let services = data.services; // Simplified access to services array
-                $.each(services, function(index, service) {
-                    let serviceName = service.service_name;
-                    let serviceId = service.id;
-                    $("#inner-service").append(`
-                        <li class='service' id='${serviceId}' service_name='${serviceName}'>${serviceName}</li>
-                    `);
-                });
+                console.log('Response Data:', data); // Log the response data
+                if (data.services && data.services.length > 0) {
+                    $.each(data.services, function(index, service) {
+                        let serviceName = service.service_name;
+                        let serviceId = service.id;
+                        $("#inner-service").append(`
+                            <li class='service' id='${serviceId}' service_name='${serviceName}'>${serviceName}</li>
+                        `);
+                    });
+                } else {
+                    $("#inner-service").append("<li class='no-results'>No services found.</li>");
+                }
             },
             error: function(xhr, status, error) {
                 console.error('Error:', status, error); // Improved error logging
             },
             complete: function() {
-                $("#search-service").hide(); // Hide loading or search div after request completes
+                $("#search-service").hide(); // Hide loading or search indicator after request completes
             }
         });
     }
@@ -36,10 +41,10 @@ $(document).on("keyup", "#serviceTxt", function() {
 $(document).on("click", ".service", function() {
     let serviceId = $(this).attr("id");
     let serviceName = $(this).attr("service_name");
-    $("#serviceTxt").val(serviceName);
-    $("#serviceID").val(serviceId);
+    $("#serviceTxt").val(serviceName); // Update input box with selected service
+    $("#serviceID").val(serviceId); // Set hidden field with service ID
     $("#inner-service").empty(); // Clear the service list
-    $("#step").attr("href", `/profession/create-account/${serviceId}?service=${serviceName}`);
+    $("#step").attr("href", `/profession/create-account/${serviceId}?service=${encodeURIComponent(serviceName)}`);
 });
 
 // Function to purchase credits when a package is clicked
