@@ -132,7 +132,7 @@
     <form method="POST" action="{{ route('purchase') }}">
         @csrf
         <input type="hidden" name="product_id" value="4">
-        <button type="submit" id='credit-pack-row-premium' class='credit-pack-row row js-credit-pack-row rounded credit-pack-option-container mb-4 p-2 p-md-4 border position-relative package-premium' data-plan-id='3' data-discount='20' data-discountprice='480.00' data-ncredits='200' data-sales-team-quote-id='0' data-price-per-credit='2.50' data-cy='credit-pack-top-up-row'>
+        <button type="submit" id='credit-pack-row-premium-plus' class='credit-pack-row row js-credit-pack-row rounded credit-pack-option-container mb-4 p-2 p-md-4 border position-relative package-premium' data-plan-id='3' data-discount='20' data-discountprice='480.00' data-ncredits='200' data-sales-team-quote-id='0' data-price-per-credit='2.50' data-cy='credit-pack-top-up-row'>
             <div class='credits-pill text-xs position-absolute'>
                 <span class='xl-rounded-left xl-rounded-right px-2 py-1 text-primary pill-light-blue'>100% OFF</span>
             </div>

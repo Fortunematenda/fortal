@@ -71,7 +71,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/updatestatus', [LeadsController::class, 'updateStatus'])->name('updatestatus');
     Route::post('/purchase', [PurchaseController::class,'purchase'])->name('purchase');
     Route::get('/purchase/success', [PurchaseController::class, 'successPurchase'])->name('purchase.success');
-    Route::get('/purchase/cancel', [PurchaseController::class, 'failedPurchase'])->name('purchase.cancel');    
+    Route::get('/purchase/cancel', [PurchaseController::class, 'failedPurchase'])->name('purchase.cancel');   
+    Route::post('/notifications/update', [ProfileController::class, 'updateNotifications'])->name('notifications.update');
+    Route::post('/notifications/update', [ProfileController::class, 'subscribedNotifications'])->name('notifications.subscribed');
     
 });
 

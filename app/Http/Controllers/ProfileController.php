@@ -278,4 +278,43 @@ class ProfileController extends Controller
     return view('transaction-history', compact('transactions')); // Ensure this view exists
 }
 
+public function updateNotifications(Request $request)
+{
+    $user = Auth::user();
+
+    // Validate the incoming request
+    $request->validate([
+        'subscribed_services_notifications' => 'nullable|boolean',
+        'new_leads_notifications' => 'nullable|boolean',
+        'weekly_newsletter_notifications' => 'nullable|boolean',
+        'sms_notifications' => 'nullable|boolean',
+    ]);
+
+    // Update notification settings based on checkbox inputs
+    $user->update([
+        'subscribed_services_notifications' => $request->has('subscribed_services_notifications'),
+        'new_leads_notifications' => $request->has('new_leads_notifications'),
+        'weekly_newsletter_notifications' => $request->has('weekly_newsletter_notifications'),
+        'sms_notifications' => $request->has('sms_notifications'),
+    ]);
+
+    return response()->json(['status' => 'success', 'message' => 'Notification settings updated successfully.']);
+}
+public function subscribedNotifications(Request $request)
+{
+    $user = Auth::user();
+
+    // Validation rules for incoming data
+    $validatedData = $request->validate([
+        'subscribed_services_notifications' => 'required|boolean',
+        'new_leads_notifications' => 'required|boolean',
+        'weekly_newsletter_notifications' => 'required|boolean',
+        'sms_notifications' => 'required|boolean',
+    ]);
+
+    // Update the subscription settings
+    $user->update($validatedData);
+
+    return response()->json(['status' => 'success', 'message' => 'Notification settings updated.']);
+}
 }
