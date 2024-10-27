@@ -9,7 +9,7 @@ class CreditTransactionModel extends Model
 {
     use HasFactory;
 
-   
+    protected $table = "credits_trail";
 
     protected $fillable = [
         'user_id',
