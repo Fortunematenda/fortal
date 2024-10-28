@@ -3,14 +3,14 @@
 
 <div class="container my-5">
     <div class="section-header p-4 rounded shadow-sm bg-light">
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="">
             <a class="text-secondary" href="/profile">
                 <span class="bark-svg-icon bsi-primary-grey-400 align-self-center bsi-sm">
                     <!-- SVG icon code -->
                 </span>
             </a>
             
-            <h2 class="subsection-title text-primary mb-0 text-center">My Credits</h2>
+            <h2 align="center" class="">My Credits</h2>
         </div>
     </div>
 
