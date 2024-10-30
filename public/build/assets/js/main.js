@@ -11,12 +11,16 @@ $(document).on("keyup", "#serviceTxt", function() {
             data: { serviceTxt, _token }, // Send data in one object
             beforeSend: function() {
                 $("#search-service").show(); // Show loading or search div
+                
             },
             success: function(data) {
+                console.log(data);
                 let services = data.services; // Simplified access to services array
                 $.each(services, function(index, service) {
                     let serviceName = service.service_name;
                     let serviceId = service.id;
+                    console.log(serviceName);
+                    console.log(serviceId);
                     $("#inner-service").append(`
                         <li class='service' id='${serviceId}' service_name='${serviceName}'>${serviceName}</li>
                     `);
@@ -26,7 +30,7 @@ $(document).on("keyup", "#serviceTxt", function() {
                 console.error('Error:', status, error); // Improved error logging
             },
             complete: function() {
-                $("#search-service").hide(); // Hide loading or search div after request completes
+                //$("#search-service").hide(); // Hide loading or search div after request completes
             }
         });
     }
@@ -40,6 +44,7 @@ $(document).on("click", ".service", function() {
     $("#serviceID").val(serviceId);
     $("#inner-service").empty(); // Clear the service list
     $("#step").attr("href", `/profession/create-account/${serviceId}?service=${serviceName}`);
+    $("#search-service").hide();
 });
 
 // Function to purchase credits when a package is clicked
