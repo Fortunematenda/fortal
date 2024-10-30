@@ -27,7 +27,7 @@ $(document).on("keyup", "#serviceTxt", function() {
                 console.error('Error:', status, error); // Improved error logging
             },
             complete: function() {
-                $("#search-service").hide(); // Hide loading or search div after request completes
+                 // Hide loading or search div after request completes
             }
         });
     }
@@ -41,6 +41,7 @@ $(document).on("click", ".service", function() {
     $("#serviceID").val(serviceId); // Set hidden field with service ID
     $("#inner-service").empty(); // Clear the service list
     $("#step").attr("href", `/profession/create-account/${serviceId}?service=${serviceName}`);
+    $("#search-service").hide();
 });
 
 // Function to purchase credits when a package is clicked
