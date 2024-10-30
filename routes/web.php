@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/credit/packages', [CreditController::class, 'showPackages'])->name('credit.packages');
     Route::get('/credit-packages', [CreditController::class, 'showCreditPackages'])->name('credit.packages');
     Route::get('/transaction-history', [ProfileController::class, 'transactionHistory'])->name('transaction.history');
+    Route::post('/help/submit', [HelpController::class, 'submit'])->name('help.submit');
     
    
     
@@ -62,6 +63,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Profile and Lead Updates
     Route::post('/update_services', [ProfileController::class, 'updateServices'])->name('update_services');
     Route::post('/getleads', [LeadsController::class, 'getUserLeads'])->name('get_leads');
+    Route::post('/getresponses', [LeadsController::class, 'getUserResponses'])->name('get_responses');
     Route::post('/leaddetails', [LeadsController::class, 'getLeadDetails'])->name('lead_details');
     Route::post('/getresponsedetails', [LeadsController::class, 'getResponseDetails'])->name('getresponsedetails');
     Route::post('/opencontacts', [LeadsController::class, 'openContacts'])->name('open_contacts');
@@ -71,7 +73,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/updatestatus', [LeadsController::class, 'updateStatus'])->name('updatestatus');
     Route::post('/purchase', [PurchaseController::class,'purchase'])->name('purchase');
     Route::get('/purchase/success', [PurchaseController::class, 'successPurchase'])->name('purchase.success');
-    Route::get('/purchase/cancel', [PurchaseController::class, 'failedPurchase'])->name('purchase.cancel');    
+    Route::get('/purchase/cancel', [PurchaseController::class, 'failedPurchase'])->name('purchase.cancel');   
+    Route::post('/notifications/update', [ProfileController::class, 'updateNotifications'])->name('notifications.update');
+    Route::post('/notifications/update', [ProfileController::class, 'subscribedNotifications'])->name('notifications.subscribed');
     
 });
 

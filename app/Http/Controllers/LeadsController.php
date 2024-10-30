@@ -19,7 +19,6 @@ use App\Models\ServiceQuestion;
 use App\Models\LeadsTrailModel;
 use App\Models\TrailsModel;
 use App\Models\LeadsNotesModel;
-use App\Models\ContactedLeadModel;
 use Exception;
 
 class LeadsController extends Controller
@@ -151,14 +150,32 @@ private function arrLeads($leads = array())
 
     public function showResponses(Request $request)
     {
-        $userId = $request->user()->id; 
-        $profileController = new ProfileController();
-        $leads = $profileController->getLeads($userId);    
-        $leads_count = count($leads);
-        $services_count = count($profileController->getUserServices($userId));
-        $leadsArr = $this->arrLeads($leads);
+        $userId = $request->user()->id;     
+    $profileController = new ProfileController();
+    $leads = $profileController->getResponseLeads($userId);    
+    $leads_count = count($leads);
+    $services_count = count($profileController->getUserServices($userId));
+    $leadsArr = $this->arrLeads($leads);
       
         return view('leads.responses', compact("leadsArr","leads_count","services_count"));
+    }
+    public function getUserResponses(Request $request)
+    {
+        try{
+            $userId = $request->user()->id; 
+            $profileController = new ProfileController();
+            $leads = $profileController->getResponseLeads($userId);    
+            $leads_count = count($leads);
+            $services_count = count($profileController->getUserServices($userId));
+            $leadsArr = $this->arrLeads($leads);
+    $resultArr = array("leadsArr"=>$leadsArr,"leads_count"=>$leads_count,"services_count"=>$services_count);
+            
+            return response()->json(["message"=>"Successful","leads"=>$resultArr],200);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(["message"=>"There is an error : ".$e->getMessage()],500); 
+        }
     }
     public function showHelp()
     {       
@@ -196,6 +213,7 @@ private function arrLeads($leads = array())
         $now = new \DateTime;
         $ago = new \DateTime($datetime);
         $diff = $now->diff($ago);
+        $dd = date('Y-m-d H:i:s');
     
         $diff->w = floor($diff->d / 7);  // Calculate weeks
         $diff->d -= $diff->w * 7;        // Subtract the weeks
@@ -212,7 +230,7 @@ private function arrLeads($leads = array())
     
         if (!$full) $string = array_slice($string, 0, 1);
     
-        return $string ? implode(', ', $string) . ' ago' : 'just now';
+        return $string ? implode(', ', $string) . ' ago ': 'just now';
     }
 
 
@@ -242,7 +260,7 @@ private function arrLeads($leads = array())
     }
     private function contactedLead($user_id,$lead_id)
     {
-        $lead = ContactedLeadModel::where('lead_id','=',$lead_id)->where('user_id','=',$user_id)->first();
+        $lead = ContactedLeadsModel::where('lead_id','=',$lead_id)->where('user_id','=',$user_id)->first();
     return $lead;
     }
     public function openContacts(Request $request)
@@ -254,6 +272,7 @@ private function arrLeads($leads = array())
             $lead = $profileController->getIndividualLead($lead_id);
             $credits = $lead->credits;
             $credits_balance = $user->credits_balance;
+            $arr = [];
             
             if($credits_balance>=$credits)
             {
@@ -265,9 +284,15 @@ private function arrLeads($leads = array())
                 $conl = $this->contactedLead($user->id,$lead_id);
                 if($conl == false)
                 {
-                    ContactedLeadModel::create(["user_id"=>$user->id,"lead_id"=>$lead_id,"entered_by"=>$user->id]);
+                  $contacted = new ContactedLeadsModel();
+                  $contacted->user_id=$user->id;
+                  $contacted->lead_id=$lead_id;
+                  $contacted->entered_by=$user->id;
+                  $contacted->save();
+                  //ContactedLeadsModel::create(["user_id"=>$user->id,"lead_id"=>$lead_id,"entered_by"=>$user->id]);
+                    
                 }                
-                return response()->json(["message"=>"Okay","details"=>$arr,"button"=>""],200);
+                return response()->json(["message"=>"Okay","details"=>$arr,"button"=>$user->id."-".$lead_id],200);
             }
             else{
                 $first_name = $lead->first_name;
@@ -380,7 +405,7 @@ private function arrLeads($leads = array())
             $user = $request->user();           
             $lead_id = (int)$request->lead_id;
             $status = $request->status;
-            $lead = ContactedLeadModel::where('lead_id','=',$lead_id)->where('user_id','=',$user->id)->first();
+            $lead = ContactedLeadsModel::where('lead_id','=',$lead_id)->where('user_id','=',$user->id)->first();
             $lead->status = $status;
             $lead->save();
         

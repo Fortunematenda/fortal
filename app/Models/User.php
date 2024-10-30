@@ -37,7 +37,7 @@ class User extends Authenticatable
         'subscribed_services_notifications',
         'new_leads_notifications',
         'weekly_newsletter_notifications',
-        'sms_notifications'
+        'sms_notifications',
 
     ];
 

@@ -44,7 +44,7 @@
                             Welcome to Fortai, {{$first_name}}
                     </h2>
         <p class="text-lg">
-            We're excited to help you grow your business.
+        We look forward to supporting the growth and success of your business.
         </p>
     
                                 </div>

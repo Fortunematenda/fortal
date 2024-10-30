@@ -6,7 +6,7 @@ $(document).ready(function() {
     const obj = {_token};
     
     // Usage:
-    getJSONResponse("getleads",obj).then((data) => {
+    getJSONResponse("getresponses",obj).then((data) => {
     leadsArr = data["leads"]["leadsArr"];
     displayLeads(leadsArr);
 }).catch((error) => {

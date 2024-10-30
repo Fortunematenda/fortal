@@ -18,10 +18,11 @@ $(document).on('click','#contact_now',function(){
 let lead_id = $(this).attr('lead_id');
 const obj = {_token,lead_id};
 getJSONResponse("opencontacts",obj).then((data) => {
+    console.log(data);
     if(data.message === "Okay")
     {
-        $("#d_email").text(data["details"]["email"])
-        $("#d_contact_number").text(data["details"]["contact_number"])
+        $("#d_email").text(data["details"]["email"]);
+        $("#d_contact_number").text(data["details"]["contact_number"]);
     }
     else if(data.message === "No credits")
     {

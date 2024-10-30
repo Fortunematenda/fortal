@@ -1,9 +1,10 @@
-// Event listener for keyup on #serviceTxt 
+// Event listener for keyup on #serviceTxt
 $(document).on("keyup", "#serviceTxt", function() {
-    let serviceTxt = $(this).val();
+    let serviceTxt = $(this).val().trim();
     let _token = $('input[name="_token"]').val(); // CSRF token
     $("#inner-service").empty();
 
+    // Proceed with AJAX only if input has more than 2 characters
     if (serviceTxt.length > 2) {
         $.ajax({
             url: '/getservices',
@@ -11,16 +12,12 @@ $(document).on("keyup", "#serviceTxt", function() {
             data: { serviceTxt, _token }, // Send data in one object
             beforeSend: function() {
                 $("#search-service").show(); // Show loading or search div
-                
             },
             success: function(data) {
-                console.log(data);
                 let services = data.services; // Simplified access to services array
                 $.each(services, function(index, service) {
                     let serviceName = service.service_name;
                     let serviceId = service.id;
-                    console.log(serviceName);
-                    console.log(serviceId);
                     $("#inner-service").append(`
                         <li class='service' id='${serviceId}' service_name='${serviceName}'>${serviceName}</li>
                     `);
@@ -30,7 +27,7 @@ $(document).on("keyup", "#serviceTxt", function() {
                 console.error('Error:', status, error); // Improved error logging
             },
             complete: function() {
-                //$("#search-service").hide(); // Hide loading or search div after request completes
+                $("#search-service").hide(); // Hide loading or search div after request completes
             }
         });
     }
@@ -40,11 +37,10 @@ $(document).on("keyup", "#serviceTxt", function() {
 $(document).on("click", ".service", function() {
     let serviceId = $(this).attr("id");
     let serviceName = $(this).attr("service_name");
-    $("#serviceTxt").val(serviceName);
-    $("#serviceID").val(serviceId);
+    $("#serviceTxt").val(serviceName); // Update input box with selected service
+    $("#serviceID").val(serviceId); // Set hidden field with service ID
     $("#inner-service").empty(); // Clear the service list
     $("#step").attr("href", `/profession/create-account/${serviceId}?service=${serviceName}`);
-    $("#search-service").hide();
 });
 
 // Function to purchase credits when a package is clicked
@@ -179,5 +175,69 @@ $(document).on("click", ".credits", function() {
             complete: function() {
            
             }
-        });    
+        });  
+          // Wait for the DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('notificationForm');
+
+    // Load checkbox states from localStorage
+    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        const checkboxName = checkbox.name;
+        // Set checkbox state based on localStorage
+        if (localStorage.getItem(checkboxName) === 'true') {
+            checkbox.checked = true;
+        }
+
+        // Add an event listener to update localStorage on change
+        checkbox.addEventListener('change', function() {
+            localStorage.setItem(checkboxName, checkbox.checked);
+        });
+    });
+
+    // Add an event listener for the form submission
+    form.addEventListener('submit', function(event) {
+        // Prevent the default form submission
+        event.preventDefault();
+
+        // Prepare the data to be sent
+        const formData = new FormData(form);
+
+        // Send the data using fetch API
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include CSRF token for security
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            //console.log('Response from server:', data);
+            toast('success', 'Notification settings updated successfully!', 3000);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            toast('error', 'Failed to update notification settings.', 3000);
+        });
+    });
+});
+
+// Your toast function
+function toast(icon, txt, time) {
+    yoyoToast.fire({
+        type: icon,
+        title: 'Status',
+        message: txt,
+        timeout: time,
+        position: 'top-right',
+        timeoutFunction: () => {},
+    });
+}  
 });
