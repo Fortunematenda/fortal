@@ -11,6 +11,7 @@ use Illuminate\View\View;
 use App\Models\ServicesModel;
 use App\Models\UserServicesModel;
 use App\Models\LeadsModel;
+use App\Models\ContactedLeadsModel;
 use App\Models\CreditsTrailModel;
 
 class ProfileController extends Controller
@@ -210,6 +211,34 @@ class ProfileController extends Controller
         )
         ->where('u.user_id', $user_id)
         ->orderBy('leads.id', 'desc') 
+        ->get();
+    
+    return $results;
+    
+    }
+    public function getResponseLeads($user_id)
+    {
+        $results = ContactedLeadsModel::join('leads as u', 'contacted_lead.lead_id', '=', 'u.id')
+        ->join('master_services as m', 'u.service_id', '=', 'm.id')
+        ->join('users as s', 'u.user_id', '=', 's.id')
+        ->select(
+            'm.service_name', 
+            'u.user_id as lead_user_id', 
+            'u.user_id as user_service_user_id', 
+            'u.service_id', 
+            's.first_name', 
+            's.last_name', 
+            'u.date_entered', 
+            'u.id', 
+            'u.description', 
+            's.location',
+            's.is_phone_verified',
+            'u.urgent',
+            'u.credits',
+            'u.hiring_decision'
+        )
+        ->where('contacted_lead.user_id', $user_id)
+        ->orderBy('contacted_lead.id', 'desc') 
         ->get();
     
     return $results;

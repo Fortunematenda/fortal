@@ -63,6 +63,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Profile and Lead Updates
     Route::post('/update_services', [ProfileController::class, 'updateServices'])->name('update_services');
     Route::post('/getleads', [LeadsController::class, 'getUserLeads'])->name('get_leads');
+    Route::post('/getresponses', [LeadsController::class, 'getUserResponses'])->name('get_responses');
     Route::post('/leaddetails', [LeadsController::class, 'getLeadDetails'])->name('lead_details');
     Route::post('/getresponsedetails', [LeadsController::class, 'getResponseDetails'])->name('getresponsedetails');
     Route::post('/opencontacts', [LeadsController::class, 'openContacts'])->name('open_contacts');
