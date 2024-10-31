@@ -250,7 +250,8 @@ class ProfileController extends Controller
             'u.credits',
             'u.hiring_decision'
         )
-        ->where('contacted_lead.user_id', $user_id)      
+        ->where('contacted_lead.user_id', $user_id)  
+        ->where('contacted_lead.status', '<>',"Not Interested")     
         ->orderBy('contacted_lead.id', 'desc') 
         ->get();
     
