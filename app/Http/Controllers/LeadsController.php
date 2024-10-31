@@ -19,6 +19,7 @@ use App\Models\ServiceQuestion;
 use App\Models\LeadsTrailModel;
 use App\Models\TrailsModel;
 use App\Models\LeadsNotesModel;
+use App\Models\LeadsReadModel;
 use Exception;
 
 class LeadsController extends Controller
@@ -56,6 +57,7 @@ class LeadsController extends Controller
 
 public function getLeadDetails(Request $request)
 {
+    $user = $request->user();
     $lead_id = $request->lead_id;
     $profileController = new ProfileController();
     $templates = new TemplatesController();
@@ -79,6 +81,10 @@ public function getLeadDetails(Request $request)
     $contact_number = $lead->contact_number;
     $masked_email = $this->maskEmail($email);
     $masked_contact_number = $this->maskPhoneNumber($contact_number);
+    LeadsReadModel::firstOrCreate(
+        ['lead_id' => $lead_id, 'user_id' => $user->id],
+        ['entered_by' => $user->id]
+    );
    
 $details = $templates->showLeadsDetails($lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$masked_email,$masked_contact_number);
 
@@ -140,7 +146,6 @@ private function arrLeads($leads = array())
         $hiring_decision = (int)$lead->hiring_decision;    
         $credits = $lead->credits;
         $additional_details = (int)strlen($description);
-    // $questions = ServiceQuestionModel::with('possibleAnswers')->get();
         $inarr = array("lead_id"=>$lead_id,"first_letter"=>$first_letter,"first_name"=>$first_name,"last_name"=>$last_name,"time"=>$time,"service_name"=>$service_name,"location"=>$location,"description"=>$description,"contacted"=>$contacted,"remender"=>$remender,"frequent"=>$frequent,"urgent"=>$urgent,"is_phone_verified"=>$is_phone_verified,"additional_details"=>$additional_details,"credits"=>$credits,"hiring_decision"=>$hiring_decision);
         array_push($leadsArr,$inarr);
 
@@ -303,6 +308,28 @@ private function arrLeads($leads = array())
 
 
         }
+        catch(Exception $e)
+        {
+            return response()->json(["message"=>"There is an error".$e->getMessage()],500);
+        }
+    }
+    public function notInterested(Request $request)
+    {
+        try{
+            $user = $request->user();
+            $lead_id = (int)$request->lead_id;            
+                $conl = $this->contactedLead($user->id,$lead_id);
+                if($conl == false)
+                {
+                  $contacted = new ContactedLeadsModel();
+                  $contacted->user_id=$user->id;
+                  $contacted->lead_id=$lead_id;
+                  $contacted->status="Not Interested";
+                  $contacted->entered_by=$user->id;
+                  $contacted->save();
+                }
+                return response()->json(["message"=>"Okay","details"=>$contacted,"button"=>$user->id."-".$lead_id],200);
+            }        
         catch(Exception $e)
         {
             return response()->json(["message"=>"There is an error".$e->getMessage()],500);

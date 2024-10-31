@@ -33,11 +33,10 @@ class TemplatesController extends Controller
                     </div>
                     <div class='col-12 px-md-2 pt-2'>
                         <div class='d-flex flex-row justify-content-between'>
-                            <div class=''>
-                             <i class='bi bi-coin'></i>
+                            <div class=''>                            
                                
                                 <span class='align-middle'>
-                                    15 credits
+                                  <i class='bi bi-coin'></i> 15 credits
                                 </span>
                             </div>
                             <p class='text-dark-blue text-sm text-grey-400'>
@@ -74,10 +73,9 @@ class TemplatesController extends Controller
                     <div class='col-12 px-md-2 pt-2'>
                         <div class='d-flex flex-row justify-content-between'>
                             <div class=''>
-                             <i class='bi bi-coin'></i>
-                               
+                                                            
                                 <span class='align-middle'>
-                                    30 credits
+                                   <i class='bi bi-coin'></i> 30 credits
                                 </span>
                             </div>
                             <p class='text-dark-blue text-sm text-grey-400'>
@@ -117,9 +115,8 @@ class TemplatesController extends Controller
                     <div class='col-12 px-md-2 pt-2'>
                         <div class='d-flex flex-row justify-content-between'>
                             <div class=''>
-                             <i class='bi bi-coin'></i>
-                                <span class='align-middle'>
-                                    60 credits
+                                                             <span class='align-middle'>
+                                   <i class='bi bi-coin'></i> 60 credits
                                 </span>
                             </div>
                             <p class='text-dark-blue text-sm text-grey-400'>
@@ -236,15 +233,15 @@ $details .= " <span class='fortai-svg-icon bsi-primary-dark-blue bsi-xs'>
                         <div class='project-top'>
                             <div class='d-flex flew-row flex-wrap justify-content-between align-items-center pb-2'>
                                 <div class='project-name-location pr-3 pt-2'>
-                                    <h4 class='mb-0'>
-                                        <span class='buyer_name'>$first_name</span>
+                                    <h4 class='mb-0 bol'>
+                                        <span class='buyer_name'><i class='bi bi-person-circle'></i> $first_name</span>
                                     </h4>
                                 </div>
                                 <div class='responded-ago text-xs-14 text-light-grey pt-2'>
-                                    Responded $time 
+                                    <i class='bi bi-alarm'></i> Responded $time 
                                 </div>
                             </div>
-                            <div class='project-title strong mb-0 lh-md text-xs-16'>
+                            <div class='project-title strong mb-0 lh-md text-xs-16 bol'>
                                 $service_name
                                 <span class='project-name-location d-inline text-regular text-xs-16'>
                                     <span class='text-light-grey mx-1'>|</span>
@@ -388,10 +385,9 @@ $details .= "<div class='toolbar-container my-4 pt-1 text-md-sm w-100 w-md-auto'
             <div class='pt-4 d-none' id='marketplace-cancel-booking-container'></div>
         
             <div class='project-credits-to-respond pt-2 mb-4 pt-md-3 align-items-center'>
-             <i class='bi bi-coin'></i>
-               
+                           
                 <span class='num-credits-resp pl-2 text-grey-400'>
-                    $credits Credits
+                   <i class='bi bi-coin'></i> $credits Credits
                 </span>
             </div>
         </div>";
@@ -512,18 +508,18 @@ return $details;
     $details .= "
         <div class='d-flex flew-row flex-wrap justify-content-between align-items-center pb-2 w-100 project-details-grid-container'>
             <div class='project-name-location pr-3 pt-2'>
-                <h4 class='mb-0'>
-                    <span class='buyer_name'>$first_name</span>
+                <h4 class='mb-0 bol'>
+                    <span class='buyer_name'><i class='bi bi-person-circle'></i> $first_name</span>
                 </h4>
             </div>
             <div class='posted-ago for-leads text-xs text-light-grey pt-2'>
-                $time 
+                <i class='bi bi-alarm'></i> $time 
             </div>
         </div>
     ";
     
     $details .= "
-        <div class='project-title strong mb-0 lh-md'>$service_name</div>
+        <div class='project-title strong mb-0 lh-md bol'>$service_name</div>
         <div class='project-name-location'>
             <span class='location'>$location</span>
         </div>
@@ -678,17 +674,16 @@ for ($i = 0; $i < $lead['$remender']; $i++) {
 
 $details .= "
 <div class='tw-flex tw-justify-start tw-items-end' data-cy='lead-price'>
-    <i class='bi bi-coin'></i>
-    <span class='tw-text-xs tw-font-gordita-regular'>$credits Credits</span>
+        <span class='tw-text-xs tw-font-gordita-regular'><i class='bi bi-coin'></i> $credits Credits</span>
 </div>
 
 <div class='calls-to-action for-leads' style=''>
-    <button id='btn_subdetails' class='btn btn-primary large-btn button submit-your-details mt-3 mr-1' data-cy='dashboard-submit'>
-        <span id='contact_now' lead_id='$lead_id'>Contact <span class='buyer_name'>$first_name</span></span>
+    <button id='btn_subdetails' class='btn btn-primary medium-btn button submit-your-details mt-3 mr-1' data-cy='dashboard-submit'>
+        <span id='contact_now' lead_id='$lead_id'><i class='bi bi-telephone-forward'></i> Contact <span class='buyer_name'>$first_name</span></span>
     </button>
-    <button class='btn btn-link large-btn not-interested mt-3 mr-1' data-cy='dashboard-not-interested'>
-        <span>Not interested</span>
-        <i class='fa fa-times'></i>
+    <button id='not_interested' lead_id='$lead_id' class='btn btn-danger medium-btn button submit-your-details mt-3 mr-1' data-cy='dashboard-not-interested'>
+        <span><i class='bi bi-telephone-x'></i> Not interested</span>
+        
     </button>
 </div>";
 

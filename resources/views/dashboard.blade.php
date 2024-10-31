@@ -122,7 +122,7 @@
             <p class="text-lg">
                 Don't miss out, get started now:
             </p>
-            <a class="btn btn-primary" href="/seller/dashboard/"> View <span class="js-live-current">398 live leads</span></a>
+            <a class="btn btn-primary" href="/seller/dashboard/"> View <span class="js-live-current"></span></a>
         </div>
         <div class="js-live-current-container-noleads d-none flex-column align-items-start text-xs text-secondary">
             <p class="mb-0">We don't have any leads in your area right now.</p>
@@ -366,7 +366,7 @@
                                                         <div class="content px-4 pt-4">
                                <p class="text-dark-blue text-md mb-3 js-live-stats-pd">
                                     <span class="text-dark-blue text-strong">
-                                        Estimated <strong><span class="text-dark-blue text-strong"><span class="js-live-prediction">39</span> leads per <span class="js-live-prediction-per">day</span></span></strong>
+                                        Estimated <strong><span class="text-dark-blue text-strong"><span class="js-live-prediction">27</span> leads per <span class="js-live-prediction-per">day</span></span></strong>
                                     </span>
                                 </p>
                                 <p class="text-secondary text-xs mb-1">Sending new leads to </p><div class="d-flex flex-wrap align-items-start justify-content-between flex-column"> <span class="text-dark-blue text-xs text-break">{{$email}}</span><a class="text-xs" href="/profile"><u>Change</u></a></div>

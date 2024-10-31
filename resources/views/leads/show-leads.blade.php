@@ -152,10 +152,10 @@
                                         class="tw-py-2 tw-px-4 tw-bg-gray-400 tw-flex tw-justify-start tw-flex-wrap tw-gap-2">
                                         <span class="tw-inline-flex tw-items-end tw-relative"><button
                                                 class="tw-relative tw-rounded tw-text-xs tw-py-1 tw-px-2 disabled:tw-bg-gray-300 disabled:tw-text-gray-600 tw-inline-flex tw-gap-1.5 tw-bg-white be_first">Be
-                                                first to respond (<span id="be_first">0</span>)</button></span><span
+                                                first to respond <span id="be_first" class="uk-badge">0</span></button></span><span
                                             class="tw-inline-flex tw-items-end tw-relative"><button
                                                 class="tw-relative tw-rounded tw-text-xs tw-py-1 tw-px-2 disabled:tw-bg-gray-300 disabled:tw-text-gray-600 tw-inline-flex tw-gap-1.5 tw-bg-white my_urgent">Urgent
-                                                requests (<span id="my_urgent">0</span>)</button></span>
+                                                requests <span id="my_urgent" class="uk-badge">0</span></button></span>
                                     </div>
                                 </div>
                             </div>

@@ -7,6 +7,7 @@ $(document).ready(function() {
     
     // Usage:
     getJSONResponse("getleads",obj).then((data) => {
+        console.log(data);
     leadsArr = data["leads"]["leadsArr"];
     displayLeads(leadsArr);
 }).catch((error) => {
@@ -18,11 +19,13 @@ $(document).on('click','#contact_now',function(){
 let lead_id = $(this).attr('lead_id');
 const obj = {_token,lead_id};
 getJSONResponse("opencontacts",obj).then((data) => {
-    console.log(data);
     if(data.message === "Okay")
     {
         $("#d_email").text(data["details"]["email"]);
         $("#d_contact_number").text(data["details"]["contact_number"]);
+        $('.calls-to-action').hide();
+        $("[m='"+lead_id+"']").prop('disabled', true);
+        window.location.href = '/responses';
     }
     else if(data.message === "No credits")
     {
@@ -31,10 +34,27 @@ getJSONResponse("opencontacts",obj).then((data) => {
         
     }
 }).catch((error) => {
-    //console.error('Failed to get details:', error);  // Handle the error here
-});    
- 
-})
+});  
+});
+
+$(document).on('click','#not_interested',function(){
+    if (confirm("Are you sure you want to remove this lead?")) {
+    var _token = $('input[name="_token"]').val();
+let lead_id = $(this).attr('lead_id');
+const obj = {_token,lead_id};
+getJSONResponse("notinterested",obj).then((data) => {
+    if(data.message === "Okay")
+    {      
+        window.location.href = '/seller/dashboard';
+    }
+    else{
+        alert("There is an error");
+    }
+    
+}).catch((error) => {
+});  
+}
+});
 
 $(document).on('click','.be_first',function() {
     $("#myleads").empty();
@@ -237,10 +257,9 @@ const leadsTemplate = (
             txt += "</div><div class='tw-flex tw-justify-between tw-mt-4'>";
             txt += "  <div class='tw-flex tw-justify-start tw-items-end' data-cy='lead-price'>";
             txt += "    <title>Fortai Token</title>";
-            txt += "    <i class='bi bi-coin'></i> ";
             txt += " <span class='tw-text-xs tw-font-gordita-regular tw-flex tw-justify-start tw-items-end'>" +
 
-"      </span>" +
+"      </span><i class='bi bi-coin'></i> &nbsp;" +
 credits + " Credits" +
 "    </span>";
 

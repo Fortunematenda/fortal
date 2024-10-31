@@ -183,8 +183,15 @@ class ProfileController extends Controller
     {
         $results = LeadsModel::join('user_services as u', 'leads.service_id', '=', 'u.service_id')
         ->join('master_services as m', 'u.service_id', '=', 'm.id')
+        ->join('users as s', 'leads.user_id', '=', 's.id')
         ->select('leads.id')
         ->where('u.user_id', $user_id)
+        ->where('leads.status','=','Open')
+        ->whereNotIn('leads.id', function ($query) use ($user_id) {
+            $query->select('lead_id')
+                  ->from('contacted_lead')
+                  ->where('user_id', $user_id);
+        })
         ->get();
         return $results;
     }
@@ -210,6 +217,12 @@ class ProfileController extends Controller
             'leads.hiring_decision'
         )
         ->where('u.user_id', $user_id)
+        ->where('leads.status','=','Open')
+        ->whereNotIn('leads.id', function ($query) use ($user_id) {
+            $query->select('lead_id')
+                  ->from('contacted_lead')
+                  ->where('user_id', $user_id);
+        })
         ->orderBy('leads.id', 'desc') 
         ->get();
     
@@ -237,7 +250,7 @@ class ProfileController extends Controller
             'u.credits',
             'u.hiring_decision'
         )
-        ->where('contacted_lead.user_id', $user_id)
+        ->where('contacted_lead.user_id', $user_id)      
         ->orderBy('contacted_lead.id', 'desc') 
         ->get();
     
@@ -279,6 +292,7 @@ class ProfileController extends Controller
     {
         $results = LeadsModel::join('user_services as u', 'leads.service_id', '=', 'u.service_id')
         ->join('master_services as m', 'u.service_id', '=', 'm.id')
+        ->join('users as s', 'leads.user_id', '=', 's.id')
         ->select('m.service_name', 'leads.user_id as lead_user_id', 'u.user_id as user_service_user_id', 'leads.service_id', 'leads.id')
         ->where('u.user_id', $user_id)
         ->whereNotIn('leads.id', function ($query) use ($user_id) {
