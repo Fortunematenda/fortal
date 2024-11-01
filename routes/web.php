@@ -51,6 +51,8 @@ Route::middleware('guest:sanctum')->group(function () {
     Route::get('/profession/create-account/{id}', [ProfileController::class, 'createAccountProfession'])->name('createaccountprofession');
     Route::post('/getservices', [LeadsController::class, 'getServices'])->name('getservices');
     Route::post('/registeruser', [RegisteredUserController::class, 'store'])->name('registeruser');
+    Route::get('/buyer/create', [ProfileController::class, 'createBuyer'])->name('createbuyer');
+
 });
 
 // Group routes for authenticated sellers/leads

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{asset('build/assets/css/main.css')}}">
     <link rel="stylesheet" href="{{asset('build/assets/css/main.9be759a28ac54caa.css')}}">
     <link rel="stylesheet" href="{{asset('build/assets/css/uikit.min.css')}}">
+    <link rel="stylesheet" href="{{asset('build/assets/css/buyer.css')}}">
     <link rel="stylesheet" href="{{asset('build/assets/css/settings.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
