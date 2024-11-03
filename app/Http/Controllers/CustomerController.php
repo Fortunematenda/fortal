@@ -21,14 +21,21 @@ class CustomerController extends Controller
     public function showRequests()
     {
         $slot = "";
-        return view('customer.customerrequests',compact(["slot"]));
+        return view('customer.requests',compact(["slot"]));
     }
 
-    public function viewProfession($id)
+    public function expertReview()
     {
         $slot = "";
         $profession = null; // Replace with actual fetching logic
 
-        return view('customer.customerviewprofession', compact('profession'));
+        return view('customer.expertreview', compact('profession'));
+    }
+     public function expertProfile()
+    {
+        $slot = "";
+        $profile = null; // Replace with actual fetching logic
+
+        return view('customer.expertprofile', compact('profile'));
     }
 }

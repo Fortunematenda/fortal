@@ -23,10 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/profile', [ProfileController::class, 'notifications'])->name('profile.notifications');
-    
-    
-    
-    
+  
     // Credit Routes
     Route::post('/buy-credits', [CreditController::class, 'buyCredits']);
     Route::get('/buy-credits', [CreditController::class, 'showBuyCreditsPage'])->name('credits.buy');
@@ -35,13 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/credit-packages', [CreditController::class, 'showCreditPackages'])->name('credit.packages');
     Route::get('/transaction-history', [ProfileController::class, 'transactionHistory'])->name('transaction.history');
     Route::post('/help/submit', [HelpController::class, 'submit'])->name('help.submit');
-    
-   
-    
-    
-    
- 
-  
+
 });
 
 // Group routes for guest users
@@ -53,12 +44,8 @@ Route::middleware('guest:sanctum')->group(function () {
     Route::get('/customer/dashboard', [CustomerController::class, 'dashboard'])->name('customer.dashboard');
     Route::get('/customer/create', [CustomerController::class, 'createCustomer'])->name('create.customer');
     Route::get('/customer/requests', [CustomerController::class, 'showRequests'])->name('customer.requests');
-    Route::get('/customer/profession/{id}', [CustomerController::class, 'viewProfession'])->name('customer.view.profession');
-
-    
-    
-   
-  
+    Route::get('/customer/review/', [CustomerController::class, 'expertReview'])->name('expertreview');
+    Route::get('/customer/profile/', [CustomerController::class, 'expertProfile'])->name('expertprofile');
 
 });
 
