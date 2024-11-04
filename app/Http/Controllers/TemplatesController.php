@@ -339,7 +339,7 @@ $details .= "<div class='toolbar-container my-4 pt-1 text-md-sm w-100 w-md-auto'
 
             $details .= "<a href='/gotoemail' target='_blank' class='Button_base__5Wcwx Button_sm__RWLp1 Button_smWithIcon__y3vYd Button_minWidth__WGVzH Button_textWhite__9w5Wn Button_bgDarkBlue__9V6YV !tw-no-underline tw-drop-shadow-[unset] !tw-px-2 !tw-min-h-[unset] tw-text-sm !tw-text-white btnDetails'><i class='bi bi-envelope'></i> Send Email</a>";
             
-            $details .= "<a href='#modal-sms' class='Button_base__5Wcwx Button_sm__RWLp1 Button_smWithIcon__y3vYd Button_minWidth__WGVzH Button_textWhite__9w5Wn Button_bgDarkBlue__9V6YV !tw-no-underline tw-drop-shadow-[unset] !tw-px-2 !tw-min-h-[unset] tw-text-sm !tw-text-white btnDetails' uk-toggle><i class='bi bi-chat-left-fill'></i> Send SMS</a><div>";
+            $details .= "<a href='#modal-sms' class='Button_base__5Wcwx Button_sm__RWLp1 Button_smWithIcon__y3vYd Button_minWidth__WGVzH Button_textWhite__9w5Wn Button_bgDarkBlue__9V6YV !tw-no-underline tw-drop-shadow-[unset] !tw-px-2 !tw-min-h-[unset] tw-text-sm !tw-text-white btnDetails' uk-toggle><i class='bi bi-chat-left'></i> Send SMS</a><div>";
         
             $details .= "
             </div>
@@ -678,8 +678,8 @@ $details .= "
 </div>
 
 <div class='calls-to-action for-leads' style=''>
-    <button id='btn_subdetails' class='btn btn-primary medium-btn button submit-your-details mt-3 mr-1' data-cy='dashboard-submit'>
-        <span id='contact_now' lead_id='$lead_id'><i class='bi bi-telephone-forward'></i> Contact <span class='buyer_name'>$first_name</span></span>
+    <button id='contact_now' lead_id='$lead_id' class='btn btn-primary medium-btn button submit-your-details mt-3 mr-1' data-cy='dashboard-submit'>
+        <span><i class='bi bi-telephone-forward'></i> Contact <span class='buyer_name'>$first_name</span></span>
     </button>
     <button id='not_interested' lead_id='$lead_id' class='btn btn-danger medium-btn button submit-your-details mt-3 mr-1' data-cy='dashboard-not-interested'>
         <span><i class='bi bi-telephone-x'></i> Not interested</span>

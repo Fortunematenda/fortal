@@ -23,6 +23,78 @@
     .tab-content.active {
       display: block;
     }
+
+    h2 {
+  color: #000;
+  text-align: center;
+  font-size: 2em;
+  margin: 20px 0;
+}
+
+.warpper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tab {
+  cursor: pointer;
+  padding: 10px 20px;
+  margin: 0px 2px;
+  background: purple;
+  display: inline-block;
+  color: #fff;
+  border-radius: 3px 3px 0px 0px;
+  box-shadow: 0 0.5rem 0.8rem #00000080;
+}
+
+.panels {
+  background: #fff;
+  box-shadow: 0 2rem 2rem #00000080;
+  min-height: 200px;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 3px;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.panel {
+  display: none;
+  animation: fadein 0.8s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.panel-title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.radio {
+  display: none;
+}
+
+#one:checked ~ .panels #one-panel,
+#two:checked ~ .panels #two-panel,
+#three:checked ~ .panels #three-panel {
+  display: block;
+}
+
+#one:checked ~ .tabs #one-tab,
+#two:checked ~ .tabs #two-tab,
+#three:checked ~ .tabs #three-tab {
+  background: #fff;
+  color: #000;
+  border-top: 3px solid purple;
+}
+
 </style>
     <div class="sticky-top enquiriesbanner">
         <div class="flex-fill d-flex">
@@ -111,28 +183,24 @@
                                             <div
                                                 class="tw-flex tw-items-center tw-text-sm  tw-font-gordita-regular tw-justify-between tw-w-full tw-pr-3">
                                                  
-                                               <button class="uk-button uk-button-danger uk-button-small"><i class="bi bi-card-checklist"></i> All</button>   
-                                               <button class="uk-button uk-button-primary uk-button-small"><i class="bi bi-yelp"></i> Pending</button>
-                                               <button class="uk-button uk-button-primary uk-button-small"><i class="bi bi-person-check-fill"></i> Hired</button>                                       
-                                            
+                                                      
+                                               <div class="warpper">
+  <input class="radio" id="one" name="group" type="radio" checked>
+  <input class="radio" id="two" name="group" type="radio">
+  <input class="radio" id="three" name="group" type="radio">
+
+  <div class="tabs">
+    <label class="tab" id="one-tab" for="one">All <span class="uk-badge">0</span></label>
+    <label class="tab" id="two-tab" for="two">Pending <span class="uk-badge">0</span></label>
+    <label class="tab" id="three-tab" for="three">Hired <span class="uk-badge">0</span></label>
+  </div>
+
+</div>
                                             <div>
                                             
                                              </div>
                                              </div>
-                                            <div class="tw-pl-3 tw-border-l tw-border-gray-400"><button
-                                                    class="Button_base__5Wcwx Button_lg__UQt1r Button_minWidth__WGVzH Button_noOutline__CXC05 Button_textBlue__z9-S- Button_bgTransparent__cMajf !tw-p-0 !tw-min-h-[unset]"
-                                                    data-cy="dashboard-filters-open"><span
-                                                        class="tw-flex tw-justify-center"><span
-                                                            class="button-main tw-flex tw-items-center "><span
-                                                                class="icon tw-text-current tw-inline-flex"><svg
-                                                                    class="MuiSvgIcon-root" focusable="false"
-                                                                    viewBox="0 0 24 24" aria-hidden="true">
-                                                                    <path
-                                                                        d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z">
-                                                                    </path>
-                                                                </svg></span><span
-                                                                class="tw-icon-spacer tw-block tw-w-[8px]"></span><span
-                                                                class="child-container Button_childContainer__YG7FP">Filter</span></span></span></button>
+                                            <div class="tw-pl-3 tw-border-l tw-border-gray-400">
                                             </div>
                                         </div>
                                     </div>
@@ -145,10 +213,10 @@
                             <div id="__rctLeadsList">
                                 <div class="infinite-scroll-component__outerdiv">
                                     <div class="infinite-scroll-component " style="height: auto; overflow: visible;">
-                                        
-                                           
+                                          
                                         <div class="tw-bg-gray-200 tw-overflow-y tw-h-full tw-gap-3 tw-flex tw-flex-col tw-py-3"
                                             data-cy="leads-list" id="myleads">
+                                      
                                          </div>
                                             <div class="tw-w-full tw-flex tw-justify-center tw-items-center tw-py-4 loader" style="display:none">
                                             <div role="status" class="tw-flex" data-cy="loading-spinner"

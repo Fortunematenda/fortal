@@ -407,3 +407,6 @@ body{
     color: white; /* White text color for Premium package */
     border: 2px solid #a56db2; /* Example border color */
 }
+.uk-badge{
+    background-color: #7f0793 !important;
+}
