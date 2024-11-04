@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ServicePossibleAnswer extends Model
+class ServicePossibleAnswerModel extends Model
 {
     use HasFactory;
 

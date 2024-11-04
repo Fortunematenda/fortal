@@ -409,7 +409,6 @@
 display: none;
 
 }
-
 #search-service li::before {
     content: '\2713'; /* Unicode for the checkmark */
     font-size: 16px;
@@ -448,7 +447,7 @@ display: none;
     margin-top: 15px;
     margin-bottom: 15px;
 }
-
-
-
+.uk-modal{
+    z-index: 2000 !important;
+}
 

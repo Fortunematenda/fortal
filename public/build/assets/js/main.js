@@ -242,3 +242,38 @@ function toast(icon, txt, time) {
     });
 }  
 });
+
+$(document).on("click", "#start_lead", function() {
+    let service_id = $("#serviceID").val();
+    let location = $("#searchLocation").val();
+    let longitude = $("#longitude").val();
+    let latitude = $("#latitude").val();
+    var _token = $('input[name="_token"]').val();
+    console.log(`${service_id} - ${location} - ${longitude} - ${latitude}`);
+    if (!service_id || !location || !longitude || !latitude) {
+        toast('error', 'Please complete the fields', 3000);
+    }
+    else{
+        UIkit.modal("#modal-create").show();
+        const obj = {
+            _token,service_id
+        };
+        $.ajax({
+            url: '/getservicesquestions',
+            type: 'POST',
+            data: obj, // Send data in one object
+            beforeSend: function() {
+               
+            },
+            success: function(data) {
+               console.log(data)
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', status, error); // Improved error logging
+            },
+            complete: function() {
+            }
+        });
+    
+    }
+});
