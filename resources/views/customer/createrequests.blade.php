@@ -79,7 +79,7 @@
         <div class="search-box">
             <div style="width:100%">
             <input type="text" id="serviceTxt" placeholder="What service are you looking for?">
-            <input type="" id="serviceID">
+            <input type="" id="serviceID" hidden>
             <span id="search-service">
                 <ul id="inner-service" class="searched-list"></ul>
             </span>
@@ -87,8 +87,8 @@
             <input type="text" id="searchLocation" placeholder="Enter location in South Africa or Zimbabwe">
             <button type="button" id="start_lead">Search</button>
         </div>
-        <input id="latitude"></input>
-        <input id="longitude"></input>
+        <input id="latitude" hidden></input>
+        <input id="longitude" hidden></input>
         <div class="popular">Popular: House Cleaning, Web Design, Personal Trainers</div>
     </div>
         </form>
