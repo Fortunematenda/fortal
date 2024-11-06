@@ -146,7 +146,10 @@ private function arrLeads($leads = array())
         $hiring_decision = (int)$lead->hiring_decision;    
         $credits = $lead->credits;
         $additional_details = (int)strlen($description);
-        $inarr = array("lead_id"=>$lead_id,"first_letter"=>$first_letter,"first_name"=>$first_name,"last_name"=>$last_name,"time"=>$time,"service_name"=>$service_name,"location"=>$location,"description"=>$description,"contacted"=>$contacted,"remender"=>$remender,"frequent"=>$frequent,"urgent"=>$urgent,"is_phone_verified"=>$is_phone_verified,"additional_details"=>$additional_details,"credits"=>$credits,"hiring_decision"=>$hiring_decision);
+        $leads_trail = $this->getLeadsTrail($lead_id, $lead_user_id) ?? [];
+        $leads_notes = $this->getLeadsNotes($lead_id, $lead_user_id) ?? [];
+        $inarr = array("lead_id"=>$lead_id,"first_letter"=>$first_letter,"first_name"=>$first_name,"last_name"=>$last_name,"time"=>$time,"service_name"=>$service_name,"location"=>$location,"description"=>$description,"contacted"=>$contacted,"remender"=>$remender,"frequent"=>$frequent,"urgent"=>$urgent,"is_phone_verified"=>$is_phone_verified,"additional_details"=>$additional_details,"credits"=>$credits,"hiring_decision"=>$hiring_decision, "leads_trail" => $leads_trail,
+        "leads_notes" => $leads_notes);
         array_push($leadsArr,$inarr);
 
     }  
