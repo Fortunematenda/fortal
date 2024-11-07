@@ -4,7 +4,7 @@
             <link rel="stylesheet" href="{{asset('build/assets/css/main_v2-built.645e5822f3.v2.css')}}">
            
     <div class="py-12">
-    <div class="container">
+    <div class="container tw-shadow-md">
             <div class="px-0 px-xl-6">
                 <div class="welcome py-3 transition-1 js-welcome-container" style="opacity: 1;">
                     <h4 class="mb-1 js-moment-greeting">
@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <div class="js-expander-content" style="display: none">
+        <div class="js-expander-content " style="display: none">
             <div class="py-4 px-3 bg-white">
                 <div class="row bg-white">
                                             <div class="col-lg-7 col-xl-6 col-11 mb-5">
@@ -185,7 +185,7 @@
                         <a class="flex-basis" href="/profile" target="_blank"><u>Update email settings</u></a>
                     </div>
                                 <div class="row flex-row h-auto">
-                                        <div class="col sellerdash-col h-auto d-flex flex-column justify-content-between">
+                                        <div class="col sellerdash-col h-auto d-flex flex-column justify-content-between tw-shadow-md">
                         <div class="rounded bg-white sd-shadow mt-3">
                             <div class="d-flex align-items-start justify-content-start flex-column px-3 py-4">
                                                             <div class="avatar-container elite-pro">
@@ -285,7 +285,7 @@
                                                             </div>
                     </div>
 
-                                        <div class="col sellerdash-col h-auto d-flex flex-column justify-content-between ">
+                                        <div class="col sellerdash-col h-auto d-flex flex-column justify-content-between tw-shadow-md">
                         <div class="sd-shadow h-100 rounded bg-white py-4 mt-3">
                             <div class="content border-bottom pb-3">
                                 <div class="d-flex justify-content-start align-items-center pl-4">
@@ -375,7 +375,7 @@
                     </div>
 
                     
-                    <div class="col sellerdash-col h-auto d-flex flex-column justify-content-between ">
+                    <div class="col sellerdash-col h-auto d-flex flex-column justify-content-between tw-shadow-md">
                         <div class="row h-100">
                             <div class="col sellerdash-col mt-3">
                                 <div class="sd-shadow rounded bg-white py-4 h-100">
@@ -447,7 +447,7 @@
                     </div>
                 </div>
                 <div class="row flex-row h-auto">
-                    <div class="col sellerdash-col h-auto d-flex flex-column justify-content-between">
+                    <div class="col sellerdash-col h-auto d-flex flex-column justify-content-between ">
                         <div class="row h-100">
                                                         <div class="col-12 col-lg-4 sellerdash-col h-auto d-flex flex-column justify-content-between">
                                 <div class="sd-shadow h-100 rounded bg-white py-4 mt-3">

@@ -218,12 +218,13 @@ const leadsTemplate = (
             txt += "</div><div class='tw-flex tw-flex-wrap tw-justify-start tw-items-center tw-gap-1 tw-mt-4' data-cy='value-badges'></div>";
             txt += " <div class='tw-flex tw-flex-col tw-p-2 tw-bg-gray-100 tw-rounded tw-text-xs tw-mt-4'>";
             
-            txt += "  <span class='tw-text-left tw-mb-3'><b>" + location + "</b></span>";
+            txt += "  <span class='tw-text-left tw-mb-3 tw-text-xs tw-font-gordita-regular tw-flex tw-justify-start tw-items-end'><b><i class='bi bi-geo-alt'></i>" + location + "</b></span>";
             txt += "  <span class='tw-text-left tw-font-gordita-regular tw-text-gray-700'><i class='bi bi-list-check'></i>" + description + "</span>";
             txt += "</div> ";
             txt += "<div class='mt-2 px-2 py-2 latest-action bg-grey-50 flex-row justify-content-between align-items-center text-break text-xs rounded'>";
             txt += "  <span class='tw-text-left tw-mb-3'></span>";
-            txt += "  <span class='tw-text-left tw-font-gordita-regular tw-text-gray-700'>" + 'leads_trail' + "</span>";
+            txt += "  <span class='tw-text-left tw-font-gordita-regular tw-text-gray-700' style='font-size: 0.8rem; display: flex; align-items: left;'><b><i class='bi bi-check-all'></i></b><span style='margin-left: 0.5rem;'><b>" + 'leads_trail' + "</b></span></span>";
+
             txt += "</div><div class='tw-flex tw-justify-between tw-mt-4'>";
             txt += "  <div class='tw-flex tw-justify-start tw-items-end' data-cy='lead-price'>";
           
