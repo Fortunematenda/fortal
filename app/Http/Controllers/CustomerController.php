@@ -61,7 +61,7 @@ class CustomerController extends Controller
              'answers' => $items->pluck('service_answer')->all()
          ];
      })
-     ->values();
+     ->values(); 
      return response()->json(["message"=>"Okay","questions"=>$questions],200);
         }
         catch(Exception $e)
