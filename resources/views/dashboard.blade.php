@@ -178,12 +178,7 @@
         </div>
     </div>
 </div>
-                                    <div class="alert alert-danger  text-xs d-flex justify-content-between align-items-center flex-wrap">
-                        <p class="text-left mb-0 flex-grow-1">
-                            You're not receiving our emails
-                        </p>
-                        <a class="flex-basis" href="/profile" target="_blank"><u>Update email settings</u></a>
-                    </div>
+           
                                 <div class="row flex-row h-auto">
                                         <div class="col sellerdash-col h-auto d-flex flex-column justify-content-between tw-shadow-md">
                         <div class="rounded bg-white sd-shadow mt-3">

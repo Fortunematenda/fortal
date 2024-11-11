@@ -167,10 +167,19 @@ label {
         display: flex;
         flex-wrap: wrap;
         margin-top: 10px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e3c5e3;
     }
     .preview-image {
         border-radius: 5px;
     }
+    .error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+}
+
 </style>
  <!-- Two-Column Section with Get Started and Image -->
  <div class="container1">
@@ -183,12 +192,12 @@ label {
         </div>
  
     <div class="container-home">
-        <h1>Find the best professionals in South Africa</h1>
-        <p>Get free quotes within minutes</p>
+        <h1>Discover top professionals in South Africa</h1>
+        <p>Receive free quotes in just minutes</p>
         <div class="search-box">
             <div style="width:100%">
             <input type="text" id="serviceTxt" placeholder="What service are you looking for?">
-            <input type="" id="serviceID" hidden>
+            <input type="hidden" id="serviceID" >
             <span id="search-service">
                 <ul id="inner-service" class="searched-list"></ul>
             </span>
@@ -242,7 +251,8 @@ label {
 
     <br/>
     <h2 align="center" class="uk-modal-title">New lead description</h2>
-        <form id="regForm" action="/action_page.php">
+
+        <form id="regForm" method="POST" action="/action_page.php">
  
   <!-- One "tab" for each step in the form: -->
     <div style="justify-content:'center'; items-align:'center'; display:none" id="loader">
@@ -269,6 +279,8 @@ label {
 
     </div>
 </div> 
+
+
 
     <script>
  function initialize() {
@@ -318,32 +330,15 @@ function showTab(n) {
   fixStepIndicator(n)
 }
 
-function nextPrev(n) {
-  var x = document.getElementsByClassName("tab");
-  if (n == 1 && !validateForm()) return false;
-  x[currentTab].style.display = "none";
-  currentTab = currentTab + n;
-  if (currentTab >= x.length) {
-    document.getElementById("regForm").submit();
-    return false;
-  }
-  showTab(currentTab);
-}
-
 function validateForm() {
-  // This function deals with validation of the form fields
   var x, y, i, valid = true;
   x = document.getElementsByClassName("tab");
   y = x[currentTab].getElementsByTagName("input");
 
-  // Loop to check every input field in the current tab:
   for (i = 0; i < y.length; i++) {
-    // If the input is a radio button
     if (y[i].type === "radio") {
-      var name = y[i].name; // Get the name attribute to group radio buttons
-      var radios = document.getElementsByName(name); // Get all radio buttons with this name
-
-      // Check if at least one radio button in this group is selected
+      var name = y[i].name; 
+      var radios = document.getElementsByName(name); 
       var isGroupValid = Array.from(radios).some(radio => radio.checked);
 
       // If no radio button in the group is selected, mark as invalid
@@ -351,6 +346,10 @@ function validateForm() {
         radios.forEach(radio => radio.className += " invalid"); // Add "invalid" class to each radio
         valid = false; // Set the valid status to false
       }
+    }
+
+    {
+
     }
   }
 
@@ -400,6 +399,7 @@ const phoneInputField = document.querySelector("#contact_number");
 
         
     }
+   
     </script>
 </x-app-layout>
 <script src="{{asset('build/assets/js/intlTelInput.min.js')}}"></script>

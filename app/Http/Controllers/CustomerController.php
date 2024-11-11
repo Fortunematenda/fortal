@@ -57,12 +57,13 @@ class CustomerController extends Controller
      ->groupBy('question')
      ->map(function ($items, $question) {
          return [
-             'question' => $question,
+            'question_id'=>$items->first()->id,
+             'question' => $question, 
              'answers' => $items->pluck('service_answer')->all()
          ];
      })
      ->values(); 
-     return response()->json(["message"=>"Okay","questions"=>$questions],200);
+     return response()->json(["message"=>"Okay","questions"=>$questions,"service_id"=>$request->service_id],200);
         }
         catch(Exception $e)
         {
