@@ -7,12 +7,15 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 use App\Models\ServicesModel;
 use App\Models\UserServicesModel;
 use App\Models\LeadsModel;
 use App\Models\ContactedLeadsModel;
 use App\Models\CreditsTrailModel;
+use App\Notifications\SendOtpNotification;
 
 class ProfileController extends Controller
 {
@@ -361,4 +364,72 @@ public function subscribedNotifications(Request $request)
 
     return response()->json(['status' => 'success', 'message' => 'Notification settings updated.']);
 }
+
+public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // Register the user
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        // Generate OTP
+        $otp = rand(100000, 999999);
+
+        // Store OTP in session or database
+        Session::put('otp', $otp);
+        Session::put('otp_user_id', $user->id);
+
+        // Send OTP to user via email
+        $user->notify(new SendOtpNotification($otp));
+
+        // Redirect to OTP verification view
+        return redirect()->route('profile.verifyOtp');
+    }
+
+    // Show OTP verification form
+    public function showOtpForm()
+    {
+        // Render the OTP view
+        return view('auth.otp');
+    }
+    public function sendOtp(Request $request)
+    {
+        $otp = rand(100000, 999999); // Generate OTP
+
+        // Store OTP in the database with expiration time (e.g., 5 minutes)
+        Otp::create([
+            'user_id' => Auth::id(),
+            'otp' => $otp,
+            'expires_at' => Carbon::now()->addMinutes(5), // Set expiration time
+        ]);
+
+        // Send OTP to the user via Email, SMS, etc.
+        $user = Auth::user();
+        $user->notify(new SendOtpNotification($otp));
+
+        return response()->json(['message' => 'OTP sent successfully']);
+    }
+
+
+    public function verifyOtp(Request $request)
+    {
+        // Verify OTP logic here
+        $otp = $request->input('otp');
+
+        // You can store the OTP in the session or database for verification
+        // Compare with the generated OTP here
+        if ($otp == '123456') {
+            return response()->json(['message' => 'OTP verified successfully']);
+        }
+
+        return response()->json(['message' => 'Invalid OTP'], 400);
+    }
 }
