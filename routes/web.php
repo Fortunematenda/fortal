@@ -33,10 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/credit-packages', [CreditController::class, 'showCreditPackages'])->name('credit.packages');
     Route::get('/transaction-history', [ProfileController::class, 'transactionHistory'])->name('transaction.history');
     Route::post('/help/submit', [HelpController::class, 'submit'])->name('help.submit');
-    Route::get('profile/otp', [ProfileController::class, 'showOtpForm'])->name('profile.otp');
-    Route::post('profile/verify-otp', [ProfileController::class, 'verifyOtp'])->name('profile.verify-otp');
-    
-
 });
 
 // Group routes for guest users
