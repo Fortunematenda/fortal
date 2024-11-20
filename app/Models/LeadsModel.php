@@ -20,4 +20,9 @@ class LeadsModel extends Model
 'estimate_quote',
 'hiring_decision'
     ];
+
+public function trails()
+{
+    return $this->hasMany(LeadTrail::class, 'lead_id', 'id');
+}
 }

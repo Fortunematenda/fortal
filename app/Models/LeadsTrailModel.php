@@ -16,4 +16,10 @@ class LeadsTrailModel extends Model
 'description', 
 'entered_by'
     ];
+
+    public function lead()
+    {
+        return $this->belongsTo(Lead::class, 'lead_id', 'id');
+    }
 }
+

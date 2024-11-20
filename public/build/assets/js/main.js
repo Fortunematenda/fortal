@@ -242,3 +242,185 @@ function toast(icon, txt, time) {
     });
 }  
 });
+
+$(document).on("click", "#start_lead", function() {
+    currentTab = 0;
+    let service_id = $("#serviceID").val();
+    let location = $("#searchLocation").val();
+    let longitude = $("#longitude").val();
+    let latitude = $("#latitude").val();
+    var _token = $('input[name="_token"]').val();
+    console.log(`${service_id} - ${location} - ${longitude} - ${latitude}`);
+    if (!service_id || !location || !longitude || !latitude) {
+        toast('error', 'Please complete the fields', 3000);
+    }
+    else{
+        UIkit.modal("#modal-create").show();
+        const obj = {
+            _token,service_id
+        };
+        console.log(obj);
+        $.ajax({
+            url: '/getservicesquestions',
+            type: 'POST',
+            data: obj, // Send data in one object
+            beforeSend: function() {
+               $("#loader").show();
+            },
+            success: function(data) {
+                console.log(data);
+               let questionsArr = data["questions"];
+               let num = questionsArr.length;
+               bullets(num);
+               steps(questionsArr);
+               showTab(currentTab);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', status, error); // Improved error logging
+            },
+            complete: function() {
+                $("#loader").hide();
+            }
+        });
+    
+    }
+});
+
+function steps(arr)
+{
+    let txt ="";
+for(key in arr)
+{
+    let question = arr[key]["question"];  
+    let question_id = arr[key]["question_id"];  
+    let answers = arr[key]["answers"];
+    txt += "<div class='tab'><h3 class='hsd'>"+question+"</h3><br/><div class=''>";
+    for(i = 0; i<answers.length; i++)
+    {
+        let lect  = "x_"+question_id;
+        let answer  = answers[i];
+        txt += "<p class='hsd1'><label><input type='radio' class='uk-radio' name='"+lect+"' value='"+answer+"'> "+answer+"</label></p>";
+    }
+   
+    txt += "</div></div>";
+}
+let ext = "<div class='tab'><p><label>Upload Photos:</label></p>";
+    ext += "<div class='drop-area' id='drop-area'><p>Drag & Drop Photos Here or Click to Upload</p>";
+    ext += "<input type='file' id='files' name='files' multiple accept='image/*' style='display: none;'></div>";
+    ext += "<div class='preview-container' id='preview-container'></div></div>";
+
+ext += "<div class='tab'><p><label>First Name:</label><input type='text' id='first_name' name='first_name' placeholder='Enter your first name' REQUIRED></p>";
+ext += "<p><label>Last Name:</label><input type='text' id='last_name' name='last_name' placeholder='Enter your last name' REQUIRED></p>";
+ext += "<p><label>Phone Number:</label><input type='tel' id='contact_number' name='contact_number' placeholder='Enter your phone number' REQUIRED></p>";
+ext += "<p><label>Email:</label><input type='email' id='email' name='email' placeholder='Enter your email' REQUIRED></p></div>";
+
+txt += ext;
+$("#insteps").html(txt);
+
+initializeDragAndDrop();
+
+numC();
+}
+
+function bullets(num)
+{
+    let txt = "";
+for(let i=0; i<num+2; i++)
+{
+txt += "<span class='step'></span>";
+}
+$("#bullets").html(txt);
+}
+function initializeDragAndDrop() {
+    const dropArea = document.getElementById("drop-area");
+    const fileInput = document.getElementById("files");
+    const previewContainer = document.getElementById("preview-container");
+
+    // Event listener for clicking on the drop area
+    dropArea.addEventListener("click", () => fileInput.click());
+
+    // Event listener for handling file selection
+    fileInput.addEventListener("change", handleFiles);
+
+    // Drag and drop events
+    ["dragenter", "dragover"].forEach(eventName => {
+        dropArea.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            dropArea.classList.add("highlight");
+        });
+    });
+
+    ["dragleave", "drop"].forEach(eventName => {
+        dropArea.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            dropArea.classList.remove("highlight");
+        });
+    });
+
+    // Handle the dropped files
+    dropArea.addEventListener("drop", (e) => {
+        const files = e.dataTransfer.files;
+        handleFiles({ target: { files: files } });
+    });
+
+    // Handle selected or dropped files
+    function handleFiles(event) {
+        const files = event.target.files;
+        previewContainer.innerHTML = "";  // Clear previous previews
+        Array.from(files).forEach(file => {
+            if (file.type.startsWith("image/")) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.classList.add("preview-image");
+                    img.style.width = "100px";
+                    img.style.height = "100px";
+                    img.style.objectFit = "cover";
+                    img.style.margin = "5px";
+                    previewContainer.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert("Please upload only image files.");
+            }
+        });
+    }
+}
+
+function nextPrev(n) {
+    var x = document.getElementsByClassName("tab");
+    if (n == 1 && !validateForm()) return false;
+    x[currentTab].style.display = "none";
+    currentTab = currentTab + n;
+    if (currentTab >= x.length) {
+      $('#regForm').trigger('submit');
+      return false;
+    }
+    showTab(currentTab);
+  }
+$(document).ready(function() {
+    $('#regForm').on('submit', function(event) {
+        event.preventDefault(); 
+        let service_id = $("#serviceID").val();
+        let location = $("#searchLocation").val();
+        let longitude = $("#longitude").val();
+        let latitude = $("#latitude").val();
+        const headerObj = [{name:"service_id",value:service_id},{name:"location",value:location},{name:"longitude",value:latitude},{name:"longitude",value:longitude}];
+        
+        let formData = $(this).serializeArray();        
+        formData = [...formData, ...headerObj];
+        console.log(formData);
+        var files = $('#files').prop('files');
+        if (files.length > 0) {
+            console.log('Files selected:');
+            for (var i = 0; i < files.length; i++) {
+              console.log(files[i].name); // Log file name
+            }
+          } else {
+            console.log('No files selected');
+          }
+        
+    }
+  )
+    });
