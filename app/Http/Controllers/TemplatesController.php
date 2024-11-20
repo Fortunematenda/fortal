@@ -27,7 +27,7 @@ class TemplatesController extends Controller
                             </p>
 
                             <p class='m-0'>
-                                R202.50 <small class='js-vat-toggle'>(ex VAT)</small>
+                                R175.00 <small class='js-vat-toggle'></small>
                             </p>
                         </div>
                     </div>
@@ -36,12 +36,10 @@ class TemplatesController extends Controller
                             <div class=''>                            
                                
                                 <span class='align-middle'>
-                                  <i class='bi bi-coin'></i> 15 credits
+                                  <i class='bi bi-coin'></i> 50 credits
                                 </span>
                             </div>
-                            <p class='text-dark-blue text-sm text-grey-400'>
-                                <span>R</span>13.50/credit
-                            </p>
+                           
                         </div>
                     </div>
                             </div>
@@ -66,7 +64,7 @@ class TemplatesController extends Controller
                             </p>
 
                             <p class='m-0'>
-                                R384.75 <small class='js-vat-toggle'>(ex VAT)</small>
+                                R300.00 <small class='js-vat-toggle'></small>
                             </p>
                         </div>
                     </div>
@@ -75,12 +73,10 @@ class TemplatesController extends Controller
                             <div class=''>
                                                             
                                 <span class='align-middle'>
-                                   <i class='bi bi-coin'></i> 30 credits
+                                   <i class='bi bi-coin'></i> 100 credits
                                 </span>
                             </div>
-                            <p class='text-dark-blue text-sm text-grey-400'>
-                                <span>R</span>12.83/credit
-                            </p>
+                            
                         </div>
                     </div>
                             </div>
@@ -108,7 +104,7 @@ class TemplatesController extends Controller
                             </p>
 
                             <p class='m-0'>
-                                R688.50 <small class='js-vat-toggle'>(ex VAT)</small>
+                                R500.00 <small class='js-vat-toggle'></small>
                             </p>
                         </div>
                     </div>
@@ -116,12 +112,10 @@ class TemplatesController extends Controller
                         <div class='d-flex flex-row justify-content-between'>
                             <div class=''>
                                                              <span class='align-middle'>
-                                   <i class='bi bi-coin'></i> 60 credits
+                                   <i class='bi bi-coin'></i> 200 credits
                                 </span>
                             </div>
-                            <p class='text-dark-blue text-sm text-grey-400'>
-                                <span>R</span>11.48/credit
-                            </p>
+                           
                         </div>
                     </div>
                             </div>
@@ -129,17 +123,7 @@ class TemplatesController extends Controller
     </button>
     </form>
                 <div class='row card-details-row js-card-details-row mt-4'>
-        <div class='p-4 p-md-3 d-block d-md-flex rounded justify-content-between bg-grey-25'>
-            <div class='card-brand-image-container flex-grow-0 flex-shrink-0 pr-2 response-modal-card-brand'><img src='https://d1w7gvu0kpf6fl.cloudfront.net/img/billing/card-logos/mastercard-logo.png' style='height: 22px; width: 65px;'></div>
-            <div class='flex-grow-1 flex-shrink-1 px-0 px-md-2 my-3 my-md-0 flex-grow-0 flex-shrink-0'>
-                We'll charge the card ending <span class='js-card-last-four strong response-modal-card-number-suffix'>9621</span> that we have on file
-            </div>
-            <div class='flex-grow-0 flex-shrink-0 text-left text-md-right change-card-container'>
-                <span class='pseudo-link cursor-pointer change-card-link js-change-card'><small><a href='/settings/billing/saved_card/'>
-                            Change
-                        </a></small></span>
-            </div>
-        </div>
+      
     </div>
     
     

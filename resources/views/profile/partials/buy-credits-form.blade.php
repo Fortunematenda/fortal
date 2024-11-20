@@ -32,7 +32,7 @@
                         <p class="badge bg-primary">5% OFF</p>
                         <p class="card-text">About 10 responses</p>
                         <p class="price">R175 <small>(ex VAT)</small></p>
-                        <p><i class="bi bi-coin"></i> 50 credits <span class="text-muted">R3.50/credit</span></p>
+                        <p><i class="bi bi-coin"></i> 50 credits </p>
                         <form method="POST" action="{{ route('purchase') }}">
                             @csrf
                             <input type="hidden" name="product_id" value="1">
@@ -50,7 +50,7 @@
                         <p class="badge bg-primary">15% OFF</p>
                         <p>About 15 responses</p>
                         <p class="price">R300 <small>(ex VAT)</small></p>
-                        <p><i class="bi bi-coin"></i> 100 credits <span class="text-muted">R3.00/credit</span></p>
+                        <p><i class="bi bi-coin"></i> 100 credits </p>
                         <form method="POST" action="{{ route('purchase') }}">
                             @csrf
                             <input type="hidden" name="product_id" value="2">
@@ -68,7 +68,7 @@
                         <p class="badge bg-light text-dark">20% OFF</p>
                         <p>About 20 responses</p>
                         <p class="price">R500 <small>(ex VAT)</small></p>
-                        <p><i class="bi bi-coin"></i> 200 credits <span class="text-muted">R2.50/credit</span></p>
+                        <p><i class="bi bi-coin"></i> 200 credits</p>
                         <form method="POST" action="{{ route('purchase') }}">
                             @csrf
                             <input type="hidden" name="product_id" value="3">
