@@ -10,7 +10,7 @@
                 </span>
             </a>
             
-            <h2 align="center" class="">My Credits</h2>
+            <h2 align="center" class="mt-4 text-center">Purchase Credits</h2>
         </div>
     </div>
 
@@ -31,7 +31,7 @@
                         <h5 class="card-title font-weight-bold">Basic Package</h5>
                         <p class="badge bg-primary">5% OFF</p>
                         <p class="card-text">About 10 responses</p>
-                        <p class="price">R175 <small>(ex VAT)</small></p>
+                        <p class="price">R175.00 <small></small></p>
                         <p><i class="bi bi-coin"></i> 50 credits </p>
                         <form method="POST" action="{{ route('purchase') }}">
                             @csrf
@@ -49,7 +49,7 @@
                         <h5 class="card-title font-weight-bold">Standard Package</h5>
                         <p class="badge bg-primary">15% OFF</p>
                         <p>About 15 responses</p>
-                        <p class="price">R300 <small>(ex VAT)</small></p>
+                        <p class="price">R300.00 <small></small></p>
                         <p><i class="bi bi-coin"></i> 100 credits </p>
                         <form method="POST" action="{{ route('purchase') }}">
                             @csrf
@@ -67,7 +67,7 @@
                         <h5 class="card-title font-weight-bold">Premium Package</h5>
                         <p class="badge bg-light text-dark">20% OFF</p>
                         <p>About 20 responses</p>
-                        <p class="price">R500 <small>(ex VAT)</small></p>
+                        <p class="price">R500.00 <small></small></p>
                         <p><i class="bi bi-coin"></i> 200 credits</p>
                         <form method="POST" action="{{ route('purchase') }}">
                             @csrf
@@ -78,14 +78,14 @@
                 </div>
             </div>
 
-            <!-- Premium Plus Package -->
+            <!-- Premium Plus Package
             <div class="col">
                 <div class="card h-100 border-0 shadow-sm text-center package-premium-plus bg-success text-white">
                     <div class="card-body">
                         <h5 class="card-title font-weight-bold">Premium Plus Package</h5>
                         <p class="badge bg-warning">100% OFF</p>
                         <p>Unlimited responses</p>
-                        <p class="price">R500.00/Month <small>(ex VAT)</small></p>
+                        <p class="price">R500.00/Month <small></small></p>
                         <p><i class="bi bi-coin"></i> Unlimited Monthly Credits</p>
                         <form method="POST" action="{{ route('purchase') }}">
                             @csrf
@@ -94,7 +94,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <!-- Transaction History Button -->
