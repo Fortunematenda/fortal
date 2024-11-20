@@ -40,15 +40,14 @@ Route::middleware('guest:sanctum')->group(function () {
     Route::get('/profession/create', [ProfileController::class, 'createProfession'])->name('createprofession');
     Route::get('/profession/create-account/{id}', [ProfileController::class, 'createAccountProfession'])->name('createaccountprofession');
     Route::post('/getservices', [LeadsController::class, 'getServices'])->name('getservices');
-    Route::post('/registeruser', [RegisteredUserController::class, 'store'])->name('registeruser');
-    Route::get('/customer/dashboard', [CustomerController::class, 'dashboard'])->name('customer.dashboard');
+    Route::post('/registeruser', [RegisteredUserController::class, 'store'])->name('registeruser');    
     Route::get('/customer/create', [CustomerController::class, 'createCustomer'])->name('create.customer');
     Route::get('/customer/createrequests', [CustomerController::class, 'createRequest'])->name('createrequests');
     Route::get('/customer/requests', [CustomerController::class, 'showRequests'])->name('customer.requests');
     Route::get('/customer/review/', [CustomerController::class, 'expertReview'])->name('expertreview');
     Route::get('/customer/profile/', [CustomerController::class, 'expertProfile'])->name('expertprofile');
     Route::post('/getservicesquestions', [CustomerController::class, 'getServicesQuestions'])->name('getservicesquestions');
-
+    Route::post('/customer/createlead', [CustomerController::class, 'createLead'])->name('createlead');
 });
 
 // Group routes for authenticated sellers/leads
@@ -75,7 +74,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/purchase/cancel', [PurchaseController::class, 'failedPurchase'])->name('purchase.cancel');   
     Route::post('/notifications/update', [ProfileController::class, 'updateNotifications'])->name('notifications.update');
     Route::post('/notifications/update', [ProfileController::class, 'subscribedNotifications'])->name('notifications.subscribed');
-    
+    Route::get('/customer/dashboard', [CustomerController::class, 'dashboard'])->name('customer.dashboard');
 });
 
 // Load authentication routes

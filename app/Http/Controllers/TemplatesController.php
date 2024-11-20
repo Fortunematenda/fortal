@@ -151,7 +151,7 @@ class TemplatesController extends Controller
 
     
   
-  public function showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status,$leads_trail,$leads_notes){
+  public function showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status,$leads_trail,$leads_notes,$lead_details){
      
     $details = " <div class='col-12 col-md-7 col-lg right-panel fixed-height-column scroll-touch h-100 d-block'
                 id='main-project-container' style='max-height: 870px;'>
@@ -410,7 +410,7 @@ $details .= "<div class='toolbar-container my-4 pt-1 text-md-sm w-100 w-md-auto'
          $details .="<ul class='uk-margin' id='my-id'><li class='tab-content active' id='activities'>";   
          $details .= $this->trail($leads_trail); 
          $details .= "</li><li class='tab-content' id='details'>";  
-         $details .= $this->details(); 
+         $details .= $this->details($lead_details); 
          $details .= "</li><li class='tab-content' id='notes'>";
          $details .= $this->notes($lead_id,$leads_notes);
          $details .= "</li></ul></div>";
@@ -502,7 +502,7 @@ $details .= "<div id='modal-whatsapp' class='uk-flex-top' uk-modal><div class='u
 return $details;
   }
 
-  public function showLeadsDetails($lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$masked_email,$masked_contact_number){
+  public function showLeadsDetails($lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$masked_email,$masked_contact_number,$lead_details){
     $details = "<div class='project-top'>";
 
     $details .= "
@@ -742,7 +742,7 @@ $details .= "<div class='d-flex flex-column project-details-col-project-details'
                 <div class='project-details pt-5 data-buyer-name='>
                     <div class='project-details-label'>Details</div>
                     <hr class='project-details-hr'>";
-$details .= $this->details();
+$details .= $this->details($lead_details);
                     $details .= "<hr class='lead-settings-prompt-hr'>
                     <div class='lead-settings-prompt flex'>
                         <div class='font-weight-medium mb-2'>Not seeing the right leads?</div>
@@ -808,36 +808,19 @@ return $details;
 }
 public function details($arr=[])
 {
-   $details = "";
-   $details .="
-   <div class='project-details-content'>
-                        <div class='project-questions-answers highlights'>
-                            <div class='project-details-question text-xs text-light-grey pb-2 text-regular'>
-                                What kind of building works do you need?
-                            </div>
-                            <div class='project-details-answer text-xs pb-4'>Renovation &amp; remodelling</div>
-
-                            <div class='project-details-question text-xs text-light-grey pb-2 text-regular'>
-                                What do you need refurbishing or remodelling?
-                            </div>
-                            <div class='project-details-answer text-xs pb-4'>Bedroom, Living Room</div>
-
-                            <div class='project-details-question text-xs text-light-grey pb-2 text-regular'>
-                                Do you have plans drawn up?
-                            </div>
-                            <div class='project-details-answer text-xs pb-4'>No - plans are not required</div>
-
-                            <div class='project-details-question text-xs text-light-grey pb-2 text-regular'>
-                                How likely are you to make a hiring decision?
-                            </div>
-                            <div class='project-details-answer text-xs pb-4'>I will possibly hire someone</div>
-                        </div>
-
-                        <div class='project-details-map highlights'>
-                            <img class='img-fluid rounded loaded' alt='' width='625' height='235' src='https://maps.googleapis.com/maps/api/staticmap?center=-33.93020000000000,18.84490000000000&amp;zoom=11&amp;size=625x235&amp;maptype=roadmap&amp;key=AIzaSyD3p2CemxOtPGf4igCbaMqo4BrNEF8Wktc'>
-                        </div>
-                    </div>
-   "; 
+    
+    $details = "";
+    $details .="<div class='project-details-content'><div class='project-questions-answers highlights'>";
+    $service_detailsArr = json_decode($arr["service_details"], true);
+    foreach($service_detailsArr as $row)
+    {
+        $question = $row["question"];
+        $answer = $row["answer"];
+        $details .= "<div class='project-details-question text-xs text-light-grey pb-2 text-regular'>$question</div>";
+        $details .= "<div class='project-details-answer text-xs pb-4'>$answer</div>";
+    }
+    $details .= " </div></div>";
+  
    return $details;
 }
 public function notes($lead_id,$arr=[])
