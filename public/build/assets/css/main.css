@@ -403,7 +403,7 @@ body{
 }
 
 .package-premium {
-    background-color: #AF42FF; /* Gold background for Premium package */
+    background-color: purple; /* Gold background for Premium package */
     color: white; /* White text color for Premium package */
     border: 2px solid #a56db2; /* Example border color */
 }
