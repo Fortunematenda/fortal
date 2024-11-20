@@ -22,7 +22,7 @@ $(document).on("keyup", "#serviceTxt", function() {
                         <li class='service' id='${serviceId}' service_name='${serviceName}'>${serviceName}</li>
                     `);
                 });
-            },
+            }, 
             error: function(xhr, status, error) {
                 console.error('Error:', status, error); // Improved error logging
             },
@@ -304,10 +304,14 @@ for(key in arr)
    
     txt += "</div></div>";
 }
-let ext = "<div class='tab'><p><label>Upload Photos:</label></p>";
+let ext = "<div class='tab'><p><label>Description:</label><textarea class='textarea' placeholder='Type brief description of the project' name='brief_description'></textarea></p><p><label>Upload Photos:</label></p>";
     ext += "<div class='drop-area' id='drop-area'><p>Drag & Drop Photos Here or Click to Upload</p>";
     ext += "<input type='file' id='files' name='files' multiple accept='image/*' style='display: none;'></div>";
     ext += "<div class='preview-container' id='preview-container'></div></div>";
+
+    ext += "<div class='tab'><p><label><b><Estimated budget</b></label><input type='number' id='estimate_quote' name='estimate_quote' value='0' placeholder='Enter estimated budget'></p>";
+    ext += "<p><label><b><input type='checkbox' id='urgent' name='urgent' value='1'> Is it urgent?</b></label></p>";
+    ext += "<p><label><b><input type='checkbox' id='hiring_decision' name='hiring_decision' value='1'> Hiring Decision Made?</b></label></p><hr/></div>";
 
 ext += "<div class='tab'><p><label>First Name:</label><input type='text' id='first_name' name='first_name' placeholder='Enter your first name' REQUIRED></p>";
 ext += "<p><label>Last Name:</label><input type='text' id='last_name' name='last_name' placeholder='Enter your last name' REQUIRED></p>";
@@ -325,7 +329,7 @@ numC();
 function bullets(num)
 {
     let txt = "";
-for(let i=0; i<num+2; i++)
+for(let i=0; i<num+3; i++)
 {
 txt += "<span class='step'></span>";
 }
@@ -388,39 +392,82 @@ function initializeDragAndDrop() {
     }
 }
 
+
+
 function nextPrev(n) {
     var x = document.getElementsByClassName("tab");
     if (n == 1 && !validateForm()) return false;
     x[currentTab].style.display = "none";
     currentTab = currentTab + n;
     if (currentTab >= x.length) {
-      $('#regForm').trigger('submit');
-      return false;
+      //$('#regForm').trigger('submit');
+      //return false;
     }
     showTab(currentTab);
+    
   }
 $(document).ready(function() {
     $('#regForm').on('submit', function(event) {
         event.preventDefault(); 
+        let _token = $('input[name="_token"]').val();
         let service_id = $("#serviceID").val();
         let location = $("#searchLocation").val();
         let longitude = $("#longitude").val();
         let latitude = $("#latitude").val();
-        const headerObj = [{name:"service_id",value:service_id},{name:"location",value:location},{name:"longitude",value:latitude},{name:"longitude",value:longitude}];
+        const headerObj = [{name:"service_id",value:service_id},{name:"location",value:location},{name:"latitude",value:latitude},{name:"longitude",value:longitude}];
         
         let formData = $(this).serializeArray();        
         formData = [...formData, ...headerObj];
-        console.log(formData);
+        let first_name = formData.find(item => item.name === "first_name").value ?? "";
+        let last_name = formData.find(item => item.name === "last_name").value ?? "";
+        let email = formData.find(item => item.name === "email").value ?? "";
+        let contact_number = formData.find(item => item.name === "contact_number").value ?? "";
+        let brief_description = formData.find(item => item.name === "brief_description").value ?? "";
+        let estimate_quote = formData.find(item => item.name === "estimate_quote").value ?? 0;
+        let urgent = formData.find(item => item.name === "urgent").value ?? 0;
+        let hiring_decision = formData.find(item => item.name === "hiring_decision").value ?? 0;
+        let company_name = "";
+        let is_company_website = 0;
+        let company_size = 0;
+        let is_company_sales_team = 0;
+        let password=null;
+        let is_company_social_media=0;
         var files = $('#files').prop('files');
+        console.log(formData);
+        const obj = {
+            service_id, location, longitude, latitude, formData, _token, first_name, last_name, email, contact_number, company_name,
+            is_company_website, company_size, is_company_sales_team, password, is_company_social_media, brief_description, estimate_quote,
+            urgent, hiring_decision
+        };
+        console.log(obj);
+        $.ajax({
+            url: '/register',
+            type: 'POST',
+            data: obj,
+            beforeSend: function() {
+            },
+            success: function(data) {
+               if (data.redirect_url) {
+                $("#prevBtn").hide();
+               $("#nextBtn").hide();
+               $("#subm").hide();
+                window.location.href = data.redirect_url;
+            }
+               
+            }, 
+            error: function(xhr, status, error) {
+                console.error('Error:', status, error);
+            },
+            complete: function() {
+            }
+        });
+        /*
         if (files.length > 0) {
             console.log('Files selected:');
             for (var i = 0; i < files.length; i++) {
               console.log(files[i].name); // Log file name
             }
-          } else {
-            console.log('No files selected');
           }
-        
-    }
-  )
+            */
+    });
     });

@@ -31,18 +31,16 @@
             margin-bottom: 10px;
         }
 
-        .search-box input[type="text"] {
+        .search-box input[type="text"], .textarea, input[type="number"] {
             padding: 12px;
             font-size: 1rem;
-            border: 1px solid #ddd;
+            border: 1px solid #ddd !important;
             border-radius: 5px;
         }
 
         .search-box input[type="text"]::placeholder {
             color: #b0b0b0;
-        }
-
-      
+        }     
 
         .search-box button {
             padding: 12px 20px;
@@ -266,6 +264,7 @@ label {
     <div style="float:right;">
       <button type="button" class="uk-button uk-button-default" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
       <button type="button" class="uk-button uk-button-primary" id="nextBtn" onclick="nextPrev(1)">Next</button>
+      <button type="submit" style="display:none" id="subm" class="uk-button uk-button-primary">SUBMIT</button>
     </div>
   </div>
   <!-- Circles which indicates the steps of the form: -->
@@ -322,8 +321,12 @@ function showTab(n) {
     document.getElementById("prevBtn").style.display = "inline";
   }
   if (n == (x.length - 1)) {
-    document.getElementById("nextBtn").innerHTML = "Submit";
+    $("#subm").show();
+    $("#nextBtn").hide();
   } else {
+    $("#subm").hide();
+    $("#nextBtn").show();
+    $("#prevBtn").show();
     document.getElementById("nextBtn").innerHTML = "Next";
   }
   //... and run a function that will display the correct step indicator:

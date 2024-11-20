@@ -14,13 +14,17 @@ class LeadsModel extends Model
 'user_id', 
 'service_id', 
 'credits',  
-'date_entered', 
 'entered_by', 
 'description', 
 'estimate_quote',
-'hiring_decision'
+'hiring_decision',
+'urgent',
+'longitude',
+'latitude',
+'location',
+'temp_code'
     ];
-
+    
 public function trails()
 {
     return $this->hasMany(LeadTrail::class, 'lead_id', 'id');

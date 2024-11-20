@@ -8,6 +8,7 @@ use App\Models\ServicesModel;
 use App\Models\ContactedLeadsModel;
 use App\Models\UserServicesModel;
 use App\Models\LeadsModel;
+use App\Models\LeadsServiceModel;
 use App\Models\ServiceQuestionModel;
 use App\Models\ServicePossibleAnswerModel;
 use App\Models\CreditsTrailModel;
@@ -80,13 +81,14 @@ public function getLeadDetails(Request $request)
     $email = $lead->email;
     $contact_number = $lead->contact_number;
     $masked_email = $this->maskEmail($email);
+    $lead_details = $this->getLeadServiceDetails($lead_id);
     $masked_contact_number = $this->maskPhoneNumber($contact_number);
     LeadsReadModel::firstOrCreate(
         ['lead_id' => $lead_id, 'user_id' => $user->id],
         ['entered_by' => $user->id]
     );
    
-$details = $templates->showLeadsDetails($lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$masked_email,$masked_contact_number);
+$details = $templates->showLeadsDetails($lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$masked_email,$masked_contact_number,$lead_details);
 
     return response($details);
 }
@@ -119,8 +121,9 @@ public function getResponseDetails(Request $request)
     $lead_status = $conl["status"];
     $leads_trail = $this->getLeadsTrail($lead_id,$user->id);
     $leads_notes = $this->getLeadsNotes($lead_id,$user->id);
+    $lead_details = $this->getLeadServiceDetails($lead_id);
    
-$details = $templates->showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status,$leads_trail,$leads_notes);
+$details = $templates->showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status,$leads_trail,$leads_notes,$lead_details);
 
     return response($details);
 }
@@ -406,6 +409,19 @@ private function arrLeads($leads = array())
         ->select('u.first_name','lead_notes.description','lead_notes.date_entered')        
         ->where('lead_id',$lead_id)->where('user_id',$user_id)->get();
         return $notes;
+    }
+    catch(Exception $e){
+        
+        return [];
+    }
+    }
+
+    public function getLeadServiceDetails($lead_id)
+    {
+        try{
+        
+        $details = LeadsServiceModel::where('lead_id',$lead_id)->first();
+        return $details;
     }
     catch(Exception $e){
         
