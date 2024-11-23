@@ -471,7 +471,7 @@
                                                 Email <a class="text-dark-blue text-nowrap noline" href="mailto:fortai.com">admin@fortai.com</a>
                                             </p>
                                             <p class="text-dark-blue mb-0">
-                                                Call <a class="text-nowrap text-dark-blue" href="tel:+27612685933">612 685933</a>
+                                                Call <a class="text-nowrap text-dark-blue" href="tel:+27612685933">+27 61 268 5933</a>
                                             </p>
                                             <p class="text-xs text-grey-400   mb-0">
                                                 open 24 hours a day, 7 days a week
