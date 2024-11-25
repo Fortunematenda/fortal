@@ -254,7 +254,7 @@
             <div class="profile-overview">
                 <h2 class="section-title">Overview</h2>
                 <p><strong>Elite Pro:</strong> 8 min response time</p>
-                <p><strong>Hires:</strong> 1 hire on Bark</p>
+                <p><strong>Hires:</strong> 1 hire on Fortai</p>
                 <p><strong>Team:</strong> 2-10 staff</p>
             </div>
 

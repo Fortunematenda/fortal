@@ -54,14 +54,14 @@ class CustomerController extends Controller
     {
         try{
      $service_id = (int)$request->service_id;
-     $questions = ServiceQuestionModel::select('service_questions.service_id', 'service_questions.question', 'service_possible_answers.service_answer','service_possible_answers.id')
+     $questions = ServiceQuestionModel::select('service_questions.service_id', 'service_questions.question', 'service_questions.id as question_id', 'service_possible_answers.service_answer','service_possible_answers.id')
      ->join('service_possible_answers', 'service_possible_answers.service_questions_id', '=', 'service_questions.id')
      ->where('service_questions.service_id', $service_id)
      ->get()
      ->groupBy('question')
      ->map(function ($items, $question) {
          return [
-            'question_id'=>$items->first()->id,
+            'question_id'=>$items->first()->question_id,
              'question' => $question, 
              'answers' => $items->pluck('service_answer')->all()
          ];

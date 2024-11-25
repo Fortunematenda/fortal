@@ -1,4 +1,13 @@
 <x-app-layout>
+    <link rel="stylesheet" href="{{asset('build/assets/css/main_v2-built.645e5822f3.v2.css')}}">
+    
+    <!-- Marquee Section -->
+    <div class="marquee-wrapper">
+        <div class="marquee">
+            <p>Welcome to the application! Keep an eye out for updates and new features!</p>
+        </div>
+    </div>
+
 <link rel="stylesheet" href="{{asset('build/assets/css/main_v2-built.645e5822f3.v2.css')}}">
     <!-- Loading Overlay -->
     <div class="v2-loading-overlay">
@@ -215,4 +224,33 @@
         <link onerror="window?.fallbackOnError?.call(this, `react_buyer_dashboard`);" rel="stylesheet" href="https://frontend-production.bark.com/130-o4zypk38cb99vdge/buyer-dashboard/styles.801bdd1ca194c698.css">
         <link onerror="window?.fallbackOnError?.call(this, `react_buyer_dashboard`);" rel="stylesheet" href="https://frontend-production.bark.com/130-o4zypk38cb99vdge/buyer-dashboard/main.d247f3888acfd52b.css">
         
+
+
+    </div>
 </x-app-layout>
+
+<!-- Add CSS for the Marquee -->
+<style>
+    .marquee-wrapper {
+        background-color: #f8f9fa;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 100%;
+        border: 1px solid #ccc;
+    }
+    .marquee {
+        display: inline-block;
+        animation: marquee 10s linear infinite;
+        font-size: 16px;
+        padding: 10px 0;
+        color: #333;
+    }
+    @keyframes marquee {
+        from {
+            transform: translateX(100%);
+        }
+        to {
+            transform: translateX(-100%);
+        }
+    }
+</style>

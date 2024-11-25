@@ -46,10 +46,11 @@ class ProfileController extends Controller
         $latest_services = $this->getUserServices($user->id);
         $latest_services_limited = array_slice($latest_services, 0, 2);
         $number_of_leads = count($this->getLeadsCount($user->id));
+        $contacted_lead = count($this->getLeadsCount($user->id));
         $service_badge = count($latest_services)-2;
         $unread_leads = count($this->getUnreadLeads($user->id));
         
-        return view("dashboard",compact(["first_name","login_at","greetings","profile_picture","contact_number","company_name","is_company_website","company_size","is_company_sales_team","logo","location","company_registration_number","latest_services_limited","service_badge","email","number_of_leads","unread_leads","credits_balance","new_leads_notifications","weekly_newsletter_notifications","subscribed_services_notifications","sms_notifications",]));
+        return view("dashboard",compact(["first_name","login_at","contacted_lead","greetings","profile_picture","contact_number","company_name","is_company_website","company_size","is_company_sales_team","logo","location","company_registration_number","latest_services_limited","service_badge","email","number_of_leads","unread_leads","credits_balance","new_leads_notifications","weekly_newsletter_notifications","subscribed_services_notifications","sms_notifications",]));
      }
      public function edit(Request $request): View
      {

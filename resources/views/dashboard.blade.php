@@ -419,7 +419,7 @@
         
             <a class="noline" href="/seller/dashboard/">
                 <span class="bg-primary-light text-primary text-xl circle-stat my-2 ">
-                    64
+                {{ $contacted_lead}}
                 </span>
             </a>
             <p class="mb-0 pb-3 w-100 text-center border-bottom">
