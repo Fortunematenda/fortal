@@ -43,47 +43,15 @@
                     </div>
 
                     <!-- Project List Section -->
+                    
                     <div class="mb-4">
                         <div class="projectlistContainer" id="app">
                             <div data-testid="project_list" class="tw-flex tw-flex-row tw-grid sm:tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-4">
                                 <!-- Project List Item 1 -->
-                                <div data-cy="projectListItem" class="projectlist_item_projectListItem__+529Q tw-text-center tw-items-center tw-flex tw-flex-col tw-p-4 tw-shadow-md tw-bg-white tw-rounded tw-p-3">
-                                    <h3 data-testid="_plistProjectLink" class="tw-pt-2 tw-text-center tw-cursor-pointer">
-                                        Skip Hire Company
-                                    </h3>
-                                    <p class="tw-text-center tw-text-sm tw-mb-4 tw-mt-1 tw-text-gray-400">
-                                        18 mins ago
-                                    </p>
-                                    <div class="tw-flex tw-flex-col tw-grow tw-w-full">
-                                        <div class="tw-pl-4 tw-pr-4">
-                                            <div class="tw-flex tw-justify-center tw-mt-2 tw-mb-4">
-                                                <div style="position: relative; width: 90px; height: 90px; display: flex; align-items: center; justify-content: center;">
-                                                    <div style="width: 90px; height: 90px; background-color: #2D7AF1; opacity: 0.15; border-radius: 50%; position: absolute;"></div>
-                                                    <i class="bi bi-check-circle-fill" style="font-size: 45px; color: purple;"></i>
-                                                </div>
-                                            </div>
-                                            <p class="projectlist_item_text-grey-600__bDXRq tw-text-center tw-mb-3">
-                                                We've got professionals ready and available!
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="tw-mt-3 tw-mb-2 tw-text-center">
-                                        <a data-testid="btn-viewquote" class="projectlist_item_linkButton__p+KBq tw-no-underline tw-drop-shadow-md tw-rounded tw-p-2 tw-text-white">
-                                            View professionals
-                                        </a>
-                                    </div>
-                                    <div class="actionsWrapper tw-pb-3 tw-mt-4 tw-items-center tw-text-center tw-text-sm">
-                                        <a data-cy="btn_close_request" class="projectlist_item_link__eqrNt tw-pr-2">
-                                            Close request
-                                        </a>
-                                        |
-                                        <a data-cy="btn_hired" class="projectlist_item_link__eqrNt tw-pl-2">
-                                            I hired someone
-                                        </a>
-                                    </div>
-                                </div>
+                                
 
                                 <!-- Project List Item 2 -->
+                                 @forelse ($user_leads as $lead)
                                 <div data-cy="projectListItem" class="projectlist_item_projectListItem__+529Q tw-text-center tw-items-center tw-flex tw-flex-col tw-p-4 tw-shadow-md tw-bg-white tw-rounded tw-p-3">
                                     <h3 data-testid="_plistProjectLink" class="tw-pt-2 tw-text-center tw-cursor-pointer">
                                         Garden Clearance Expert
@@ -122,6 +90,9 @@
                             </div>
                         </div>
                     </div>
+                    @empty
+    <h3>No Leads</h3>
+                   @endforelse
                     <div class="pt-3">
                         <div class="__buyerNextBarkContainer">
                             <div class="all_pt-3__89f4A">

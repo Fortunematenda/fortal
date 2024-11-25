@@ -12,10 +12,26 @@ use Exception;
 
 class CustomerController extends Controller
 {
-    public function dashboard()
+    public function customerdashboard(Request $request)
     {
         $slot = "";
-        return view('customer.dashboard',compact(["slot"]));
+        $user = $request->user();
+        $user_id = $user->id;
+        $leads = LeadsModel::join('master_services as m', 'leads.service_id', '=', 'm.id')
+    ->where('leads.user_id', 1)
+    ->get(['leads.*', 'm.*']);
+
+        $user_leads = array();
+        foreach($leads as $lead)
+        {
+            $lead_id = $lead["lead_id"];
+            $service_name = $lead["service_name"];
+            $date_entered = $lead["date_entered"];
+            $isExpertApplied = 1;
+            $inarr = array("lead_id" => $lead_id, "service_name" => $service_name, "date_entered"=>$date_entered, "isExpertApplied"=>$isExpertApplied);
+            array_push($user_leads, $inarr);
+        }       
+       return view('customer.dashboard',compact(["slot", "user_leads"]));
     }
 
     public function createCustomer()
