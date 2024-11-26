@@ -17,6 +17,8 @@ Route::get('/', function () {
 // Dashboard route with middleware for authenticated users
 Route::get('/dashboard', [ProfileController::class, 'openDashboard'])->middleware(['auth:sanctum', 'verified'])->name('dashboard');
 
+Route::get('/customer/createrequests', [CustomerController::class, 'createRequest'])->name('createrequests');
+
 // Group routes for authenticated users
 Route::middleware('auth')->group(function () {
     // Profile Routes
@@ -42,7 +44,6 @@ Route::middleware('guest:sanctum')->group(function () {
     Route::post('/getservices', [LeadsController::class, 'getServices'])->name('getservices');
     Route::post('/registeruser', [RegisteredUserController::class, 'store'])->name('registeruser');    
     Route::get('/customer/create', [CustomerController::class, 'createCustomer'])->name('create.customer');
-    Route::get('/customer/createrequests', [CustomerController::class, 'createRequest'])->name('createrequests');
     Route::get('/customer/requests', [CustomerController::class, 'showRequests'])->name('customer.requests');
     Route::get('/customer/review/', [CustomerController::class, 'expertReview'])->name('expertreview');
     Route::get('/customer/profile/', [CustomerController::class, 'expertProfile'])->name('expertprofile');

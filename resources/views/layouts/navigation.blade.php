@@ -97,6 +97,10 @@
         {{ __('Profile') }}
     </x-dropdown-link>
 
+ <x-dropdown-link :href="route('customer.dashboard')">
+        {{ __('Switch to Buyer') }}
+    </x-dropdown-link>
+
     <!-- Authentication -->
     <form method="POST" action="{{ route('logout') }}">
         @csrf

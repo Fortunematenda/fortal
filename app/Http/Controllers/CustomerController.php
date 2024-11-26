@@ -9,7 +9,7 @@ use App\Models\LeadsModel;
 use App\Models\ServicesModel;
 use App\Models\LeadsServiceModel;
 use Exception;
-
+use DateTime;
 class CustomerController extends Controller
 {
     public function customerdashboard(Request $request)
@@ -18,8 +18,8 @@ class CustomerController extends Controller
         $user = $request->user();
         $user_id = $user->id;
         $leads = LeadsModel::join('master_services as m', 'leads.service_id', '=', 'm.id')
-    ->where('leads.user_id', 1)
-    ->get(['leads.*', 'm.*']);
+    ->where('leads.user_id', $user_id)
+    ->get(['leads.*', 'm.*','leads.date_entered']);
 
         $user_leads = array();
         foreach($leads as $lead)
@@ -27,8 +27,12 @@ class CustomerController extends Controller
             $lead_id = $lead["lead_id"];
             $service_name = $lead["service_name"];
             $date_entered = $lead["date_entered"];
+            
+            $date = new DateTime($date_entered);
+            $formatted_date = $date->format('l H:i');
+
             $isExpertApplied = 1;
-            $inarr = array("lead_id" => $lead_id, "service_name" => $service_name, "date_entered"=>$date_entered, "isExpertApplied"=>$isExpertApplied);
+            $inarr = array("lead_id" => $lead_id, "service_name" => $service_name, "date_entered"=>$formatted_date, "isExpertApplied"=>$isExpertApplied);
             array_push($user_leads, $inarr);
         }       
        return view('customer.dashboard',compact(["slot", "user_leads"]));

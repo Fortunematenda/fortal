@@ -35,7 +35,7 @@
                             <button class="Button_base__iY8s5 Button_lg__GH03D Button_minWidth__2dpSx Button_textBlue__796NH Button_bgLightBlue__0RMHv __btnPlaceRequest tw-border-0">
                                 <span class="button-main">
                                     <span class="child-container Button_childContainer__ytwFQ">
-                                        Place new request
+                                    <a href="{{ route('createrequests') }}" class="text-gray">Place new request</a>
                                     </span>
                                 </span>
                             </button>
@@ -54,10 +54,10 @@
                                  @forelse ($user_leads as $lead)
                                 <div data-cy="projectListItem" class="projectlist_item_projectListItem__+529Q tw-text-center tw-items-center tw-flex tw-flex-col tw-p-4 tw-shadow-md tw-bg-white tw-rounded tw-p-3">
                                     <h3 data-testid="_plistProjectLink" class="tw-pt-2 tw-text-center tw-cursor-pointer">
-                                        Garden Clearance Expert
+                                        {{$lead["service_name"]}}
                                     </h3>
                                     <p class="tw-text-center tw-text-sm tw-mb-4 tw-mt-1 tw-text-gray-400">
-                                        Wednesday
+                                       {{$lead["date_entered"]}}
                                     </p>
                                     <div class="tw-flex tw-flex-col tw-grow tw-w-full">
                                         <div class="tw-pl-4 tw-pr-4">
@@ -87,12 +87,13 @@
                                         </a>
                                     </div>
                                 </div>
+                                @empty
+                                                 <h3>No Leads</h3>
+                               @endforelse
                             </div>
                         </div>
                     </div>
-                    @empty
-    <h3>No Leads</h3>
-                   @endforelse
+     
                     <div class="pt-3">
                         <div class="__buyerNextBarkContainer">
                             <div class="all_pt-3__89f4A">
