@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-customernav>
 <link rel="stylesheet" href="{{asset('build/assets/css/create.css')}}">
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_Qd54wgjWo4t-Klmi3m_pz8HbHz0GQto&libraries=places" type="text/javascript"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css"/>
@@ -404,6 +404,6 @@ const phoneInputField = document.querySelector("#contact_number");
     }
    
     </script>
-</x-app-layout>
+</x-customernav>
 <script src="{{asset('build/assets/js/intlTelInput.min.js')}}"></script>
 <script src="{{asset('build/assets/js/utils.js')}}"></script>

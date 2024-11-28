@@ -1,144 +1,9 @@
-<x-app-layout>
-<html lang="en-ZA">
-    <iframe height="0" width="0" style="display: none; visibility: hidden;"></iframe>
-    <head>
-        
-      
-  
-       
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta property="twitter:card" content="summary">
-        <meta property="twitter:site" content="@barkteam">
-        <meta property="og:type" content="website">
-        <title>Fortai.com | Connect With Professionals in South Africa Now</title>
-       
-        <link rel="stylesheet" href="https://d3a1eo0ozlzntn.cloudfront.net/assets/css/main_v2-built.87872c72ad.v2.css">
-        <link rel="stylesheet" href="https://d1w7gvu0kpf6fl.cloudfront.net/fonts/marin-icons-032019/Marin-Icons.css">
-        
-    <meta name="theme-color" content="#ffffff">
-
+<x-customernav>
 
 <link rel="stylesheet" type="text/css" href="https://frontend-production.bark.com/124-becvahpe4pxa2o6n/buyer-app/605.7a64858592b4bf03.css">
 <link rel="stylesheet" type="text/css" href="https://frontend-production.bark.com/124-becvahpe4pxa2o6n/buyer-app/155.9e63495fc5b25540.css">
-</head>
 
 
-
-
-
-
-
-<body>
-    <div class="collapsed ml-auto d-flex d-lg-none notifications-dropdown">
-        <a class="notifications-dropdown-toggle" href="#" id="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <div class="ld-notifications-cont">
-                <span class="buyer-notification notification-bell mobile-notifications-trigger" style="display: none">
-                    <img src="https://d18jakcjgoan9.cloudfront.net/s/img/img/barkv2/custom-icons/bell-default.png!d=2M4f26" alt="" width="24" height="24">
-                    <span class="red-circle"></span>
-                </span>
-            </div>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right notification-dropdown-box mw-50 mt-0" aria-labelledby="notifications-dropdown-toggle-mobile">
-            <ul id="buyer-notifications-mobile" class="dropdown notification-list js-notification-list"></ul>
-        </div>
-    </div>
-    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="bark-svg-icon bsi-primary-dark-blue bsi-sm hamburger_menu">
-            <!--?xml version="1.0" encoding="UTF-8"?-->
-            <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <!-- Generator: Sketch 55 (78076) - https://sketchapp.com -->
-                 <title>Icon/hamburger_menu</title>
-                 <desc>Created with Sketch.</desc>
-                 <g id="Icon/hamburger_menu" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <g id="attach">
-                        <polygon id="Path" points="0 0 24 0 24 24 0 24">
-                            
-                        </polygon>
-                        <path d="M2,5 L22,5 L22,7 L2,7 L2,5 Z M2,11 L22,11
-                        L22,13 L2,13 L2,11 Z M2,17 L22,17 L22,19 L2,19 L2,17 Z" id="Combined-Shape" fill="#111637">
-                    </path>
-                </g>
-            </g>
-        </svg>
-    </span>
-    <span class="bark-svg-icon bsi-primary-dark-blue bsi-sm close-menu">
-        <!--?xml version="1.0" encoding="UTF-8"?-->
-        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g transform="translate(5.000000, 5.000000)" class="primary-color">
-                    <path d="M8.4,7 L14,12.6 L12.6,14 L7,8.4 L1.4,14 L2.48689958e-14,12.6 L5.6,7
-                     L-1.46549439e-14,1.4 L1.4,-5.15143483e-14 L7,5.6 L12.6,-2.30926389e-14 L14,1.4 L8.4,7 Z">
-                    </path>
-                </g>
-            </g>
-        </svg>
-    </span>
-</button>
-<div class="collapse navbar-collapse " id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto d-flex align-items-center">
-        <li class="buyer-dashboard nav-item px-2 py-3 py-sm-4 " id="js-joyride-buyer-dashboard">
-            <a class="text-grey-400 nav-link py-0" href="/buyers/dashboard/">
-                My requests
-            </a>
-        </li>
-        <li class="nav-item dropdown notifications-dropdown py-2 d-none d-lg-block">
-            <a class="notifications-dropdown-toggle" href="#" id="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <div class="ld-notifications-cont">
-                    <span class="buyer-notification notification-bell mobile-notifications-trigger" style="display: none">
-                        <img src="https://d18jakcjgoan9.cloudfront.net/s/img/img/barkv2/custom-icons/bell-default.png!d=2M4f26" alt="" width="24" height="24">
-                        <span class="red-circle"></span>
-                    </span>
-                </div>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right notification-dropdown-box" aria-labelledby="notifications-dropdown-toggle">
-                <ul id="buyer-notifications" class="dropdown notification-list js-notification-list"></ul>
-            </div>
-        </li>
-        <li class="nav-item dropdown user-account-dropdown buyer p-lg-2">
-            <a class="dropdown-toggle d-lg-flex flex-row" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img class="img-fluid default-avatar ml-3 mr-1 d-none" alt="john" width="32" height="32" title="john" src="" srcset="">
-                <p class="d-inline-flex text-dark-blue mb-0 ml-1 js-buyer-username">
-                    john
-                </p>
-                <span class="bark-svg-icon bsi-primary-grey-200 bsi-xxs d-inline-block arrow-down-svg ml-1">
-                    <!--?xml version="1.0" encoding="UTF-8"?-->
-                    <svg width="10px" height="6px" viewBox="0 0 10 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <g id="Guide-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g id="Style-Guide" transform="translate(-344.000000, -10881.000000)">
-                                <g id="Icons/Illustrations" transform="translate(115.000000, 10318.000000)">
-                                    <g id="Icons" transform="translate(22.000000, 242.000000)">
-                                        <g id="Icon/arrow_down" transform="translate(206.000000, 320.000000)">
-                                            <g id="arrow_down">
-                                                <rect id="base" fill-rule="nonzero" x="0" y="0" width="12" height="8"></rect>
-                                                <path d="M6.63460593,6.744 C6.28160593,7.084 5.75960593,7.085 5.40560593,6.748 L1.33160593,2.863 C0.934605927,2.484 0.887605927,1.818 1.22560593,1.374 C1.40460593,1.139 1.66760593,1.003 1.94360593,1.003 L10.0556059,1 C10.5766059,1 10.9996059,1.472 10.9996059,2.056 C11.0006059,2.363 10.8796059,2.655 10.6716059,2.856 L6.63460593,6.744 Z" id="arrow-down" class="primary-color"></path>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </g>
-                            </g>
-                        </g>
-                    </svg>
-                </span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right text-light-grey mt-0" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item nav-link px-3 px-md-two d-flex align-items-center justify-content-center justify-content-md-start" href="/user/notifications/">
-                    <span>Notifications</span>
-                </a>
-                <a class="dropdown-item nav-link px-3 px-md-two d-flex align-items-center justify-content-center justify-content-md-start" href="/user/settings/">
-                    <span>Account settings</span>
-                </a>
-                <a class="dropdown-item nav-link px-3 px-md-two d-flex align-items-center justify-content-center justify-content-md-start" href="/logout/">
-                    <span>
-                        Log Out
-                    </span>
-                </a>
-            </div>
-        </li>
-    </ul>
-</div>
-</nav>
 <div class="v2-loading-overlay">
     <div class="loading-box fade show mx-auto">
         <div class="d-flex flex-column py-4 align-items-center">
@@ -390,27 +255,11 @@
     <div id="response-preference-container" class="d-none d-lg-inline-flex align-items-center">
     </div>
     <div class="rqfa-container d-none d-lg-inline-flex flex-shrink-0 ml-auto animate-in">
-        <div class="" id="__reqQfromAllBtn"><div style=""><div class="ShareWithAllHeader_base__JBdic tw-font-gordita-regular RequestMultipleReplies_animate__Ue+eU">
-            <div class="tw-text-center lg:tw-text-left">
-                <p class="ShareWithAllHeader_recommendedTitle__E9ZMP">Recommended:</p>
-                <p class="ShareWithAllHeader_recommendedSubheading__zJ-6h">
-                    Request replies from 
-                    <span class="tw-font-sans">
-                        your top 5
-                    </span> matches to hear back faster</p>
-                </div>
-                <button class="Button_base__iY8s5 Button_sm__a3N1h Button_minWidth__2dpSx Button_textWhite__
-                xuORO Button_bgDarkBlue__V0O05 ShareWithAllHeader_shareButton__CPqmV" data-testid="share-with-all">
-                <span class="tw-flex tw-justify-center">
-                    <span class="button-main  ">
-                    <span class="child-container Button_childContainer__ytwFQ">
-                        Request replies from top 5
-                    </span>
-                </span>
-            </span>
-        </button>
-    </div>
-<div>
+        <div class="" id="__reqQfromAllBtn">
+            <div class="ShareWithAllHeader_base__JBdic tw-font-gordita-regular RequestMultipleReplies_animate__Ue+eU">
+                
+            </div>
+            <div>
 
 </div>
 </div>
@@ -540,73 +389,15 @@
                         </div>
                     </div>
                 </div>
-        </div><div class="card mb-2 seller-list-card font-weight-regular primary-card  border-0 " data-seller-profile-id="LjnpD" data-ppurl="/en/za/company/mc-maids-on-call-pty-ltd/LjnpD/">
+        </div>
+        <div class="card mb-2 seller-list-card font-weight-regular primary-card  border-0 " ">
             <div class="primary-card-body">
                 <div class="mob-card">
                         <div class="north-container">
                             <div class="d-flex flex-column   align-items-center  ">
-                            <a href="/en/za/company/mc-maids-on-call-pty-ltd/LjnpD/?prid=mkZzVY&amp;bpvsid=475053544&amp;bpvid=106626944" class="text-decoration-none js-view-profile-action" data-link-name="avatar" data-seller-profile-id="LjnpD"> 
-                                    <img class="seller-list-avatar js-company-pic  " src="https://bark-user-data.s3.eu-west-1.amazonaws.com/avatar_v2/EKn8eG/logo/5fcd16d18bebc.jpg" onerror="this.onerror = null;this.classList.add('d-none');this.nextElementSibling.classList.remove('d-none');this.nextElementSibling.classList.add('d-flex'); this.remove();">
-                                    <div class="d-none seller-list-avatar seller-list-avatar-fallback bg-sunglo text-white justify-content-center align-items-center cursor-pointer font-weight-medium">
-                                        M
-                                    </div>
-                                </a>
+                           
                         </div>
-                        <div class="d-flex justify-content-start align-items-end ml-auto flex-column  ">
-                            <div class="reviews-component d-flex justify-content-right align-items-center ">
-                                        <a href="/en/za/company/mc-maids-on-call-pty-ltd/LjnpD/?prid=mkZzVY&amp;bpvsid=475053544&amp;bpvid=106626944&amp;show-reviews=1" class="text-decoration-none js-view-profile-action d-flex justify-content-end align-items-center" data-link-name="reviews" data-seller-profile-id="LjnpD">
-                                            <div class="stars-img-container   d-flex justify-content-center align-items-end"><img class="img-fluid star star-full" width="18" height="19" src="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6 1x, https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=xnoTN 2x"><img class="img-fluid star star-full" width="18" height="19" src="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6 1x, https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=xnoTN 2x"><img class="img-fluid star star-full" width="18" height="19" src="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6 1x, https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=xnoTN 2x"><img class="img-fluid star star-full" width="18" height="19" src="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6 1x, https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=xnoTN 2x"><img class="img-fluid star star-half" width="18" height="19" src="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star_half.png!d=5Jzh6" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star_half.png!d=5Jzh6 1x, https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star_half.png!d=xnoTN 2x"></div>
-                                            <p class="text-dark-blue mb-0 pt-1 ml-1 reviews-count">(21)</p>
-                                        </a>
-                                </div>
-                            </div>
-                    </div>
-                        <div class="row core-container">
-                            <div class="center-container">
-                                <div class="company-name-overflow">
-                        <a class="js-view-profile-action  text-dark-blue font-weight-medium " href="/en/za/company/mc-maids-on-call-pty-ltd/LjnpD/?prid=mkZzVY&amp;bpvsid=475053544&amp;bpvid=106626944" data-link-name="company-name" data-seller-profile-id="LjnpD">
-                            <p class="mb-0 align-items-center text-left d-flex ">
-                MC Maids On Call (PTY) LTD
-                            </p>
-                        </a>
-                    </div>
-                    <div class="label-row-container ">
-                                    <div class="seller-list-label green">
-                                                        <div class="label-icon">
-                                                            <span class="bark-svg-icon bsi-primary-puerto-rico bsi-xs contact-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M7.33331 14H6.66665L7.33331 9.33333H4.99998C4.41331 9.33333 4.77998 8.83333 4.79331 8.81333C5.65331 7.29333 6.94665 5.02667 8.67331 2H9.33998L8.67331 6.66667H11.0133C11.28 6.66667 11.4266 6.79333 11.28 7.10667C8.64665 11.7 7.33331 14 7.33331 14Z" fill="none" class="primary-color"></path>
-                                        </svg>
-                                        </span>
-                                                        </div>
-                                                        <div>Quick to respond</div>
-                                                    </div>
-                                                </div>
-                                <ul class="seller-top-categories">
-                                        <li class="text-grey-600">
-                                            House Cleaning
-                                        </li>
-                                        <li class="text-grey-600">
-                                            Deep Cleaning Services
-                                        </li>
-                                        <li class="text-grey-600">
-                                            Carpet Cleaning
-                                        </li>
-                                    </ul>
-                                </div>
-                            <div class="interactions-container">
-                                
-                            </div>
-                            <div class="buttons-container row no-gutters ">
-                                <div class="   col-12 ">
-                            <a href="/en/za/company/mc-maids-on-call-pty-ltd/LjnpD/?prid=mkZzVY&amp;bpvsid=475053544&amp;bpvid=106626944" class="btn btn-outline-clear-blue text-xs cta-button btn-hover-azure js-view-profile js-view-profile-action  text-xs font-weight-medium w-100 btn-lg" data-seller-profile-id="LjnpD" data-link-name="cta">
-                                View profile
-                            </a>
-                            </div>
-                            <div class="    col-12 mt-2  ">
-                            <button class="js-request-quote btn  btn-primary  js-fill-name cta-button text-xs font-weight-medium w-100 btn-lg" data-seller-profile-id="LjnpD">
-                                Request reply
-                            </button>
-                        </div>
+                       
                     </div>
                         </div>
                     </div>
@@ -677,178 +468,8 @@
     </div>
 </div>
 </div>
-</div><div class="card mb-2 seller-list-card font-weight-regular primary-card  border-0 " data-seller-profile-id="QeR0R" data-ppurl="/en/za/company/antos-spotless-cleaning-services/QeR0R/">
-    <div class="primary-card-body">
-        <div class="mob-card">
-            <div class="north-container">
-                <div class="d-flex flex-column   align-items-center  ">
-                    <a href="/en/za/company/antos-spotless-cleaning-services/QeR0R/?prid=mkZzVY&amp;bpvsid=null&amp;bpvid=106626944" class="text-decoration-none js-view-profile-action" data-link-name="avatar" data-seller-profile-id="QeR0R">
-                        <img class="seller-list-avatar js-company-pic  " src="https://bark-user-data.s3.eu-west-1.amazonaws.com/avatar_v2/0ZGOMn/logo/65dcdc288d3f6.jpg" onerror="this.onerror = null;this.classList.add('d-none');this.nextElementSibling.classList.remove('d-none');this.nextElementSibling.classList.add('d-flex'); this.remove();">
-                        <div class="d-none seller-list-avatar seller-list-avatar-fallback bg-inch-worm text-white justify-content-center align-items-center cursor-pointer font-weight-medium">
-                            A
-                        </div>
-                    </a>
-                </div>
-                <div class="d-flex justify-content-start align-items-end ml-auto flex-column  ">
-                    <div class="reviews-component d-flex justify-content-right align-items-center ">
-                        <a href="/en/za/company/antos-spotless-cleaning-services/QeR0R/?prid=mkZzVY&amp;bpvsid=null&amp;bpvid=106626944&amp;show-reviews=1" class="text-decoration-none js-view-profile-action d-flex justify-content-end align-items-center" data-link-name="reviews" data-seller-profile-id="QeR0R">
-                            <div class="stars-img-container   d-flex justify-content-center align-items-end">
-                                <img class="img-fluid star star-full" width="18" height="19" src="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6 1x, https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=xnoTN 2x">
-                                <img class="img-fluid star star-full" width="18" height="19" src="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6 1x, https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=xnoTN 2x">
-                                <img class="img-fluid star star-full" width="18" height="19" src="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6 1x, https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=xnoTN 2x">
-                                <img class="img-fluid star star-full" width="18" height="19" src="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6 1x, https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=xnoTN 2x">
-                                <img class="img-fluid star star-full" width="18" height="19" src="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6 1x, https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=xnoTN 2x">
-                            </div>
-                            <p class="text-dark-blue mb-0 pt-1 ml-1 reviews-count">
-                                (1)
-                            </p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="row core-container">
-                <div class="center-container">
-                    <div class="company-name-overflow">
-                        <a class="js-view-profile-action  text-dark-blue font-weight-medium " href="/en/za/company/antos-spotless-cleaning-services/QeR0R/?prid=mkZzVY&amp;bpvsid=null&amp;bpvid=106626944" data-link-name="company-name" data-seller-profile-id="QeR0R">
-                            <p class="mb-0 align-items-center text-left d-flex ">
-                                Anto's Spotless Cleaning Services
-                            </p>
-                        </a>
-                    </div>
-                    <div class="label-row-container ">
-                        <div class="seller-list-label green">
-                            <div class="label-icon">
-                                <span class="bark-svg-icon bsi-primary-puerto-rico bsi-xs contact-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7.33331 14H6.66665L7.33331 9.33333H4.99998C4.41331 9.33333 4.77998 8.83333 4.79331 8.81333C5.65331 7.29333 6.94665 5.02667 8.67331 2H9.33998L8.67331 6.66667H11.0133C11.28 6.66667 11.4266 6.79333 11.28 7.10667C8.64665 11.7 7.33331 14 7.33331 14Z" fill="none" class="primary-color"></path>
-                                </svg>
-                            </span>
-                        </div>
-                        <div>
-                            Quick to respond
-                        </div>
-                    </div>
-                </div>
-                <ul class="seller-top-categories">
-                    <li class="text-grey-600">
-                        House Cleaning
-                    </li>
-                    <li class="text-grey-600">
-                        Deep Cleaning Services
-                    </li>
-                    <li class="text-grey-600">
-                        Carpet Cleaning
-                    </li>
-                </ul>
-            </div>
-            <div class="interactions-container"></div>
-            <div class="buttons-container row no-gutters ">
-                <div class="   col-12 ">
-                    <a href="/en/za/company/antos-spotless-cleaning-services/QeR0R/?prid=mkZzVY&amp;bpvsid=null&amp;bpvid=106626944" class="btn btn-outline-clear-blue text-xs cta-button btn-hover-azure js-view-profile js-view-profile-action  text-xs font-weight-medium w-100 btn-lg" data-seller-profile-id="QeR0R" data-link-name="cta">
-                        View profile
-                    </a>
-                </div>
-                <div class="    col-12 mt-2  ">
-                    <button class="js-request-quote btn  btn-primary  js-fill-name cta-button text-xs font-weight-medium w-100 btn-lg" data-seller-profile-id="QeR0R">
-                        Request reply
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="tb-card">
-        <div class="w-100 d-flex flex-row justify-content-start align-items-start">
-            <div class="avatar-container">
-                <div class="d-flex flex-column   align-items-center  ">
-                    <a href="/en/za/company/antos-spotless-cleaning-services/QeR0R/?prid=mkZzVY&amp;bpvsid=null&amp;bpvid=106626944" class="text-decoration-none js-view-profile-action" data-link-name="avatar" data-seller-profile-id="QeR0R">
-                        <img class="seller-list-avatar js-company-pic  " src="https://bark-user-data.s3.eu-west-1.amazonaws.com/avatar_v2/0ZGOMn/logo/65dcdc288d3f6.jpg" onerror="this.onerror = null;this.classList.add('d-none');this.nextElementSibling.classList.remove('d-none');this.nextElementSibling.classList.add('d-flex'); this.remove();">
-                        <div class="d-none seller-list-avatar seller-list-avatar-fallback bg-inch-worm text-white justify-content-center align-items-center cursor-pointer font-weight-medium">
-                            A
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="content-container">
-                <div class="core-container border-bottom">
-                    <div class="title-row">
-                        <div class="company-name-overflow">
-                            <a class="js-view-profile-action  text-dark-blue font-weight-medium " href="/en/za/company/antos-spotless-cleaning-services/QeR0R/?prid=mkZzVY&amp;bpvsid=null&amp;bpvid=106626944" data-link-name="company-name" data-seller-profile-id="QeR0R">
-                                <p class="mb-0 align-items-center text-left d-flex ">
-                                    Anto's Spotless Cleaning Services
-                                </p>
-                            </a>
-                        </div>
-                        <div class="reviews-component d-flex justify-content-right align-items-center ml-auto">
-                            <a href="/en/za/company/antos-spotless-cleaning-services/QeR0R/?prid=mkZzVY&amp;bpvsid=null&amp;bpvid=106626944&amp;show-reviews=1" class="text-decoration-none js-view-profile-action d-flex justify-content-end align-items-center" data-link-name="reviews" data-seller-profile-id="QeR0R">
-                                <div class="stars-img-container   d-flex justify-content-center align-items-end">
-                                    <img class="img-fluid star star-full" width="18" height="19" src="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6 1x, https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=xnoTN 2x">
-                                    <img class="img-fluid star star-full" width="18" height="19" src="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6 1x, https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=xnoTN 2x">
-                                    <img class="img-fluid star star-full" width="18" height="19" src="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6 1x, https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=xnoTN 2x">
-                                    <img class="img-fluid star star-full" width="18" height="19" src="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6 1x, https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=xnoTN 2x">
-                                    <img class="img-fluid star star-full" width="18" height="19" src="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=5Jzh6 1x, https://d18jakcjgoan9.cloudfront.net/s/img/frontend-v2/icons/rating_star.png!d=xnoTN 2x">
-                                </div>
-                                <p class="text-dark-blue mb-0 pt-1 ml-1 reviews-count">
-                                    (1)
-                                </p>
-                            </a>
-                            </div>
-                        </div>
-                        <div class="seller-top-categories">
-                            <span class="badge badge-pill text-grey-600">
-                                House Cleaning
-                            </span>
-                                   <span class="badge badge-pill text-grey-600">
-                                    Deep Cleaning Services
-                                </span>
-                                   <span class="badge badge-pill text-grey-600">
-                                    Carpet Cleaning
-                                </span>
-                            </div>
-                            <a href="/en/za/company/antos-spotless-cleaning-services/QeR0R/?prid=mkZzVY&amp;bpvsid=null&amp;bpvid=106626944" class="text-decoration-none js-view-profile-action" data-seller-profile-id="QeR0R" data-link-name="description">
-                                <div class="description desktop">
-                                    <p class="text-xs mb-0">
-                                        We have been working with diffrent people in Capetown and sorrounding areas ,Offering the best deep ,standard ,move in and out ,windows cleaning services. Also packing and unpacking of clothes and kitchenware
-                                    </p>
-                                </div>
-                            </a>
-                            <div class="d-flex justify-content-between align-items-end mt-auto">
-                                <div class="mr-auto">
-                                    <a href="/en/za/company/antos-spotless-cleaning-services/QeR0R/?prid=mkZzVY&amp;bpvsid=null&amp;bpvid=106626944" class="seller-list-link-view-profile js-view-profile js-view-profile-action font-weight-medium  " data-seller-profile-id="QeR0R" data-link-name="cta-arrow">
-                                        <span class="d-flex align-items-center justify-content-start text-nowrap">
-                                            <span class="bark-svg-icon bsi-primary-primary bsi-xs">
-                                                <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.29289 13.7072L6.87868 12.293L11.1716 8.00008H0.585787V6.00008H11.1716L6.87868 1.70718L8.29289 0.292969L15 7.00008L8.29289 13.7072Z" fill="none" class="primary-color"></path>
-                                                </svg>
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="label-row-container ml-auto w-auto">
-                                        <div class="seller-list-label green">
-                                            <div class="label-icon">
-                                                <span class="bark-svg-icon bsi-primary-puerto-rico bsi-xs contact-icon">
-                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M7.33331 14H6.66665L7.33331 9.33333H4.99998C4.41331 9.33333 4.77998 8.83333 4.79331 8.81333C5.65331 7.29333 6.94665 5.02667 8.67331 2H9.33998L8.67331 6.66667H11.0133C11.28 6.66667 11.4266 6.79333 11.28 7.10667C8.64665 11.7 7.33331 14 7.33331 14Z" fill="none" class="primary-color"></path>
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                            <div>
-                                                Quick to respond
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class=" buttons-container">
-                                 <div class="cta-mw-160 ml-2 ">
-                                    <button class="js-request-quote btn  btn-primary  js-fill-name cta-button text-xs font-weight-medium w-100" data-seller-profile-id="QeR0R">
-                                        Request reply
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+</div>
+
         <div class="rqfa-container d-lg-none w-100 rqfa-lower mt-4 border-bottom mb-3 pb-4 ">
            
         </div>
@@ -873,25 +494,15 @@
     </div>
     
 </div>
-        <p class="text-medium text-xs mt-4 text-center">
-            We'll email you when you get a reply
-        </p>
-        <p class="text-regular text-center text-xs mb-0 px-3">
-            Contact your favourite matches from your list to get quicker replies:
-        </p>
+  
+
         <div class="col text-center">
             <button class="mt-3 btn btn-primary js-view-matches" id="matches-button" data-toggle="tab" href="#matches" role="tab" aria-controls="matches">
                 View your matches
             </button>
         </div>
     </div>
-    <div class="next-bark-wrapper my-two">
-        <section id="buyer-next-bark" class="">
-            <div class="d-flex d-md-none justify-content-center border-bottom mb-3 pb-two">
-                <button class="js-initiate-new-bark btn btn-outline-clear-blue text-xs btn-lg btn-outline-darker-border" data-bark-mode="bnb-button">
-                    Place new request
-                </button>
-            </div>
+    
             <div class="" id="__bnb">
             <div class="__buyerNextBarkContainer">
             <div class="all_pt-3__89f4A">
@@ -902,8 +513,8 @@
                     </h2>
                     <div class="page-buttons all_d-flex__WrxK8 all_mt-2__B9L78 all_mt-md-0__hdzCb bark-carousel-buttons">
                         <div class="all_d-none__gqjAc all_d-md-inline__fILlw">
-                            <button class="js--new-bark all_btn__qb85G all_btn-outline-clear-blue__vIN5n all_text-xs__81jVN all_btn-lg__y6C7b all_btn-outline-darker-border__92f2J all_me-3__lOVNM" data-bark-mode="bnb-button">
-                                Place new request
+                            <button  href="/customer/createrequests" class="js--new-bark all_btn__qb85G all_btn-outline-clear-blue__vIN5n all_text-xs__81jVN all_btn-lg__y6C7b all_btn-outline-darker-border__92f2J all_me-3__lOVNM" data-bark-mode="bnb-button">
+                                <a href="{{ route('createrequests') }}" class="text-gray">Place new request</a>
                             </button>
                         </div>
                         <div class="all_d-none__gqjAc all_d-md-flex__kchcM">
@@ -974,6 +585,6 @@
 </div>
 </div>
 
-</div></body></html>
+</div>
 
-</x-app-layout>
+</x-customernav>

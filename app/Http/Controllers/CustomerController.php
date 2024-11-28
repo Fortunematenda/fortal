@@ -56,13 +56,22 @@ class CustomerController extends Controller
         return view('customer.createrequests',compact(["slot"]));
     }
 
-    public function expertReview()
+    public function expertView()
     {
         $slot = "";
         $profession = null; // Replace with actual fetching logic
 
-        return view('customer.expertreview', compact('profession'));
+        return view('customer.expertview', compact('profession'));
     }
+
+    public function customerSettings()
+    {
+        $slot = "";
+        $profession = null; // Replace with actual fetching logic
+
+        return view('customer.customersettings', compact('profession'));
+    }
+    
      public function expertProfile()
     {
         $slot = "";

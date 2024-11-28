@@ -1,5 +1,5 @@
 <nav class="navbar sticky-top navbar-expand-lg bark-header  body-min-width header-shadow background-color-white py-0 bg-white border-b border-gray-100" x-data="{ open: false }" id="bark-header">
-            <a class="navbar-brand py-3" href="/dashboard/">
+            <a class="navbar-brand py-3" href="/customer/dashboard/">
             <img class="img-fluid loaded" src="{{asset('build/assets/img/fortailogo.png')}}" width="80" height="24" title="Fortai Logo" alt="Fortai Logo" data-was-processed="true">
         </a>
     
@@ -24,21 +24,15 @@
     @auth
  
                 <ul class="navbar-nav ml-auto d-flex align-items-center">
-        <li class="dashboard-home nav-item px-2 py-3 py-sm-4" id="js-joyride-dashboard-home">
-            <a class="text-grey-400 nav-link py-0" href="/dashboard/">Dashboard</a>
-        </li>
+      
         <li class="requests nav-item px-2 py-3 py-sm-4 active" id="js-joyride-requests">
-            <a class="text-grey-400 nav-link py-0" href="/seller/dashboard/">Leads</a>
+            <a class="text-grey-400 nav-link py-0" href="/customer/dashboard/">My Requests</a>
+        </li> 
+        <li class="requests nav-item px-2 py-3 py-sm-4 active" id="js-joyride-requests">
+            <a class="text-grey-400 nav-link py-0" href="/customer/expertview/">View Professionals</a>
         </li>
-        <li class="my-responses nav-item px-2 py-3 py-sm-4" id="js-joyride-my-responses">
-            <a class="text-grey-400 nav-link py-0" href="/responses"">My Responses</a>
-        </li>
-        <li class="settings nav-item px-2 py-3 py-sm-4" id="js-joyride-settings">
-            <a class="text-grey-400 nav-link py-0" href="/profile">Settings</a>
-        </li>
-        <li class="help nav-item px-2 py-3 py-sm-4" id="js-joyride-help">
-            <a class="text-grey-400 nav-link py-0" href="/help">Help</a>
-        </li>
+      
+       
         <li class="nav-item dropdown notifications-dropdown py-2 d-none d-lg-block">
         <a class="notifications-dropdown-toggle" href="/seller/dashboard" id="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="ld-notifications-cont">
@@ -93,12 +87,12 @@
 
 </x-slot>
 <x-slot name="content" style="background-color: gray;">
-    <x-dropdown-link :href="route('profile.edit')">
-        {{ __('Profile') }}
+    <x-dropdown-link :href="route('expertview')">
+        {{ __('View Professionals') }}
     </x-dropdown-link>
 
- <x-dropdown-link :href="route('customer.dashboard')">
-        {{ __('Switch to Customer') }}
+ <x-dropdown-link :href="route('customersettings')">
+        {{ __('Account Settings') }}
     </x-dropdown-link>
 
     <!-- Authentication -->
@@ -137,8 +131,8 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('customer.dashboard')" :active="request()->routeIs('customer.dashboard')">
+                {{ __('Home') }}
             </x-responsive-nav-link>
         </div>
 
@@ -151,8 +145,8 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                <x-responsive-nav-link :href="route('expertview')">
+                    {{ __('View Professionls') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -199,20 +193,15 @@
         <div class="mt-2 flex justify-center">
             <ul class="navbar-nav flex-col items-center w-full">
                 <li class="nav-item mb-2">
-                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                    <a class="nav-link" href="/customer/dashboard">Home</a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a class="nav-link" href="/seller/dashboard/">Leads</a>
+                    <a class="nav-link" href="/customer/review/">View Professionals</a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a class="nav-link" href="/responses">My Responses</a>
+                    <a class="nav-link" href="/dashboard">Switch To Expert</a>
                 </li>
-                <li class="nav-item mb-2">
-                    <a class="nav-link" href="/profile">Settings</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a class="nav-link" href="/help">Help</a>
-                </li>
+             
                 @auth
                     <li class="nav-item mb-2">
                         <form method="POST" action="{{ route('logout') }}">

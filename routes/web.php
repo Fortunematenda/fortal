@@ -45,9 +45,7 @@ Route::middleware('guest:sanctum')->group(function () {
     Route::post('/registeruser', [RegisteredUserController::class, 'store'])->name('registeruser');    
     Route::get('/customer/create', [CustomerController::class, 'createCustomer'])->name('create.customer');
     Route::get('/customer/requests', [CustomerController::class, 'showRequests'])->name('customer.requests');
-    Route::get('/customer/review/', [CustomerController::class, 'expertReview'])->name('expertreview');
-    Route::get('/customer/profile/', [CustomerController::class, 'expertProfile'])->name('expertprofile');
-    Route::post('/getservicesquestions', [CustomerController::class, 'getServicesQuestions'])->name('getservicesquestions');
+            Route::post('/getservicesquestions', [CustomerController::class, 'getServicesQuestions'])->name('getservicesquestions');
     Route::post('/customer/createlead', [CustomerController::class, 'createLead'])->name('createlead');
 });
 
@@ -76,6 +74,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/notifications/update', [ProfileController::class, 'updateNotifications'])->name('notifications.update');
     Route::post('/notifications/update', [ProfileController::class, 'subscribedNotifications'])->name('notifications.subscribed');
     Route::get('/customer/dashboard', [CustomerController::class, 'customerdashboard'])->name('customer.dashboard');
+    Route::get('/customer/profile/', [CustomerController::class, 'expertProfile'])->name('expertprofile');
+    Route::get('/customer/expertview/', [CustomerController::class, 'expertView'])->name('expertview');
+    Route::get('/customer/settings/', [CustomerController::class, 'customerSettings'])->name('customersettings');
 });
 
 // Load authentication routes

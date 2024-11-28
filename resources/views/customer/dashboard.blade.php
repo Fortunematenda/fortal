@@ -1,10 +1,11 @@
-<x-app-layout>
+
+<x-customernav>
     <link rel="stylesheet" href="{{asset('build/assets/css/main_v2-built.645e5822f3.v2.css')}}">
     
     <!-- Marquee Section -->
     <div class="marquee-wrapper">
         <div class="marquee">
-            <p>Welcome to the application! Keep an eye out for updates and new features!</p>
+            <p>"Welcome to your dashboard! 🌟 We're here to make your experience seamless and efficient. Keep exploring, and don't forget to check out new features and updates tailored just for you!</p>
         </div>
     </div>
 
@@ -73,7 +74,7 @@
                                         </div>
                                     </div>
                                     <div class="tw-mt-3 tw-mb-2 tw-text-center">
-                                        <a data-testid="btn-viewquote" class="projectlist_item_linkButton__p+KBq tw-no-underline tw-drop-shadow-md tw-rounded tw-p-2 tw-text-white">
+                                        <a href="/customer/profile/" data-testid="btn-viewquote" class="projectlist_item_linkButton__p+KBq tw-no-underline tw-drop-shadow-md tw-rounded tw-p-2 tw-text-white">
                                             View professionals
                                         </a>
                                     </div>
@@ -199,7 +200,7 @@
 
 
     </div>
-</x-app-layout>
+    </x-customernav>
 
 <!-- Add CSS for the Marquee -->
 <style>
@@ -212,10 +213,10 @@
     }
     .marquee {
         display: inline-block;
-        animation: marquee 10s linear infinite;
-        font-size: 16px;
+        animation: marquee 40s linear infinite;
+        font-size: 20px;
         padding: 10px 0;
-        color: #333;
+        color: purple;
     }
     @keyframes marquee {
         from {
