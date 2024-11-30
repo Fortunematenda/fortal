@@ -260,7 +260,7 @@ label {
 
     </div>
 
-  <div style="overflow:auto;">
+  <div style="overflow:auto; margin-top:23px">
     <div style="float:right;">
       <button type="button" class="uk-button uk-button-default" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
       <button type="button" class="uk-button uk-button-primary" id="nextBtn" onclick="nextPrev(1)">Next</button>
@@ -380,7 +380,7 @@ const phoneInputField = document.querySelector("#contact_number");
             utilsScript: "{{asset('build/assets/js/utils.js')}}", // for formatting and validation
             initialCountry: "auto", // detect the user's country
             geoIpLookup: function(callback) {
-                fetch('https://ipinfo.io?token=YOUR_API_KEY') // replace 'YOUR_API_KEY' with a free key from ipinfo.io
+                fetch('') 
                     .then((response) => response.json())
                     .then((data) => callback(data.country))
                     .catch(() => callback("za")); // default to 'us' if geolocation fails

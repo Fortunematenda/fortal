@@ -68,7 +68,18 @@ class RegisteredUserController extends Controller
                 $customer = new CustomerController();
                 $lead = $customer->createLead($user->id, $service_id, $user->id, $description, $estimate_quote, $urgent, $hiring_decision,$longitude,$latitude,$location);
                 $customer->addLeadService($data,$lead->id,$user->id);
-
+                $request->validate([
+                    'files.*' => 'required|file|mimes:jpg,png|max:2048', // Customize validation rules as needed
+                ]);
+        
+                $uploadedFiles = [];
+                if ($request->hasFile('files')) {
+                    foreach ($request->file('files') as $file) {
+                        // Save the file to a desired location
+                        $path = $file->store('uploads', 'public'); // 'uploads' directory under 'storage/app/public'
+                        $uploadedFiles[] = $path; // Save file path for response
+                    }
+                }
             }
             else{
                 UserServicesModel::create([
