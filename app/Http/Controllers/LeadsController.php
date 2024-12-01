@@ -299,7 +299,7 @@ private function arrLeads($leads = array())
                   $contacted->user_id=$user->id;
                   $contacted->lead_id=$lead_id;
                   $contacted->entered_by=$user->id;
-                  $contacted->save();
+                  $contacted->save(); 
                   //ContactedLeadsModel::create(["user_id"=>$user->id,"lead_id"=>$lead_id,"entered_by"=>$user->id]);
                     
                 }                
