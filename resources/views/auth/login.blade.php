@@ -50,10 +50,12 @@
     <hr><br>
     <div class="col-12 col-md-10 col-lg-8 mx-auto text-center mt-5">
                     <div class="pro-account">
-                        <p>Offering a service? <br class="d-xs-block d-sm-none"><span><u><a href="/profession/create" tabindex="6">Join as a professional</a></u></span></p>
+                
+                        <u><a href="/customer/createrequests" tabindex="6">Looking for a service? </a></u></span></p>
+                        <u><a href="/profession/create" tabindex="6">Join as a professional</a></u></span></p>
                     </div>
                     <div class="signup-text">
-                        <p>Looking for a service? <br class="d-xs-block d-sm-none"><span><u><a href="/register" tabindex="7">Get started</a></u></span></p>
+                     <u><a href="/" tabindex="7">Home</a></u></span></p>
                     </div>
                 </div>
 </x-guest-layout>

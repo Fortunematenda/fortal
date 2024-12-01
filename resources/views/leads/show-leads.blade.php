@@ -253,7 +253,8 @@
 </div>
 <div></div>
 <div></div>
-<div id="modal-center" class="uk-flex-top" uk-modal>
+<div id="modal-center" class="uk-flex-top" uk-modal style="margin-top: 5px !important;
+    margin-bottom: auto !important;">
     <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 
         <button class="uk-modal-close-default" type="button" uk-close></button>

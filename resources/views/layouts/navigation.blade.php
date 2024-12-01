@@ -20,7 +20,7 @@
 
         
        
-    <div class="collapse navbar-collapse " id="navbarSupportedContent" style="background-color: #fffff;">
+    <div class="collapse navbar-collapse " id="navbarSupportedContent" style="background-color: #ffff;">
     @auth
  
                 <ul class="navbar-nav ml-auto d-flex align-items-center">
@@ -95,6 +95,10 @@
 <x-slot name="content" style="background-color: gray;">
     <x-dropdown-link :href="route('profile.edit')">
         {{ __('Profile') }}
+    </x-dropdown-link>
+
+ <x-dropdown-link :href="route('customer.dashboard')">
+        {{ __('Switch to Customer') }}
     </x-dropdown-link>
 
     <!-- Authentication -->

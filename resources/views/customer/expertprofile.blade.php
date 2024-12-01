@@ -1,5 +1,5 @@
 <!-- resources/views/customer/requests.blade.php -->
-<x-app-layout>
+<x-customernav>
 <link rel="stylesheet" href="{{asset('build/assets/css/main_v2-built.645e5822f3.v2.css')}}">
 
 <head>
@@ -327,4 +327,4 @@
 
 
  
-</x-app-layout>
+</x-customernav>

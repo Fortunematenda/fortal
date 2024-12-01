@@ -309,7 +309,7 @@ let ext = "<div class='tab'><p><label>Description:</label><textarea class='texta
     ext += "<input type='file' id='files' name='files' multiple accept='image/*' style='display: none;'></div>";
     ext += "<div class='preview-container' id='preview-container'></div></div>";
 
-    ext += "<div class='tab'><p><label><b><Estimated budget</b></label><input type='number' id='estimate_quote' name='estimate_quote' value='0' placeholder='Enter estimated budget'></p>";
+    ext += "<div class='tab'><p><label><b>Estimated budget</b></label><input type='text' id='estimate_quote' name='estimate_quote' placeholder='R 0.00'></p>";
     ext += "<p><label><b><input type='checkbox' id='urgent' name='urgent' value='1'> Is it urgent?</b></label></p>";
     ext += "<p><label><b><input type='checkbox' id='hiring_decision' name='hiring_decision' value='1'> Hiring Decision Made?</b></label></p><hr/></div>";
 
@@ -424,8 +424,8 @@ $(document).ready(function() {
         let contact_number = formData.find(item => item.name === "contact_number").value ?? "";
         let brief_description = formData.find(item => item.name === "brief_description").value ?? "";
         let estimate_quote = formData.find(item => item.name === "estimate_quote").value ?? 0;
-        let urgent = formData.find(item => item.name === "urgent").value ?? 0;
-        let hiring_decision = formData.find(item => item.name === "hiring_decision").value ?? 0;
+        let urgent = formData.find(item => item.name === "urgent")?.value ?? 0;
+let hiring_decision = formData.find(item => item.name === "hiring_decision")?.value ?? 0;
         let company_name = "";
         let is_company_website = 0;
         let company_size = 0;
@@ -440,10 +440,22 @@ $(document).ready(function() {
             urgent, hiring_decision
         };
         console.log(obj);
+        console.log(files);
+        if (files.length > 0) {
+            var formDataArr = new FormData();
+            console.log('Files selected:');
+            for (var i = 0; i < files.length; i++) {
+                formDataArr.append('files[]', files[i]);
+              console.log(files[i].name); // Log file name
+            }
+          }
+          for (let key in obj) {
+            formDataArr.append(key, obj[key]);
+        }
         $.ajax({
             url: '/register',
             type: 'POST',
-            data: obj,
+            data: formDataArr,
             beforeSend: function() {
             },
             success: function(data) {
@@ -451,7 +463,7 @@ $(document).ready(function() {
                 $("#prevBtn").hide();
                $("#nextBtn").hide();
                $("#subm").hide();
-                window.location.href = data.redirect_url;
+                //window.location.href = data.redirect_url;
             }
                
             }, 
@@ -460,14 +472,21 @@ $(document).ready(function() {
             },
             complete: function() {
             }
+        });      
+       
+           
+    });
+    });
+
+    $(document).on('blur','#estimate_quote',function(){
+        let val = $(this).val().replace('R','');
+        $(this).val(formatCurrencyZAR(val));
+    })
+
+    function formatCurrencyZAR(amount) {
+        const formatter = new Intl.NumberFormat('en-ZA', {
+            style: 'currency',
+            currency: 'ZAR',
         });
-        /*
-        if (files.length > 0) {
-            console.log('Files selected:');
-            for (var i = 0; i < files.length; i++) {
-              console.log(files[i].name); // Log file name
-            }
-          }
-            */
-    });
-    });
+        return formatter.format(amount);
+    }

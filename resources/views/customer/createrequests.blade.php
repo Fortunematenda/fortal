@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-customernav>
 <link rel="stylesheet" href="{{asset('build/assets/css/create.css')}}">
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_Qd54wgjWo4t-Klmi3m_pz8HbHz0GQto&libraries=places" type="text/javascript"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css"/>
@@ -260,7 +260,7 @@ label {
 
     </div>
 
-  <div style="overflow:auto;">
+  <div style="overflow:auto; margin-top:23px">
     <div style="float:right;">
       <button type="button" class="uk-button uk-button-default" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
       <button type="button" class="uk-button uk-button-primary" id="nextBtn" onclick="nextPrev(1)">Next</button>
@@ -380,7 +380,7 @@ const phoneInputField = document.querySelector("#contact_number");
             utilsScript: "{{asset('build/assets/js/utils.js')}}", // for formatting and validation
             initialCountry: "auto", // detect the user's country
             geoIpLookup: function(callback) {
-                fetch('https://ipinfo.io?token=YOUR_API_KEY') // replace 'YOUR_API_KEY' with a free key from ipinfo.io
+                fetch('') 
                     .then((response) => response.json())
                     .then((data) => callback(data.country))
                     .catch(() => callback("za")); // default to 'us' if geolocation fails
@@ -404,6 +404,6 @@ const phoneInputField = document.querySelector("#contact_number");
     }
    
     </script>
-</x-app-layout>
+</x-customernav>
 <script src="{{asset('build/assets/js/intlTelInput.min.js')}}"></script>
 <script src="{{asset('build/assets/js/utils.js')}}"></script>
