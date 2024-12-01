@@ -809,7 +809,6 @@ public function details($arr=[])
 public function notes($lead_id,$arr=[])
 {
      $details = "";
-
     foreach($arr as $note)
     {
         $first_name = $note["first_name"];
