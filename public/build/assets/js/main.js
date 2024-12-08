@@ -432,26 +432,32 @@ let hiring_decision = formData.find(item => item.name === "hiring_decision")?.va
         let is_company_sales_team = 0;
         let password=null;
         let is_company_social_media=0;
-        var files = $('#files').prop('files');
-        console.log(formData);
+        //var files = $('#files').prop('files');
         const obj = {
             service_id, location, longitude, latitude, formData, _token, first_name, last_name, email, contact_number, company_name,
             is_company_website, company_size, is_company_sales_team, password, is_company_social_media, brief_description, estimate_quote,
             urgent, hiring_decision
         };
-        console.log(obj);
-        console.log(files);
+        const formDataArr = new FormData();
+        const files = document.getElementById('files').files; // File input element
+    
+        // Append files to FormData
         if (files.length > 0) {
-            var formDataArr = new FormData();
             console.log('Files selected:');
-            for (var i = 0; i < files.length; i++) {
+            for (let i = 0; i < files.length; i++) {
                 formDataArr.append('files[]', files[i]);
-              console.log(files[i].name); // Log file name
             }
-          }
+        }
+        formDataArr.append('_token', document.querySelector('meta[name="csrf-token"]').content);
+/*
           for (let key in obj) {
             formDataArr.append(key, obj[key]);
         }
+            */
+        for (let [key, value] of formDataArr.entries()) {
+            console.log(`${key}: ${value instanceof File ? value.name : value}`);
+        }
+
         $.ajax({
             url: '/register',
             type: 'POST',

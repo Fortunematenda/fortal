@@ -250,7 +250,7 @@ label {
     <br/>
     <h2 align="center" class="uk-modal-title">New lead description</h2>
 
-        <form id="regForm" method="POST" action="/action_page.php">
+        <form id="regForm" method="POST" action="/action_page.php" enctype="multipart/form-data">
  
   <!-- One "tab" for each step in the form: -->
     <div style="justify-content:'center'; items-align:'center'; display:none" id="loader">
