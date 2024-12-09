@@ -8,6 +8,7 @@ use App\Models\ServicePossibleAnswerModel;
 use App\Models\LeadsModel;
 use App\Models\ServicesModel;
 use App\Models\LeadsServiceModel;
+use App\Models\ImagesModel;
 use Exception;
 use DateTime;
 class CustomerController extends Controller
@@ -118,10 +119,14 @@ class CustomerController extends Controller
     }
     public function addLeadService($arr,$lead_id,$entered_by)
     {
+        $arr = json_decode($arr, true);
+     
         $filteredData = array_filter($arr, function($item) {
             return str_starts_with($item['name'], 'x_');
         });
+        
         $arry = [];
+        
         foreach($filteredData as $row)
         {
             $question_id = (int)substr($row["name"], 2);
@@ -132,6 +137,7 @@ class CustomerController extends Controller
         }
         $questions = json_encode($arry,true);
         LeadsServiceModel::create(["lead_id"=>$lead_id, "service_details"=>$questions, "entered_by"=>$entered_by]);
+        
     }
     public function createLead($user_id, $service_id, $entered_by, $description, $estimate_quote, $urgent, $hiring_decision,$longitude,$latitude,$location)
     {
@@ -164,5 +170,16 @@ class CustomerController extends Controller
         
     }
 
+public function insertImages($image_name, $category, $entered_by, $user_id, $lead_id)
+{
+    $image = ImagesModel::create([
+        "image_name"=>$image_name, "category"=>$category, "entered_by"=>$entered_by, "user_id"=>$user_id, "lead_id"=>$lead_id
+    ]);
+    return  $image;
+}
 
+public function expertReplies(Request $request)
+{
+   return view("customer.expertreplies");
+}
 }

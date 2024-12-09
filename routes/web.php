@@ -7,6 +7,7 @@ use App\Http\Controllers\CreditController;
 use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\HelpController;
 
 // Home route
 Route::get('/', function () {
@@ -77,6 +78,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/customer/profile/', [CustomerController::class, 'expertProfile'])->name('expertprofile');
     Route::get('/customer/expertview/', [CustomerController::class, 'expertView'])->name('expertview');
     Route::get('/customer/settings/', [CustomerController::class, 'customerSettings'])->name('customersettings');
+    Route::get('/customer/expertreplies/', [CustomerController::class, 'expertReplies'])->name('expertreplies');
 });
 
 // Load authentication routes

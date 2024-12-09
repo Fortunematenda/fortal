@@ -9,14 +9,12 @@ use App\Models\ContactedLeadsModel;
 use App\Models\UserServicesModel;
 use App\Models\LeadsModel;
 use App\Models\LeadsServiceModel;
-use App\Models\ServiceQuestionModel;
-use App\Models\ServicePossibleAnswerModel;
 use App\Models\CreditsTrailModel;
 use App\Http\Controllers\ProfileController; 
 use App\Http\Controllers\TemplatesController; 
 use Illuminate\Support\Facades\DB;
 use App\Models\ServicePossibleAnswer;
-use App\Models\ServiceQuestion;
+use App\Models\ImagesModel;
 use App\Models\LeadsTrailModel;
 use App\Models\TrailsModel;
 use App\Models\LeadsNotesModel;
@@ -87,8 +85,9 @@ public function getLeadDetails(Request $request)
         ['lead_id' => $lead_id, 'user_id' => $user->id],
         ['entered_by' => $user->id]
     );
+    $lead_images = $this->getImages($lead_id);
    
-$details = $templates->showLeadsDetails($lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$masked_email,$masked_contact_number,$lead_details);
+$details = $templates->showLeadsDetails($lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$masked_email,$masked_contact_number,$lead_details,$lead_images);
 
     return response($details);
 }
@@ -122,8 +121,9 @@ public function getResponseDetails(Request $request)
     $leads_trail = $this->getLeadsTrail($lead_id,$user->id);
     $leads_notes = $this->getLeadsNotes($lead_id,$user->id);
     $lead_details = $this->getLeadServiceDetails($lead_id);
+    $lead_images = $this->getImages($lead_id);
    
-$details = $templates->showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status,$leads_trail,$leads_notes,$lead_details);
+$details = $templates->showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status,$leads_trail,$leads_notes,$lead_details,$lead_images);
 
     return response($details);
 }
@@ -209,6 +209,10 @@ private function arrLeads($leads = array())
     private function userResponse($lead_id)
     {
         return ContactedLeadsModel::where('lead_id',$lead_id)->count();
+    }
+    private function getImages($lead_id)
+    {
+        return ImagesModel::where('lead_id',$lead_id)->get();
     }
     private function frequentUser($user_id)
     {

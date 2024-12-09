@@ -425,21 +425,24 @@ $(document).ready(function() {
         let brief_description = formData.find(item => item.name === "brief_description").value ?? "";
         let estimate_quote = formData.find(item => item.name === "estimate_quote").value ?? 0;
         let urgent = formData.find(item => item.name === "urgent")?.value ?? 0;
-let hiring_decision = formData.find(item => item.name === "hiring_decision")?.value ?? 0;
+        let hiring_decision = formData.find(item => item.name === "hiring_decision")?.value ?? 0;
         let company_name = "";
         let is_company_website = 0;
         let company_size = 0;
         let is_company_sales_team = 0;
         let password=null;
+        let password_confirmation = null;
         let is_company_social_media=0;
         //var files = $('#files').prop('files');
         const obj = {
             service_id, location, longitude, latitude, formData, _token, first_name, last_name, email, contact_number, company_name,
-            is_company_website, company_size, is_company_sales_team, password, is_company_social_media, brief_description, estimate_quote,
+            is_company_website, company_size, is_company_sales_team, password, password_confirmation, is_company_social_media, brief_description, estimate_quote,
             urgent, hiring_decision
         };
         const formDataArr = new FormData();
         const files = document.getElementById('files').files; // File input element
+        console.log(obj);
+       
     
         // Append files to FormData
         if (files.length > 0) {
@@ -449,27 +452,30 @@ let hiring_decision = formData.find(item => item.name === "hiring_decision")?.va
             }
         }
         formDataArr.append('_token', document.querySelector('meta[name="csrf-token"]').content);
-/*
-          for (let key in obj) {
-            formDataArr.append(key, obj[key]);
-        }
-            */
-        for (let [key, value] of formDataArr.entries()) {
-            console.log(`${key}: ${value instanceof File ? value.name : value}`);
-        }
 
+          for (let key in obj) {
+            if (typeof obj[key] === 'object') {
+                formDataArr.append(key, JSON.stringify(obj[key])); // Convert objects/arrays to JSON
+            } else {
+                formDataArr.append(key, obj[key]); // Append primitive values directly
+            }
+        }           
+       
         $.ajax({
             url: '/register',
             type: 'POST',
             data: formDataArr,
+            processData: false, // Prevent jQuery from converting FormData into a query string
+            contentType: false,
             beforeSend: function() {
             },
             success: function(data) {
+
                if (data.redirect_url) {
                 $("#prevBtn").hide();
                $("#nextBtn").hide();
                $("#subm").hide();
-                //window.location.href = data.redirect_url;
+                window.location.href = data.redirect_url;
             }
                
             }, 

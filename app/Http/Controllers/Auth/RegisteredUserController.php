@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Rules;
 use App\Notifications\SendOtpNotification;
 use Illuminate\View\View;
@@ -24,15 +24,27 @@ class RegisteredUserController extends Controller
             $role = isset($request->formData)?"Customer":"Expert";
             
             // Validating the incoming request
-            
+           if(isset($request->formData))
+           {
             $request->validate([
                 'first_name' => ['required', 'string', 'max:255'],
                 'last_name' => ['required', 'string', 'max:255'],
                 'contact_number' => ['required', 'string', 'max:15'],
                 'location' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255'],
-                'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
             ]);
+           }
+           else{
+            $request->validate([
+                'first_name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
+                'contact_number' => ['required', 'string', 'max:15'],
+                'location' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255'],
+                'password' => ['nullable', 'confirmed', Password::defaults()],
+            ]);
+           }
+          
 
             // Creating the user
             $user = User::firstOrCreate(
@@ -52,31 +64,37 @@ class RegisteredUserController extends Controller
                     'entered_by' => $request->email,
                 ]
             );
-
+ 
             // Assigning the service
             if(isset($request->formData))
             {
+                
                 $data = $request->formData;
                 $service_id = (int)$request->service_id;
                 $description = $request->brief_description;
                 $estimate_quote = (double)$request->estimate_quote;
                 $urgent = (int)$request->urgent;
+                
                 $hiring_decision = (int)$request->hiring_decision;
                 $longitude = $request->longitude;
                 $latitude = $request->latitude;
                 $location = $request->location;
+                
                 $customer = new CustomerController();
                 $lead = $customer->createLead($user->id, $service_id, $user->id, $description, $estimate_quote, $urgent, $hiring_decision,$longitude,$latitude,$location);
+              
                 $customer->addLeadService($data,$lead->id,$user->id);
-        
+         
                 $uploadedFiles = [];
                 if ($request->hasFile('files')) {
                     foreach ($request->file('files') as $file) {
-                        $path = $file->store('uploads', 'public'); // Save in the 'public/uploads' directory
+                        $path = $file->store('uploads', 'public'); 
                         $uploadedFiles[] = $path;
+                        $image_name = basename($path);
+                        $customer->insertImages($image_name, "Lead", $user->id, $user->id, $lead->id);
                     }
                 }
-        
+       
                 // Save form data to the database (example)
                 $data = $request->except('files');
             }
@@ -102,10 +120,11 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
         Auth::login($user);
-        return response()->json([
+          return response()->json([
             "message" => "Success",
             "redirect_url" => route('customer.dashboard')
-        ], 200);
+        ], 200);       
+       
         
         } catch (\Exception $e) {
             return response()->json(["message" => "Error: " . $e->getMessage()], 500);
