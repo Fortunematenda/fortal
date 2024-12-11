@@ -74,7 +74,7 @@
                                         </div>
                                     </div>
                                     <div class="tw-mt-3 tw-mb-2 tw-text-center">
-                                        <a href="/customer/expertview/" data-testid="btn-viewquote" class="projectlist_item_linkButton__p+KBq tw-no-underline tw-drop-shadow-md tw-rounded tw-p-2 tw-text-white">
+                                        <a href="/customer/expertreplies/" data-testid="btn-viewquote" class="projectlist_item_linkButton__p+KBq tw-no-underline tw-drop-shadow-md tw-rounded tw-p-2 tw-text-white">
                                             View professionals
                                         </a>
                                     </div>
