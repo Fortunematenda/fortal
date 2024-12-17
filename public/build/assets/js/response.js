@@ -69,8 +69,11 @@ $(document).on('click','#add_note',function() {
    let description=$('#note_description').val();
    const obj = {_token,lead_id,description};
    getJSONResponse("addleadnote",obj).then((data) => {
+   console.log(data);
     toast("success",data.message,5000);
-    $('#ininfo').html(data.message);
+    $('#ininfo').append('<div class="details flex-column flex-grow-1 ml-2 mb-4 p-3 border text-sm"><div class="details-top d-flex justify-content-between text-sm text-grey-400">'+
+        '<div class="details-top-left flex-grow-1"> <div class="item-actor-name">Me</div></div><div class="details-top-right">'+
+        '<div class="item-date">'+data.date_entered+'</div></div></div><div class="details-center"><p class="item-message mb-0 mt-1">'+data.note["description"]+"</p></div></div>");
     $('#note_description').val("");
 }).catch((error) => {
     console.log('There is an error : '+error);  // Handle the error here

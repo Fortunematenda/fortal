@@ -3,7 +3,7 @@ $(document).on("keyup", "#serviceTxt", function() {
     let serviceTxt = $(this).val().trim();
     let _token = $('input[name="_token"]').val(); // CSRF token
     $("#inner-service").empty();
-
+    
     // Proceed with AJAX only if input has more than 2 characters
     if (serviceTxt.length > 2) {
         $.ajax({
@@ -14,6 +14,7 @@ $(document).on("keyup", "#serviceTxt", function() {
                 $("#search-service").show(); // Show loading or search div
             },
             success: function(data) {
+                console.log(data);
                 let services = data.services; // Simplified access to services array
                 $.each(services, function(index, service) {
                     let serviceName = service.service_name;

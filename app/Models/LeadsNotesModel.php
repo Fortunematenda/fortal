@@ -14,6 +14,7 @@ class LeadsNotesModel extends Model
 'lead_id', 
 'user_id', 
 'description',  
-'entered_by', 
+'entered_by',
+'comm_link'
     ];
 }

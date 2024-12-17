@@ -29,7 +29,7 @@
             <a class="text-grey-400 nav-link py-0" href="/customer/dashboard/">My Requests</a>
         </li> 
         <li class="requests nav-item px-2 py-3 py-sm-4 active" id="js-joyride-requests">
-            <a class="text-grey-400 nav-link py-0" href="/customer/expertview/">View Professionals</a>
+            <a class="text-grey-400 nav-link py-0" href="/customer/settings/">Account Settings</a>
         </li>
       
        

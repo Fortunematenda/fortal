@@ -8,6 +8,8 @@ use App\Models\ServicePossibleAnswerModel;
 use App\Models\LeadsModel;
 use App\Models\ServicesModel;
 use App\Models\LeadsServiceModel;
+use App\Models\LeadsNotesModel;
+use App\Models\ContactedLeadsModel;
 use App\Models\ImagesModel;
 use Exception;
 use DateTime;
@@ -178,8 +180,39 @@ public function insertImages($image_name, $category, $entered_by, $user_id, $lea
     return  $image;
 }
 
+public function getLeadsNotes($lead_id,$user_id)
+{
+    try{
+        $comm_link = "";
+    
+    $notes = LeadsNotesModel::join('users as u','lead_notes.user_id','=','u.id')
+    ->join('leads as l','lead_notes.lead_id','=','l.id')
+    ->select('u.first_name','lead_notes.description','lead_notes.date_entered','lead_notes.user_id', 'l.user_id as leads_user_id')        
+    ->where('lead_notes.comm_link',$comm_link)->get();
+    return $notes;
+}
+catch(Exception $e){
+    
+    return [];
+}
+}
+
 public function expertReplies(Request $request)
 {
-   return view("customer.expertreplies");
+    //$lead_id = (int)$request->lead_id;
+    $lead_id = 3;
+    $replyexperts = ContactedLeadsModel::where('lead_id', $lead_id)
+    ->join('leads', 'contacted_lead.lead_id', '=', 'leads.id')
+    ->join('users', 'contacted_lead.user_id', '=', 'users.id')
+    ->select('users.first_name', 'users.last_name', 'contacted_lead.user_id')
+    ->orderBy('contacted_lead.id')
+    ->get();
+
+    $user_id = $replyexperts[0]["user_id"];
+
+    $expertnotes = $this->getLeadsNotes($lead_id,$user_id);
+
+
+   return view("customer.expertreplies", compact(["replyexperts", "expertnotes"]));
 }
 }

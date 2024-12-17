@@ -1,26 +1,27 @@
 <x-customernav>
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Interface</title>
+    <title>Lea Replies</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            color: white;
         }
 
         .container {
             display: flex;
             height: 100vh;
+            width: 100%;
+            position: fixed
         }
 
         /* Left Navigation */
         .left-nav {
             width: 250px;
-            background-color: #2c3e50;
+            background-color: #ca6cc4;;
             color: white;
             padding: 20px;
             display: flex;
@@ -45,6 +46,7 @@
         .client-list {
             margin-top: 50px;
             flex-grow: 1;
+
         }
 
         .client-item {
@@ -69,14 +71,16 @@
             flex-direction: column;
             background-color: #ffffff;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            height: 100vh;
+            height: 85vh;
+            overflow-y: scroll;
         }
 
         .chat-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #3498db;
+            background-color: rgba(0, 0, 0, 0);
+            background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(128, 0, 128));
             padding: 15px;
             color: white;
             font-size: 20px;
@@ -89,6 +93,7 @@
         .chat-header .header-left {
             display: flex;
             align-items: center;
+            
         }
 
         .chat-header .header-left .avatar {
@@ -102,6 +107,7 @@
         .chat-header .header-left .header-name {
             font-weight: 600;
             font-size: 18px;
+            color: #1c1a1a;
         }
 
         .chat-header .header-right {
@@ -200,10 +206,11 @@
 
 .info-section p {
   margin: 5px 0;
+  color: black;
 }
 
 .info-section strong {
-  color: #555;
+  color: #000;
 }
 
         /* Chat Body */
@@ -211,7 +218,7 @@
             flex-grow: 1;
             padding: 10px;
             overflow-y: auto;
-            background-color: #e5ddd5;
+            background-color:#ffffff70;;
         }
 
         .chat-input {
@@ -227,10 +234,11 @@
             border-radius: 20px;
             border: 1px solid #ccc;
             font-size: 14px;
+            color: black;
         }
 
         .chat-input button {
-            background-color: #075e54;
+            background-color: #3498db;
             color: white;
             border: none;
             padding: 10px 15px;
@@ -261,11 +269,12 @@
             display: inline-block;
             padding: 8px 12px;
             border-radius: 10px;
-            background-color: #dcf8c6;
+            background-color: grey;
         }
 
         .message.user p {
-            background-color: #e1f3fe;
+            background-color: #ca6cc4;
+            color: white;
         }
 
         .timestamp {
@@ -280,6 +289,11 @@
             border-radius: 50%;
             margin-right: 10px;
         }
+        @media (min-width: 1536px) {
+  .container {
+    max-width: 100% !important;
+  }
+}
     </style>
 </head>
 <body>
@@ -288,17 +302,15 @@
 <div class="container">
     <!-- Left Navigation -->
     <div class="left-nav">
-        <span class="nav-toggle" onclick="toggleNav()">&#9776;</span> <!-- Toggle Icon -->
+      
         <div class="client-list">
-            <div class="client-item" onclick="selectClient('Sibusiso Dyakala')">
-                <span class="client-name">Sibusiso Dyakala</span>
-            </div>
-            <div class="client-item" onclick="selectClient('Candice Praat')">
-                <span class="client-name">Candice Praat</span>
-            </div>
-            <div class="client-item" onclick="selectClient('Brenda Gwari')">
-                <span class="client-name">Brenda Gwari</span>
-            </div>
+            @foreach($replyexperts as $expert)
+            <div class="client-item" onclick="selectClient('{{ $expert->first_name }} {{ $expert->last_name }}')">
+
+            <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Avatar" class="avatar" onclick="toggleProfileModal()"><span class="client-name">{{$expert->first_name}} {{$expert->last_name}}</span>
+            </div><hr>
+            @endforeach
+           
         </div>
     </div>
 
@@ -307,17 +319,30 @@
         <div class="chat-header" id="chat-header">
             <div class="header-left">
                 <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Avatar" class="avatar" onclick="toggleProfileModal()">
-                <span class="header-name" id="chat-title">Chatbot</span>
+                <span class="header-name" id="chat-title">{{$replyexperts[0]->first_name}} {{$replyexperts[0]->last_name}}</span>
             </div>
-            <div class="header-right">
-                <span class="header-icon" id="search-icon">&#128269;</span> <!-- Search icon -->
-                <span class="header-icon">&#128241;</span> <!-- More options icon -->
-            </div>
+           
         </div>
 
         <!-- Chat Body -->
         <div class="chat-body" id="chat-body">
-            <!-- Chat messages will appear here -->
+            <!-- Chat messages will appear here --> 
+              
+            @foreach($expertnotes as $note)
+
+            @if($note->user_id == $note->leads_user_id)
+            <div class="message user"><img class="avatar" src="https://www.w3schools.com/w3images/avatar2.png"><div>
+                <p>{{$note->description}}</p><span class="timestamp"> {{$note->date_entered}}</span></div>
+            </div>
+            @else
+            <div class="message bot"><img class="avatar" src="https://www.w3schools.com/w3images/avatar5.png"><div>
+                <p>{{$note->description}}</p>
+                <span class="timestamp"> {{$note->date_entered}}</span>
+            </div></div>
+            @endif
+      
+
+            @endforeach
         </div>
 
         <!-- Input Area -->
@@ -466,7 +491,4 @@
         modal.style.display = 'none';
     }
 </script>
-
-</body>
-</html>
 </x-customernav>

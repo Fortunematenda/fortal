@@ -75,7 +75,7 @@
                                     </div>
                                     <div class="tw-mt-3 tw-mb-2 tw-text-center">
                                         <a href="/customer/expertreplies/" data-testid="btn-viewquote" class="projectlist_item_linkButton__p+KBq tw-no-underline tw-drop-shadow-md tw-rounded tw-p-2 tw-text-white">
-                                            View professionals
+                                            View Experts
                                         </a>
                                     </div>
                                     <div class="actionsWrapper tw-pb-3 tw-mt-4 tw-items-center tw-text-center tw-text-sm">
@@ -167,24 +167,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group js-init-new-bark-category-container">
-                            <label for="initiate-new-bark-category">
-                                What service do you need?
-                            </label>
-                            <input type="text" id="initiate-new-bark-category" placeholder="e.g. Personal Trainers, House Cleaning" autocomplete="off" class="form-control">
-                        </div>
-                        <div class="form-group js-init-new-bark-location-container">
-                            <label for="initiate-new-bark-location">
-                                Where do you need it?
-                            </label>
-                            <input type="text" id="initiate-new-bark-location" placeholder="Enter your postal code or town" autocomplete="off" class="form-control">
-                        </div>
+                        
                     </div>
-                    <div class="modal-footer px-4 justify-content-center pt-0">
-                        <span class="btn btn-primary px-5 py-2 js-init-new-bark-begin">
-                            Continue
-                        </span>
-                    </div>
+                  
                 </div>
             </div>
         </div>

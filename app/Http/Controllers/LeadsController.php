@@ -13,7 +13,7 @@ use App\Models\CreditsTrailModel;
 use App\Http\Controllers\ProfileController; 
 use App\Http\Controllers\TemplatesController; 
 use Illuminate\Support\Facades\DB;
-use App\Models\ServicePossibleAnswer;
+use App\Models\ServicePossibleAnswerModel;
 use App\Models\ImagesModel;
 use App\Models\LeadsTrailModel;
 use App\Models\TrailsModel;
@@ -268,7 +268,7 @@ private function arrLeads($leads = array())
         ]);
 
         // Fetch possible answers based on the provided question_id
-        $answers = ServicePossibleAnswer::where('service_question_id', $request->question_id)->get();
+        $answers = ServicePossibleAnswerModel::where('service_question_id', $request->question_id)->get();
 
         // Return the possible answers as a JSON response
         return response()->json($answers);
@@ -439,10 +439,12 @@ private function arrLeads($leads = array())
             $user = $request->user();
             $user_id = $user->id;
             $lead_id = (int)$request->lead_id;
+            $lead = LeadsModel::where('id',$lead_id)->first();
             $description = $request->description;
+            $comm_link = $lead->user_id."_".$user_id;
         
-        $note = LeadsNotesModel::create(["lead_id"=>$lead_id,"description"=>$description,"entered_by"=>$user_id,"user_id"=>$user_id]);
-        return response()->json(["message"=>"Note Successfully added","note"=>$note],200);
+        $note = LeadsNotesModel::create(["lead_id"=>$lead_id,"description"=>$description,"entered_by"=>$user_id,"user_id"=>$user_id,"comm_link"=>$comm_link]);        
+        return response()->json(["message"=>"Note Successfully added","note"=>$note, "date_entered" => date("Y-m-d H:i:s")],200);
     }
     catch(Exception $e){
         return response()->json(["message"=>"There is an error : ".$e->getMessage()],500);

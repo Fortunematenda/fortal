@@ -19,7 +19,8 @@ Route::get('/', function () {
 Route::get('/dashboard', [ProfileController::class, 'openDashboard'])->middleware(['auth:sanctum', 'verified'])->name('dashboard');
 
 Route::get('/customer/createrequests', [CustomerController::class, 'createRequest'])->name('createrequests');
-
+Route::post('/getservices', [LeadsController::class, 'getServices'])->name('getservices');
+Route::post('/getservicesquestions', [CustomerController::class, 'getServicesQuestions'])->name('getservicesquestions');
 // Group routes for authenticated users
 Route::middleware('auth')->group(function () {
     // Profile Routes
@@ -41,12 +42,10 @@ Route::middleware('auth')->group(function () {
 // Group routes for guest users
 Route::middleware('guest:sanctum')->group(function () {
     Route::get('/profession/create', [ProfileController::class, 'createProfession'])->name('createprofession');
-    Route::get('/profession/create-account/{id}', [ProfileController::class, 'createAccountProfession'])->name('createaccountprofession');
-    Route::post('/getservices', [LeadsController::class, 'getServices'])->name('getservices');
+    Route::get('/profession/create-account/{id}', [ProfileController::class, 'createAccountProfession'])->name('createaccountprofession');    
     Route::post('/registeruser', [RegisteredUserController::class, 'store'])->name('registeruser');    
     Route::get('/customer/create', [CustomerController::class, 'createCustomer'])->name('create.customer');
-    Route::get('/customer/requests', [CustomerController::class, 'showRequests'])->name('customer.requests');
-            Route::post('/getservicesquestions', [CustomerController::class, 'getServicesQuestions'])->name('getservicesquestions');
+    Route::get('/customer/requests', [CustomerController::class, 'showRequests'])->name('customer.requests');            
     Route::post('/customer/createlead', [CustomerController::class, 'createLead'])->name('createlead');
 });
 
