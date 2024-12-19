@@ -33,6 +33,8 @@
                     <div class="pb-4">
                         <div class="top-row_root__3JOm6">
                             <h1>Your requests</h1>
+                            
+
                             <button class="Button_base__iY8s5 Button_lg__GH03D Button_minWidth__2dpSx Button_textBlue__796NH Button_bgLightBlue__0RMHv __btnPlaceRequest tw-border-0">
                                 <span class="button-main">
                                     <span class="child-container Button_childContainer__ytwFQ">
@@ -40,6 +42,7 @@
                                     </span>
                                 </span>
                             </button>
+                            
                         </div>
                     </div>
 
@@ -74,9 +77,13 @@
                                         </div>
                                     </div>
                                     <div class="tw-mt-3 tw-mb-2 tw-text-center">
-                                        <a href="/customer/expertreplies/" data-testid="btn-viewquote" class="projectlist_item_linkButton__p+KBq tw-no-underline tw-drop-shadow-md tw-rounded tw-p-2 tw-text-white">
+                                    <form method="POST" action="{{ route('expertreplies') }}">
+                                    @csrf
+                                    <input value="{{$lead["lead_id"]}}" name="kmm" hidden/>
+                                        <button type="submit" data-testid="btn-viewquote" class="projectlist_item_linkButton__p+KBq tw-no-underline tw-drop-shadow-md tw-rounded tw-p-2 tw-text-white">
                                             View Experts
-                                        </a>
+                                        </button>
+                                        </form>
                                     </div>
                                     <div class="actionsWrapper tw-pb-3 tw-mt-4 tw-items-center tw-text-center tw-text-sm">
                                         <a data-cy="btn_close_request" class="projectlist_item_link__eqrNt tw-pr-2">

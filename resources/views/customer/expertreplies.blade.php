@@ -297,6 +297,9 @@
     </style>
 </head>
 <body>
+<form>
+@csrf
+</form>
 
 <!-- Container for Left Navbar and Chat -->
 <div class="container">
@@ -305,7 +308,7 @@
       
         <div class="client-list">
             @foreach($replyexperts as $expert)
-            <div class="client-item" onclick="selectClient('{{ $expert->first_name }} {{ $expert->last_name }}')">
+            <div class="client-item dexpert" contacted_user_id="{{$expert->user_id}}" onclick="selectClient('{{ $expert->first_name }} {{ $expert->last_name }}')">
 
             <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Avatar" class="avatar" onclick="toggleProfileModal()"><span class="client-name">{{$expert->first_name}} {{$expert->last_name}}</span>
             </div><hr>
@@ -313,8 +316,7 @@
            
         </div>
     </div>
-
-    <!-- Chat Container -->
+        <!-- Chat Container -->
     <div class="chat-container">
         <div class="chat-header" id="chat-header">
             <div class="header-left">
@@ -327,7 +329,7 @@
         <!-- Chat Body -->
         <div class="chat-body" id="chat-body">
             <!-- Chat messages will appear here --> 
-              
+          
             @foreach($expertnotes as $note)
 
             @if($note->user_id == $note->leads_user_id)
@@ -350,6 +352,8 @@
             <input type="text" id="user-input" placeholder="Type a message..." />
             <button id="send-button">Send</button>
         </div>
+        <input value="{{$lead_id}}" id="xkk" hidden/>
+        <input value="{{$user_id}}" id="uuus"/>
     </div>
 </div>
 
@@ -392,6 +396,7 @@
 </div>
 
 <script>
+    
     let currentClient = '';
     let chatHistory = {}; // Store chat history for each client
 
@@ -412,12 +417,7 @@
         }
     }
 
-    document.getElementById('send-button').addEventListener('click', sendMessage);
-    document.getElementById('user-input').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            sendMessage();
-        }
-    });
+ 
 
     function sendMessage() {
         let userInput = document.getElementById('user-input').value.trim();
@@ -430,12 +430,7 @@
         // Store the chat history
         storeChatHistory();
 
-        // Simulate bot response after a delay
-        setTimeout(() => {
-            let botResponse = generateBotResponse(userInput);
-            addMessage(botResponse, 'bot');
-            storeChatHistory(); // Store updated chat history
-        }, 1000);
+        
     }
 
     function addMessage(message, sender) {
@@ -471,16 +466,6 @@
         chatHistory[currentClient] = chatBody; // Store the chat history for the current client
     }
 
-    function generateBotResponse(userInput) {
-        const responses = {
-            "hello": "Hi there! How can I assist you today?",
-            "how are you?": "I'm doing great, thanks for asking! How about you?",
-            "bye": "Goodbye! Have a nice day!",
-        };
-
-        return responses[userInput.toLowerCase()] || "Sorry, I didn't understand that.";
-    }
-
     function toggleProfileModal() {
         const modal = document.getElementById('profile-modal');
         modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
@@ -492,3 +477,83 @@
     }
 </script>
 </x-customernav>
+
+<script>
+    $(document).on('click','.dexpert',function(){
+        let lead_id = $("#xkk").val();
+        let contacted_user_id = $(this).attr("contacted_user_id"); 
+        let _token = $('input[name="_token"]').val(); 
+        const obj = {
+            lead_id,
+            contacted_user_id,
+            _token
+        };
+        $("#uuus").val(contacted_user_id);
+        $.ajax({
+            url: '/getleadnotes',
+            type: 'POST',
+            data: obj, // Send data in one object
+            beforeSend: function() {
+                $("#chat-body").empty();
+            },
+            success: function(data) {
+                const json = data["expertnotes"];
+                let txt = "";
+                for(let key in json)
+            {
+                if(json[key]["user_id"] == json[key]["leads_user_id"])
+            {
+            txt += '<div class="message user"><img class="avatar" src="https://www.w3schools.com/w3images/avatar2.png"><div>';
+            txt += '<p>'+json[key]["description"]+'</p><span class="timestamp"> '+json[key]["date_entered"]+'</span></div></div>';
+            
+            }
+            else
+            {
+                txt += '<div class="message bot"><img class="avatar" src="https://www.w3schools.com/w3images/avatar2.png"><div>';
+            txt += '<p>'+json[key]["description"]+'</p><span class="timestamp"> '+json[key]["date_entered"]+'</span></div></div>';
+            }  
+
+            }
+            $("#chat-body").html(txt);                             
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', status, error); // Improved error logging
+            },
+            complete: function() {
+                $("#loader").hide();
+            }
+        });
+
+    })
+    $(document).on("click", "#send-button", function() {
+        let lead_id = $("#xkk").val();
+        let contacted_user_id = $("#uuus").val();
+        let _token = $('input[name="_token"]').val(); 
+        let description = $("#user-input").val();
+        const obj = {
+            lead_id,
+            contacted_user_id,
+            description,
+            _token
+        };
+   
+        $.ajax({
+            url: '/addleadnote',
+            type: 'POST',
+            data: obj, // Send data in one object
+            beforeSend: function() {
+            },
+            success: function(data) {
+                sendMessage();
+              
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', status, error); // Improved error logging
+            },
+            complete: function() {
+                $("#loader").hide();
+            }
+        });    
+});
+
+</script>

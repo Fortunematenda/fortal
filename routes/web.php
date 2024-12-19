@@ -77,7 +77,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/customer/profile/', [CustomerController::class, 'expertProfile'])->name('expertprofile');
     Route::get('/customer/expertview/', [CustomerController::class, 'expertView'])->name('expertview');
     Route::get('/customer/settings/', [CustomerController::class, 'customerSettings'])->name('customersettings');
-    Route::get('/customer/expertreplies/', [CustomerController::class, 'expertReplies'])->name('expertreplies');
+    Route::post('/customer/expertreplies/', [CustomerController::class, 'expertReplies'])->name('expertreplies');
+    Route::post('/getleadnotes', [LeadsController::class, 'getLeadNotes'])->name('getleadnotes');
 });
 
 // Load authentication routes

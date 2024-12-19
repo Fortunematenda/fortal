@@ -22,7 +22,7 @@ class CustomerController extends Controller
         $user_id = $user->id;
         $leads = LeadsModel::join('master_services as m', 'leads.service_id', '=', 'm.id')
     ->where('leads.user_id', $user_id)
-    ->get(['leads.*', 'm.*','leads.date_entered']);
+    ->get(['leads.*', 'm.*','leads.date_entered','leads.id as lead_id']);
 
         $user_leads = array();
         foreach($leads as $lead)
@@ -180,15 +180,18 @@ public function insertImages($image_name, $category, $entered_by, $user_id, $lea
     return  $image;
 }
 
-public function getLeadsNotes($lead_id,$user_id)
+public function getLeadsNotes($lead_id,$contact_user_id)
 {
     try{
-        $comm_link = "";
+        $lead = LeadsModel::where('id',$lead_id)->first();
+        $comm_link = $lead->user_id."_".$contact_user_id;
+        //echo $comm_link;
     
     $notes = LeadsNotesModel::join('users as u','lead_notes.user_id','=','u.id')
     ->join('leads as l','lead_notes.lead_id','=','l.id')
     ->select('u.first_name','lead_notes.description','lead_notes.date_entered','lead_notes.user_id', 'l.user_id as leads_user_id')        
-    ->where('lead_notes.comm_link',$comm_link)->get();
+    ->where('lead_notes.comm_link',$comm_link)
+    ->where('lead_notes.lead_id',$lead_id)->get();
     return $notes;
 }
 catch(Exception $e){
@@ -199,8 +202,7 @@ catch(Exception $e){
 
 public function expertReplies(Request $request)
 {
-    //$lead_id = (int)$request->lead_id;
-    $lead_id = 3;
+    $lead_id = (int)$request->kmm;
     $replyexperts = ContactedLeadsModel::where('lead_id', $lead_id)
     ->join('leads', 'contacted_lead.lead_id', '=', 'leads.id')
     ->join('users', 'contacted_lead.user_id', '=', 'users.id')
@@ -213,6 +215,24 @@ public function expertReplies(Request $request)
     $expertnotes = $this->getLeadsNotes($lead_id,$user_id);
 
 
-   return view("customer.expertreplies", compact(["replyexperts", "expertnotes"]));
+   return view("customer.expertreplies", compact(["replyexperts", "expertnotes","user_id","lead_id"]));
 }
+
+public function postNote(Request $request)
+{
+    try{ 
+        $user_id = (int)$request->user_id;
+        $lead_id = (int)$request->lead_id;
+        $lead = LeadsModel::where('id',$lead_id)->first();
+        $description = $request->description;
+        $comm_link = $lead->user_id."_".$user_id;
+    
+    $note = LeadsNotesModel::create(["lead_id"=>$lead_id,"description"=>$description,"entered_by"=>$user_id,"user_id"=>$user_id,"comm_link"=>$comm_link]);        
+    return response()->json(["message"=>"Note Successfully added","note"=>$note, "date_entered" => date("Y-m-d H:i:s")],200);
+}
+catch(Exception $e){
+    return response()->json(["message"=>"There is an error : ".$e->getMessage()],500);
+}
+}
+
 }

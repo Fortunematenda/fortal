@@ -260,7 +260,6 @@ $(document).on("click", "#start_lead", function() {
         const obj = {
             _token,service_id
         };
-        console.log(obj);
         $.ajax({
             url: '/getservicesquestions',
             type: 'POST',

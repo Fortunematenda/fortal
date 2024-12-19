@@ -405,20 +405,26 @@ private function arrLeads($leads = array())
     }
     }
 
-    public function getLeadsNotes($lead_id,$user_id)
-    {
-        try{
-        
-        $notes = LeadsNotesModel::join('users as u','lead_notes.user_id','=','u.id')
-        ->select('u.first_name','lead_notes.description','lead_notes.date_entered')        
-        ->where('lead_id',$lead_id)->where('user_id',$user_id)->get();
-        return $notes;
-    }
-    catch(Exception $e){
-        
-        return [];
-    }
-    }
+    public function getLeadsNotes($lead_id,$contact_user_id)
+{
+    try{
+        $lead = LeadsModel::where('id',$lead_id)->first();
+        $comm_link = $lead->user_id."_".$contact_user_id;
+    
+    $notes = LeadsNotesModel::join('users as u','lead_notes.user_id','=','u.id')
+    ->join('leads as l','lead_notes.lead_id','=','l.id')
+    ->select('u.first_name','lead_notes.description','lead_notes.date_entered','lead_notes.user_id', 'l.user_id as leads_user_id')        
+    ->where('lead_notes.comm_link',$comm_link)
+    ->where('lead_notes.lead_id',$lead_id)->get();
+    return $notes;
+}
+catch(Exception $e){
+    
+    return [];
+}
+}
+
+   
 
     public function getLeadServiceDetails($lead_id)
     {
@@ -436,12 +442,26 @@ private function arrLeads($leads = array())
     public function postNote(Request $request)
     {
         try{ 
-            $user = $request->user();
-            $user_id = $user->id;
             $lead_id = (int)$request->lead_id;
             $lead = LeadsModel::where('id',$lead_id)->first();
             $description = $request->description;
-            $comm_link = $lead->user_id."_".$user_id;
+            $user = $request->user();            
+            $user_id = $user->id;
+            $first_id = 0;
+            $second_id = 0;
+            if(isset($request->contacted_user_id)){
+                $first_id =  $user_id;    
+                $second_id = (int)$request->contacted_user_id;           
+            }
+            else
+            {
+                $first_id =  $lead->user_id;
+                $second_id = $user_id; 
+            }
+           
+            $comm_link = $first_id."_".$second_id;
+
+           // return ["lead_id"=>$lead_id,"description"=>$description,"entered_by"=>$user_id,"user_id"=>$user_id,"comm_link"=>$comm_link];
         
         $note = LeadsNotesModel::create(["lead_id"=>$lead_id,"description"=>$description,"entered_by"=>$user_id,"user_id"=>$user_id,"comm_link"=>$comm_link]);        
         return response()->json(["message"=>"Note Successfully added","note"=>$note, "date_entered" => date("Y-m-d H:i:s")],200);
@@ -462,6 +482,21 @@ private function arrLeads($leads = array())
             $lead->save();
         
          return response()->json(["message"=>"Lead updated successfully","lead"=>$lead],200);
+    }
+    catch(Exception $e){
+        return response()->json(["message"=>"There is an error : ".$e->getMessage()],500);
+    }
+    }
+
+    public function getLeadNotes(Request $request)
+    {
+        try{ 
+            $user = $request->user();           
+            $lead_id = (int)$request->lead_id;
+            $contacted_user_id = (int)$request->contacted_user_id;
+            $expertnotes = $this->getLeadsNotes($lead_id,$contacted_user_id);
+        
+         return response()->json(["message"=>"Notes Received","expertnotes"=>$expertnotes],200);
     }
     catch(Exception $e){
         return response()->json(["message"=>"There is an error : ".$e->getMessage()],500);
