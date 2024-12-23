@@ -209,10 +209,15 @@ public function expertReplies(Request $request)
     ->select('users.first_name', 'users.last_name', 'contacted_lead.user_id')
     ->orderBy('contacted_lead.id')
     ->get();
+    $user_id = 0;
+    $expertnotes = [];
+    if($replyexperts)
+    {
 
     $user_id = $replyexperts[0]["user_id"];
 
     $expertnotes = $this->getLeadsNotes($lead_id,$user_id);
+    }
 
 
    return view("customer.expertreplies", compact(["replyexperts", "expertnotes","user_id","lead_id"]));

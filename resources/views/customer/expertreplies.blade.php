@@ -304,6 +304,7 @@
 <!-- Container for Left Navbar and Chat -->
 <div class="container">
     <!-- Left Navigation -->
+     @if(count($replyexperts)>0)
     <div class="left-nav">
       
         <div class="client-list">
@@ -355,6 +356,9 @@
         <input value="{{$lead_id}}" id="xkk" hidden/>
         <input value="{{$user_id}}" id="uuus"/>
     </div>
+    @else
+    <h3 align="center">No Experts</h3>
+    @endif
 </div>
 
 <div class="profile-modal" id="profile-modal">
