@@ -5,7 +5,7 @@ $(document).on("keyup", "#serviceTxt", function() {
     $("#inner-service").empty();
     
     // Proceed with AJAX only if input has more than 2 characters
-    if (serviceTxt.length > 2) {
+    if (serviceTxt.length > 0) {
         $.ajax({
             url: '/getservices',
             type: 'POST',
@@ -288,6 +288,8 @@ $(document).on("click", "#start_lead", function() {
 
 function steps(arr)
 {
+    let isLogged = $("#isLogged").val();
+
     let txt ="";
 for(key in arr)
 {
@@ -313,17 +315,27 @@ let ext = "<div class='tab'><p><label>Description:</label><textarea class='texta
     ext += "<p><label><b><input type='checkbox' id='urgent' name='urgent' value='1'> Is it urgent?</b></label></p>";
     ext += "<p><label><b><input type='checkbox' id='hiring_decision' name='hiring_decision' value='1'> Hiring Decision Made?</b></label></p><hr/></div>";
 
-ext += "<div class='tab'><p><label>First Name:</label><input type='text' id='first_name' name='first_name' placeholder='Enter your first name' REQUIRED></p>";
+ext += "<div class='tab'>";
+if(isLogged !== "Logged")
+{
+ext += "<div><p><label>First Name:</label><input type='text' id='first_name' name='first_name' placeholder='Enter your first name' REQUIRED></p>";
 ext += "<p><label>Last Name:</label><input type='text' id='last_name' name='last_name' placeholder='Enter your last name' REQUIRED></p>";
 ext += "<p><label>Phone Number:</label><input type='tel' id='contact_number' name='contact_number' placeholder='Enter your phone number' REQUIRED></p>";
 ext += "<p><label>Email:</label><input type='email' id='email' name='email' placeholder='Enter your email' REQUIRED></p></div>";
+}
+else{
+ext += "<div><h3 class='hsd' align='center'>You can now submit this lead!!</h3></div>";
+}
+ext += "</div>";
 
 txt += ext;
 $("#insteps").html(txt);
 
 initializeDragAndDrop();
-
+if(isLogged !== "Logged")
+    {
 numC();
+    }
 }
 
 function bullets(num)
@@ -408,7 +420,8 @@ function nextPrev(n) {
   }
 $(document).ready(function() {
     $('#regForm').on('submit', function(event) {
-        event.preventDefault(); 
+        event.preventDefault();
+        let isLogged = $("#isLogged").val(); 
         let _token = $('input[name="_token"]').val();
         let service_id = $("#serviceID").val();
         let location = $("#searchLocation").val();
@@ -418,10 +431,17 @@ $(document).ready(function() {
         
         let formData = $(this).serializeArray();        
         formData = [...formData, ...headerObj];
-        let first_name = formData.find(item => item.name === "first_name").value ?? "";
-        let last_name = formData.find(item => item.name === "last_name").value ?? "";
-        let email = formData.find(item => item.name === "email").value ?? "";
-        let contact_number = formData.find(item => item.name === "contact_number").value ?? "";
+        let first_name = "";
+        let last_name = "";
+        let email = "";
+        let contact_number = "";
+        if(isLogged !== "Logged")
+        {
+        first_name = formData.find(item => item.name === "first_name").value ?? "";
+        last_name = formData.find(item => item.name === "last_name").value ?? "";
+        email = formData.find(item => item.name === "email").value ?? "";
+        contact_number = formData.find(item => item.name === "contact_number").value ?? "";
+        }
         let brief_description = formData.find(item => item.name === "brief_description").value ?? "";
         let estimate_quote = formData.find(item => item.name === "estimate_quote").value ?? 0;
         let urgent = formData.find(item => item.name === "urgent")?.value ?? 0;
@@ -468,9 +488,10 @@ $(document).ready(function() {
             processData: false, // Prevent jQuery from converting FormData into a query string
             contentType: false,
             beforeSend: function() {
+                $("#loader").show();
             },
             success: function(data) {
-
+                console.log(data);
                if (data.redirect_url) {
                 $("#prevBtn").hide();
                $("#nextBtn").hide();
@@ -483,6 +504,7 @@ $(document).ready(function() {
                 console.error('Error:', status, error);
             },
             complete: function() {
+                $("#loader").hide();
             }
         });      
        

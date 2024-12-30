@@ -110,6 +110,7 @@ button:hover {
   background-color: #bbbbbb;
 }
 
+
 /* Make circles that indicate the steps of the form: */
 .step {
   height: 15px;
@@ -177,6 +178,8 @@ label {
     margin-top: 5px;
     display: block;
 }
+
+
 
 </style>
  <!-- Two-Column Section with Get Started and Image -->
@@ -248,16 +251,17 @@ label {
     <button class="uk-modal-close-default" type="button" uk-close></button>
 
     <br/>
-    <h2 align="center" class="uk-modal-title">New lead description</h2>
+    <h2 align="center" class="uk-modal-title">New lead</h2>
 
         <form id="regForm" method="POST" action="/action_page.php" enctype="multipart/form-data">
  
   <!-- One "tab" for each step in the form: -->
-    <div style="justify-content:'center'; items-align:'center'; display:none" id="loader">
-        <h3 align="center"><img src="{{asset('build/assets/img/loader.gif')}}"/></h3>
-    </div>
+  
     <div id="insteps">
 
+    </div>
+    <div style="text-align: center;margin-left: auto; margin-right: auto; width: 50%; display:none" id="loader">
+        <img src="{{asset('build/assets/img/loader.svg')}}"/>
     </div>
 
   <div style="overflow:auto; margin-top:23px">
@@ -279,7 +283,7 @@ label {
     </div>
 </div> 
 
-
+<input id="isLogged" value = "{{ auth()->check() ? 'Logged' : 'Guest' }}" hidden/>
 
     <script>
  function initialize() {
