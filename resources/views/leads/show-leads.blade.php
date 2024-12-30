@@ -105,7 +105,7 @@
                                                 </div>
                                             </div>
                                             <div class="tw-flex tw-items-end tw-pl-1 tw-flex-row"><a
-                                                    href="/profile/"
+                                                    href="/settings/"
                                                     class="Button_base__5Wcwx Button_sm__RWLp1 Button_smWithIcon__y3vYd Button_minWidth__WGVzH Button_textWhite__9w5Wn Button_bgDarkBlue__9V6YV !tw-no-underline tw-drop-shadow-[unset] !tw-px-2 !tw-min-h-[unset] tw-text-sm !tw-text-white"
                                                     data-cy="dashboard-filters-edit"
                                                     data-cham="dashboard-filters-edit"><span

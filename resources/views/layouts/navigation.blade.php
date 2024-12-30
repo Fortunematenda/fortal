@@ -34,7 +34,7 @@
             <a class="text-grey-400 nav-link py-0" href="/responses"">My Responses</a>
         </li>
         <li class="settings nav-item px-2 py-3 py-sm-4" id="js-joyride-settings">
-            <a class="text-grey-400 nav-link py-0" href="/profile">Settings</a>
+            <a class="text-grey-400 nav-link py-0" href="/settings">Settings</a>
         </li>
         <li class="help nav-item px-2 py-3 py-sm-4" id="js-joyride-help">
             <a class="text-grey-400 nav-link py-0" href="/help">Help</a>
@@ -208,7 +208,7 @@
                     <a class="nav-link" href="/responses">My Responses</a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a class="nav-link" href="/profile">Settings</a>
+                    <a class="nav-link" href="/settings">Settings</a>
                 </li>
                 <li class="nav-item mb-2">
                     <a class="nav-link" href="/help">Help</a>
