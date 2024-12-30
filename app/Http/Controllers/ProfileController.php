@@ -58,6 +58,7 @@ class ProfileController extends Controller
          $services = ServicesModel::pluck('service_name')->toArray();
          $latest_services = $this->getUserServices($user->id);
          $transactions = $this->getCreditHistory($user->id);
+         
      
          return view('profile.edit', [
              'user' => $user,

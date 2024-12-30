@@ -4,7 +4,7 @@
 <div class="container my-5">
     <div class="section-header p-4 rounded shadow-sm bg-light">
         <div class="">
-            <a class="text-secondary" href="/profile">
+            <a class="text-secondary" href="/settings">
                 <span class="bark-svg-icon bsi-primary-grey-400 align-self-center bsi-sm">
                     <!-- SVG icon code -->
                 </span>

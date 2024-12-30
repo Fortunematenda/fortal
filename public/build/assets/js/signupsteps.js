@@ -17,7 +17,8 @@ function validateEmail(email) {
     return emailPattern.test(email);
 }
 function validateContactNumber(contact_number) {
-    let phonePattern = /^\+?[1-9]\d{1,14}$/;
+    // Regex pattern to match numbers starting with + and exactly 12 digits
+    let phonePattern = /^\+\d{11}$/;
     return phonePattern.test(contact_number);
 }
 

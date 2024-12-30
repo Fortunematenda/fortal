@@ -24,10 +24,10 @@ Route::post('/getservicesquestions', [CustomerController::class, 'getServicesQue
 // Group routes for authenticated users
 Route::middleware('auth')->group(function () {
     // Profile Routes
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('/profile', [ProfileController::class, 'notifications'])->name('profile.notifications');
+    Route::get('/settings', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/settings', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/settings', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/settings', [ProfileController::class, 'notifications'])->name('profile.notifications');
   
     // Credit Routes
     Route::post('/buy-credits', [CreditController::class, 'buyCredits']);
@@ -74,7 +74,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/notifications/update', [ProfileController::class, 'updateNotifications'])->name('notifications.update');
     Route::post('/notifications/update', [ProfileController::class, 'subscribedNotifications'])->name('notifications.subscribed');
     Route::get('/customer/dashboard', [CustomerController::class, 'customerdashboard'])->name('customer.dashboard');
-    Route::get('/customer/profile/', [CustomerController::class, 'expertProfile'])->name('expertprofile');
+    Route::get('/customer/settings/', [CustomerController::class, 'expertProfile'])->name('expertprofile');
     Route::get('/customer/expertview/', [CustomerController::class, 'expertView'])->name('expertview');
     Route::get('/customer/settings/', [CustomerController::class, 'customerSettings'])->name('customersettings');
     Route::post('/customer/expertreplies/', [CustomerController::class, 'expertReplies'])->name('expertreplies');
