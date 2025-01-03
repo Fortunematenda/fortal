@@ -502,5 +502,30 @@ catch(Exception $e){
         return response()->json(["message"=>"There is an error : ".$e->getMessage()],500);
     }
     }
+
+    public function updateEstimate(Request $request)
+    {
+        try{ 
+            $user = $request->user();   
+            $contacted_user_id = $user->id;        
+            $lead_id = (int)$request->lead_id; 
+            $estimate_amount = (double)$request->estimate_amount;
+            $estimate_type = $request->estimate_type;
+            $estimate_message = $request->respond_textarea_field;         
+            $contacted_lead = ContactedLeadsModel::where("user_id", $contacted_user_id)
+            ->where("lead_id", $lead_id)
+            ->update([
+                "estimate_amount" => $estimate_amount,
+                "estimate_type" => $estimate_type,
+                "estimate_message" => $estimate_message,
+            ]);
+        
+        
+         return response()->json(["message"=>"Lead Updated","contacted_lead"=>$contacted_lead],200);
+    }
+    catch(Exception $e){
+        return response()->json(["message"=>"There is an error : ".$e->getMessage()],500);
+    }
+    }
     
 }

@@ -1,6 +1,6 @@
 <x-customernav>
 <link rel="stylesheet" href="{{asset('build/assets/css/create.css')}}">
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_Qd54wgjWo4t-Klmi3m_pz8HbHz0GQto&libraries=places" type="text/javascript"></script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css"/>
 <style>
    
@@ -286,29 +286,31 @@ label {
 <input id="isLogged" value = "{{ auth()->check() ? 'Logged' : 'Guest' }}" hidden/>
 
     <script>
- function initialize() {
-        var input = document.getElementById('searchLocation');
-        var autocomplete = new google.maps.places.Autocomplete(input);
-        google.maps.event.addListener(autocomplete, 'place_changed', function () {
-            var place = autocomplete.getPlace();
-            
-            document.getElementById('latitude').value = place.geometry.location.lat();
-            document.getElementById('longitude').value = place.geometry.location.lng();
-            
+ function initializeAutocomplete() {
+    const input = document.getElementById("searchLocation");
 
-        });
-    }
-    google.maps.event.addDomListener(window, 'load', initialize); 
+    const options = {
+        types: ["geocode"],
+        componentRestrictions: { country: ["ZA", "ZW"] }, // Restrict to specific countries
+    };
 
-        function initAutocomplete() {
-            const input = document.getElementById("searchLocation");
-            const options = {
-                types: ["geocode"],
-                componentRestrictions: { country: ["ZA", "ZW"] }
-            };
-            new google.maps.places.Autocomplete(input, options);
+    const autocomplete = new google.maps.places.Autocomplete(input, options);
+
+    autocomplete.addListener("place_changed", function () {
+        const place = autocomplete.getPlace();
+
+        if (!place.geometry) {
+            console.error("No geometry available for this place.");
+            return;
         }
-        google.maps.event.addDomListener(window, "load", initAutocomplete);
+
+        // Update the latitude and longitude fields
+        document.getElementById("latitude").value = place.geometry.location.lat();
+        document.getElementById("longitude").value = place.geometry.location.lng();
+    });
+}
+
+
 
 
         var currentTab = 0;
@@ -411,3 +413,4 @@ const phoneInputField = document.querySelector("#contact_number");
 </x-customernav>
 <script src="{{asset('build/assets/js/intlTelInput.min.js')}}"></script>
 <script src="{{asset('build/assets/js/utils.js')}}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_Qd54wgjWo4t-Klmi3m_pz8HbHz0GQto&libraries=places&callback=initializeAutocomplete" type="text/javascript"></script>

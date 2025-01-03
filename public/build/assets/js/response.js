@@ -37,6 +37,21 @@ $(document).on('click','.trail',function() {
     });         
 });
 
+$(document).on('click','#send_estimate',function() {    
+    let _token = $('input[name="_token"]').val();    
+    let lead_id = $(this).attr("lead_id");
+    let estimate_amount = $("#estimate_amount").val();
+    let estimate_type = $("#estimate_type").val();
+    let respond_textarea_field = $("#respond_textarea_field").val();
+
+    const obj = {_token,lead_id, estimate_amount, estimate_type, respond_textarea_field};
+    getJSONResponse("updateestimate",obj).then((data) => {
+        console.log(data);
+    }).catch((error) => {
+        console.error('Failed to update lead:', error);  // Handle the error here
+    });         
+});
+
 
 $(document).on('click','.my_urgent',function() {
     $("#myleads").empty();

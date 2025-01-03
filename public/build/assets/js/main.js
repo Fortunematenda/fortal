@@ -435,12 +435,14 @@ $(document).ready(function() {
         let last_name = "";
         let email = "";
         let contact_number = "";
+        let url = "/registerlogged";
         if(isLogged !== "Logged")
         {
         first_name = formData.find(item => item.name === "first_name").value ?? "";
         last_name = formData.find(item => item.name === "last_name").value ?? "";
         email = formData.find(item => item.name === "email").value ?? "";
         contact_number = formData.find(item => item.name === "contact_number").value ?? "";
+        url = "/register";
         }
         let brief_description = formData.find(item => item.name === "brief_description").value ?? "";
         let estimate_quote = formData.find(item => item.name === "estimate_quote").value ?? 0;
@@ -482,7 +484,7 @@ $(document).ready(function() {
         }           
        
         $.ajax({
-            url: '/register',
+            url: url,
             type: 'POST',
             data: formDataArr,
             processData: false, // Prevent jQuery from converting FormData into a query string

@@ -131,6 +131,66 @@ class RegisteredUserController extends Controller
         }
     }
 
+    public function registerLogged(Request $request)
+    { 
+        try {
+           
+            // Validating the incoming request
+            $user = $request->user();               
+
+ 
+            // Assigning the service
+            if(isset($request->formData))
+            {
+                
+                $data = $request->formData;
+                $service_id = (int)$request->service_id;
+                $description = $request->brief_description;
+                $estimate_quote = (double)$request->estimate_quote;
+                $urgent = (int)$request->urgent;
+                
+                $hiring_decision = (int)$request->hiring_decision;
+                $longitude = $request->longitude;
+                $latitude = $request->latitude;
+                $location = $request->location;
+                
+                $customer = new CustomerController();
+                $lead = $customer->createLead($user->id, $service_id, $user->id, $description, $estimate_quote, $urgent, $hiring_decision,$longitude,$latitude,$location);
+              
+                $customer->addLeadService($data,$lead->id,$user->id);
+         
+                $uploadedFiles = [];
+                if ($request->hasFile('files')) {
+                    foreach ($request->file('files') as $file) {
+                        $path = $file->store('uploads', 'public'); 
+                        $uploadedFiles[] = $path;
+                        $image_name = basename($path);
+                        $customer->insertImages($image_name, "Lead", $user->id, $user->id, $lead->id);
+                    }
+                }
+       
+                // Save form data to the database (example)
+                $data = $request->except('files');
+            }
+            else{
+                UserServicesModel::create([
+                    'user_id' => $user->id,
+                    'service_id' => (int)$request->service_id,
+                    'entered_by' => $user->id,
+                ]);
+            }
+
+          return response()->json([
+            "message" => "Success",
+            "redirect_url" => route('customer.dashboard')
+        ], 200);       
+       
+        
+        } catch (\Exception $e) {
+            return response()->json(["message" => "Error: " . $e->getMessage()], 500);
+        }
+    }
+
     public function showOtpForm()
 {
     return view('auth.otp'); // Display the OTP form

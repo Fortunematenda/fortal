@@ -55,6 +55,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/seller/dashboard', [LeadsController::class, 'showLeads'])->name('show-leads');
     Route::get('/responses', [LeadsController::class, 'showResponses'])->name('show-responses');
     Route::get('/help', [LeadsController::class, 'showHelp'])->name('help');
+    Route::post('/registerlogged', [RegisteredUserController::class, 'registerLogged'])->name('registerlogged');  
     
     // Profile and Lead Updates 
     Route::post('/update_services', [ProfileController::class, 'updateServices'])->name('update_services');
@@ -79,6 +80,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/customer/settings/', [CustomerController::class, 'customerSettings'])->name('customersettings');
     Route::post('/customer/expertreplies/', [CustomerController::class, 'expertReplies'])->name('expertreplies');
     Route::post('/getleadnotes', [LeadsController::class, 'getLeadNotes'])->name('getleadnotes');
+    Route::post('/updateestimate', [LeadsController::class, 'updateEstimate'])->name('updateestimate');
 });
 
 // Load authentication routes

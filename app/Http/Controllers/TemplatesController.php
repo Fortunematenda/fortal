@@ -449,7 +449,7 @@ $details .= "<div id='modal-whatsapp' class='uk-flex-top' uk-modal><div class='u
                                     <div class='input-group-prepend'>
                                         <span class='input-group-text pr-1 text-grey-400 border-white text-xl' id='estimate-currency-symbol'>R</span>
                                     </div>
-                                    <input type='number' class='form-text-field estimate-amount form-control pl-1 text-md' id='estimate-amount' placeholder='0'>
+                                    <input type='number' class='form-text-field estimate-amount form-control pl-1 text-md' id='estimate_amount' placeholder='0'>
                                     <div class='input-group-append'>
                                         <div class='bar py-2'>
                                             <span class='bg-grey-200 d-block h-100' style='width: 2px;'></span>
@@ -459,9 +459,8 @@ $details .= "<div id='modal-whatsapp' class='uk-flex-top' uk-modal><div class='u
                             </div>
                             <div class='estimate-value-select'>
                                 <label for='estimate-type' class='sr-only m-0'>Estimate</label>
-                                <select class='form-select-field estimate-type custom-select custom-select-wider text-md prevent-ios-zoom pt-2' id='estimate-type'>
-                                    <option value=''>select one</option>
-                                    <option value='onceoff'>one off fee</option>
+                                <select class='form-select-field estimate-type custom-select custom-select-wider text-md prevent-ios-zoom pt-2' id='estimate_type'>
+                                    <option value='one off fee'>one off fee</option>
                                     <option value='hour'>/ hour</option>
                                     <option value='visit'>/ visit</option>
                                     <option value='session'>/ session</option>
@@ -477,10 +476,10 @@ $details .= "<div id='modal-whatsapp' class='uk-flex-top' uk-modal><div class='u
                             <label for='respond-textarea-field' class='text-xs-14 text-grey-600'>
                                 Any additional details?
                             </label>
-                            <textarea class='form-textarea-field respond-textarea-field form-control form-control-md text-xs-14 prevent-ios-zoom' id='respond-textarea-field' placeholder='Message' rows='3'></textarea>
+                            <textarea class='form-textarea-field respond-textarea-field form-control form-control-md text-xs-14 prevent-ios-zoom' id='respond_textarea_field' placeholder='Message' rows='3'></textarea>
                         </div>
                     </div>
-   <hr/><br><p class='uk-text-right'><button class='uk-button uk-button-default uk-modal-close' type='button'>Cancel</button><button class='uk-button uk-button-primary' type='button'>Send Estimate</button></p></div></div>";
+   <hr/><br><p class='uk-text-right'><button class='uk-button uk-button-default uk-modal-close' type='button'>Cancel</button><button class='uk-button uk-button-primary' type='button' id='send_estimate' lead_id='$lead_id'>Send Estimate</button></p></div></div>";
 
 return $details;
   }
