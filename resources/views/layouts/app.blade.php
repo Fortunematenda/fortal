@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="{{asset('build/assets/css/Marin-Icons.css')}}">
     <link rel="stylesheet" href="{{asset('build/assets/css/demo.css')}}">
     <!--<link rel="stylesheet" href="{{asset('build/assets/css/bootstrap.min.css')}}">-->
-    <link rel="stylesheet" href="{{asset('build/assets/css/kaiadmin.min.css')}}">
+  
     <link rel="stylesheet" href="{{asset('build/assets/css/plugins.min.css')}}">
 
     <!-- Favicon -->

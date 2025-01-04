@@ -1,5 +1,5 @@
 <x-app-layout>
-
+<link rel="stylesheet" href="{{asset('build/assets/css/kaiadmin.min.css')}}">
     <!-- Fonts and icons -->
    <script>
       WebFont.load({
@@ -222,7 +222,7 @@
                                         Edit
                                     </a>
                     </div>
-                    <h2 class="mb-2">You'll receive leads in these categories</h2>
+                    <p class="mb-2">You'll receive leads in these categories</p>
                  
                     <div class="flex-wrap category-list  ">
                                         @foreach($latest_services_limited as $service)

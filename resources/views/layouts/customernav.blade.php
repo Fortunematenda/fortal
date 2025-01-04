@@ -24,6 +24,7 @@
     <link onerror="window?.fallbackOnError?.call(this, 'seller_dashboard');" rel="stylesheet" href="{{asset('build/assets/css/main.6dd4d89d0b4fea95.css')}}">
     <link rel="stylesheet" href="{{asset('build/assets/css/main_v2-built.645e5822f3.v2.css')}}">
     <link rel="stylesheet" href="{{asset('build/assets/css/Marin-Icons.css')}}">
+    
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="https://d1w7gvu0kpf6fl.cloudfront.net/images/favicon/20190628/apple-touch-icon.png">
