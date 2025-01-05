@@ -58,6 +58,7 @@
         .nav-link{
 font-size: 16px !important;
         }
+        
 </style></head>
   <body>
     
@@ -73,7 +74,7 @@ font-size: 16px !important;
                 <a href="#" class="btn btn-primary btn-round"><b>Balance:{{$credits_balance}} Credits</b></a>
               </div>
             </div>
-            <div class="row">
+            <div class="row flex-row h-auto">
               <div class="col-sm-6 col-md-3">
                 <div class="card card-stats card-round">
                   <div class="card-body">
@@ -135,44 +136,143 @@ font-size: 16px !important;
                     </div>
                   </div>
                 </div>
-              </div>
-             
-            </div>
-            <div class="row">
-              <div class="col-md-8">
-                <div class="card card-round">
-                  <div class="card-header">
-                    <div class="card-head-row">
-                      <div class="card-title">User Statistics</div>
-                      <div class="card-tools">
-                        <a href="#" class="btn btn-label-success btn-round btn-sm me-2">
-                          <span class="btn-label">
-                            <i class="fa fa-pencil"></i>
-                          </span>
-                          Export
-                        </a>
-                        <a href="#" class="btn btn-label-info btn-round btn-sm">
-                          <span class="btn-label">
-                            <i class="fa fa-print"></i>
-                          </span>
-                          Print
-                        </a>
+              </div> 
+              
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col-icon">
+                        <div class="icon-big text-center icon-success bubble-shadow-small">
+                          <i class="bi bi-envelope-check-fill"></i>
+                        </div>
+                      </div>
+                      
+                      <div class="col col-stats ms-3 ms-sm-0">
+                        <div class="numbers">
+                          <p class="card-category">Unread Leads</p>
+                          <h4 class="card-title">{{$unread_leads}}</h4>
+                          <a href="/seller/dashboard/" class="pr-4 text-grey-200 hover-dark noline text-sm text-capitalize">View</a>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class="card-body">
-                    <div class="chart-container" style="min-height: 375px"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                      <canvas id="statisticsChart" width="1007" height="375" style="display: block; width: 1007px; height: 375px;" class="chartjs-render-monitor"></canvas>
-                    </div>
-                    <div id="myChartLegend"><ul class="0-legend html-legend"><li><span style="background-color:#f3545d"></span>Leads</li><li><span style="background-color:#fdaf4b"></span>Responses</li><li><span style="background-color:#177dff"></span>Active Users</li></ul></div>
-                  </div>
                 </div>
               </div>
+             
+            </div>
+            <div class="row flex-row h-auto">
               <div class="col-md-4">
-                <div class="card card-primary card-round">
+                <div class="card card-primary card-round col sellerdash-col h-auto d-flex flex-column justify-content-between ">
                   <div class="card-header">
                     <div class="card-head-row">
-                      <div class="card-title">Daily Sales</div>
+                      <div class="card-title">Profile Review
+                      <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <p class=" mb-0">Your profile is 97% complete</p>
+            <a href="/settings/" class="text-grey-200 text-xs hover-dark noline">Edit</a>
+        </div>
+                        <div class="dropdown">
+                          <button class="btn btn-sm btn-label-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Export
+                          </button>
+                          
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href=#">Something else here</a>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="card-category">Enhancing your profile is an excellent way to attract more customers.</div>
+                  </div>
+                  
+                  <div class="card-body pb-0">
+                    <div class="mb-4 mt-2">
+                      <h2>97%</h2>
+                      <div class="progress" style="height:8px">
+                <div class="progress-bar" role="progressbar" style="width: 97%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+                    </div>
+                    <div class="pull-in"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                      <canvas id="dailySalesChart" width="506" height="150" style="display: block; width: 506px; height: 150px;" class="chartjs-render-monitor"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="card card-round">
+                <div class="card-body pb-0">
+                    <div class="card-title fw-bold float-end text-primary">Account Settings
+                    <a href="/settings" class="text-grey-200 noline hover-dark ">
+                                      
+                                    </a>
+                    </div>
+                    <hr>
+                    <p class="mb-2">Standard</p>
+                 
+                    <div class="flex-wrap category-list  ">
+                                      
+                                        <div class="card-title ">
+                                        <i class="icon-big text-center icon-info bubble-shadow-small bi bi-person"></i>
+                                         </div>
+                                        <a href="/settings">
+                            Upgrade to Pro
+                          </a>
+                          <style>
+    .icon-wrapper {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+    }
+  </style>
+     <div class="text">Online 
+  <div data-ui-test="bullet-list-unordered-icon" class="icon-wrapper">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 20 20" width="10" height="10" preserveAspectRatio="xMidYMid meet" style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px); content-visibility: visible;">
+      <defs>
+        <clipPath id="__lottie_element_2">
+          <rect width="20" height="20" x="0" y="0"></rect>
+        </clipPath>
+      </defs>
+      <g clip-path="url(#__lottie_element_2)">
+        <g transform="matrix(1,0,0,1,10,10)" opacity="0.3316" style="display: block;">
+          <g opacity="1" transform="matrix(1,0,0,1,0,0)">
+            <path fill="rgb(32,191,111)" fill-opacity="1" d="M0,-7.992 C4.411,-7.992 7.992,-4.411 7.992,0 C7.992,4.411 4.411,7.992 0,7.992 C-4.411,7.992 -7.992,4.411 -7.992,0 C-7.992,-4.411 -4.411,-7.992 0,-7.992z"></path>
+            <path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(5,17,86)" stroke-opacity="1" stroke-width="0" d="M0,-7.992 C4.411,-7.992 7.992,-4.411 7.992,0 C7.992,4.411 4.411,7.992 0,7.992 C-4.411,7.992 -7.992,4.411 -7.992,0 C-7.992,-4.411 -4.411,-7.992 0,-7.992z"></path>
+          </g>
+        </g>
+        <g transform="matrix(1,0,0,1,10,10)" opacity="0.2" style="display: block;">
+          <g opacity="1" transform="matrix(1,0,0,1,0,0)">
+            <path fill="rgb(32,191,111)" fill-opacity="1" d="M0,-10 C5.519,-10 10,-5.519 10,0 C10,5.519 5.519,10 0,10 C-5.519,10 -10,5.519 -10,0 C-10,-5.519 -5.519,-10 0,-10z"></path>
+            <path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(5,17,86)" stroke-opacity="1" stroke-width="0" d="M0,-10 C5.519,-10 10,-5.519 10,0 C10,5.519 5.519,10 0,10 C-5.519,10 -10,5.519 -10,0 C-10,-5.519 -5.519,-10 0,-10z"></path>
+          </g>
+        </g>
+        <g transform="matrix(1,0,0,1,10,10)" opacity="1" style="display: block;">
+          <g opacity="1" transform="matrix(1,0,0,1,0,0)">
+            <path fill="rgb(32,191,111)" fill-opacity="1" d="M0,-4 C2.208,-4 4,-2.208 4,0 C4,2.208 2.208,4 0,4 C-2.208,4 -4,2.208 -4,0 C-4,-2.208 -2.208,-4 0,-4z"></path>
+            <path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(5,17,86)" stroke-opacity="1" stroke-width="0" d="M0,-4 C2.208,-4 4,-2.208 4,0 C4,2.208 2.208,4 0,4 C-2.208,4 -4,2.208 -4,0 C-4,-2.208 -2.208,-4 0,-4z"></path>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </div></div>
+                          <div class="flex-wrap category-list  ">
+                                     
+                                     <div class="badge badge-pill border border-grey-100 text-grey-800 font-weight-normal text-xs p-2 mr-2 my-auto text-truncate mw-100">
+                                           
+                                         </div>
+                                      
+                                     </div>
+                                 </div>
+                             </div>
+             </div>
+                </div>
+                
+                <div class="col-md-4">
+                <div class="card card-primary card-round col sellerdash-col h-auto d-flex flex-column justify-content-between ">
+                  <div class="card-header">
+                    <div class="card-head-row">
+                      <div class="card-title">Lead settings</div>
                       <div class="card-tools">
                         <div class="dropdown">
                           <button class="btn btn-sm btn-label-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -186,29 +286,14 @@ font-size: 16px !important;
                         </div>
                       </div>
                     </div>
-                    <div class="card-category">March 25 - April 02</div>
+                    <hr>
+                    <div class="card-category h1  float-end">List my services</div>
                   </div>
                   <div class="card-body pb-0">
                     <div class="mb-4 mt-2">
-                      <h2>$4,578.58</h2>
-                    </div>
-                    <div class="pull-in"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                      <canvas id="dailySalesChart" width="506" height="150" style="display: block; width: 506px; height: 150px;" class="chartjs-render-monitor"></canvas>
-                    </div>
-                  </div>
-                </div>
-                <div class="card card-round">
-                  <div class="card-body pb-0">
-                    <div class="h1 fw-bold float-end text-primary">Services
-                    <a href="/settings" class="text-grey-200 noline hover-dark text-xs">
-                                        Edit
-                                    </a>
-                    </div>
-                    <p class="mb-2">You'll receive leads in these categories</p>
-                 
                     <div class="flex-wrap category-list  ">
                                         @foreach($latest_services_limited as $service)
-                                        <div class="text-muted badge badge-pill border border-grey-100 text-grey-800 font-weight-normal text-xs p-2 mr-2 my-auto text-truncate "><p>{{$service}} |</p></div>
+                                        <div class="badge   text-xs    "><p class="border border-grey-100 text-grey-800 font-weight-normal my-auto mr-2 p-2 badge-pill  text-truncate">{{$service}} </p></div>
                                         @endforeach
 
                                         @if($service_badge>0)
@@ -219,7 +304,105 @@ font-size: 16px !important;
                                             @endif
                                         </div>
                                     </div>
+                  
+                    <div class="pull-in"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                      <canvas id="dailySalesChart" width="506" height="150" style="display: block; width: 506px; height: 150px;" class="chartjs-render-monitor"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="card card-round">
+                  <div class="card-body pb-0">
+                    <div class="card-title fw-bold float-end text-primary">Location
+                    <a href="/settings" class="text-grey-200 noline hover-dark ">
+                                   
+                                    </a>
+                    </div>
+                    <hr>
+                    <p class="mb-2">You're attracting customers within</p>
+                 
+                    <div class="flex-wrap category-list  ">
+                                      
+                                        <div class="card-title ">
+                                        <i class="icon-big text-center icon-info bubble-shadow-small bi bi-geo-alt-fill"></i>
+                                          <p>{{$location}} </p></div>
+                                       
+                                        <div class="badge badge-pill border border-grey-100 text-grey-800 font-weight-normal text-xs p-2 mr-2 my-auto text-truncate mw-100">
+                                              
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
                                 </div>
+                </div>
+                
+                <div class="col-md-4">
+                <div class="card card-primary card-round col sellerdash-col h-auto d-flex flex-column justify-content-between ">
+                  <div class="card-header">
+                    <div class="card-head-row">
+                      <div class="card-title">Ongoing tasks</div>
+                      <div class="card-tools">
+                        <div class="dropdown">
+                          <button class="btn btn-sm btn-label-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Export
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href=#">Something else here</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="card-category">Current Tasks in Progress: <b>Building</b> </div>
+                    <div class="card-category">Task Location: <b>Plumstead</b></div>
+                    <div class="card-category">Task Description:<b> Builing a House</b></div>
+                    <div class="card-category">Expected Completion:<b> 11/02/2025</b></div>
+                  </div>
+                  <hr>
+                  <div class="card-body pb-0">
+                    <div class="mb-4 mt-2">
+                      <h2>Graph</h2>
+                    </div>
+                    <div class="pull-in"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                      <canvas id="dailySalesChart" width="506" height="150" style="display: block; width: 506px; height: 150px;" class="chartjs-render-monitor"></canvas>
+                    </div>
+                  </div>
+                </div>
+               
+                  <div class="card card-round">
+                  <div class="card-body pb-0">
+                    <div class="card-title fw-bold float-end text-primary">
+                    
+                                    Help
+                                   
+                                    <hr>
+                    </div>
+                    <div class="text-dark-blue text-xs ml-2">
+                                            <p class="text-left mb-3">
+                                            Explore our <a class="text-nowrap text-dark-blue hover-light" href="/help"><u>Help Centre</u></a> for guidance and expert tips.
+                                            </p>
+                                            <p class="text-left mb-2">
+                                                Email: <a class="text-dark-blue text-nowrap noline" href="mailto:support@fortai.com">fortai.com</a>
+                                            </p>
+                                            <p class="text-dark-blue mb-0">
+                                                Call <a class="text-nowrap text-dark-blue" href="tel:+27612685933">86 331 2093</a>
+                                            </p>
+                                            <p class=" text-grey-400   mb-2">
+                                                open Monday-Friday, 8:30am-5:30pm
+                                            </p>
+                                        </div>
+                    <div class="flex-wrap category-list  ">
+                                     
+                                        <div class="badge badge-pill border border-grey-100 text-grey-800 font-weight-normal text-xs p-2 mr-2 my-auto text-truncate mw-100">
+                                              
+                                            </div>
+                                         
+                                        </div>
+                                    </div>
+                                </div>
+                </div>
+                </div>
                 </div>
               </div>
             </div>
