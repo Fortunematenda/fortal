@@ -55,6 +55,9 @@
             font-family: 'NotoSans_semibold_online_security'; 
             src: url(chrome-extension://llbcnfanfmjhpedaedhbcnpgeepdnnok/assets/fonts/noto-sans-semibold.ttf);
         }
+        .nav-link{
+font-size: 16px !important;
+        }
 </style></head>
   <body>
     
@@ -133,28 +136,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6 col-md-3">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-icon">
-                        <div class="icon-big text-center icon-secondary bubble-shadow-small">
-                          <i class="far fa-check-circle"></i>
-                        </div>
-                      </div>
-                      
-                      <div class="col col-stats ms-3 ms-sm-0">
-                        <div class="numbers">
-                          <p class="card-category">Location</p>
-                          <p class="card-category">You're receiving customers within</p>
-                          <h4 class="card-title"> {{$location}}</h4>
-                          <a href="/seller/dashboard/" class="pr-4 text-grey-200 hover-dark noline text-sm text-capitalize">View</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+             
             </div>
             <div class="row">
               <div class="col-md-8">
