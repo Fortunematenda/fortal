@@ -360,10 +360,7 @@ $details .= "<div class='toolbar-container my-4 pt-1 text-md-sm w-100 w-md-auto'
             </div>";
                                      
             $details .= "
-            <div class='info-message info-fortai-closed alert py-3 px-4 mt-3 error-box error'>
-                <div class='title-wrapper'>
-                    No more professionals can respond, but you can still follow up
-                </div>
+           
             </div>
             <div class='pt-4 d-none' id='marketplace-cancel-booking-container'></div>
         
@@ -727,8 +724,7 @@ $details .= "<div class='d-flex flex-column project-details-col-project-details'
 $details .= $this->details($lead_details, $lead_images);
                     $details .= "<hr class='lead-settings-prompt-hr'>
                     <div class='lead-settings-prompt flex'>
-                        <div class='font-weight-medium mb-2'>Not seeing the right leads?</div>
-                        <div class='font-weight-regular mb-2'>Stop seeing leads with specific answers by customising your settings.</div>
+                    
 
                         <div class='update-link-container d-inline-flex align-items-center'>
                             <span class='fortai-svg-icon bsi-primary-primary bsi-sm mr-2'>
@@ -740,7 +736,7 @@ $details .= $this->details($lead_details, $lead_images);
                                     </g>
                                 </svg>
                             </span>
-                            <a href='/profile' class='js-lead-prefs-from-lead-link'>Update lead settings</a>";
+                            <a href='/settings' class='js-lead-prefs-from-lead-link'>Modify Lead Preferences</a>";
 $details .= "</div>"; // Closing the update-link-container div
 $details .= "</div>"; // Closing the lead-settings-prompt flex div
 $details .= "</div>"; // Closing the project-details pt-5 data-buyer-name div
