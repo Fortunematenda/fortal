@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use App\Models\ServicesModel;
 use App\Models\UserServicesModel;
@@ -203,34 +204,44 @@ class ProfileController extends Controller
     public function getLeads($user_id)
     {
         $results = LeadsModel::join('user_services as u', 'leads.service_id', '=', 'u.service_id')
-        ->join('master_services as m', 'u.service_id', '=', 'm.id')
-        ->join('users as s', 'leads.user_id', '=', 's.id')
-        ->select(
-            'm.service_name', 
-            'leads.user_id as lead_user_id', 
-            'u.user_id as user_service_user_id', 
-            'leads.service_id', 
-            's.first_name', 
-            's.last_name', 
-            'leads.date_entered', 
-            'leads.id', 
-            'leads.description', 
-            's.location',
-            's.is_phone_verified',
-            'leads.urgent',
-            'leads.credits',
-            'leads.hiring_decision'
-        )
-        ->where('u.user_id', $user_id)
-        ->where('leads.status','=','Open')
-        ->whereNotIn('leads.id', function ($query) use ($user_id) {
-            $query->select('lead_id')
-                  ->from('contacted_lead')
-                  ->where('user_id', $user_id);
-        })
-        ->orderBy('leads.id', 'desc') 
-        ->get();
-    
+    ->join('master_services as m', 'u.service_id', '=', 'm.id')
+    ->join('users as s', 'leads.user_id', '=', 's.id')
+    ->select(
+        'm.service_name', 
+        'leads.user_id as lead_user_id', 
+        'u.user_id as user_service_user_id', 
+        'leads.service_id', 
+        's.first_name', 
+        's.last_name', 
+        'leads.date_entered', 
+        'leads.id', 
+        'leads.description', 
+        'leads.location',
+        's.is_phone_verified',
+        'leads.urgent',
+        'leads.credits',
+        'leads.hiring_decision',
+        // Calculate the distance and include it in the result
+        DB::raw('(
+            6371 * acos(
+                cos(radians(s.latitude)) 
+                * cos(radians(leads.latitude)) 
+                * cos(radians(leads.longitude) - radians(s.longitude)) 
+                + sin(radians(s.latitude)) 
+                * sin(radians(leads.latitude))
+            )
+        ) AS distance')
+    )
+    ->where('u.user_id', $user_id)
+    ->where('leads.status', '=', 'Open')
+    ->whereNotIn('leads.id', function ($query) use ($user_id) {
+        $query->select('lead_id')
+              ->from('contacted_lead')
+              ->where('user_id', $user_id);
+    })
+    ->havingRaw('distance <= 20')  // Only include leads within 20km
+    ->orderBy('leads.id', 'desc')
+    ->get();
     return $results;
     
     }

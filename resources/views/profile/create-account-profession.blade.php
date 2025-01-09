@@ -44,14 +44,19 @@
                             
 
                             <div class="row myrow">
+                               
+                                <div class="col-6">                                 
+                                <input name="searchLocation" id="searchLocation" aria-label="autocomplete" type="text" class="Select_buttonClasses__rxXNq select-button" role="combobox" placeholder="Enter your location" data-cy="seller-signup-form-location" id="location">
+                                <input id="latitude" hidden></input>
+                                <input id="longitude" hidden></input>
+                                
+                                </div>
                                 <div class="col-6">
                                     <select class="Select_buttonClasses__rxXNq select-button" id="distance">
-                                        <option>100 miles</option>
+                                        <option value="50">50 Kilometers</option>
+                                        <option value="20">20 Kilometers</option>
+                                        <option value="10">10 Kilometers</option>
                                     </select>                              
-                                </div>
-                                <div class="col-6">                                 
-                                <input name="location" aria-label="autocomplete" type="text" class="Select_buttonClasses__rxXNq select-button" role="combobox" placeholder="Enter your postal code" data-cy="seller-signup-form-location" id="location">
-                                <ul id="suggestions" class="autocomplete-suggestions"></ul>
                                 </div>
                             </div>  
                         

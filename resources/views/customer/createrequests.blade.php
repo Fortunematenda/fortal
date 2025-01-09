@@ -203,7 +203,7 @@ label {
                 <ul id="inner-service" class="searched-list"></ul>
             </span>
             </div>
-            <input type="text" id="searchLocation" placeholder="Enter location in South Africa or Zimbabwe">
+            <input type="text" id="searchLocation" placeholder="Enter location in South Africa">
             <button type="button" id="start_lead">Search</button>
         </div>
         <input id="latitude" hidden></input>
