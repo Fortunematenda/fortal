@@ -184,7 +184,6 @@ suggestionsList = document.getElementById('suggestions');
         let latitude = $("#latitude").val();
         let longitude = $("#longitude").val();
         let distance = $("#distance").val();
-        let role = "Expert";
         let email = $("#email").val();
         let password = $("#password").val();
         let password_confirmation = $("#confirm_password").val();
@@ -205,7 +204,7 @@ suggestionsList = document.getElementById('suggestions');
                 }
        else{
         const obj = {
-            first_name,last_name,contact_number,location,latitude,longitude,distance,role,email,password,password_confirmation,company_name,is_company_website,company_size,is_company_sales_team,is_company_social_media,location_select,_token,service_id
+            first_name,last_name,contact_number,location,latitude,longitude,distance,email,password,password_confirmation,company_name,is_company_website,company_size,is_company_sales_team,is_company_social_media,location_select,_token,service_id
         }
   
             $.ajax({

@@ -46,8 +46,8 @@ class ProfileController extends Controller
         $login_at = date('l, j M g:ia', $timestamp);
         $latest_services = $this->getUserServices($user->id);
         $latest_services_limited = array_slice($latest_services, 0, 2);
-        $number_of_leads = count($this->getLeadsCount($user->id));
-        $contacted_lead = count($this->getLeadsCount($user->id));
+        $number_of_leads = count($this->getLeadsCount($user->id, $user->distance));
+        $contacted_lead = count($this->getLeadsCount($user->id, $user->distance));
         $service_badge = count($latest_services)-2;
         $unread_leads = count($this->getUnreadLeads($user->id));
         
@@ -71,6 +71,9 @@ class ProfileController extends Controller
              'contact_number' => $user->contact_number,
              'company_registration_number' => $user->company_registration_number,
              'location'=>$user->location,
+             'latitude'=>$user->latitude,
+             'longitude'=>$user->longitude,
+             'distance'=>$user->distance,
              'latest_services' => $latest_services,
              'profile_picture' =>$user->profile_picture,
              'logo' =>$user->logo,
@@ -97,6 +100,7 @@ class ProfileController extends Controller
     if ($user->isDirty('email')) {
         $user->email_verified_at = null; // Reset verification if email has changed
     }
+ 
 
     if ($user->isDirty()) {
         $user->profile_picture = $imageName;
@@ -185,23 +189,7 @@ class ProfileController extends Controller
         ->toArray();
         return $latest_services;
     }
-    public function getLeadsCount($user_id)
-    {
-        $results = LeadsModel::join('user_services as u', 'leads.service_id', '=', 'u.service_id')
-        ->join('master_services as m', 'u.service_id', '=', 'm.id')
-        ->join('users as s', 'leads.user_id', '=', 's.id')
-        ->select('leads.id')
-        ->where('u.user_id', $user_id)
-        ->where('leads.status','=','Open')
-        ->whereNotIn('leads.id', function ($query) use ($user_id) {
-            $query->select('lead_id')
-                  ->from('contacted_lead')
-                  ->where('user_id', $user_id);
-        })
-        ->get();
-        return $results;
-    }
-    public function getLeads($user_id)
+    public function getLeadsCount($user_id, $distance = 20)
     {
         $results = LeadsModel::join('user_services as u', 'leads.service_id', '=', 'u.service_id')
     ->join('master_services as m', 'u.service_id', '=', 'm.id')
@@ -239,7 +227,49 @@ class ProfileController extends Controller
               ->from('contacted_lead')
               ->where('user_id', $user_id);
     })
-    ->havingRaw('distance <= 20')  // Only include leads within 20km
+    ->havingRaw('distance <= '.$distance)  
+    ->get();
+    return $results;
+    }
+    public function getLeads($user_id, $distance = 20)
+    {
+        $results = LeadsModel::join('user_services as u', 'leads.service_id', '=', 'u.service_id')
+    ->join('master_services as m', 'u.service_id', '=', 'm.id')
+    ->join('users as s', 'leads.user_id', '=', 's.id')
+    ->select(
+        'm.service_name', 
+        'leads.user_id as lead_user_id', 
+        'u.user_id as user_service_user_id', 
+        'leads.service_id', 
+        's.first_name', 
+        's.last_name', 
+        'leads.date_entered', 
+        'leads.id', 
+        'leads.description', 
+        'leads.location',
+        's.is_phone_verified',
+        'leads.urgent',
+        'leads.credits',
+        'leads.hiring_decision',
+        // Calculate the distance and include it in the result
+        DB::raw('(
+            6371 * acos(
+                cos(radians(s.latitude)) 
+                * cos(radians(leads.latitude)) 
+                * cos(radians(leads.longitude) - radians(s.longitude)) 
+                + sin(radians(s.latitude)) 
+                * sin(radians(leads.latitude))
+            )
+        ) AS distance')
+    )
+    ->where('u.user_id', $user_id)
+    ->where('leads.status', '=', 'Open')
+    ->whereNotIn('leads.id', function ($query) use ($user_id) {
+        $query->select('lead_id')
+              ->from('contacted_lead')
+              ->where('user_id', $user_id);
+    })
+    ->havingRaw('distance <= '.$distance)  // Only include leads within 20km
     ->orderBy('leads.id', 'desc')
     ->get();
     return $results;

@@ -31,6 +31,8 @@ class RegisteredUserController extends Controller
                 'last_name' => ['required', 'string', 'max:255'],
                 'contact_number' => ['required', 'string', 'max:15'],
                 'location' => ['required', 'string', 'max:255'],
+                'latitude' => ['required', 'string', 'max:20'],
+                'longitude' => ['required', 'string', 'max:20'],
                 'email' => ['required', 'string', 'email', 'max:255'],
             ]);
            }
@@ -40,6 +42,8 @@ class RegisteredUserController extends Controller
                 'last_name' => ['required', 'string', 'max:255'],
                 'contact_number' => ['required', 'string', 'max:15'],
                 'location' => ['required', 'string', 'max:255'],
+                'latitude' => ['required', 'string', 'max:20'],
+                'longitude' => ['required', 'string', 'max:20'],
                 'email' => ['required', 'string', 'email', 'max:255'],
                 'password' => ['nullable', 'confirmed', Password::defaults()],
             ]);
@@ -54,6 +58,8 @@ class RegisteredUserController extends Controller
                     'last_name' => $request->last_name,
                     'contact_number' => $request->contact_number,
                     'location' => $request->location,
+                    'latitude' => $request->latitude,
+                    'longitude' => $request->longitude,
                     'role' => $role,
                     'password' => Hash::make($request->password),
                     'company_name' => $request->company_name,

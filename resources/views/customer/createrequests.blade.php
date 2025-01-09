@@ -286,32 +286,7 @@ label {
 <input id="isLogged" value = "{{ auth()->check() ? 'Logged' : 'Guest' }}" hidden/>
 
     <script>
- function initializeAutocomplete() {
-    const input = document.getElementById("searchLocation");
-
-    const options = {
-        types: ["geocode"],
-        componentRestrictions: { country: ["ZA", "ZW"] }, // Restrict to specific countries
-    };
-
-    const autocomplete = new google.maps.places.Autocomplete(input, options);
-
-    autocomplete.addListener("place_changed", function () {
-        const place = autocomplete.getPlace();
-
-        if (!place.geometry) {
-            console.error("No geometry available for this place.");
-            return;
-        }
-
-        // Update the latitude and longitude fields
-        document.getElementById("latitude").value = place.geometry.location.lat();
-        document.getElementById("longitude").value = place.geometry.location.lng();
-    });
-}
-
-
-
+ 
 
         var currentTab = 0;
 
@@ -357,9 +332,6 @@ function validateForm() {
       }
     }
 
-    {
-
-    }
   }
 
   // If valid status is true, mark the step as finished and valid:

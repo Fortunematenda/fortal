@@ -102,13 +102,21 @@
             <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
                 <div class="uk-margin">
                     <x-input-label for="location" :value="__('Address')" />
-                    <x-text-input id="location" name="location" type="text" 
+                    <x-text-input id="searchLocation" name="location" type="text" placeholder="Enter your location"
                                    class="mt-1 block w-full border rounded-md focus:ring focus:ring-indigo-200" 
                                    :value="old('location', $user->location)" />
+                                   <input id="latitude" name="latitude" hidden></input>
+                                <input id="longitude" name="longitude" hidden></input>
                 </div>
                 <div class="uk-margin">
-                    <x-input-label for="inputState" :value="__('State')" />
-                    <select id="inputState" name="state" class="mt-1 block w-full border rounded-md focus:ring focus:ring-indigo-200">
+                <x-input-label for="inputState" :value="__('Distance')"/>
+                <select class="Select_buttonClasses__rxXNq select-button" id="distance" name="distance">
+                                        <option value="50">50 Kilometers</option>
+                                        <option value="20">20 Kilometers</option>
+                                        <option value="10">10 Kilometers</option>
+                                    </select>
+                    
+                    <select id="inputState" name="state" class="mt-1 block w-full border rounded-md focus:ring focus:ring-indigo-200" hidden>
                         <option selected>{{ old('state', $user->state) ?: 'Choose...' }}</option>
                         <option>Western Cape</option>
                     </select>

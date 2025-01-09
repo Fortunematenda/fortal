@@ -526,3 +526,30 @@ $(document).ready(function() {
         });
         return formatter.format(amount);
     }
+    console.log("Dzivala")
+    function initializeAutocomplete() {
+        const input = document.getElementById("searchLocation");
+    
+        const options = {
+            types: ["geocode"],
+            componentRestrictions: { country: ["ZA"] }, // Restrict to specific countries
+        };
+    
+        const autocomplete = new google.maps.places.Autocomplete(input, options);
+    
+        autocomplete.addListener("place_changed", function () {
+            const place = autocomplete.getPlace();
+    
+            if (!place.geometry) {
+                console.error("No geometry available for this place.");
+                return;
+            }
+    
+            // Update the latitude and longitude fields
+            document.getElementById("latitude").value = place.geometry.location.lat();
+            document.getElementById("longitude").value = place.geometry.location.lng();
+        });
+    }
+    
+    
+    

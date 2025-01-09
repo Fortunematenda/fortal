@@ -28,7 +28,7 @@ class LeadsController extends Controller
         try{
             $userId = $request->user()->id;
             $profileController = new ProfileController();
-    $leads = $profileController->getLeads($userId);    
+    $leads = $profileController->getLeads($userId, $request->user()->distance);    
     $leads_count = count($leads);
     $services_count = count($profileController->getUserServices($userId));
     $leadsArr = $this->arrLeads($leads);
@@ -45,7 +45,7 @@ class LeadsController extends Controller
 {
     $userId = $request->user()->id;     
     $profileController = new ProfileController();
-    $leads = $profileController->getLeads($userId);    
+    $leads = $profileController->getLeads($userId, $request->user()->distance);    
     $leads_count = count($leads);
     $services_count = count($profileController->getUserServices($userId));
     $leadsArr = $this->arrLeads($leads);
