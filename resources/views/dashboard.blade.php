@@ -56,10 +56,15 @@
             src: url(chrome-extension://llbcnfanfmjhpedaedhbcnpgeepdnnok/assets/fonts/noto-sans-semibold.ttf);
         }
         .nav-link{
-font-size: 16px !important;
+font-size: 15px !important;
         }
-        
-</style></head>
+    .icon-wrapper {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+    }
+  </style>
+</head>
   <body>
     
 
@@ -166,10 +171,10 @@ font-size: 16px !important;
                 <div class="card card-primary card-round col sellerdash-col h-auto d-flex flex-column justify-content-between ">
                   <div class="card-header">
                     <div class="card-head-row">
-                      <div class="card-title">Profile Review
+                      <div class="card-title fw-bold float-end text-primary">
                       <div class="d-flex justify-content-between align-items-center flex-wrap">
-            <p class=" mb-0">Your profile is 97% complete</p>
-            <a href="/settings/" class="text-grey-200 text-xs hover-dark noline">Edit</a>
+          
+            <div class=" mb-0  text-primary"><a <a href="/settings/">Profile Review</a></div>
         </div>
                         <div class="dropdown">
                           <button class="btn btn-sm btn-label-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -188,7 +193,7 @@ font-size: 16px !important;
                     <hr>
                     <div class="card-category">Enhancing your profile is an excellent way to attract more customers.</div>
                   </div>
-                  
+                
                   <div class="card-body pb-0">
                     <div class="mb-4 mt-2">
                       <h2>97%</h2>
@@ -219,13 +224,7 @@ font-size: 16px !important;
                                         <a href="/settings">
                             Upgrade to Pro
                           </a>
-                          <style>
-    .icon-wrapper {
-      width: 20px;
-      height: 20px;
-      display: inline-block;
-    }
-  </style>
+  
      <div class="text">Online 
   <div data-ui-test="bullet-list-unordered-icon" class="icon-wrapper">
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 20 20" width="10" height="10" preserveAspectRatio="xMidYMid meet" style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px); content-visibility: visible;">
@@ -272,8 +271,12 @@ font-size: 16px !important;
                 <div class="card card-primary card-round col sellerdash-col h-auto d-flex flex-column justify-content-between ">
                   <div class="card-header">
                     <div class="card-head-row">
-                      <div class="card-title">Lead settings</div>
-                      <div class="card-tools">
+                    <div class="card-title fw-bold float-end text-primary">
+                      <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <div class=" mb-0  text-primary"><a <a href="/settings/">Leads Settings</a></div>
+           
+        </div>
+                  
                         <div class="dropdown">
                           <button class="btn btn-sm btn-label-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Export
@@ -339,8 +342,11 @@ font-size: 16px !important;
                 <div class="card card-primary card-round col sellerdash-col h-auto d-flex flex-column justify-content-between ">
                   <div class="card-header">
                     <div class="card-head-row">
-                      <div class="card-title">Ongoing tasks</div>
-                      <div class="card-tools">
+                    <div class="card-title fw-bold float-end text-primary">
+                      <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <div class=" mb-0  text-primary"><a <a href="/settings/">Ongoing Tasks</a></div>
+           
+        </div>
                         <div class="dropdown">
                           <button class="btn btn-sm btn-label-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Export
