@@ -100,14 +100,15 @@
 
             <h2>{{ __('Location Information') }}</h2>
             <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
-                <div class="uk-margin">
-                    <x-input-label for="location" :value="__('Address')" />
-                    <x-text-input id="searchLocation" name="location" type="text" placeholder="Enter your location"
-                                   class="mt-1 block w-full border rounded-md focus:ring focus:ring-indigo-200" 
-                                   :value="old('location', $user->location)" />
-                                   <input id="latitude" name="latitude" hidden></input>
-                                <input id="longitude" name="longitude" hidden></input>
-                </div>
+            <div class="uk-margin">
+    <x-input-label for="location" :value="__('Address')" />
+    <x-text-input id="searchLocation" name="location" type="text" placeholder="Enter your location"
+                   class="mt-1 block w-full border rounded-md focus:ring focus:ring-indigo-200" 
+                   :value="old('location', $user->location)" />
+
+    <input id="latitude" name="latitude" type="hidden" value="{{ old('latitude', $user->latitude) }}">
+    <input id="longitude" name="longitude" type="hidden" value="{{ old('longitude', $user->longitude) }}">
+</div>
                 <div class="uk-margin">
                 <x-input-label for="inputState" :value="__('Distance')"/>
                 <select class="Select_buttonClasses__rxXNq select-button" id="distance" name="distance">

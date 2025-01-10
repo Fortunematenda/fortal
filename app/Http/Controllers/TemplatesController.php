@@ -737,6 +737,7 @@ $details .= $this->details($lead_details, $lead_images);
                                 </svg>
                             </span>
                             <a href='/settings' class='js-lead-prefs-from-lead-link'>Modify Lead Preferences</a>";
+                           
 $details .= "</div>"; // Closing the update-link-container div
 $details .= "</div>"; // Closing the lead-settings-prompt flex div
 $details .= "</div>"; // Closing the project-details pt-5 data-buyer-name div

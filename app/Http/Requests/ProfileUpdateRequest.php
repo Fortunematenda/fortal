@@ -23,6 +23,8 @@ class ProfileUpdateRequest extends FormRequest
             'profile_picture' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Not always required
             'logo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Not always required
             'location' => ['required', 'string', 'max:255'],
+            'latitude' => 'nullable|numeric', // Latitude
+            'longitude' => 'nullable|numeric', // Longitude
             'is_company_website' => ['boolean'],
             'company_size' => ['nullable', 'string', 'max:255'],
             'is_company_sales_team' => ['boolean'],
