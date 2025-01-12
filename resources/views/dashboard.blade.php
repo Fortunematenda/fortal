@@ -225,36 +225,7 @@ font-size: 15px !important;
                             Upgrade to Pro
                           </a>
   
-     <div class="text">Online 
-  <div data-ui-test="bullet-list-unordered-icon" class="icon-wrapper">
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 20 20" width="10" height="10" preserveAspectRatio="xMidYMid meet" style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px); content-visibility: visible;">
-      <defs>
-        <clipPath id="__lottie_element_2">
-          <rect width="20" height="20" x="0" y="0"></rect>
-        </clipPath>
-      </defs>
-      <g clip-path="url(#__lottie_element_2)">
-        <g transform="matrix(1,0,0,1,10,10)" opacity="0.3316" style="display: block;">
-          <g opacity="1" transform="matrix(1,0,0,1,0,0)">
-            <path fill="rgb(32,191,111)" fill-opacity="1" d="M0,-7.992 C4.411,-7.992 7.992,-4.411 7.992,0 C7.992,4.411 4.411,7.992 0,7.992 C-4.411,7.992 -7.992,4.411 -7.992,0 C-7.992,-4.411 -4.411,-7.992 0,-7.992z"></path>
-            <path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(5,17,86)" stroke-opacity="1" stroke-width="0" d="M0,-7.992 C4.411,-7.992 7.992,-4.411 7.992,0 C7.992,4.411 4.411,7.992 0,7.992 C-4.411,7.992 -7.992,4.411 -7.992,0 C-7.992,-4.411 -4.411,-7.992 0,-7.992z"></path>
-          </g>
-        </g>
-        <g transform="matrix(1,0,0,1,10,10)" opacity="0.2" style="display: block;">
-          <g opacity="1" transform="matrix(1,0,0,1,0,0)">
-            <path fill="rgb(32,191,111)" fill-opacity="1" d="M0,-10 C5.519,-10 10,-5.519 10,0 C10,5.519 5.519,10 0,10 C-5.519,10 -10,5.519 -10,0 C-10,-5.519 -5.519,-10 0,-10z"></path>
-            <path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(5,17,86)" stroke-opacity="1" stroke-width="0" d="M0,-10 C5.519,-10 10,-5.519 10,0 C10,5.519 5.519,10 0,10 C-5.519,10 -10,5.519 -10,0 C-10,-5.519 -5.519,-10 0,-10z"></path>
-          </g>
-        </g>
-        <g transform="matrix(1,0,0,1,10,10)" opacity="1" style="display: block;">
-          <g opacity="1" transform="matrix(1,0,0,1,0,0)">
-            <path fill="rgb(32,191,111)" fill-opacity="1" d="M0,-4 C2.208,-4 4,-2.208 4,0 C4,2.208 2.208,4 0,4 C-2.208,4 -4,2.208 -4,0 C-4,-2.208 -2.208,-4 0,-4z"></path>
-            <path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(5,17,86)" stroke-opacity="1" stroke-width="0" d="M0,-4 C2.208,-4 4,-2.208 4,0 C4,2.208 2.208,4 0,4 C-2.208,4 -4,2.208 -4,0 C-4,-2.208 -2.208,-4 0,-4z"></path>
-          </g>
-        </g>
-      </g>
-    </svg>
-  </div></div>
+   
                           <div class="flex-wrap category-list  ">
                                      
                                      <div class="badge badge-pill border border-grey-100 text-grey-800 font-weight-normal text-xs p-2 mr-2 my-auto text-truncate mw-100">
