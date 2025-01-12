@@ -27,7 +27,7 @@ class LeadsController extends Controller
     {
         try{
             $page = $request->input('page', 1);
-            $perPage = 2; // Number of records per page
+            $perPage = 5; // Number of records per page
              $offset = ($page - 1) * $perPage;
              $filter = $request->input('filter', 0);
         
