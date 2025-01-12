@@ -100,8 +100,10 @@ class ProfileController extends Controller
     if ($user->isDirty('email')) {
         $user->email_verified_at = null; // Reset verification if email has changed
     }
- 
-
+    if ($request->filled('latitude') && $request->filled('longitude')) {
+        $user->latitude = $request->latitude;
+        $user->longitude = $request->longitude;
+    }
     if ($user->isDirty()) {
         $user->profile_picture = $imageName;
         $user->save(); 
