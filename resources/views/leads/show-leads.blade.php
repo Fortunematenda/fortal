@@ -1,5 +1,15 @@
 <x-app-layout>
-
+<style>
+      .end-message {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+            color: purple;
+        }
+        .bd{
+    border: 1px solid purple;
+}
+    </style>
 
     <div class="sticky-top enquiriesbanner">
         <div class="flex-fill d-flex">
@@ -101,7 +111,7 @@
                                                             <path fill-rule="evenodd" clip-rule="evenodd"
                                                                 d="M10.0001 1.66663C6.77508 1.66663 4.16675 4.27496 4.16675 7.49996C4.16675 11.875 10.0001 18.3333 10.0001 18.3333C10.0001 18.3333 15.8334 11.875 15.8334 7.49996C15.8334 4.27496 13.2251 1.66663 10.0001 1.66663ZM10.0001 9.58329C8.85008 9.58329 7.91675 8.64996 7.91675 7.49996C7.91675 6.34996 8.85008 5.41663 10.0001 5.41663C11.1501 5.41663 12.0834 6.34996 12.0834 7.49996C12.0834 8.64996 11.1501 9.58329 10.0001 9.58329Z">
                                                             </path>
-                                                        </svg> <span class="tw-leading-[16px]">2 locations</span></div>
+                                                        </svg> <span class="tw-leading-[16px]">{{$distance}} KM</span></div>
                                                 </div>
                                             </div>
                                             <div class="tw-flex tw-items-end tw-pl-1 tw-flex-row"><a
@@ -127,7 +137,7 @@
                                         <div class="tw-py-2 tw-px-4 tw-bg-gray-300 tw-flex tw-justify-between">
                                             <div
                                                 class="tw-flex tw-items-center tw-text-sm tw-font-gordita-regular tw-justify-between tw-w-full tw-pr-3">
-                                                <span class="tw-text-gray-600">Showing all <span class="matching_leads">0</span> leads</span>
+                                                <span class="tw-text-gray-600">Showing all <span class="matching_leads1">0</span> leads</span>
                                             </div>
                                             <div class="tw-pl-3 tw-border-l tw-border-gray-400"><button
                                                     class="Button_base__5Wcwx Button_lg__UQt1r Button_minWidth__WGVzH Button_noOutline__CXC05 Button_textBlue__z9-S- Button_bgTransparent__cMajf !tw-p-0 !tw-min-h-[unset]"
@@ -150,10 +160,10 @@
                                 <div id="__rctLeadsQuickFilters">
                                     <div
                                         class="tw-py-2 tw-px-4 tw-bg-gray-400 tw-flex tw-justify-start tw-flex-wrap tw-gap-2">
-                                        <span class="tw-inline-flex tw-items-end tw-relative"><button
+                                        <span class="tw-inline-flex tw-items-end tw-relative dd"><button
                                                 class="tw-relative tw-rounded tw-text-xs tw-py-1 tw-px-2 disabled:tw-bg-gray-300 disabled:tw-text-gray-600 tw-inline-flex tw-gap-1.5 tw-bg-white be_first">Be
                                                 first to respond <span id="be_first" class="uk-badge">0</span></button></span><span
-                                            class="tw-inline-flex tw-items-end tw-relative"><button
+                                            class="tw-inline-flex tw-items-end tw-relative dd"><button
                                                 class="tw-relative tw-rounded tw-text-xs tw-py-1 tw-px-2 disabled:tw-bg-gray-300 disabled:tw-text-gray-600 tw-inline-flex tw-gap-1.5 tw-bg-white my_urgent">Urgent
                                                 requests <span id="my_urgent" class="uk-badge">0</span></button></span>
                                     </div>
@@ -182,6 +192,12 @@
                                         <div class="tw-bg-gray-200 tw-overflow-y tw-h-full tw-gap-3 tw-flex tw-flex-col tw-py-3"
                                             data-cy="leads-list" id="myleads">
                                          </div>
+                                         <div id="end-message" class="end-message">
+        No more leads to display.
+    </div>
+    <div id="noleads" class="end-message">
+        No leads to display.
+    </div>
                                             <div class="tw-w-full tw-flex tw-justify-center tw-items-center tw-py-4 loader" style="display:none">
                                             <div role="status" class="tw-flex" data-cy="loading-spinner"
                                                 style="width: 22px; height: 22px;">

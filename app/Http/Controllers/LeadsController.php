@@ -26,13 +26,24 @@ class LeadsController extends Controller
     public function getUserLeads(Request $request)
     {
         try{
-            $userId = $request->user()->id;
+            $page = $request->input('page', 1);
+            $perPage = 2; // Number of records per page
+             $offset = ($page - 1) * $perPage;
+             $filter = $request->input('filter', 0);
+        
+            $user = $request->user();
+            $userId = $user->id;     
             $profileController = new ProfileController();
-    $leads = $profileController->getLeads($userId, $request->user()->distance);    
-    $leads_count = count($leads);
-    $services_count = count($profileController->getUserServices($userId));
-    $leadsArr = $this->arrLeads($leads);
-    $resultArr = array("leadsArr"=>$leadsArr,"leads_count"=>$leads_count,"services_count"=>$services_count);
+            $leads = $profileController->getLeads($userId, $user->distance,$page, $perPage,$offset,$filter);    
+            $befirst_count = $profileController->getLeadsCount($user->id, $user->distance,1);
+            $urgent_count = $profileController->getLeadsCount($user->id, $user->distance,2);           
+            
+            
+            $leadsArr = $this->arrLeads($leads["data"]); 
+            $current_page =  (int)$leads["current_page"];
+            $last_page =  $leads["last_page"]; 
+            $leads_count = $leads["total"]; 
+    $resultArr = array("leadsArr"=>$leadsArr,"leads_count"=>$leads_count,"current_page"=>$current_page,"befirst_count"=>$befirst_count,"urgent_count"=>$urgent_count,"last_page"=>$last_page);
             
             return response()->json(["message"=>"Successful","leads"=>$resultArr],200);
         }
@@ -43,15 +54,13 @@ class LeadsController extends Controller
     }
     public function showLeads(Request $request)
 {
-    $userId = $request->user()->id;     
+    $user = $request->user();
+    $userId = $user->id;     
     $profileController = new ProfileController();
-    $leads = $profileController->getLeads($userId, $request->user()->distance);    
-    $leads_count = count($leads);
     $services_count = count($profileController->getUserServices($userId));
-    $leadsArr = $this->arrLeads($leads);
-    //$resultArr = array("leadsArr"=>$leadsArr,"leads_count"=>$leads_count,"services_count"=>$services_count);   
-  
-    return view("leads.show-leads",compact(["leadsArr","leads_count","services_count"]));
+    $distance = $user->distance;
+    
+    return view("leads.show-leads", compact(["services_count","distance"]));
 }
 
 public function getLeadDetails(Request $request)
@@ -146,12 +155,13 @@ private function arrLeads($leads = array())
         $service_name = $lead->service_name;
         $location = $lead->location;
         $description = $lead->description;
+        $distance = round($lead->distance);
         $hiring_decision = (int)$lead->hiring_decision;    
         $credits = $lead->credits;
         $additional_details = (int)strlen($description);
         $leads_trail = $this->getLeadsTrail($lead_id, $lead_user_id) ?? [];
         $leads_notes = $this->getLeadsNotes($lead_id, $lead_user_id) ?? [];
-        $inarr = array("lead_id"=>$lead_id,"first_letter"=>$first_letter,"first_name"=>$first_name,"last_name"=>$last_name,"time"=>$time,"service_name"=>$service_name,"location"=>$location,"description"=>$description,"contacted"=>$contacted,"remender"=>$remender,"frequent"=>$frequent,"urgent"=>$urgent,"is_phone_verified"=>$is_phone_verified,"additional_details"=>$additional_details,"credits"=>$credits,"hiring_decision"=>$hiring_decision, "leads_trail" => $leads_trail,
+        $inarr = array("lead_id"=>$lead_id,"first_letter"=>$first_letter,"first_name"=>$first_name,"last_name"=>$last_name,"time"=>$time,"service_name"=>$service_name,"location"=>$location,"distance"=>$distance,"contacted"=>$contacted,"remender"=>$remender,"frequent"=>$frequent,"urgent"=>$urgent,"is_phone_verified"=>$is_phone_verified,"additional_details"=>$additional_details,"credits"=>$credits,"hiring_decision"=>$hiring_decision, "leads_trail" => $leads_trail,
         "leads_notes" => $leads_notes);
         array_push($leadsArr,$inarr);
 

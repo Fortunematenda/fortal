@@ -43,7 +43,13 @@ $(document).on("click", ".service", function() {
     $("#inner-service").empty(); // Clear the service list
     $("#step").attr("href", `/profession/create-account/${serviceId}?service=${serviceName}`);
     $("#search-service").hide();
-});
+}); 
+
+$(document).on('click','.dd', function(){
+    $(".dd").removeClass("bd");
+    $(this).addClass("bd");
+
+})
 
 // Function to purchase credits when a package is clicked
 function purchaseCredits(element) {
@@ -526,7 +532,6 @@ $(document).ready(function() {
         });
         return formatter.format(amount);
     }
-    console.log("Dzivala")
     function initializeAutocomplete() {
         const input = document.getElementById("searchLocation");
     
