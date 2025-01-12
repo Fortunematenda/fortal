@@ -9,6 +9,12 @@
         .bd{
     border: 1px solid purple;
 }
+hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+    margin: 10px 0 10px 0px !important;
+}
     </style>
 
     <div class="sticky-top enquiriesbanner">

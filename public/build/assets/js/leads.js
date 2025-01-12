@@ -36,6 +36,11 @@ getJSONResponse("opencontacts",obj).then((data) => {
         UIkit.modal("#modal-center").show();
         
     }
+    else if(data.message === "Not Allowed")
+        {
+           alert(data.content);
+            
+        }
 }).catch((error) => {
 });  
 });
@@ -255,7 +260,7 @@ const leadsTemplate = (
             
             txt += "</div><div class='tw-flex tw-flex-col tw-p-2 tw-bg-gray-100 tw-rounded tw-text-xs tw-mt-4'>";
             txt += "  <span class='tw-text-left tw-mb-3'><b>" + service_name + "</b></span>";
-            txt += "  <span class='tw-text-left tw-font-gordita-regular tw-text-gray-700'>" + distance + " KM</span>";
+            txt += "  <span class='tw-text-left tw-font-gordita-regular tw-text-gray-700'>Approximately "  + distance +" km away from you </span>";
             txt += "</div><div class='tw-flex tw-justify-between tw-mt-4'>";
             txt += "  <div class='tw-flex tw-justify-start tw-items-end' data-cy='lead-price'>";
             txt += "    <title>Fortai Token</title>";

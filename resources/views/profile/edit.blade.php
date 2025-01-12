@@ -173,7 +173,7 @@
                     <!--Lead Settings-->
                     <div class="tab-pane fade" id="lead_settings">
                         <div class="card-body pb-2">
-                            @include('profile.partials.business-info-form')
+                            @include('profile.partials.leads-settings-form')
                         </div>
                     </div>
                     <!--Purchase Credits-->

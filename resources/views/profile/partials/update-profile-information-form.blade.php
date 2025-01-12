@@ -47,7 +47,12 @@
             <label class="form-label">Contact Number</label>
             <input type="text" id="contact_number" name="contact_number" class="form-control mb-1" value="{{ old('contact_number', $user->contact_number) }}" />
         </div>
-    </div>
+
+    <div class="form-group">
+                    <label class="form-label">Bio</label>
+                    <textarea class="form-control" rows="5"> </textarea>
+                  </div>
+                  </div>
     <div class="text-right mt-3">
         <button type="submit" class="btn btn-primary">Save</button>
         <a href="{{ route('profile.edit') }}" class="btn btn-secondary">Cancel</a>

@@ -27,7 +27,7 @@ class LeadsController extends Controller
     {
         try{
             $page = $request->input('page', 1);
-            $perPage = 2; // Number of records per page
+            $perPage = 5; // Number of records per page
              $offset = ($page - 1) * $perPage;
              $filter = $request->input('filter', 0);
         
@@ -293,6 +293,7 @@ private function arrLeads($leads = array())
         try{
             $user = $request->user();
             $lead_id = (int)$request->lead_id;
+            
             $profileController = new ProfileController();
             $lead = $profileController->getIndividualLead($lead_id);
             $credits = $lead->credits;
@@ -301,6 +302,9 @@ private function arrLeads($leads = array())
             
             if($credits_balance>=$credits)
             {
+                $contacts_count=(int)$this->userResponse($lead_id);
+                if($contacts_count <5)
+                {
                 $balance = $credits_balance - $credits;
                 $user->credits_balance = $balance;
                 $user->save();
@@ -318,6 +322,10 @@ private function arrLeads($leads = array())
                     
                 }                
                 return response()->json(["message"=>"Okay","details"=>$arr,"button"=>$user->id."-".$lead_id],200);
+            }
+            else{
+                return response()->json(["message"=>"Not Allowed","content"=>"This Lead is unavailable"],200);
+            }
             }
             else{
                 $first_name = $lead->first_name;
