@@ -723,8 +723,10 @@ $details .= "<div class='d-flex flex-column project-details-col-project-details'
                     <hr class='project-details-hr'>";
 $details .= $this->details($lead_details, $lead_images);
                     $details .= "<hr class='lead-settings-prompt-hr'>
-                    <div class='lead-settings-prompt flex'>
+                    <div class='lead-settings-prompt flex'></div>
                     
+
+                        <div class='font-weight-regular mb-2'>Stop seeing leads with specific answers by customising your settings.</div>
 
                         <div class='update-link-container d-inline-flex align-items-center'>
                             <span class='fortai-svg-icon bsi-primary-primary bsi-sm mr-2'>
@@ -736,12 +738,12 @@ $details .= $this->details($lead_details, $lead_images);
                                     </g>
                                 </svg>
                             </span>
-                            <a href='/settings' class='js-lead-prefs-from-lead-link'>Modify Lead Preferences</a>";
+                            <a href='/settings' class='js-lead-prefs-from-lead-link font-weight-medium mb-2 '>Modify Lead Preferences</a>";
                            
 $details .= "</div>"; // Closing the update-link-container div
 $details .= "</div>"; // Closing the lead-settings-prompt flex div
 $details .= "</div>"; // Closing the project-details pt-5 data-buyer-name div
-$details .= "</div>"; // Closing the d-flex flex-column project-details-col-project-details div
+
 
     return $details;
 }

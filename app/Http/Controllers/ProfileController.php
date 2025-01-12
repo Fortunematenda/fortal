@@ -86,13 +86,13 @@ class ProfileController extends Controller
      public function update(ProfileUpdateRequest $request): RedirectResponse
 {
     $user = $request->user();
-    $imageName = "test";
+  
     // Handle profile picture upload
     if ($request->hasFile('profile_picture')) {
         // Store the image in the 'public/profile_pictures' directory
         $path = $request->file('profile_picture')->store('profile_pictures', 'public');
         $imageName = basename($path);
-      
+        
     }
 
     // Fill in other user data from validated request
@@ -104,8 +104,14 @@ class ProfileController extends Controller
         $user->latitude = $request->latitude;
         $user->longitude = $request->longitude;
     }
+    if ($request->filled('distance')) {
+        $user->distance = $request->distance;
+    }
+
     if ($user->isDirty()) {
+        if ($request->hasFile('profile_picture')) {
         $user->profile_picture = $imageName;
+        }
         $user->save(); 
         return redirect()->route('profile.edit')->with('status', 'profile-updated')->with('success', 'Profile updated successfully!');
     }
