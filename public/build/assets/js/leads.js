@@ -1,19 +1,22 @@
 let leadsArr = [];
+let page = 1;
+let isLoading = false;
+let lastPage = false;
+let filter = 0;
+let total = 0;
+
 $(document).ready(function() {
     $("#myleads").empty();
-    $(".loader").show();
-    var _token = $('input[name="_token"]').val();
-    const obj = {_token};
-    
-    // Usage:
-    getJSONResponse("getleads",obj).then((data) => {
-        console.log(data);
-    leadsArr = data["leads"]["leadsArr"];
-    displayLeads(leadsArr);
-}).catch((error) => {
-    //console.error('Failed to fetch leads:', error);  // Handle the error here
-});      
+    fetchLeads();   
 });
+
+$("#dashboard-projects").scroll(function() {
+    if ($("#dashboard-projects").scrollTop() + $("#dashboard-projects").height() >= $(document).height() - 100) {
+        fetchLeads();
+    }
+});
+
+
 $(document).on('click','#contact_now',function(){
     var _token = $('input[name="_token"]').val();
 let lead_id = $(this).attr('lead_id');
@@ -57,22 +60,23 @@ getJSONResponse("notinterested",obj).then((data) => {
 });
 
 $(document).on('click','.be_first',function() {
+    isLoading = false;
+lastPage = false;
+    filter = 1;
+    page = 1;
     $("#myleads").empty();
     $(".loader").show();
-    const beFirstArr = $.grep(leadsArr, function(json) {
-        return json.contacted === 0;
-    });
-    displayLeads(beFirstArr);    
+    fetchLeads();  
 });
 
 
 $(document).on('click','.my_urgent',function() {
+    isLoading = false;
+lastPage = false;
+    filter = 2;
+    page = 1;
     $("#myleads").empty();
-    $(".loader").show();
-    const beFirstArr = $.grep(leadsArr, function(json) {
-        return json.urgent === 1;
-    });
-    displayLeads(beFirstArr);      
+    fetchLeads();     
 });
 $(document).on('click','.view_lead',function() {
     var _token = $('input[name="_token"]').val();
@@ -91,16 +95,13 @@ $(document).on('click','.view_lead',function() {
    $("#show_details").html(details);
 });
 
-const displayLeads = (json) =>{
-    const beFirstArr = $.grep(leadsArr, function(obj) {
-        return obj.contacted === 0;
-    });
-    const urgentArr = $.grep(leadsArr, function(obj) {
-        return obj.urgent === 1;
-    });
-    $(".matching_leads").text(json.length);
-    $("#be_first").text(beFirstArr.length);
-    $("#my_urgent").text(urgentArr.length);
+const displayLeads = (json,count_total,befirst_count,urgent_count) =>{
+  
+    $(".matching_leads").text(total);
+    $(".matching_leads1").text(count_total);
+    $("#be_first").text(befirst_count);
+    $("#my_urgent").text(urgent_count);
+ 
 
     for(key in json)
         {
@@ -114,12 +115,12 @@ const displayLeads = (json) =>{
             let additional_details = json[key]["additional_details"];
             let frequent = json[key]["frequent"];
             let contacted = json[key]["contacted"];
-            let description = json[key]["description"];
+            let distance = json[key]["distance"];
             let hiring_decision = json[key]["hiring_decision"];   
             let remender = json[key]["remender"];
             let service_name = json[key]["service_name"];
             let credits = json[key]["credits"];
-            $("#myleads").append(leadsTemplate(lead_id,first_letter,first_name,location,time,urgent,is_phone_verified,additional_details,frequent,description,contacted,remender,service_name,credits,hiring_decision));
+            $("#myleads").append(leadsTemplate(lead_id,first_letter,first_name,location,time,urgent,is_phone_verified,additional_details,frequent,distance,contacted,remender,service_name,credits,hiring_decision));
           
         }
         if(json.length>0)
@@ -161,6 +162,7 @@ const getJSONResponse = (url,obj) => {
             },
             complete: function() {
                 $(".loader").hide();
+                isLoading = false;
             }
         });
     });
@@ -193,7 +195,7 @@ const getHTMLResponse = (url,obj) => {
 
 const leadsTemplate = (
     lead_id, first_letter, first_name, location, time, urgent, 
-    is_phone_verified, additional_details, frequent, description, 
+    is_phone_verified, additional_details, frequent, distance, 
     contacted, remender, service_name, credits,hiring_decision
 ) => {
 
@@ -253,7 +255,7 @@ const leadsTemplate = (
             
             txt += "</div><div class='tw-flex tw-flex-col tw-p-2 tw-bg-gray-100 tw-rounded tw-text-xs tw-mt-4'>";
             txt += "  <span class='tw-text-left tw-mb-3'><b>" + service_name + "</b></span>";
-            txt += "  <span class='tw-text-left tw-font-gordita-regular tw-text-gray-700'>" + description + "</span>";
+            txt += "  <span class='tw-text-left tw-font-gordita-regular tw-text-gray-700'>" + distance + " KM</span>";
             txt += "</div><div class='tw-flex tw-justify-between tw-mt-4'>";
             txt += "  <div class='tw-flex tw-justify-start tw-items-end' data-cy='lead-price'>";
             txt += "    <title>Fortai Token</title>";
@@ -286,4 +288,37 @@ else{
  txt += " </span></div></div></div></div></div></button>";                                    
     
  return txt;
+};
+
+const fetchLeads = () => {
+    if (isLoading || lastPage) return;
+
+    isLoading = true;
+
+    $(".loader").show();
+    var _token = $('input[name="_token"]').val();
+    const obj = {_token,page,filter};
+    getJSONResponse("getleads",obj).then((data) => {
+    const leadsArr = data["leads"]["leadsArr"];
+    const current_page =  data["leads"]["current_page"];
+    const last_page =  data["leads"]["last_page"];    
+    const befirst_count =  data["leads"]["befirst_count"];
+    const urgent_count =  data["leads"]["urgent_count"];
+    const count_total =  data["leads"]["leads_count"];
+    if(total <= 0)
+        {
+            total =  count_total;
+        } 
+    
+    displayLeads(leadsArr,count_total,befirst_count,urgent_count);
+    if (current_page >= last_page) {
+        lastPage = true;
+        $('#end-message').show();
+    } else {
+        page++;
+        $('#end-message').hide();
+    }
+}).catch((error) => {
+    console.error('Failed to fetch leads:', error); 
+});      
 };

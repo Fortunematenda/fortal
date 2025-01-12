@@ -46,8 +46,8 @@ class ProfileController extends Controller
         $login_at = date('l, j M g:ia', $timestamp);
         $latest_services = $this->getUserServices($user->id);
         $latest_services_limited = array_slice($latest_services, 0, 2);
-        $number_of_leads = count($this->getLeadsCount($user->id, $user->distance));
-        $contacted_lead = count($this->getLeadsCount($user->id, $user->distance));
+        $number_of_leads = $this->getLeadsCount($user->id, $user->distance);
+        $contacted_lead = 0;
         $service_badge = count($latest_services)-2;
         $unread_leads = count($this->getUnreadLeads($user->id));
         
@@ -197,51 +197,59 @@ class ProfileController extends Controller
         ->toArray();
         return $latest_services;
     }
-    public function getLeadsCount($user_id, $distance = 20)
-    {
-        $results = LeadsModel::join('user_services as u', 'leads.service_id', '=', 'u.service_id')
-    ->join('master_services as m', 'u.service_id', '=', 'm.id')
-    ->join('users as s', 'leads.user_id', '=', 's.id')
-    ->select(
-        'm.service_name', 
-        'leads.user_id as lead_user_id', 
-        'u.user_id as user_service_user_id', 
-        'leads.service_id', 
-        's.first_name', 
-        's.last_name', 
-        'leads.date_entered', 
-        'leads.id', 
-        'leads.description', 
-        'leads.location',
-        's.is_phone_verified',
-        'leads.urgent',
-        'leads.credits',
-        'leads.hiring_decision',
-        // Calculate the distance and include it in the result
-        DB::raw('(
-            6371 * acos(
-                cos(radians(s.latitude)) 
-                * cos(radians(leads.latitude)) 
-                * cos(radians(leads.longitude) - radians(s.longitude)) 
-                + sin(radians(s.latitude)) 
-                * sin(radians(leads.latitude))
-            )
-        ) AS distance')
-    )
-    ->where('u.user_id', $user_id)
-    ->where('leads.status', '=', 'Open')
-    ->whereNotIn('leads.id', function ($query) use ($user_id) {
-        $query->select('lead_id')
-              ->from('contacted_lead')
-              ->where('user_id', $user_id);
-    })
-    ->havingRaw('distance <= '.$distance)  
-    ->get();
-    return $results;
+    public function getLeadsCount($user_id, $distance = 20, $filter = 0)
+{
+    $urgentTotal = LeadsModel::join('user_services as u', 'leads.service_id', '=', 'u.service_id')
+        ->join('master_services as m', 'u.service_id', '=', 'm.id')
+        ->join('users as s', 'leads.user_id', '=', 's.id')
+        ->select('leads.*')
+        ->selectRaw('
+            (
+                6371 * acos(
+                    cos(radians(s.latitude)) 
+                    * cos(radians(leads.latitude)) 
+                    * cos(radians(leads.longitude) - radians(s.longitude)) 
+                    + sin(radians(s.latitude)) 
+                    * sin(radians(leads.latitude))
+                )
+            ) AS distance
+        ')
+        ->where('u.user_id', $user_id)
+        ->where('leads.status', '=', 'Open');
+
+    // Apply filter conditionally
+    if ($filter == 1) {
+        $urgentTotal->whereNotIn('leads.id', function ($query) {
+            $query->select('lead_id')
+                  ->from('contacted_lead');
+        });
+    } elseif ($filter == 2) {
+        $urgentTotal->where('leads.urgent', '=', 1);
     }
-    public function getLeads($user_id, $distance = 20)
+
+    $urgentTotal->whereNotIn('leads.id', function ($query) use ($user_id) {
+            $query->select('lead_id')
+                  ->from('contacted_lead')
+                  ->where('user_id', $user_id);
+        })
+        ->whereRaw('
+            (
+                6371 * acos(
+                    cos(radians(s.latitude)) 
+                    * cos(radians(leads.latitude)) 
+                    * cos(radians(leads.longitude) - radians(s.longitude)) 
+                    + sin(radians(s.latitude)) 
+                    * sin(radians(leads.latitude))
+                )
+            ) <= ?
+        ', [$distance]);  // Filter by distance using WHERE
+
+    return $urgentTotal->count();
+}
+
+    public function getLeads($user_id,$distance = 20,$page=0,$perPage=0,$offset=0,$filter=0)
     {
-        $results = LeadsModel::join('user_services as u', 'leads.service_id', '=', 'u.service_id')
+        $query = LeadsModel::join('user_services as u', 'leads.service_id', '=', 'u.service_id')
     ->join('master_services as m', 'u.service_id', '=', 'm.id')
     ->join('users as s', 'leads.user_id', '=', 's.id')
     ->select(
@@ -276,11 +284,35 @@ class ProfileController extends Controller
         $query->select('lead_id')
               ->from('contacted_lead')
               ->where('user_id', $user_id);
-    })
-    ->havingRaw('distance <= '.$distance)  // Only include leads within 20km
-    ->orderBy('leads.id', 'desc')
-    ->get();
-    return $results;
+    });
+      // Apply filter conditionally
+      if ($filter == 1)
+      {
+        $query->whereNotIn('leads.id', function ($query)  {
+            $query->select('lead_id')
+                  ->from('contacted_lead');
+        });
+      }
+      elseif ($filter == 2) {
+        $query->where('leads.urgent', '=', 1);
+    }
+   
+    $query->havingRaw('distance <= '.$distance)  // Only include leads within 20km
+    ->orderBy('leads.id', 'desc');
+    $countQuery = clone $query;
+        $total = $countQuery->count();
+
+        // Apply limit and offset for pagination
+        $leads = $query->skip($offset)->take($perPage)->get();
+
+        // Return JSON response
+        return [
+            'data' => $leads,
+            'current_page' => $page,
+            'per_page' => $perPage,
+            'total' => $total,
+            'last_page' => ceil($total / $perPage)
+        ];
     
     }
     public function getResponseLeads($user_id)
