@@ -141,6 +141,7 @@
           <div class="list-group list-group-flush account-settings-links overflow-auto scroll-touch">
     <a class="list-group-item list-group-item-action active" data-toggle="list" href="#profile">General</a>
     <a class="list-group-item list-group-item-action" data-toggle="list" href="#lead_settings">Lead Settings</a>
+    <a class="list-group-item list-group-item-action" data-toggle="list" href="#services">Services</a>
     <a class="list-group-item list-group-item-action" data-toggle="list" href="#purchase_credits">Purchase Credits</a>
     <a class="list-group-item list-group-item-action" data-toggle="list" href="#social-links">Social links</a>
     <a class="list-group-item list-group-item-action" data-toggle="list" href="#password">Update Password</a>
@@ -162,6 +163,11 @@
                     <div class="tab-pane fade" id="profile">
                         <div class="card-body pb-2">
                             @include('profile.partials.update-profile-information-form')
+                        </div>
+                    </div> 
+                    <div class="tab-pane fade" id="services">
+                        <div class="card-body pb-2">
+                            @include('profile.partials.update-services')
                         </div>
                     </div>
                     <div class="tab-pane fade" id="password">

@@ -131,6 +131,10 @@ class ProfileController extends Controller
         $services = $request->services;
         for($i=0; $i<count($services);$i++)
         {
+            if($i>4)
+            {
+                break;
+            }
             $service = $services[$i];
             $id = $this->getServiceID($service);
             $service = UserServicesModel::create(['user_id'=>$user->id, 'service_id'=>$id, 'entered_by'=>$user->id]);
