@@ -145,12 +145,14 @@ hr {
                                                 class="tw-flex tw-items-center tw-text-sm tw-font-gordita-regular tw-justify-between tw-w-full tw-pr-3">
                                                 <span class="tw-text-gray-600">Showing all <span class="matching_leads1">0</span> leads</span>
                                             </div>
-                                            <div class="tw-pl-3 tw-border-l tw-border-gray-400"><button
+                                            <div class="tw-pl-3 tw-border-l tw-border-gray-400"><button id="sortdistance"
                                                     class="Button_base__5Wcwx Button_lg__UQt1r Button_minWidth__WGVzH Button_noOutline__CXC05 Button_textBlue__z9-S- Button_bgTransparent__cMajf !tw-p-0 !tw-min-h-[unset]"
                                                     data-cy="dashboard-filters-open"><span
                                                         class="tw-flex tw-justify-center"><span
                                                             class="button-main tw-flex tw-items-center "><span
-                                                                class="icon tw-text-current tw-inline-flex"><svg
+                                                                class="icon tw-text-current tw-inline-flex">
+                                                                
+                                                                <svg
                                                                     class="MuiSvgIcon-root" focusable="false"
                                                                     viewBox="0 0 24 24" aria-hidden="true">
                                                                     <path

@@ -30,11 +30,12 @@ class LeadsController extends Controller
             $perPage = 5; // Number of records per page
              $offset = ($page - 1) * $perPage;
              $filter = $request->input('filter', 0);
+             $sortdistance = $request->input('sortdistance', 0);
         
             $user = $request->user();
             $userId = $user->id;     
             $profileController = new ProfileController();
-            $leads = $profileController->getLeads($userId, $user->distance,$page, $perPage,$offset,$filter);    
+            $leads = $profileController->getLeads($userId, $user->distance,$page, $perPage,$offset,$filter,$sortdistance);    
             $befirst_count = $profileController->getLeadsCount($user->id, $user->distance,1);
             $urgent_count = $profileController->getLeadsCount($user->id, $user->distance,2);           
             
@@ -154,6 +155,7 @@ private function arrLeads($leads = array())
         $time = $this->timeAgo($lead->date_entered);
         $service_name = $lead->service_name;
         $location = $lead->location;
+        $contacted_status = $lead->contacted_status ?? 'Not Set';
         $description = $lead->description;
         $distance = round($lead->distance);
         $hiring_decision = (int)$lead->hiring_decision;    
@@ -161,7 +163,7 @@ private function arrLeads($leads = array())
         $additional_details = (int)strlen($description);
         $leads_trail = $this->getLeadsTrail($lead_id, $lead_user_id) ?? [];
         $leads_notes = $this->getLeadsNotes($lead_id, $lead_user_id) ?? [];
-        $inarr = array("lead_id"=>$lead_id,"first_letter"=>$first_letter,"first_name"=>$first_name,"last_name"=>$last_name,"time"=>$time,"service_name"=>$service_name,"location"=>$location,"distance"=>$distance,"contacted"=>$contacted,"remender"=>$remender,"frequent"=>$frequent,"urgent"=>$urgent,"is_phone_verified"=>$is_phone_verified,"additional_details"=>$additional_details,"credits"=>$credits,"hiring_decision"=>$hiring_decision, "leads_trail" => $leads_trail,
+        $inarr = array("lead_id"=>$lead_id,"first_letter"=>$first_letter,"first_name"=>$first_name,"last_name"=>$last_name,"time"=>$time,"service_name"=>$service_name,"location"=>$location,"distance"=>$distance,"contacted"=>$contacted,"remender"=>$remender,"frequent"=>$frequent,"urgent"=>$urgent,"is_phone_verified"=>$is_phone_verified,"additional_details"=>$additional_details,"credits"=>$credits,"hiring_decision"=>$hiring_decision, "leads_trail" => $leads_trail, "contacted_status"=>$contacted_status,
         "leads_notes" => $leads_notes);
         array_push($leadsArr,$inarr);
 
@@ -170,26 +172,29 @@ private function arrLeads($leads = array())
 }
 
     public function showResponses(Request $request)
-    {
-        $userId = $request->user()->id;     
-    $profileController = new ProfileController();
-    $leads = $profileController->getResponseLeads($userId);    
-    $leads_count = count($leads);
-    $services_count = count($profileController->getUserServices($userId));
-    $leadsArr = $this->arrLeads($leads);
-      
-        return view('leads.responses', compact("leadsArr","leads_count","services_count"));
+    {        
+        return view('leads.responses');
     }
     public function getUserResponses(Request $request)
     {
         try{
-            $userId = $request->user()->id; 
+            $page = (int)$request->input('page', 1);
+            $perPage = 5; // Number of records per page
+             $offset = ($page - 1) * $perPage;
+             $filter = (int)$request->input('filter', 0);
+        
+            $user = $request->user();
+            $userId = $user->id;     
             $profileController = new ProfileController();
-            $leads = $profileController->getResponseLeads($userId);    
-            $leads_count = count($leads);
-            $services_count = count($profileController->getUserServices($userId));
-            $leadsArr = $this->arrLeads($leads);
-    $resultArr = array("leadsArr"=>$leadsArr,"leads_count"=>$leads_count,"services_count"=>$services_count);
+            $leads = $profileController->getResponseLeads($userId,$page, $perPage,$offset,$filter); 
+            $pending_count = $profileController->getResponseLeadsCount($userId,1);
+            $hired_count = $profileController->getResponseLeadsCount($userId,2);
+            
+            $leadsArr = $this->arrLeads($leads["data"]); 
+            $current_page =  (int)$leads["current_page"];
+            $last_page =  $leads["last_page"]; 
+            $leads_count = $leads["total"]; 
+    $resultArr = array("leadsArr"=>$leadsArr,"leads_count"=>$leads_count,"pending_count"=>$pending_count, "hired_count"=>$hired_count, "current_page"=>$current_page,"last_page"=>$last_page,"filter"=>$filter);
             
             return response()->json(["message"=>"Successful","leads"=>$resultArr],200);
         }

@@ -4,6 +4,7 @@ let isLoading = false;
 let lastPage = false;
 let filter = 0;
 let total = 0;
+let sortdistance = 0;
 
 $(document).ready(function() {
     $("#myleads").empty();
@@ -69,6 +70,7 @@ $(document).on('click','.be_first',function() {
 lastPage = false;
     filter = 1;
     page = 1;
+    $('#end-message').hide();
     $("#myleads").empty();
     $(".loader").show();
     fetchLeads();  
@@ -80,9 +82,19 @@ $(document).on('click','.my_urgent',function() {
 lastPage = false;
     filter = 2;
     page = 1;
+    $('#end-message').hide();
     $("#myleads").empty();
     fetchLeads();     
 });
+$(document).on('click', '#sortdistance', function () {
+    isLoading = false;
+    lastPage = false;
+    $('#end-message').hide();
+    $("#myleads").empty();
+    sortdistance = sortdistance === 1 ? 0 : 1;
+    fetchLeads();     
+});
+
 $(document).on('click','.view_lead',function() {
     var _token = $('input[name="_token"]').val();
    let lead_id = $(this).attr("m");  
@@ -128,7 +140,7 @@ const displayLeads = (json,count_total,befirst_count,urgent_count) =>{
             $("#myleads").append(leadsTemplate(lead_id,first_letter,first_name,location,time,urgent,is_phone_verified,additional_details,frequent,distance,contacted,remender,service_name,credits,hiring_decision));
           
         }
-        if(json.length>0)
+        if(json.length>0 && page === 1)
             {
                
                 let _token = $('input[name="_token"]').val();
@@ -302,7 +314,7 @@ const fetchLeads = () => {
 
     $(".loader").show();
     var _token = $('input[name="_token"]').val();
-    const obj = {_token,page,filter};
+    const obj = {_token,page,filter, sortdistance};
     getJSONResponse("getleads",obj).then((data) => {
     const leadsArr = data["leads"]["leadsArr"];
     const current_page =  data["leads"]["current_page"];

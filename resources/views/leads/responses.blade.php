@@ -94,7 +94,12 @@
   color: #000;
   border-top: 3px solid purple;
 }
-
+.end-message {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+            color: purple;
+        }
 </style>
     <div class="sticky-top enquiriesbanner">
         <div class="flex-fill d-flex">
@@ -218,6 +223,9 @@
                                             data-cy="leads-list" id="myleads">
                                       
                                          </div>
+                                         <div id="end-message" class="end-message">
+        No more leads to display.
+    </div>
                                             <div class="tw-w-full tw-flex tw-justify-center tw-items-center tw-py-4 loader" style="display:none">
                                             <div role="status" class="tw-flex" data-cy="loading-spinner"
                                                 style="width: 22px; height: 22px;">

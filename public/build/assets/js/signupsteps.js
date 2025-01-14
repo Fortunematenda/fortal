@@ -40,12 +40,12 @@ console.log(serviceName)
     setProgressBar(current);
 
     $("#next1").click(function(){
-        let distance = $("#distance").val();
-        let location = $("#location").val();
+        let distance =  parseInt($("#distance").val(),10);
+        let location = $("#searchLocation").val();
         if ($('input[name="location_select"]:checked').length < 1) {
             toast("danger","Please select area",5000);
         } 
-        else if(distance.length<3)
+        else if(distance<9)
         {
             toast("danger","Please enter distance",5000);
         }

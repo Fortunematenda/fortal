@@ -251,7 +251,7 @@ class ProfileController extends Controller
     return $urgentTotal->count();
 }
 
-    public function getLeads($user_id,$distance = 20,$page=0,$perPage=0,$offset=0,$filter=0)
+    public function getLeads($user_id,$distance = 20,$page=0,$perPage=0,$offset=0,$filter=0, $sortdistance=0)
     {
         $query = LeadsModel::join('user_services as u', 'leads.service_id', '=', 'u.service_id')
     ->join('master_services as m', 'u.service_id', '=', 'm.id')
@@ -301,8 +301,15 @@ class ProfileController extends Controller
         $query->where('leads.urgent', '=', 1);
     }
    
-    $query->havingRaw('distance <= '.$distance)  // Only include leads within 20km
-    ->orderBy('leads.id', 'desc');
+    $query->havingRaw('distance <= '.$distance);  // Only include leads within 20km
+    if($sortdistance == 1)
+    {
+        $query->orderBy('distance', 'asc');
+    }
+    else{
+        $query->orderBy('leads.id', 'desc');
+    }
+    
     $countQuery = clone $query;
         $total = $countQuery->count();
 
@@ -319,9 +326,27 @@ class ProfileController extends Controller
         ];
     
     }
-    public function getResponseLeads($user_id)
+    public function getResponseLeadsCount($user_id,$filter=0)
     {
-        $results = ContactedLeadsModel::join('leads as u', 'contacted_lead.lead_id', '=', 'u.id')
+        $query = ContactedLeadsModel::join('leads as u', 'contacted_lead.lead_id', '=', 'u.id')
+        ->join('master_services as m', 'u.service_id', '=', 'm.id')
+        ->join('users as s', 'u.user_id', '=', 's.id')            
+        ->where('contacted_lead.user_id', $user_id)  
+        ->where('contacted_lead.status', '<>',"Not Interested");
+        if($filter == 1)  
+        {
+$query->where('contacted_lead.status', '=',"Pending");
+        } 
+        elseif($filter == 2) 
+        {
+            $query->where('contacted_lead.status', '=',"Hired");
+        }
+        return $query->count();
+    
+    }
+    public function getResponseLeads($user_id, $page=0,$perPage=0,$offset=0,$filter=0)
+    {
+        $query = ContactedLeadsModel::join('leads as u', 'contacted_lead.lead_id', '=', 'u.id')
         ->join('master_services as m', 'u.service_id', '=', 'm.id')
         ->join('users as s', 'u.user_id', '=', 's.id')
         ->select(
@@ -338,12 +363,34 @@ class ProfileController extends Controller
             's.is_phone_verified',
             'u.urgent',
             'u.credits',
-            'u.hiring_decision'
+            'u.hiring_decision',
+            'contacted_lead.status as contacted_status'
         )
         ->where('contacted_lead.user_id', $user_id)  
-        ->where('contacted_lead.status', '<>',"Not Interested")     
-        ->orderBy('contacted_lead.id', 'desc') 
-        ->get();
+        ->where('contacted_lead.status', '<>',"Not Interested");
+        if($filter == 1)  
+        {
+$query->where('contacted_lead.status', '=',"Pending");
+        } 
+        elseif($filter == 2) 
+        {
+            $query->where('contacted_lead.status', '=',"Hired");
+        }
+        $query->orderBy('contacted_lead.id', 'desc');
+        $countQuery = clone $query;
+        $total = $countQuery->count();
+
+        // Apply limit and offset for pagination
+        $leads = $query->skip($offset)->take($perPage)->get();
+
+        // Return JSON response
+        return [
+            'data' => $leads,
+            'current_page' => $page,
+            'per_page' => $perPage,
+            'total' => $total,
+            'last_page' => ceil($total / $perPage)
+        ];
     
     return $results;
     
