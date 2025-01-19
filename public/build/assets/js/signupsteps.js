@@ -181,6 +181,7 @@ suggestionsList = document.getElementById('suggestions');
         let last_name = $("#last_name").val();
         let contact_number = $("#contact_number").val();
         let location = $("#searchLocation").val();
+        let biography = $("#biography").val();
         let latitude = $("#latitude").val();
         let longitude = $("#longitude").val();
         let distance = $("#distance").val();
@@ -204,8 +205,9 @@ suggestionsList = document.getElementById('suggestions');
                 }
        else{
         const obj = {
-            first_name,last_name,contact_number,location,latitude,longitude,distance,email,password,password_confirmation,company_name,is_company_website,company_size,is_company_sales_team,is_company_social_media,location_select,_token,service_id
+            first_name,last_name,contact_number,location,latitude,longitude,distance,email,password,password_confirmation,company_name,is_company_website,company_size,is_company_sales_team,is_company_social_media,location_select,_token,service_id,biography
         }
+  console.log(obj);
   
             $.ajax({
                 url: '/register',
@@ -215,13 +217,14 @@ suggestionsList = document.getElementById('suggestions');
                     $("#loader").show();
                 },
                 success: function(response) {
+                    console.log(response);
+                   
                     if(response.message === "Success")
                     {
                         //window.location.href = '/dashboard';                        
                         toast("success","Congratulations for signing up you can now view your leads!!!!",10000);
                         current_fs = $(".next").parent();
                         next_fs = $(".next").parent().next();
-                        console.log(next_fs);
                         $("#confirm").addClass("active");
                         
                         next_fs.show();
@@ -243,7 +246,7 @@ suggestionsList = document.getElementById('suggestions');
                 else{
                     toast("danger",'Error : '+response.message,5000);   
                 }
-                    
+                 
                     
                 },
                 error: function(xhr, status, error) {
@@ -254,6 +257,7 @@ suggestionsList = document.getElementById('suggestions');
                     $("#loader").hide();
                 }
             });
+           
         }
         });
         $('#location').on('input', function() {

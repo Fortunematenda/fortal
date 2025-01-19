@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{asset('build/assets/css/select2.min.css')}}">
     <link onerror="window?.fallbackOnError?.call(this, 'seller_dashboard');" rel="stylesheet" href="{{asset('build/assets/css/main.6dd4d89d0b4fea95.css')}}">
     <link rel="stylesheet" href="{{asset('build/assets/css/main_v2-built.645e5822f3.v2.css')}}">
+    <link rel="stylesheet" href="{{asset('build/assets/css/main_v2-built.87872c72ad.v2')}}">
     <link rel="stylesheet" href="{{asset('build/assets/css/Marin-Icons.css')}}">
     
 

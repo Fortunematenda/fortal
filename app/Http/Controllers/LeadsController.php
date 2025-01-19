@@ -35,9 +35,9 @@ class LeadsController extends Controller
             $user = $request->user();
             $userId = $user->id;     
             $profileController = new ProfileController();
-            $leads = $profileController->getLeads($userId, $user->distance,$page, $perPage,$offset,$filter,$sortdistance);    
-            $befirst_count = $profileController->getLeadsCount($user->id, $user->distance,1);
-            $urgent_count = $profileController->getLeadsCount($user->id, $user->distance,2);           
+            $leads = $profileController->getLeads($user,$page, $perPage,$offset,$filter,$sortdistance);    
+            $befirst_count = $profileController->getLeadsCount($user,1);
+            $urgent_count = $profileController->getLeadsCount($user,2);           
             
             
             $leadsArr = $this->arrLeads($leads["data"]); 
@@ -107,15 +107,18 @@ public function getResponseDetails(Request $request)
     $lead_id = $request->lead_id;
     $profileController = new ProfileController();
     $templates = new TemplatesController();
+      
     $lead = $profileController->getIndividualLead($lead_id);
     $first_letter = substr($lead->first_name, 0, 1);
     $first_name = $lead->first_name;
     $last_name = $lead->last_name;
+   
     $contacted = (int)$this->userResponse($lead_id);
     $remender = 5-$contacted;
     $lead_user_id  = (int)$lead->lead_user_id;
     $frequent = $this->frequentUser($lead_user_id);
     $urgent = (int)$lead->urgent;
+    
     $is_phone_verified = (int)$lead->is_phone_verified;
     $time = $this->timeAgo($lead->date_entered);
     $service_name = $lead->service_name;
@@ -124,31 +127,53 @@ public function getResponseDetails(Request $request)
     $hiring_decision = (int)$lead->hiring_decision;
     $credits = $lead->credits;
     $email = $lead->email;
+    
     $contact_number = $lead->contact_number;
     $lead_status = $lead->status;
+    
     $conl = $this->contactedLead($user->id,$lead_id);
     $lead_status = $conl["status"];
+  
     $leads_trail = $this->getLeadsTrail($lead_id,$user->id);
     $leads_notes = $this->getLeadsNotes($lead_id,$user->id);
     $lead_details = $this->getLeadServiceDetails($lead_id);
+    
     $lead_images = $this->getImages($lead_id);
+  
+    $lastresponded = $this->timeAgo($leads_notes[0]->date_entered);
+    
    
-$details = $templates->showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status,$leads_trail,$leads_notes,$lead_details,$lead_images);
-
+$details = $templates->showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status,$leads_trail,$leads_notes,$lead_details,$lead_images, $lastresponded);
+//$details ="YThgf";
     return response($details);
 }
-private function arrLeads($leads = array())
+private function arrLeads($leads = array(), $resp = 0,$loggedin_user_id = 0)
 {
     $leadsArr = array();
+
     foreach($leads as $lead)
     {
         $lead_id = $lead->id;
         $first_letter = substr($lead->first_name, 0, 1);
         $first_name = $lead->first_name;
         $last_name = $lead->last_name;
-        $contacted = (int)$this->userResponse($lead_id);
-        $remender = 5-$contacted;
         $lead_user_id  = (int)$lead->lead_user_id;
+        if($resp == 0){
+            $contacted = (int)$this->userResponse($lead_id);
+            $remender = 5-$contacted;
+            $distance = round($lead->distance);
+            $leads_notes = [];
+            $lastresponded = "";
+        }
+        else{
+            $contacted = 0;
+            $remender = 0;
+            $distance = 0;
+            $leads_notes = $this->getLeadsNotes($lead_id,$loggedin_user_id) ?? [];
+            $lastresponded = $this->timeAgo($lead->latest_note_date);
+            //$lastresponded = "";
+        }        
+        
         $frequent = $this->frequentUser($lead_user_id);
         $urgent = (int)$lead->urgent;
         $is_phone_verified = (int)$lead->is_phone_verified;
@@ -157,14 +182,15 @@ private function arrLeads($leads = array())
         $location = $lead->location;
         $contacted_status = $lead->contacted_status ?? 'Not Set';
         $description = $lead->description;
-        $distance = round($lead->distance);
+        
         $hiring_decision = (int)$lead->hiring_decision;    
         $credits = $lead->credits;
         $additional_details = (int)strlen($description);
         $leads_trail = $this->getLeadsTrail($lead_id, $lead_user_id) ?? [];
-        $leads_notes = $this->getLeadsNotes($lead_id, $lead_user_id) ?? [];
+        
+        
         $inarr = array("lead_id"=>$lead_id,"first_letter"=>$first_letter,"first_name"=>$first_name,"last_name"=>$last_name,"time"=>$time,"service_name"=>$service_name,"location"=>$location,"distance"=>$distance,"contacted"=>$contacted,"remender"=>$remender,"frequent"=>$frequent,"urgent"=>$urgent,"is_phone_verified"=>$is_phone_verified,"additional_details"=>$additional_details,"credits"=>$credits,"hiring_decision"=>$hiring_decision, "leads_trail" => $leads_trail, "contacted_status"=>$contacted_status,
-        "leads_notes" => $leads_notes);
+        "leads_notes" => $leads_notes, "lastresponded"=>$lastresponded);
         array_push($leadsArr,$inarr);
 
     }  
@@ -190,7 +216,7 @@ private function arrLeads($leads = array())
             $pending_count = $profileController->getResponseLeadsCount($userId,1);
             $hired_count = $profileController->getResponseLeadsCount($userId,2);
             
-            $leadsArr = $this->arrLeads($leads["data"]); 
+            $leadsArr = $this->arrLeads($leads["data"], 1, $userId); 
             $current_page =  (int)$leads["current_page"];
             $last_page =  $leads["last_page"]; 
             $leads_count = $leads["total"]; 
@@ -313,7 +339,10 @@ private function arrLeads($leads = array())
                 $balance = $credits_balance - $credits;
                 $user->credits_balance = $balance;
                 $user->save();
+                $description = "Hello, ChatGPT";
+                $lead = LeadsModel::where('id',$lead_id)->first();
                 $trail = CreditsTrailModel::create(["user_id"=>$user->id,"lead_id"=>$lead_id,"credits"=>$credits,"entered_by"=>$user->id]);
+                $note = LeadsNotesModel::create(["lead_id"=>$lead_id,"description"=>$description,"entered_by"=>$user->id,"user_id"=>$user->id,"comm_link"=>$lead->user_id."_".$user->id]);
                 $arr = array("email"=>$lead->email,"contact_number"=>$lead->contact_number);
                 $conl = $this->contactedLead($user->id,$lead_id);
                 if($conl == false)
@@ -329,6 +358,7 @@ private function arrLeads($leads = array())
                 return response()->json(["message"=>"Okay","details"=>$arr,"button"=>$user->id."-".$lead_id],200);
             }
             else{
+                LeadsModel::where('id', $lead_id)->update(["status" => "Unavailable"]);
                 return response()->json(["message"=>"Not Allowed","content"=>"This Lead is unavailable"],200);
             }
             }
@@ -438,7 +468,7 @@ private function arrLeads($leads = array())
     ->join('leads as l','lead_notes.lead_id','=','l.id')
     ->select('u.first_name','lead_notes.description','lead_notes.date_entered','lead_notes.user_id', 'l.user_id as leads_user_id')        
     ->where('lead_notes.comm_link',$comm_link)
-    ->where('lead_notes.lead_id',$lead_id)->get();
+    ->where('lead_notes.lead_id',$lead_id)->orderBy('lead_notes.id', 'desc')->get();
     return $notes;
 }
 catch(Exception $e){

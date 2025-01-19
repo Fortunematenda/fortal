@@ -134,7 +134,7 @@ class TemplatesController extends Controller
 
     
   
-  public function showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status,$leads_trail,$leads_notes,$lead_details,$lead_images){
+  public function showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status,$leads_trail,$leads_notes,$lead_details,$lead_images,$lastresponded){
      
     $details = " <div class='col-12 col-md-7 col-lg right-panel fixed-height-column scroll-touch h-100 d-block'
                 id='main-project-container' style='max-height: 870px;'>
@@ -182,7 +182,7 @@ $details .= " <span class='fortai-svg-icon bsi-primary-dark-blue bsi-xs'>
         $details .= "<div class='response-status-select-bar  '>"; 
 
         $details .= "<span class='last-activity-container'>
-                        <span class='js-last-activity'>Last activity $time</span>
+                        <span class='js-last-activity'>Lead created $time</span>
                         <span class='last-activity-copy' style='margin-right:10px'>Current status : </span>
                     </span>"; 
         
@@ -201,9 +201,7 @@ $details .= " <span class='fortai-svg-icon bsi-primary-dark-blue bsi-xs'>
         
         $details .= "<span class='status-icon' id='status-icon'>
                         <span class='fortai-svg-icon pending'>
-                            <svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                                <circle cx='7' cy='7' r='7' fill='#6C7191'></circle>
-                            </svg>
+                          <i class='bi bi-circle-fill $lead_status'></i>
                         </span>
                     </span>
                     </div>
@@ -221,7 +219,7 @@ $details .= " <span class='fortai-svg-icon bsi-primary-dark-blue bsi-xs'>
                                     </h4>
                                 </div>
                                 <div class='responded-ago text-xs-14 text-light-grey pt-2'>
-                                    <i class='bi bi-alarm'></i> Responded $time 
+                                    <i class='bi bi-alarm'></i> Responded $lastresponded 
                                 </div>
                             </div>
                             <div class='project-title strong mb-0 lh-md text-xs-16 bol'>
@@ -265,20 +263,7 @@ $details .= " <span class='fortai-svg-icon bsi-primary-dark-blue bsi-xs'>
         $details .= "<div class='bg-grey-50 rounded-pill text-green cursor-pointer d-flex verified-phone-button'>
                         <span class='fortai-svg-icon bsi-primary-primary bsi-primary-green'>
                             <!--?xml version='1.0' encoding='UTF-8'?-->
-                            <svg width='24px' height='24px' viewBox='0 0 24 24' version='1.1'
-                                xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
-                                <title>thick-tick</title>
-                                <g id='thick-tick' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'
-                                    class='primary-color'>
-                                    <g id='Icon/check_medium' fill-rule='nonzero'>
-                                        <g id='check_medium'>
-                                            <polygon id='Path-5'
-                                                points='18.4168162 5.93933983 20.5381366 8.06066017 10.2651963 18.3336005 3.93933983 12.007744 6.06066017 9.88642365 10.265 14.091'>
-                                            </polygon>
-                                        </g>
-                                    </g>
-                                </g>
-                            </svg>
+                          <i class='bi bi-patch-check'></i>
                         </span>
                         Verified
                     </div>

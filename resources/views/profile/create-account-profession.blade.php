@@ -47,8 +47,8 @@
                                
                                 <div class="col-6">                                 
                                 <input name="searchLocation" id="searchLocation" aria-label="autocomplete" type="text" class="Select_buttonClasses__rxXNq select-button" role="combobox" placeholder="Enter your location" data-cy="seller-signup-form-location" id="location">
-                                <input id="latitude" hidden></input>
-                                <input id="longitude" hidden></input>
+                                <input id="latitude" hidden ></input>
+                                <input id="longitude" hidden ></input>
                                 
                                 </div>
                                 <div class="col-6">
@@ -94,7 +94,7 @@
     <div class="radio-label">Company size, employees</div>
     <div class="options-container">
       <input type="radio" id="self-employed" name="company_size" value="Self-employed">
-      <label for="self-employed">Self-employed, Sole trader</label>
+      <label for="self-employed">Self-employed</label>
       <input type="radio" id="2-10" name="company_size" value="2-10">
       <label for="2-10">2-10</label>
       <input type="radio" id="11-50" name="company_size" value="11-50">

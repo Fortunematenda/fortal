@@ -1,14 +1,7 @@
 <section class="p-4 bg-white rounded-lg">
     <form id="notificationForm" action="{{ route('notifications.subscribed') }}" method="POST">
         @csrf <!-- Include CSRF token for security -->
-        
-        <header>
-            <h2 class="text-lg font-medium text-gray-900">
-                {{ __('Notification Settings') }}
-            </h2>
-        </header>
-
-        <div class="p-4 sm:p-8 sm:rounded-lg">
+      <div class="p-4 sm:p-8 sm:rounded-lg">
             <div class="max-w-xl">
                 <h4 class="text-md font-semibold mt-4">Services Alerts</h4>
                 

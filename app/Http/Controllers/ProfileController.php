@@ -17,6 +17,7 @@ use App\Models\LeadsModel;
 use App\Models\ContactedLeadsModel;
 use App\Models\CreditsTrailModel;
 use App\Notifications\SendOtpNotification;
+use Exception;
 
 class ProfileController extends Controller
 {
@@ -35,6 +36,7 @@ class ProfileController extends Controller
         $sms_notifications = $user->sms_notifications;
         $contact_number=$user->contact_number;
         $is_company_website=$user->is_company_website;
+        $biography=$user->biography;
         $company_size=$user->company_size;
         $is_company_sales_team=$user->is_company_sales_team;
         $location=$user->location;
@@ -46,12 +48,12 @@ class ProfileController extends Controller
         $login_at = date('l, j M g:ia', $timestamp);
         $latest_services = $this->getUserServices($user->id);
         $latest_services_limited = array_slice($latest_services, 0, 2);
-        $number_of_leads = $this->getLeadsCount($user->id, $user->distance);
+        $number_of_leads = $this->getLeadsCount($user);
         $contacted_lead = 0;
         $service_badge = count($latest_services)-2;
         $unread_leads = count($this->getUnreadLeads($user->id));
         
-        return view("dashboard",compact(["first_name","login_at","contacted_lead","greetings","profile_picture","contact_number","company_name","is_company_website","company_size","is_company_sales_team","logo","location","company_registration_number","latest_services_limited","service_badge","email","number_of_leads","unread_leads","credits_balance","new_leads_notifications","weekly_newsletter_notifications","subscribed_services_notifications","sms_notifications",]));
+        return view("dashboard",compact(["first_name","login_at","contacted_lead","greetings","profile_picture","contact_number","company_name","is_company_website","company_size","is_company_sales_team","logo","location","company_registration_number","latest_services_limited","service_badge","email","number_of_leads","unread_leads","credits_balance","new_leads_notifications","weekly_newsletter_notifications","subscribed_services_notifications","sms_notifications","biography"]));
      }
      public function edit(Request $request): View
      {
@@ -70,6 +72,7 @@ class ProfileController extends Controller
              'is_company_sales_team' => $user->is_company_sales_team,
              'contact_number' => $user->contact_number,
              'company_registration_number' => $user->company_registration_number,
+             'biography' => $user->biography,
              'location'=>$user->location,
              'latitude'=>$user->latitude,
              'longitude'=>$user->longitude,
@@ -78,7 +81,8 @@ class ProfileController extends Controller
              'profile_picture' =>$user->profile_picture,
              'logo' =>$user->logo,
              'transactions'=>$transactions,
-             'credits_balance'=>$user->credits_balance
+             'credits_balance'=>$user->credits_balance,
+             
          ]);
      }
      
@@ -86,7 +90,7 @@ class ProfileController extends Controller
      public function update(ProfileUpdateRequest $request): RedirectResponse
 {
     $user = $request->user();
-  
+  try{
     // Handle profile picture upload
     if ($request->hasFile('profile_picture')) {
         // Store the image in the 'public/profile_pictures' directory
@@ -108,6 +112,10 @@ class ProfileController extends Controller
         $user->distance = $request->distance;
     }
 
+    if ($request->filled('biography')) {
+        $user->biography = $request->input('biography');
+    }
+
     if ($user->isDirty()) {
         if ($request->hasFile('profile_picture')) {
         $user->profile_picture = $imageName;
@@ -115,8 +123,13 @@ class ProfileController extends Controller
         $user->save(); 
         return redirect()->route('profile.edit')->with('status', 'profile-updated')->with('success', 'Profile updated successfully!');
     }
+}
+catch(Exception $e)
+{
+    return redirect()->route('profile.edit')->with('status', 'profile-updated')->with('error', 'No changes were made : '.$e->getMessage());
+}
 
-    return redirect()->route('profile.edit')->with('status', 'No changes were made.');
+    
 }
 
 
@@ -201,8 +214,9 @@ class ProfileController extends Controller
         ->toArray();
         return $latest_services;
     }
-    public function getLeadsCount($user_id, $distance = 20, $filter = 0)
+    public function getLeadsCount($user, $filter = 0)
 {
+    $user_id = $user->id;
     $urgentTotal = LeadsModel::join('user_services as u', 'leads.service_id', '=', 'u.service_id')
         ->join('master_services as m', 'u.service_id', '=', 'm.id')
         ->join('users as s', 'leads.user_id', '=', 's.id')
@@ -210,11 +224,11 @@ class ProfileController extends Controller
         ->selectRaw('
             (
                 6371 * acos(
-                    cos(radians(s.latitude)) 
-                    * cos(radians(leads.latitude)) 
-                    * cos(radians(leads.longitude) - radians(s.longitude)) 
-                    + sin(radians(s.latitude)) 
-                    * sin(radians(leads.latitude))
+                cos(radians('.$user->latitude.')) 
+                * cos(radians(leads.latitude)) 
+                * cos(radians(leads.longitude) - radians('.$user->longitude.')) 
+                + sin(radians('.$user->latitude.')) 
+                * sin(radians(leads.latitude))
                 )
             ) AS distance
         ')
@@ -238,28 +252,28 @@ class ProfileController extends Controller
         })
         ->whereRaw('
             (
-                6371 * acos(
-                    cos(radians(s.latitude)) 
-                    * cos(radians(leads.latitude)) 
-                    * cos(radians(leads.longitude) - radians(s.longitude)) 
-                    + sin(radians(s.latitude)) 
-                    * sin(radians(leads.latitude))
+                   6371 * acos(
+                cos(radians('.$user->latitude.')) 
+                * cos(radians(leads.latitude)) 
+                * cos(radians(leads.longitude) - radians('.$user->longitude.')) 
+                + sin(radians('.$user->latitude.')) 
+                * sin(radians(leads.latitude))
                 )
             ) <= ?
-        ', [$distance]);  // Filter by distance using WHERE
+        ', [$user->distance]);  // Filter by distance using WHERE
 
     return $urgentTotal->count();
 }
 
-    public function getLeads($user_id,$distance = 20,$page=0,$perPage=0,$offset=0,$filter=0, $sortdistance=0)
+    public function getLeads($user, $page=0,$perPage=0,$offset=0,$filter=0, $sortdistance=0)
     {
+        $user_id = $user->id;
         $query = LeadsModel::join('user_services as u', 'leads.service_id', '=', 'u.service_id')
     ->join('master_services as m', 'u.service_id', '=', 'm.id')
     ->join('users as s', 'leads.user_id', '=', 's.id')
     ->select(
         'm.service_name', 
-        'leads.user_id as lead_user_id', 
-        'u.user_id as user_service_user_id', 
+        'leads.user_id as lead_user_id',  
         'leads.service_id', 
         's.first_name', 
         's.last_name', 
@@ -273,11 +287,11 @@ class ProfileController extends Controller
         'leads.hiring_decision',
         // Calculate the distance and include it in the result
         DB::raw('(
-            6371 * acos(
-                cos(radians(s.latitude)) 
+               6371 * acos(
+                cos(radians('.$user->latitude.')) 
                 * cos(radians(leads.latitude)) 
-                * cos(radians(leads.longitude) - radians(s.longitude)) 
-                + sin(radians(s.latitude)) 
+                * cos(radians(leads.longitude) - radians('.$user->longitude.')) 
+                + sin(radians('.$user->latitude.')) 
                 * sin(radians(leads.latitude))
             )
         ) AS distance')
@@ -301,7 +315,7 @@ class ProfileController extends Controller
         $query->where('leads.urgent', '=', 1);
     }
    
-    $query->havingRaw('distance <= '.$distance);  // Only include leads within 20km
+    $query->havingRaw('distance <= '.$user->distance);  // Only include leads within 20km
     if($sortdistance == 1)
     {
         $query->orderBy('distance', 'asc');
@@ -347,36 +361,43 @@ $query->where('contacted_lead.status', '=',"Pending");
     public function getResponseLeads($user_id, $page=0,$perPage=0,$offset=0,$filter=0)
     {
         $query = ContactedLeadsModel::join('leads as u', 'contacted_lead.lead_id', '=', 'u.id')
-        ->join('master_services as m', 'u.service_id', '=', 'm.id')
-        ->join('users as s', 'u.user_id', '=', 's.id')
-        ->select(
-            'm.service_name', 
-            'u.user_id as lead_user_id', 
-            'u.user_id as user_service_user_id', 
-            'u.service_id', 
-            's.first_name', 
-            's.last_name', 
-            'u.date_entered', 
-            'u.id', 
-            'u.description', 
-            's.location',
-            's.is_phone_verified',
-            'u.urgent',
-            'u.credits',
-            'u.hiring_decision',
-            'contacted_lead.status as contacted_status'
-        )
-        ->where('contacted_lead.user_id', $user_id)  
-        ->where('contacted_lead.status', '<>',"Not Interested");
-        if($filter == 1)  
-        {
-$query->where('contacted_lead.status', '=',"Pending");
-        } 
-        elseif($filter == 2) 
-        {
-            $query->where('contacted_lead.status', '=',"Hired");
-        }
-        $query->orderBy('contacted_lead.id', 'desc');
+    ->join('master_services as m', 'u.service_id', '=', 'm.id')
+    ->join('users as s', 'u.user_id', '=', 's.id')
+    ->leftJoin(DB::raw('(SELECT lead_id, MAX(date_entered) as latest_date_entered FROM lead_notes GROUP BY lead_id) as ln'), 'u.id', '=', 'ln.lead_id')
+    ->leftJoin('lead_notes as ln_full', function($join) {
+        $join->on('ln.lead_id', '=', 'ln_full.lead_id')
+             ->on('ln.latest_date_entered', '=', 'ln_full.date_entered');
+    })
+    ->select(
+        'm.service_name', 
+        'u.user_id as lead_user_id', 
+        'u.user_id as user_service_user_id', 
+        's.id as loggedin_user_id',
+        'u.service_id', 
+        's.first_name', 
+        's.last_name', 
+        'u.date_entered', 
+        'u.id', 
+        'u.description', 
+        's.location',
+        's.is_phone_verified',
+        'u.urgent',
+        'u.credits',
+        'u.hiring_decision',
+        'contacted_lead.status as contacted_status',
+        'ln_full.date_entered as latest_note_date',
+    )
+    ->where('contacted_lead.user_id', $user_id)
+    ->where('contacted_lead.status', '<>', "Not Interested");
+
+if ($filter == 1) {  
+    $query->where('contacted_lead.status', '=', "Pending");
+} elseif ($filter == 2) {  
+    $query->where('contacted_lead.status', '=', "Hired");
+}
+
+$query->orderBy('ln_full.date_entered', 'desc');
+
         $countQuery = clone $query;
         $total = $countQuery->count();
 
@@ -410,7 +431,7 @@ $query->where('contacted_lead.status', '=',"Pending");
             'leads.date_entered', 
             'leads.id', 
             'leads.description', 
-            's.location',
+            'leads.location',
             's.is_phone_verified',
             'leads.urgent',
             'leads.credits',

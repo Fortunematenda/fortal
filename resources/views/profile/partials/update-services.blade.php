@@ -1,14 +1,6 @@
 <section class="p-4 bg-white rounded-lg">
 
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Add More Services') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your services.") }}
-        </p>
-    </header>
+ 
 
 
     <form method="post" action="{{ route('update_services') }}" class="mt-6 space-y-6">

@@ -21,7 +21,13 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     { 
         try {
-            $role = isset($request->formData)?"Customer":"Expert";
+            $role = "Customer";
+            $distance = '0';
+            if(!isset($request->formData))
+            {
+                $role = "Expert";
+                $distance = $request->distance;
+            }
             
             // Validating the incoming request
            if(isset($request->formData))
@@ -54,12 +60,13 @@ class RegisteredUserController extends Controller
             $user = User::firstOrCreate(
                 ['email' => $request->email],
                 [ 
-                    'first_name' => $request->first_name,
-                    'last_name' => $request->last_name,
+                    'first_name' => ucfirst($request->first_name),
+                    'last_name' => ucfirst($request->last_name),
                     'contact_number' => $request->contact_number,
                     'location' => $request->location,
                     'latitude' => $request->latitude,
                     'longitude' => $request->longitude,
+                    'distance' => $distance,
                     'role' => $role,
                     'password' => Hash::make($request->password),
                     'company_name' => $request->company_name,
@@ -68,6 +75,7 @@ class RegisteredUserController extends Controller
                     'is_company_sales_team' => $request->is_company_sales_team,
                     'is_company_social_media' => $request->is_company_social_media,
                     'entered_by' => $request->email,
+
                 ]
             );
  
@@ -128,6 +136,9 @@ class RegisteredUserController extends Controller
         Auth::login($user);
           return response()->json([
             "message" => "Success",
+            "user"=>$user,
+            "latitude"=>$request->latitude,
+            "longitude"=>$request->longitude,
             "redirect_url" => route('customer.dashboard')
         ], 200);       
        

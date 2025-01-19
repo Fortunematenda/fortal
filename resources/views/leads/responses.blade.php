@@ -100,6 +100,21 @@
             margin: 20px 0;
             color: purple;
         }
+        .Pending{
+            color: gold;
+        }
+        .Archive{
+            color: grey;
+        }
+        .Hired{
+            color:rgb(91, 211, 63);
+        }
+        .Lost{
+            color: red;
+        }
+        .Cancelled{
+            color: brown;
+        }
 </style>
     <div class="sticky-top enquiriesbanner">
         <div class="flex-fill d-flex">

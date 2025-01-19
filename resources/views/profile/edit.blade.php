@@ -1,5 +1,5 @@
 <x-app-layout>
-  <!DOCTYPE html>
+<!DOCTYPE html>
   <html lang="en">
   <head>
       <meta charset="utf-8">
@@ -8,7 +8,6 @@
       <title>account settings - Bootdey.com</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
-      
       <style type="text/css">
   
   
@@ -106,24 +105,170 @@
       padding: 0.85rem 1.5rem;
       border-color: rgba(24,28,33,0.03) !important;
   }
+  body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: white;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        header img {
+            height: 50px;
+        }
+
+        .tabs {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            border-bottom: 1px solid #ddd;
+            background-color: white;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .tab.active {
+            border-bottom: 2px solid #4285f4;
+            font-weight: bold;
+            color: #4285f4;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .section {
+            background-color: white;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .section h2 {
+            font-size: 18px;
+            margin: 0;
+            padding: 15px;
+            background-color: #4285f4;
+            color: white;
+        }
+
+        .section p {
+            padding: 15px;
+            margin: 0;
+            color: #333;
+        }
+
+        .section a {
+            display: block;
+            padding: 15px;
+            text-decoration: none;
+            color: #4285f4;
+            background-color: #f9f9f9;
+            border-top: 1px solid #ddd;
+        }
+
+        .section a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .tabs {
+                overflow-x: auto;
+                scrollbar-width: thin;
+            }
+
+            .tab {
+                flex: 0 0 auto;
+            }
+        }
   
-  
-  
+        .cHKndY {
+    flex: 1 1 0% !important;
+    text-align: center !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    box-shadow: none !important;
+    margin-bottom: 16px !important;
+    color: purple !important;
+    margin-top: 16px !important;
+}
+.iidlEb {
+    max-width: 768px !important ;
+    margin: 24px auto !important;
+    border-radius: 4px !important;
+    box-shadow: rgb(224, 224, 224) 0px 0px 0px 1px !important;
+    background-color: rgb(255, 255, 255) !important;
+    padding: 24px 16px !important;
+}
+.wHRnL {
+    background-color: rgb(255, 255, 255) !important;
+    box-shadow: rgb(224, 224, 224) 0px 0px 0px 1px !important;
+    color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.wUjgt {
+   /* font-family: "source sans pro", "sans-serif";*/
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: rgba(0, 0, 0, 0.87);
+    font-weight: bold;
+}
+
       </style>
-  </head>
-  <body>
-  <div class="container light-style flex-grow-1 container-p-y">
+ 
   
-      <h4 class="font-weight-bold py-3 mb-4">
+  <div class="tabs wHRnL wUjgt" id="tabs">
+        <div class="tab profile" data-content="profile" href="#profile">Personal Info</div>
+        <div class="tab lead_settings" data-content="lead_settings" href="#lead_settings">Lead Settings</div>
+        <div class="tab services" data-content="services" href="#services">Services</div>
+        <div class="tab purchase_credits" data-content="purchase_credits" href="#purchase_credits">Credits</div>
+        <div class="tab data-privacy" data-content="data-privacy">Data & Privacy</div>
+        <div class="tab password" data-content="password"  href="#password">Security</div>
+        <div class="tab social-links" data-content="social-links"  href="#social-links">Social links</div>
+        <div class="tab notifications" data-content="notifications" href="#notifications">Notifications</div>
+    </div>
+  <h4 class="font-weight-bold  mb-4 cHKndY">
         Account settings
       </h4>
+  <div class="container light-style flex-grow-1 container-p-y iidlEb">
+  
+     
   
       @if(session('success'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-          {{ session('success') }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-  @endif
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@elseif(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+{{-- Display Validation Errors --}}
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
       <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
     </form>
@@ -133,22 +278,9 @@
     @method('patch')
     <!-- Form fields go here -->
     
+   
 
-        
-      <div class="card overflow-hidden ">
-        <div class="row no-gutters row-bordered row-border-light">
-          <div class="col-md-3 pt-0 ">
-          <div class="list-group list-group-flush account-settings-links overflow-auto scroll-touch">
-    <a class="list-group-item list-group-item-action active" data-toggle="list" href="#profile">General</a>
-    <a class="list-group-item list-group-item-action" data-toggle="list" href="#lead_settings">Lead Settings</a>
-    <a class="list-group-item list-group-item-action" data-toggle="list" href="#services">Services</a>
-    <a class="list-group-item list-group-item-action" data-toggle="list" href="#purchase_credits">Purchase Credits</a>
-    <a class="list-group-item list-group-item-action" data-toggle="list" href="#social-links">Social links</a>
-    <a class="list-group-item list-group-item-action" data-toggle="list" href="#password">Update Password</a>
-    <a class="list-group-item list-group-item-action" data-toggle="list" href="#notifications">Notifications</a>
-</div>
-</div>
-          <div class="col-md-9">
+  
             <div class="tab-content">
 
              <!--General-->
@@ -217,55 +349,73 @@
   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript"></script>
-  </body>
-  </html>
+
   </x-app-layout>
   
   <script>
-      function showContent(contentId, tab) {
-          // Hide all content divs
-          const contents = document.querySelectorAll('.content');
-          contents.forEach(content => {
-              content.classList.add('hidden');
-          });
-  
-          // Remove active styles from all tabs
-          const allTabs = document.querySelectorAll('.tab-button');
-          allTabs.forEach(function(t) {
-              t.classList.remove('text-blue-500', 'border-b-2', 'border-blue-500');
-              t.classList.add('text-gray-500');
-          });
-  
-          // Show the selected content and style the active tab
-          tab.classList.remove('text-gray-500');
-          tab.classList.add('text-blue-500', 'border-b-2', 'border-blue-500');
-          document.getElementById(contentId).classList.remove('hidden');
-      }
-  
-     
-      window.onload = function() {
-          const profileTab = document.querySelector('.tab-button');
-          showContent('profile', profileTab);
-      };
-  
-      function toast(icon, txt, time) {
-          yoyoToast.fire({
-              type: icon,
-              title: 'Status',
-              message: txt,
-              timeout: time,
-              position: 'top-right',
-              timeoutFunction: () => {},   
-          });
-      }
-  
-   
-      document.getElementById('saveButton').addEventListener('click', function() {
-          toast('success', 'Profile updated successfully!', 3000);
-      });
-      
+    function getCookie(name) {
+    const cookies = document.cookie.split(';'); // Split all cookies into an array
+    for (let cookie of cookies) {
+        cookie = cookie.trim(); // Remove leading and trailing spaces
+        if (cookie.startsWith(name + "=")) {
+            return cookie.substring((name + "=").length); // Return the value of the cookie
+        }
+    }
+    return null; // Return null if the cookie is not found
+}
+    let tab_name = "profile";
+    document.addEventListener('DOMContentLoaded', function () {
+    // Select all tabs
+    const tabs = document.querySelectorAll('.tab');
+    
+    // Attach event listeners to all tabs
+    tabs.forEach((tab) => {
+        tab.addEventListener('click', function () {
+            // Remove active class from all tabs
+            tabs.forEach((t) => t.classList.remove('active'));
+            
+            // Add active class to the clicked tab
+            this.classList.add('active');
+            
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-pane');
+            tabContents.forEach((content) => content.classList.remove('active', 'show'));
+            
+            // Show the corresponding content
+            const contentId = this.getAttribute('data-content');
+            const contentElement = document.getElementById(contentId);
+            tab_name = contentId;
+            document.cookie = `tab_name=${tab_name}; path=/`;
+            if (contentElement) {
+                contentElement.classList.add('active', 'show');
+            }
+        });
+    });
+
+    // Initialize the first tab as active on load
+    const tabNameCookie = getCookie('tab_name');
+    console.log(tabNameCookie);
+if (tabNameCookie) {
+    tab_name = tabNameCookie;
+} else {
+    tab_name = "profile";
+}
+    const initialTab = document.querySelector('.tab.'+tab_name);
+    if (initialTab) {
+        // Hide all tab contents
+        const tabContents = document.querySelectorAll('.tab-pane');
+            tabContents.forEach((content) => content.classList.remove('active', 'show'));
+        $("."+tab_name).addClass("active");
+        
+        const initialContentId = initialTab.getAttribute('data-content');
+        const initialContent = document.getElementById(initialContentId);
+        if (initialContent) {
+            initialContent.classList.add('active', 'show');
+        }
+    }
+});
+
+//document.cookie = `tab_name=profile; path=/`;     
   </script>
   
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_Qd54wgjWo4t-Klmi3m_pz8HbHz0GQto&libraries=places&callback=initializeAutocomplete" type="text/javascript"></script>
-  
-  

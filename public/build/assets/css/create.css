@@ -3,12 +3,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 50px;
-  background: linear-gradient(to right, #1e90ff, #d3d3d3);
+  background: linear-gradient(to right, #a7bdd1, #d3d3d3);
 
 }
 #heading {
     text-transform: uppercase;
-    color: #1e90ff;
+    color: purple;
     font-weight: 600;
     font-size: 24px;
     margin-bottom: 10px;
@@ -106,13 +106,13 @@
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    border: 1px solid #1e90ff;
+    border: 1px solid purple;
     outline-width: 0
 }
 
 #msform .action-button {
     width: 100px;
-    background: #1e90ff;
+    background: purple;
     font-weight: bold;
     color: white;
     border: 0 none;
@@ -154,14 +154,14 @@
 
 .fs-title {
     font-size: 25px;
-    color: #1e90ff;
+    color: purple;
     margin-bottom: 15px;
     font-weight: normal;
     text-align: left
 }
 
 .purple-text {
-    color: #1e90ff;
+    color: purple;
     font-weight: normal
 }
 
@@ -185,7 +185,7 @@
 }
 
 #progressbar .active {
-    color: #1e90ff
+    color: purple;
 }
 
 #progressbar li {
@@ -243,7 +243,7 @@
 
 #progressbar li.active:before,
 #progressbar li.active:after {
-    background: #1e90ff
+    background: purple;
 }
 
 .progress {
@@ -251,7 +251,7 @@
 }
 
 .progress-bar {
-    background-color: #1e90ff
+    background-color: purple
 }
 
 .fit-image {
@@ -265,14 +265,14 @@
 
 .left-column h1 {
     font-size: 4em;
-    color: #333;
+    color: #5f0969;
     padding-right: 10px;
 }
 
 .left-column p {
     font-size: 1.5em;
     margin: 20px 0;
-    color: #555;
+    color: #531457;
 }
 
 .left-column input[type="text"] {
@@ -287,7 +287,7 @@
 .left-column button {
     padding: 15px 30px;
     font-size: 1.2em;
-    background-color: #0066ff;
+    background-color: #741a93;
     color: white;
     border: none;
     border-radius: 10px;

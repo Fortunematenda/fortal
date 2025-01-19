@@ -31,7 +31,9 @@
                 <div class="container tw-mx-auto">
                     <!-- Header Section -->
                     <div class="pb-4">
+                    <h3 class="fw-bold mb-3">Good night, Tenda!</h3><h6 class="op-7 mb-2">Tuesday, 10 Dec 9:37am</h6>
                         <div class="top-row_root__3JOm6">
+                            
                             <h1>Your requests</h1>
                             
 
@@ -49,10 +51,12 @@
                     <!-- Project List Section -->
                     
                     <div class="mb-4">
+                        
                         <div class="projectlistContainer" id="app">
                             <div data-testid="project_list" class="tw-flex tw-flex-row tw-grid sm:tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-4">
                                 <!-- Project List Item 1 -->
-                                
+                                        
+              
 
                                 <!-- Project List Item 2 -->
                                  @forelse ($user_leads as $lead)

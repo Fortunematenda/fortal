@@ -143,7 +143,8 @@ const displayLeads = (json,pending_count,hired_count) =>{
             let credits = json[key]["credits"];
             let leads_trail = json[key]["leads_trail"];
             let contacted_status = json[key]["contacted_status"];
-            $("#myleads").append(leadsTemplate(lead_id,first_letter,first_name,location,time,urgent,is_phone_verified,additional_details,frequent,description,contacted,remender,service_name,credits,hiring_decision,leads_trail, contacted_status));
+            let lastresponded = json[key]["lastresponded"];
+            $("#myleads").append(leadsTemplate(lead_id,first_letter,first_name,location,time,urgent,is_phone_verified,additional_details,frequent,lastresponded,contacted,remender,service_name,credits,hiring_decision,leads_trail, contacted_status));
           
         }
         if(json.length>0 && page === 1)
@@ -218,7 +219,7 @@ const getHTMLResponse = (url,obj) => {
 
 const leadsTemplate = (
     lead_id, first_letter, first_name, location, time, urgent, 
-    is_phone_verified, additional_details, frequent, description, 
+    is_phone_verified, additional_details, frequent, lastresponded, 
     contacted, remender, service_name, credits,hiring_decision,leads_trail, contacted_status
 ) => {
 
@@ -236,18 +237,17 @@ const leadsTemplate = (
               "<p class='tw-m-0 tw-font-gordita-regular tw-text-xs'>" + service_name + "</p>" +
               "<p class='tw-mt-1 tw-font-gordita-regular tw-text-xs tw-text-gray-500'></p>" +
               "</div></div>" +
-              "<span class='tw-p-1 tw-m-0 tw-text-gray-600 tw-text-xs tw-font-gordita-regular " +
-              "tw-bg-green-50 tw-h-fit tw-rounded'><svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='7' cy='7' r='7' fill='#6C7191'></circle></svg>"+contacted_status+"</span>";
+              "<div style='color:purple'> <i class='bi bi-patch-check'></i></div>";
 
             txt += "</div><div class='tw-flex tw-flex-wrap tw-justify-start tw-items-center tw-gap-1 tw-mt-4' data-cy='value-badges'></div>";
             txt += " <div class='tw-flex tw-flex-col tw-p-2 tw-bg-gray-100 tw-rounded tw-text-xs tw-mt-4'>";
             
-            txt += "  <span class='tw-text-left tw-mb-3 tw-text-xs tw-font-gordita-regular tw-flex tw-justify-start tw-items-end'><b><i class='bi bi-geo-alt'></i>" + location + "</b></span>";
-            txt += "  <span class='tw-text-left tw-font-gordita-regular tw-text-gray-700'><i class='bi bi-list-check'></i>" + description + "</span>";
+            txt += "  <span class='tw-text-left tw-mb-3 tw-text-xs tw-font-gordita-regular tw-flex tw-justify-start tw-items-end'><b><i class='bi bi-geo-alt'></i> " + location + "</b></span>";
+            txt += "  <span class='tw-text-left tw-font-gordita-regular tw-text-gray-700'><i class='bi bi-alarm'></i> " + lastresponded + "</span>";
             txt += "</div> ";
             txt += "<div class='mt-2 px-2 py-2 latest-action bg-grey-50 flex-row justify-content-between align-items-center text-break text-xs rounded'>";
-            txt += "  <span class='tw-text-left tw-mb-3'></span>";
-            txt += "  <span class='tw-text-left tw-font-gordita-regular tw-text-gray-700' style='font-size: 0.8rem; display: flex; align-items: left;'><b><i class='bi bi-check-all'></i></b><span style='margin-left: 0.5rem;'><b>" + 'leads_trail' + "</b></span></span>";
+            txt += "  <span class='tw-text-left tw-mb-3 tw-mt-2 tw-text-xs tw-font-gordita-regular tw-flex tw-justify-start tw-items-end'><i class='bi bi-coin'></i> &nbsp;" +credits + " Credits" +"</span>";
+            txt += "  <span class='tw-text-left tw-font-gordita-regular tw-text-gray-700' style='font-size: 0.8rem; display: flex; align-items: left;'><b><i class='bi bi-circle-fill "+contacted_status+"'></i></b><span style='margin-left: 0.5rem;'><b> " + contacted_status + "</b></span></span>";
 
             txt += "</div><div class='tw-flex tw-justify-between tw-mt-4'>";
             txt += "  <div class='tw-flex tw-justify-start tw-items-end' data-cy='lead-price'>";

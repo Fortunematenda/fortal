@@ -22,6 +22,7 @@ class ProfileUpdateRequest extends FormRequest
             'company_registration_number' => ['nullable', 'string', 'max:50'],
             'profile_picture' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Not always required
             'logo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Not always required
+            'biography' => ['nullable', 'string'],
             'location' => ['required', 'string', 'max:255'],
             'latitude' => 'nullable|numeric', // Latitude
             'longitude' => 'nullable|numeric', // Longitude
@@ -35,4 +36,20 @@ class ProfileUpdateRequest extends FormRequest
             ],
         ];
     }
+
+    public function messages(): array
+{
+    return [
+        'first_name.required' => 'The first name is required.',
+        'last_name.required' => 'The last name is required.',
+        'location.required' => 'Please provide your location.',
+        'email.required' => 'The email address is required.',
+        'email.email' => 'Please provide a valid email address.',
+        'email.unique' => 'This email is already registered.',
+        'profile_picture.image' => 'The profile picture must be an image.',
+        'profile_picture.mimes' => 'The profile picture must be a file of type: jpeg, png, jpg, gif.',
+        'profile_picture.max' => 'The profile picture must not exceed 2 MB.',
+        'distance.in' => 'The distance must be one of the following: 10, 20, 50.',
+    ];
+}
 }

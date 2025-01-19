@@ -6,14 +6,14 @@
         <link rel="stylesheet" href="https://d1w7gvu0kpf6fl.cloudfront.net/fonts/marin-icons-032019/Marin-Icons.css">
     
       <link rel="stylesheet" href="{{asset('build/assets/css/main_v2-built.645e5822f3.v2.css')}}">
-    <div class="card-body media align-items-center">
+    <div class="card-body media align-items-center wUjgt ">
         <img src="{{ $user->profile_picture && file_exists(public_path('storage/profile_pictures/' . $user->profile_picture)) 
             ? asset('storage/profile_pictures/' . $user->profile_picture) 
             : 'https://bootdey.com/img/Content/avatar/avatar1.png' }}" 
             alt="Profile Picture" 
             class="d-block ui-w-80">
 
-        <div class="media-body ml-4">
+        <div class="media-body ml-4 ">
             <label for="profile_picture" class="btn btn-outline-primary">
                 {{ __('Upload Profile Picture') }}
                 <input type="file" id="profile_picture" name="profile_picture" class="account-settings-fileinput block w-full focus:ring focus:ring-indigo-200" accept="image/*">
@@ -47,10 +47,18 @@
             <label class="form-label">Contact Number</label>
             <input type="text" id="contact_number" name="contact_number" class="form-control mb-1" value="{{ old('contact_number', $user->contact_number) }}" />
         </div>
+        <!-- Location -->
+        <div class="form-group">
+                            <label class="form-label">Location</label>
+                            <input type="text" id="searchLocation" name="location" class="form-control mb-1" value="{{ old('location', $user->location) }}" placeholder="Enter your location" />
+                            <input type="hidden" name="latitude" id="latitude" value="{{ old('latitude', $user->latitude) }}">
+                            <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude', $user->longitude) }}">
+                        </div>
 
     <div class="form-group">
                     <label class="form-label">Bio</label>
-                    <textarea class="form-control" rows="5"> </textarea>
+                    <textarea class="form-control" id="biography" name="biography" rows="5">{{ old('biography', $user->biography) }} </textarea>
+                    
                   </div>
                   </div>
     <div class="text-right mt-3">

@@ -14,7 +14,8 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="{{asset('build/assets/css/main.css')}}">
     <link rel="stylesheet" href="{{asset('build/assets/css/main.9be759a28ac54caa.css')}}">
-    <link rel="stylesheet" href="{{asset('build/assets/css/uikit.min.css')}}">
+    <!--<link rel="stylesheet" href="{{asset('build/assets/css/kaiadmin.min')}}">-->
+    <link rel="stylesheet" href="{{asset('build/assets/css/uikit.min.css')}}"
     <link rel="stylesheet" href="{{asset('build/assets/css/buyer.css')}}">
     <link rel="stylesheet" href="{{asset('build/assets/css/settings.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -72,6 +73,10 @@
     <!-- Scripts -->
     <script type="text/javascript" charset="utf-8" src="{{asset('build/assets/js/jquery.min.js')}}"></script>
     <script type="text/javascript" charset="utf-8" src="{{asset('build/assets/js/main.js')}}"></script>
+  <!--  <script type="text/javascript" charset="utf-8" src="{{asset('build/assets/js/demo.js')}}"></script>
+    <script type="text/javascript" charset="utf-8" src="{{asset('build/assets/js/kaiadmin.min.js')}}"></script>
+    <script type="text/javascript" charset="utf-8" src="{{asset('build/assets/js/setting-demo.js')}}"></script>-->
+   
     <script src="{{asset('build/assets/js/signupsteps.js')}}"></script>
     <script src="{{asset('build/assets/js/yoyoToast.umd.min.js')}}"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
