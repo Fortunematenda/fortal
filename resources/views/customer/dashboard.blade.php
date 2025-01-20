@@ -23,19 +23,14 @@
             </div>
         </div>
     </div>
-
-    <!-- Main Content Wrapper -->
-    <div class="full-width-wrapper full-height-with-header bg-light-grey">
-        <div id="__rctBuyerPlist">
-            <div class="" id="app" style="background-color: rgb(249, 249, 250);">
-                <div class="container tw-mx-auto">
-                    <!-- Header Section -->
-                    <div class="pb-4">
-                    <h3 class="fw-bold mb-3">Good night, Tenda!</h3><h6 class="op-7 mb-2">Tuesday, 10 Dec 9:37am</h6>
+    <div class="pb-4">
+                   
                         <div class="top-row_root__3JOm6">
                             
-                            <h1>Your requests</h1>
-                            
+                        
+                            <h4 class="font-weight-bold  mb-4 cHKndY">
+                            Your requests
+      </h4>
 
                             <button class="Button_base__iY8s5 Button_lg__GH03D Button_minWidth__2dpSx Button_textBlue__796NH Button_bgLightBlue__0RMHv __btnPlaceRequest tw-border-0">
                                 <span class="button-main">
@@ -47,6 +42,13 @@
                             
                         </div>
                     </div>
+    <!-- Main Content Wrapper -->
+    <div class="full-width-wrapper full-height-with-header bg-light-grey">
+        <div id="__rctBuyerPlist">
+            <div class="" id="app" style="background-color: rgb(249, 249, 250);">
+                <div class="container tw-mx-auto">
+                    <!-- Header Section -->
+                
 
                     <!-- Project List Section -->
                     
@@ -200,6 +202,19 @@
 
 <!-- Add CSS for the Marquee -->
 <style>
+    .mb-4 {
+  margin-bottom: 1.5rem !important;
+}
+.cHKndY {
+  flex: 1 1 0% !important;
+  text-align: center !important;
+  font-size: 20px !important;
+  font-weight: bold !important;
+  box-shadow: none !important;
+  margin-bottom: 16px !important;
+  color: purple !important;
+  margin-top: 16px !important;
+}
     .marquee-wrapper {
         background-color: #f8f9fa;
         overflow: hidden;

@@ -52,16 +52,18 @@
     <a class="d-lg-flex flex-row" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <x-dropdown align="right" width="48">
             <x-slot name="trigger">
-                <div class="d-inline-flex text-white justify-content-center align-items-center">
-                    <div class="elite-pro d-inline-flex justify-content-center align-items-center">
-                        <span class="w-0"></span>
-                        <img class="img-fluid default-avatar default-avatar-36 elite-pro-border elite-pro-border-sm ml-3 mr-1 loading" alt="Rachfort Solutions" width="32" height="32" title="Rachfort Solutions" src="./Bark.com - Leads_files/667b472a2a569.png!d=Wm3hl" srcset="https://d1k8hez1mxkuxw.cloudfront.net/s/avatar_v2/bmMOaP/logo/667b472a2a569.png!d=Wm3hl 1x, https://d1k8hez1mxkuxw.cloudfront.net/s/avatar_v2/bmMOaP/logo/667b472a2a569.png!d=N0quzn 2x" data-was-processed="true">
-                            <div class="d-none default-avatar default-avatar-36 bg-heliotrope text-white ml-3 mr-1 justify-content-center align-items-center elite-pro-border elite-pro-border-sm">
-                                R
-                            </div>
-                            <img class="elite-pro-icon elite-pro-icon-32 loading" src="{{asset('build/assets/img/elite-pro.svg')}}" alt="Rachfort Solutions" height="18" width="16" data-was-processed="true">
-                        </div>
-                    </div>
+            <div class="d-inline-flex text-white justify-content-center align-items-center">
+                                                                    <div class="elite-pro d-inline-flex justify-content-center align-items-center">
+                                        <span class="w-0"></span>
+                                    <img class="img-fluid default-avatar default-avatar-36 elite-pro-border elite-pro-border-sm ml-3 mr-1 loading" alt="Rachfort Solutions" width="32" height="32" title="Rachfort Solutions" src="./Bark.com - Leads_files/667b472a2a569.png!d=Wm3hl" srcset="https://d1k8hez1mxkuxw.cloudfront.net/s/avatar_v2/bmMOaP/logo/667b472a2a569.png!d=Wm3hl 1x, https://d1k8hez1mxkuxw.cloudfront.net/s/avatar_v2/bmMOaP/logo/667b472a2a569.png!d=N0quzn 2x" data-was-processed="true">
+                                        
+                                        <div class="d-none default-avatar default-avatar-36 bg-heliotrope text-white ml-3 mr-1 justify-content-center align-items-center elite-pro-border elite-pro-border-sm">
+                                            R
+                                        </div>
+                                        <p class="d-inline-flex text-dark-blue mb-0 ml-1 js-buyer-username">
+                                            Fortune Matenda
+                                        </p>
+                                    </div>
                     
                 </a>
 

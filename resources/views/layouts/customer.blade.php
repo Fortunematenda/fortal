@@ -19,6 +19,15 @@
         </div>
 
         
+
+
+
+
+
+
+
+
+        
        
     <div class="collapse navbar-collapse " id="navbarSupportedContent" style="background-color: #ffff;">
     @auth
@@ -48,6 +57,24 @@
             
         </li>
 
+
+
+
+
+
+
+
+       
+
+
+
+
+
+
+
+
+
+
                 </li>
                 <li class="nav-item dropdown user-account-dropdown seller p-lg-2">
                     <a class="dropdown-toggle d-lg-flex flex-row" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -56,32 +83,17 @@
                                                     <div class="d-inline-flex text-white justify-content-center align-items-center">
                                                                     <div class="elite-pro d-inline-flex justify-content-center align-items-center">
                                         <span class="w-0"></span>
-                                        <img class="img-fluid default-avatar default-avatar-36 elite-pro-border elite-pro-border-sm ml-3 mr-1 loading" alt="Rachfort Solutions" width="32" height="32" title="Rachfort Solutions" src="./Bark.com - Leads_files/667b472a2a569.png!d=Wm3hl" srcset="https://d1k8hez1mxkuxw.cloudfront.net/s/avatar_v2/bmMOaP/logo/667b472a2a569.png!d=Wm3hl 1x, https://d1k8hez1mxkuxw.cloudfront.net/s/avatar_v2/bmMOaP/logo/667b472a2a569.png!d=N0quzn 2x" data-was-processed="true">
+                                    <img class="img-fluid default-avatar default-avatar-36 elite-pro-border elite-pro-border-sm ml-3 mr-1 loading" alt="Rachfort Solutions" width="32" height="32" title="Rachfort Solutions" src="./Bark.com - Leads_files/667b472a2a569.png!d=Wm3hl" srcset="https://d1k8hez1mxkuxw.cloudfront.net/s/avatar_v2/bmMOaP/logo/667b472a2a569.png!d=Wm3hl 1x, https://d1k8hez1mxkuxw.cloudfront.net/s/avatar_v2/bmMOaP/logo/667b472a2a569.png!d=N0quzn 2x" data-was-processed="true">
+                                        
                                         <div class="d-none default-avatar default-avatar-36 bg-heliotrope text-white ml-3 mr-1 justify-content-center align-items-center elite-pro-border elite-pro-border-sm">
                                             R
                                         </div>
-                                        <img class="elite-pro-icon elite-pro-icon-32 loading" src="{{asset('build/assets/img/elite-pro.svg')}}" alt="Rachfort Solutions" height="18" width="16" data-was-processed="true">
+                                        <p class="d-inline-flex text-dark-blue mb-0 ml-1 js-buyer-username">
+                                            Fortune Matenda
+                                        </p>
                                     </div>
-                                  </div>
-                                                                            <span class="bark-svg-icon bsi-primary-dark-blue bsi-xxs d-inline-block arrow-down-svg mt-10p ml-1"><!--?xml version="1.0" encoding="UTF-8"?-->
-<svg width="10px" height="6px" viewBox="0 0 10 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="Guide-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Style-Guide" transform="translate(-344.000000, -10881.000000)">
-            <g id="Icons/Illustrations" transform="translate(115.000000, 10318.000000)">
-                <g id="Icons" transform="translate(22.000000, 242.000000)">
-                    <g id="Icon/arrow_down" transform="translate(206.000000, 320.000000)">
-                        <g id="arrow_down">
-                            <rect id="base" fill-rule="nonzero" x="0" y="0" width="12" height="8"></rect>
-                            <path d="M6.63460593,6.744 C6.28160593,7.084 5.75960593,7.085 5.40560593,6.748 L1.33160593,2.863 C0.934605927,2.484 0.887605927,1.818 1.22560593,1.374 C1.40460593,1.139 1.66760593,1.003 1.94360593,1.003 L10.0556059,1 C10.5766059,1 10.9996059,1.472 10.9996059,2.056 C11.0006059,2.363 10.8796059,2.655 10.6716059,2.856 L6.63460593,6.744 Z" id="arrow-down" class="primary-color"></path>
-                        </g>
-                    </g>
-                </g>
-            </g>
-        </g>
-    </g>
-</svg>
-</span>
-                                        </a>
+                                </div>
+                            </a>
 
                                         
 

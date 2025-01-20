@@ -339,7 +339,10 @@ private function arrLeads($leads = array(), $resp = 0,$loggedin_user_id = 0)
                 $balance = $credits_balance - $credits;
                 $user->credits_balance = $balance;
                 $user->save();
-                $description = "Hello, ChatGPT";
+                $description = "Hello [Client's Name],
+                My name is Fortune, and I’ve received your task from Fortai. I’d be delighted to assist you with it.
+                When would you be available for a quick chat to discuss the details? Please let me know a time that works best for you.
+                Looking forward to your response.";
                 $lead = LeadsModel::where('id',$lead_id)->first();
                 $trail = CreditsTrailModel::create(["user_id"=>$user->id,"lead_id"=>$lead_id,"credits"=>$credits,"entered_by"=>$user->id]);
                 $note = LeadsNotesModel::create(["lead_id"=>$lead_id,"description"=>$description,"entered_by"=>$user->id,"user_id"=>$user->id,"comm_link"=>$lead->user_id."_".$user->id]);
