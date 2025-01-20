@@ -37,10 +37,7 @@
         <li class="requests nav-item px-2 py-3 py-sm-4 active" id="js-joyride-requests">
             <a class="text-grey-400 nav-link py-0" href="/customer/dashboard/">My Requests</a>
         </li> 
-        <li class="requests nav-item px-2 py-3 py-sm-4 active" id="js-joyride-requests">
-            <a class="text-grey-400 nav-link py-0" href="/customer/settings/">Account Settings</a>
-        </li>
-      
+       
        
         <li class="nav-item dropdown notifications-dropdown py-2 d-none d-lg-block">
         <a class="notifications-dropdown-toggle" href="/seller/dashboard" id="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -88,9 +85,7 @@
                                         <div class="d-none default-avatar default-avatar-36 bg-heliotrope text-white ml-3 mr-1 justify-content-center align-items-center elite-pro-border elite-pro-border-sm">
                                             R
                                         </div>
-                                        <p class="d-inline-flex text-dark-blue mb-0 ml-1 js-buyer-username">
-                                            Fortune Matenda
-                                        </p>
+                                       
                                     </div>
                                 </div>
                             </a>
@@ -98,25 +93,115 @@
                                         
 
 </x-slot>
-<x-slot name="content" style="background-color: gray;">
-    <x-dropdown-link :href="route('expertview')">
-        {{ __('View Professionals') }}
-    </x-dropdown-link>
 
- <x-dropdown-link :href="route('customersettings')">
-        {{ __('Account Settings') }}
-    </x-dropdown-link>
+<x-slot name="content" style="background-color: gray;" class="sc-1s8qip7-0 sc-hkhyta-2 ceTrJs dOiuFl">
+ <div class="sc-1s8qip7-1 sc-hkhyta-11 eCavCD clCrzG">
+            <div class="sc-1s8qip7-2 sc-hkhyta-0 fxLrOp">
+                Fortune Matenda
+            </div>
+            
+        </div>
+        <div class="sc-1s8qip7-4 sc-hkhyta-12 gnCLxp fXvisv">
+            <div class="sc-1s8qip7-16 cwXCbP">
+            <div class="sc-1s8qip7-17 hVHmYO">
+                   
+                </div>
+                <div class="sc-1s8qip7-5 sc-hkhyta-8 ctDvgK">
+                <div class="verified-phone-container ml-3">
+                    <div class="bg-grey-50 rounded-pill text-green cursor-pointer d-flex verified-phone-button">
+                        <span class="fortai-svg-icon bsi-primary-primary bsi-primary-green">
+                            <!--?xml version='1.0' encoding='UTF-8'?-->
+                          <i class="bi bi-patch-check"></i>
+                        </span>
+                        Verified
+                    </div>
+                </div>
+                </div>
+            </div>
+                &nbsp;
+                    
+                <div class="sc-1s8qip7-6 sc-hkhyta-9 edgKuz">
+            
+                </div>
+            </div>
+            <div class="sc-1s8qip7-4 sc-hkhyta-12 gnCLxp hkYiXY">
+                <div class="sc-1s8qip7-16 cwXCbP">
+                    <div class="sc-1s8qip7-17 hVHmYO">
+                    
+                </div>
+                
+            </div>
+           
+        </div>
+        
 
-    <!-- Authentication -->
-    <form method="POST" action="{{ route('logout') }}">
+
+        <div class="sc-1s8qip7-8 sc-hkhyta-13 MPbvU KoFio">
+            <div class="sc-1s8qip7-10 sc-hkhyta-5 jIbDI knOKru">
+            <a href="/customer/expertreplies/">
+                Let's Chat
+            </div>
+            
+        </div>
+        <div class="sc-1s8qip7-11 sc-hkhyta-10 kpsRoH qQMnI">
+
+        </div>
+        <div class="sc-1s8qip7-13 sc-hkhyta-14 nWBeg igslBq">
+            <a aria-label="chatai" href="#">
+                <div class="sc-1s8qip7-18 cDRzHp">
+                    
+                    <div class="sc-1s8qip7-12 sc-hkhyta-6 cNLnak jHYwEm">
+                  <x-dropdown-link :href="route('customer.dashboard')">
+                    {{ __('Dashboard') }}
+                      </x-dropdown-link>
+                    </div>
+                </div>
+            </a>  
+
+            <a aria-label="my-bets" href="/customer/settings/">
+                <div class="sc-1s8qip7-12 sc-hkhyta-6 cNLnak jHYwEm">
+                    <x-dropdown-link :href="route('customersettings')">
+                        {{ __('Account Settings') }}
+                    </x-dropdown-link>
+                </div>
+            </a>
+            
+             <a aria-label="chatai" href="#">
+                <div class="sc-1s8qip7-18 cDRzHp">
+                    
+                    <div class="sc-1s8qip7-12 sc-hkhyta-6 cNLnak jHYwEm">
+                  <x-dropdown-link >
+                    {{ __('Help') }}
+                      </x-dropdown-link>
+                    </div>
+                </div>
+            </a>
+
+            
+           
+            
+            
+   
+
+        </div>
+        
+           <!-- Authentication -->
+
+        <form method="POST" action="{{ route('logout') }}">
         @csrf
-
-        <x-dropdown-link :href="route('logout')"
+        
+        <div class="sc-1s8qip7-14 sc-hkhyta-7 jvzCSS guzjrm   ">
+            <div class="sc-1s8qip7-18 cDRzHp">
+                <x-dropdown-link :href="route('logout')"
                 onclick="event.preventDefault();
                             this.closest('form').submit();">
             {{ __('Log Out') }}
         </x-dropdown-link>
-    </form>
+            </div>
+        </div>
+   
+
+   </form>
 </x-slot>
                     </x-dropdown>
                                             </a>
@@ -218,7 +303,7 @@
                     <li class="nav-item mb-2">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <a class="nav-link"
+                            <a class="nav-link "
                                 onclick="event.preventDefault();
                                     this.closest('form').submit();">
                                 {{ __('Log Out') }}
@@ -234,3 +319,264 @@
   
 </nav>
 
+<style>
+.dOiuFl {
+    width: 300px;
+    padding: 0px;
+}
+
+.ceTrJs {
+    width: 280px;
+    min-height: 420px;
+    max-height: calc(-64px + 100vh);
+    overflow: auto;
+    padding: 12px 16px;
+    position: absolute;
+    right: 24px;
+    background-color: rgb(255, 255, 255);
+    top: 64px;
+    z-index: 1;
+    border-radius: 4px;
+    cursor: default;
+    animation: 300ms ease 0s 1 normal none running react-responsive-modal-overlay-in;
+}
+.clCrzG {
+    margin: 16px;
+}
+
+.eCavCD {
+    display: flex
+;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.fxLrOp {
+    color: hsl(318, 75.50%, 38.40%);
+    font-size: 20px;
+    font-weight: bold;
+}
+.bCqJic {
+    color: hsl(318, 75.50%, 38.40%);
+    font-size: 14px;
+    font-weight: bold;
+}
+.fXvisv {
+    margin: 12px 16px;
+}
+
+.gnCLxp {
+    display: flex
+;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-bottom: 4px;
+}
+.cwXCbP {
+    display: flex
+;
+}
+.ctDvgK {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.87);
+    margin-left: 4px;
+}
+.hVHmYO {
+    display: flex
+;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.dmysol {
+    height: 16px;
+}
+.hVHmYO {
+    display: flex
+;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.topheader {
+    background-color: #111fa3;
+    display: flex
+;
+    flex-direction: row;
+    font-size: 14px;
+    height: 88px;
+    width: 100%;
+}
+.edgKuz {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.87);
+}
+.hkYiXY {
+    margin: 4px 16px;
+}
+
+.gnCLxp {
+    display: flex
+;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-bottom: 4px;
+}
+.dYOyxF > a {
+    display: block;
+    text-align: center;
+    padding: 8px 0px;
+    width: 100%;
+}
+.knOKru {
+    border-radius: 20px;
+    height: 40px;
+    color: rgba(0, 0, 0, 0.87);
+    background-color: rgb(255, 255, 255);
+    border-color: rgba(55, 62, 85, 0.1);
+    text-transform: uppercase;
+}
+
+.jIbDI {
+    margin-bottom: 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid hsl(318, 75.50%, 38.40%);
+    color:hsl(318, 75.50%, 38.40%);
+    font-weight: bold;
+    display: flex
+;
+    flex: 1 1 0%;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 8px 0px;
+}
+.bTDIzv {
+    border-radius: 20px;
+    height: 40px;
+    color: rgba(0, 0, 0, 0.87);
+    background-color: rgb(255, 255, 255);
+    border-color: rgba(55, 62, 85, 0.1);
+    text-transform: uppercase;
+}
+
+.fcPWta {
+    margin-bottom: 8px;
+    margin-right: 8px;
+    border-radius: 4px;
+    border: 1px solid  hsl(318, 75.50%, 38.40%);
+    color: hsl(318, 75.50%, 38.40%);
+    font-weight: bold;
+    display: flex
+;
+    flex: 1 1 0%;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 8px 0px;
+}
+.KoFio {
+    margin: 0px 16px;
+}
+
+.MPbvU {
+    display: flex
+;
+}
+.qQMnI {
+    background-color: rgb(255, 255, 255);
+    margin: 0px;
+}
+
+.kpsRoH {
+    background-color: rgb(218, 228, 236);
+    height: 1px;
+    margin-top: 16px;
+}
+.igslBq {
+    margin-bottom: 0px;
+}
+
+.nWBeg {
+    margin-bottom: 16px;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+.cDRzHp {
+    display: flex
+;
+}
+.fLQGYh {
+    display: none;
+}
+.jHYwEm {
+    display: flex
+;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid rgb(237, 237, 237);
+    padding: 16px;
+    margin: 0px;
+}
+
+.cNLnak {
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 16px;
+    margin-top: 16px;
+    cursor: pointer;
+}
+
+.cDRzHp {
+    display: flex
+;
+}
+.fLQGYh {
+    display: none;
+}
+.qQMnI {
+    background-color: rgb(255, 255, 255);
+    margin: 0px;
+}
+
+.kpsRoH {
+    background-color: rgb(218, 228, 236);
+    height: 1px;
+    margin-top: 16px;
+}
+.guzjrm {
+    height: 40px;
+    color: rgba(0, 0, 0, 0.87);
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(55, 62, 85, 0.1);
+    border-radius: 20px;
+    margin: 12px 16px 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: flex
+;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.jvzCSS {
+    margin-top: 16px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.87);
+    cursor: pointer;
+}
+</style>

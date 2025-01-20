@@ -86,7 +86,7 @@ font-size: 15px !important;
                     <div class="row align-items-center">
                       <div class="col-icon">
                         <div class="icon-big text-center icon-primary bubble-shadow-small">
-                        <i class="bi bi-graph-up"></i>
+                        <i class="bi bi-briefcase"></i>
                         </div>
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
@@ -100,27 +100,7 @@ font-size: 15px !important;
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6 col-md-3">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-icon">
-                        <div class="icon-big text-center icon-info bubble-shadow-small">
-                          <i class="bi bi-people"></i>
-                          
-                        </div>
-                      </div>
-                      <div class="col col-stats ms-3 ms-sm-0">
-                        <div class="numbers">
-                          <p class="card-category">Responses</p>
-                          <h4 class="card-title">  {{ $contacted_lead}}</h4>
-                          <a href="/responses/" class="pr-4 text-grey-200 hover-dark noline text-sm text-capitalize">View</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
               <div class="col-sm-6 col-md-3">
                 <div class="card card-stats card-round">
                   <div class="card-body">
@@ -142,6 +122,29 @@ font-size: 15px !important;
                   </div>
                 </div>
               </div> 
+
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col-icon">
+                        <div class="icon-big text-center icon-info bubble-shadow-small">
+                          <i class="bi bi-people"></i>
+                          
+                        </div>
+                      </div>
+                      <div class="col col-stats ms-3 ms-sm-0">
+                        <div class="numbers">
+                          <p class="card-category">Responses</p>
+                          <h4 class="card-title">  {{ $contacted_lead}}</h4>
+                          <a href="/responses/" class="pr-4 text-grey-200 hover-dark noline text-sm text-capitalize">View</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
               
               <div class="col-sm-6 col-md-3">
                 <div class="card card-stats card-round">
@@ -149,13 +152,13 @@ font-size: 15px !important;
                     <div class="row align-items-center">
                       <div class="col-icon">
                         <div class="icon-big text-center icon-success bubble-shadow-small">
-                          <i class="bi bi-envelope-check-fill"></i>
+                        <i class="bi bi-hand-thumbs-up"></i>
                         </div>
                       </div>
                       
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category">Unread Leads</p>
+                          <p class="card-category">Responses Hired</p>
                           <h4 class="card-title">{{$unread_leads}}</h4>
                           <a href="/seller/dashboard/" class="pr-4 text-grey-200 hover-dark noline text-sm text-capitalize">View</a>
                         </div>
