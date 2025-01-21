@@ -22,6 +22,7 @@ class CustomerController extends Controller
         $user_id = $user->id;
         $leads = LeadsModel::join('master_services as m', 'leads.service_id', '=', 'm.id')
     ->where('leads.user_id', $user_id)
+    ->orderBy('leads.id','DESC')
     ->get(['leads.*', 'm.*','leads.date_entered','leads.id as lead_id']);
 
         $user_leads = array();
@@ -33,9 +34,9 @@ class CustomerController extends Controller
             
             $date = new DateTime($date_entered);
             $formatted_date = $date->format('l H:i');
+            $isExpertApplied = ContactedLeadsModel::where('lead_id',$lead_id)->count();
 
-            $isExpertApplied = 1;
-            $inarr = array("lead_id" => $lead_id, "service_name" => $service_name, "date_entered"=>$formatted_date, "isExpertApplied"=>$isExpertApplied);
+            $inarr = array("lead_id" => $lead_id, "service_name" => $service_name, "status"=>$lead["status"], "date_entered"=>$formatted_date, "isExpertApplied"=>$isExpertApplied);
             array_push($user_leads, $inarr);
         }       
        return view('customer.dashboard',compact(["slot", "user_leads"]));

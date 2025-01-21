@@ -81,6 +81,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/customer/expertreplies/', [CustomerController::class, 'expertReplies'])->name('expertreplies');
     Route::post('/getleadnotes', [LeadsController::class, 'getLeadNotes'])->name('getleadnotes');
     Route::post('/updateestimate', [LeadsController::class, 'updateEstimate'])->name('updateestimate');
+    Route::post('/poststatus', [LeadsController::class, 'postStatus'])->name('poststatus');
+    Route::get('/leadexperts', [LeadsController::class, 'leadExperts'])->name('leadexperts');
 });
 
 // Load authentication routes

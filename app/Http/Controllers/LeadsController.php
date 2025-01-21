@@ -583,5 +583,46 @@ catch(Exception $e){
         return response()->json(["message"=>"There is an error : ".$e->getMessage()],500);
     }
     }
+
+    function postStatus(Request $request)
+    {
+        try{
+        $lead_id = (int)$request->lead_id;
+        $status = $request->status;
+        $hired_expert_id = (int)$request->hired_expert_id;
+        $closed_description = $request->closed_description;
+        $user = $request->user();
+       $updated_lead = LeadsModel::where('id',$lead_id)
+       ->update(["status" => $status, 
+       "hired_expert_id" => $hired_expert_id, 
+       "closed_by" => $user->id,
+       "date_closed" => date("Y-m-d H:i:s"),
+       "closed_description" => $closed_description
+    ]);
+    return redirect()->route('customer.dashboard')->with('status', 'updated_lead')->with('success', 'Lead updated successfully!');
+   
+} catch(Exception $e)
+{
+    return redirect()->route('customer.dashboard')->with('status', 'updated_lead')->with('error', 'No changes were made : '.$e->getMessage());
+}
+
+    }
+
+    function leadExperts(Request $request)
+    {
+        try{
+        $lead_id = $request->xl;        
+        $user = $request->user();
+        $xperts = ContactedLeadsModel::join('users', 'contacted_lead.user_id', '=', 'users.id')
+        ->select('users.id', 'users.first_name', 'users.last_name')
+        ->where('contacted_lead.lead_id', $lead_id)
+        ->get();
+    return response()->json(["message" => "Experts retrieved","xperts" => $xperts], 200);
+} catch(Exception $e)
+{
+    return response()->json(["message" => "There is an error"], 500);
+}
+
+    }
     
 }
