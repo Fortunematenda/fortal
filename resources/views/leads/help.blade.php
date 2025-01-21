@@ -30,23 +30,16 @@
                 <x-text-input id="msg" name="msg" type="text" class="mt-1 block w-full" placeholder="Type your message here..." required autofocus autocomplete="msg" />
                 
                 <x-primary-button class="mt-4">{{ __('Submit') }}</x-primary-button>
-                
+    
                 <div class="mt-4 text-sm text-gray-600">
-                    <p>Alternatively, you can reach us at:</p>
+                  
                     <ul class="list-disc ml-5">
-                        <li>Email: <a href="mailto:support@example.com" class="text-blue-600 hover:underline">support@example.com</a></li>
-                        <li>Phone: <a href="tel:+1234567890" class="text-blue-600 hover:underline">+123 456 7890</a></li>
+                        <li>Email: <a href="mailto:support@fortai.com" class="text-blue-600 hover:underline">support@fortai.com</a></li>
+                        <li>Phone: <a href="tel:+27612685933" class="text-blue-600 hover:underline">+27 21 456 7890</a></li>
                     </ul>
                 </div>
                 
-                <div class="mt-6">
-                    <h4 class="font-semibold text-lg mb-2">Frequently Asked Questions</h4>
-                    <ul class="list-disc ml-5 mt-2 text-gray-700">
-                        <li>How do I reset my password?</li>
-                        <li>What payment methods are accepted?</li>
-                        <li>How do I contact customer support?</li>
-                    </ul>
-                </div>
+                
             </div>
         </div>
     </div>
