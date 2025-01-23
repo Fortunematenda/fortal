@@ -855,4 +855,34 @@ public function displayImage($imrarr){
     $details .= "</div>";
 return $details;
 }
+public function expertProfile($name, $email, $contact_number, $services, $bio, $facebook, $twitter, $linkedin, $images){
+    $details = "<div class='profile-container'> <div class='content'>";
+    $details .= "<section class='about'><h3>About</h3><ul class='info-list'><li><span>Name:</span> $name</li>";
+    $details .= "<li><span>Email:</span> $email</li><li><span>Phone:</span> $contact_number</li></ul></section>";
+
+    $details .= "<section class='skills'><h3>Skills</h3><ul>";
+    foreach($services as $service)
+    {
+        $details .= "<li>".$service["service_name"]."</li>";
+    }
+    $details .= "</ul></section><br>";
+
+    $details .= "<section class='bio'><h3>Bio</h3><p>$bio</p></section><br>";
+
+    $details .= "<section class='social'><h3>Social Media</h3><div>";
+    $details .= "<a href='$facebook' class='uk-icon-button uk-margin-small-right' uk-icon='instagram'><i class='bi bi-facebook'></i></a>";
+    $details .= "<a href='$twitter' class='uk-icon-button  uk-margin-small-right' uk-icon='facebook'><i class='bi bi-twitter-x'></i></a>";
+    $details .= "<a href='$linkedin' class='uk-icon-button' uk-icon='youtube'><i class='bi bi-linkedin'></i></a></div></section><br/>";
+
+    $details .= "<section class='photos'><h3>Photos</h3><div id='exampe-slider' class='sliderm'><div class='sliderm__slider'><div class='sliderm__slides'>";
+      foreach($images as $image)
+    {
+        $img = $image->image_name;
+        $path = Storage::url('uploads/'.$img);
+        $details .= "<div class='sliderm__slide'><img src='".$path."' /></div>";
+    }
+    $details .=  "</div></div></div></section></div></div>";  
+       
+    return $details;
+}
 }

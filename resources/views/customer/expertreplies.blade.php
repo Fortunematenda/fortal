@@ -1,13 +1,19 @@
+
 <x-customernav>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lea Replies</title>
     <!-- Bootstrap CSS -->
+ 
+<link rel="stylesheet" href="https://sliderm.com/dist/1.0.8/sliderm.css">
+<script src="https://sliderm.com/dist/1.0.8/sliderm.js">console.log("dzdz");</script>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJQ8l7f+K2wL3g60kF3gnm+f6X8QO5r57WfRpxVS43v7wBfeJY4p+V3joEJe" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybR12FwBfj6vvZQvi4z5BvNK1HhZ1Xc2/3pJZqLFfINkQeK6e" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0zUtb6O9yVemH7A0/Tl5PpRxmA7hP5r9pMQzF+X0ZqC5C3xZ" crossorigin="anonymous"></script>
-    <style>
+
+   <style>
         
 
         .container {
@@ -126,52 +132,7 @@
             color: #f1c40f;
         }
 
-        .profile-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
-}
-
-.profile-modal-content {
-  background: #e4dbe5;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 600px;
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  position: relative;
-  overflow-y: auto;
-  max-height: 90%;
-}
-
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  color: #888;
-  transition: color 0.2s ease-in-out;
-}
-
-.close-btn:hover {
-  color: #000;
-}
-
-/* Profile header */
-.profile-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
+    
 
 .avatar {
   width: 100px;
@@ -185,23 +146,6 @@
   color: #666;
 }
 
-/* Profile information */
-.profile-info {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.info-section {
-  border-top: 1px solid #eee;
-  padding-top: 10px;
-}
-
-.info-section h3 {
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-  color: #333;
-}
 
 .info-section p {
   margin: 5px 0;
@@ -470,6 +414,137 @@ hr .new1 {
             font-size: 14px;
             color: #666;
         }
+        .profile-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: #850385ab;
+            color: white;
+        }
+
+        .header img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .header h1 {
+            margin: 10px 0 5px;
+            font-size: 1.8em;
+        }
+
+        .header p {
+            margin: 5px 0;
+            font-size: 1em;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .content h3 {
+            border-bottom: 2px solid #850385ab;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .info-list li span {
+            font-weight: bold;
+        }
+
+        .skills, .social {
+            margin-top: 20px;
+        }
+
+        .skills ul, .social ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skills li, .social li {
+            padding: 8px 12px;
+            background: #850385ab;
+            color: white;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .social li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .profile-container {
+                margin: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .header p {
+                font-size: 0.9em;
+            }
+        }
+        #modal-overflow{
+z-index: 10000 !important;
+        }
+
+        
+        .modal {
+            z-index: 100000 !important;
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+
+        .modal.close {
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white !important;
+            font-size: 24px;
+        }
 
     </style>
 </head>
@@ -488,7 +563,13 @@ hr .new1 {
             @foreach($replyexperts as $expert)
             <div class="client-item dexpert" contacted_user_id="{{$expert->user_id}}" onclick="selectClient('{{ $expert->first_name }} {{ $expert->last_name }}')">
 
-            <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Avatar" class="avatar" onclick="toggleProfileModal()"><span class="client-name">{{$expert->first_name}} {{$expert->last_name}}</span>
+            @php
+    $img = $expert->profile_picture;
+    $path = strlen($img)>5?Storage::url('uploads/' . $img):"https://www.w3schools.com/w3images/avatar2.png";
+@endphp
+
+                <img src="{{ $path }}" alt="Profile" class="avatar" ><span class="client-name">{{$expert->first_name}} {{$expert->last_name}}</span>
+                
             </div><hr>
             @endforeach
            
@@ -498,7 +579,9 @@ hr .new1 {
     <div class="chat-container">
         <div class="chat-header" id="chat-header">
             <div class="header-left">
-                <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Avatar" class="avatar" onclick="toggleProfileModal()">
+            <a class="" href="#modal-overflow" uk-toggle>
+                <img src="" alt="Avatar" class="avatar path">
+                </a>
                 <span class="header-name" id="chat-title">{{$replyexperts[0]->first_name}} {{$replyexperts[0]->last_name}}</span>
             </div>
            
@@ -506,23 +589,7 @@ hr .new1 {
 
         <!-- Chat Body -->
         <div class="chat-body" id="chat-body">
-            <!-- Chat messages will appear here --> 
-          
-            @foreach($expertnotes as $note)
-
-            @if($note->user_id == $note->leads_user_id)
-            <div class="message user"><img class="avatar" src="https://www.w3schools.com/w3images/avatar2.png"><div>
-                <p>{{$note->description}}</p><span class="timestamp"> {{$note->date_entered}}</span></div>
-            </div>
-            @else
-            <div class="message bot"><img class="avatar" src="https://www.w3schools.com/w3images/avatar5.png"><div>
-                <p>{{$note->description}}</p>
-                <span class="timestamp"> {{$note->date_entered}}</span>
-            </div></div>
-            @endif
-      
-
-            @endforeach
+         
         </div>
 
         <!-- Input Area -->
@@ -531,82 +598,45 @@ hr .new1 {
             <button id="send-button">Send</button>
         </div>
         <input value="{{$lead_id}}" id="xkk" hidden/>
-        <input value="{{$user_id}}" id="uuus"/>
+        <input value="{{$user_id}}" id="uuus" hidden/>
     </div>
     @else
     <h3 align="center">No Experts</h3>
     @endif
 </div>
 
-<div class="profile-modal" id="profile-modal">
-  <div class="profile-modal-content ">
-    <button class="close-btn" onclick="closeProfileModal()">&times;</button>
-    <div class="image d-flex flex-column justify-content-center align-items-center">
-    <button class="btn btn-secondary "> 
-    <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Avatar" class="avatar">
-                </button> 
 
-                <span class="name mt-3">Fortune Matenda</span> 
-                <span class="idd">Network Engineer</span>
+<div id="modal-overflow" uk-modal>
+    <div class="uk-modal-dialog">
 
-                <div class="d-flex flex-row justify-content-center align-items-center gap-2 px-2 rounded mt-4 date">
-                    <span class="join">Joined May,2021</span>
-                    <span>
-                        <i class="fa fa-copy"></i>
-                </span> 
-                      </div>
-                      <div class="d-flex flex-row justify-content-center align-items-center mt-3">
-                         <span  class="rating">⭐⭐⭐⭐⭐</span>
-                      </div>
-                            <span class="rating"> 4.5</span>
-                            </span>
-                             </div> 
-                            <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> 
-    <span>
-        <i class="bi bi-twitter" onclick="window.open('https://x.com', '_blank');"></i>
-    </span>
-    <span>
-        <i class="bi bi-facebook" onclick="window.open('https://facebook.com', '_blank');"></i>
-    </span>
-    <span>
-        <i class="bi bi-instagram" onclick="window.open('https://instagram.com', '_blank');"></i>
-    </span>
-    <span>
-        <i class="bi bi-linkedin" onclick="window.open('https://linkedin.com', '_blank');"></i>
-    </span>
-</div>
+        <button class="uk-modal-close-default" type="button" uk-close></button>
 
-                                                  
-                             <div class=" d-flex mt-2 "> 
-                               
-                                    <h2 class="section-title">About</h2>
-                                    </div> 
-                                    <div class="profile-about">
-           
-                <p class="profile-reviews">At SNVL Real Connection Carpet Cleaning, we specialize in delivering professional
-                     cleaning services to both residential and commercial properties in Cape Town and surrounding areas.
-                      Our commitment lies in offering top-notch deep cleaning services at competitive rates.</p>
-            </div>
-                                         
-   <div class="profile-photos">
-    <h2 class="section-title">Photos</h2>
-    <div class="marquee" id="photo-marquee">
-        <div class="marquee-content">
-            <img src="https://d1vbfnp4jhzk1f.cloudfront.net/s/modal-thumbnail/35-1479228507889087712.png!d=72Qsoe" alt="Cleaning Equipment" class="photo" />
-            <img src="https://d1vbfnp4jhzk1f.cloudfront.net/s/modal-thumbnail/1212-15656972151119486286.png!d=72Qsoe" alt="Cleaning Machine" class="photo" />
-            <img src="https://d1vbfnp4jhzk1f.cloudfront.net/s/modal_thumbnail_1119.jpg!d=72Qsoe" alt="Team at Work" class="photo" />
-            <img src="https://d1vbfnp4jhzk1f.cloudfront.net/s/modal_thumbnail_132.jpg!d=72Qsoe" alt="Service Van" class="photo" />
+        <div class="uk-modal-header header">
+        <img id="path" class="avatar path" src="#" alt="Profile Photo">
+            <h1 style="color:white" id="name"></h1>
+            <p>{{$expertnotes[0]->service_name}}</p>
         </div>
+
+        <div class="uk-modal-body infod" uk-overflow-auto>
+      
+        </div>
+
+
     </div>
 </div>
-         </div> 
-                                                     </div>
+
+
                                                      
 </div>
                       </div>
     
     </div>
   </div>
+</div>
+
+<div id="imageModal" class="modal">
+    <span class="close" id="closeModal">&times;</span>
+    <img id="modalImage" src="" alt="Zoomed Image">
 </div>
 
 
@@ -678,18 +708,9 @@ hr .new1 {
 
     function storeChatHistory() {
         const chatBody = document.getElementById('chat-body').innerHTML;
-        chatHistory[currentClient] = chatBody; // Store the chat history for the current client
+        chatHistory[currentClient] = chatBody;
     }
 
-    function toggleProfileModal() {
-        const modal = document.getElementById('profile-modal');
-        modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
-    }
-
-    function closeProfileModal() {
-        const modal = document.getElementById('profile-modal');
-        modal.style.display = 'none';
-    }
 </script>
 </x-customernav>
 
@@ -710,26 +731,34 @@ hr .new1 {
             data: obj, // Send data in one object
             beforeSend: function() {
                 $("#chat-body").empty();
+                $("#chat-body").html("loading....");
             },
             success: function(data) {
+                console.log(data);
                 const json = data["expertnotes"];
+                const details = data["details"];
+                const name = data["name"];
+                const path = data["profile_pic"];
                 let txt = "";
                 for(let key in json)
             {
                 if(json[key]["user_id"] == json[key]["leads_user_id"])
             {
-            txt += '<div class="message user"><img class="avatar" src="https://www.w3schools.com/w3images/avatar2.png"><div>';
+            txt += '<div class="message user"><img class="avatar" src="'+path+'"><div>';
             txt += '<p>'+json[key]["description"]+'</p><span class="timestamp"> '+json[key]["date_entered"]+'</span></div></div>';
             
             }
             else
             {
-                txt += '<div class="message bot"><img class="avatar" src="https://www.w3schools.com/w3images/avatar2.png"><div>';
+                txt += '<div class="message bot"><img class="avatar" src="'+path+'"><div>';
             txt += '<p>'+json[key]["description"]+'</p><span class="timestamp"> '+json[key]["date_entered"]+'</span></div></div>';
             }  
 
             }
-            $("#chat-body").html(txt);                             
+            $("#chat-body").html(txt);  
+            $(".infod").html(details);    
+            $("#name").html(name);
+            $(".path").attr('src',path);                       
             },
             error: function(xhr, status, error) {
                 console.error('Error:', status, error); // Improved error logging
@@ -771,4 +800,43 @@ hr .new1 {
         });    
 });
 
+</script>
+<script>
+    const sliderm = new Sliderm('#exampe-slider', {
+  arrow: true,
+  pagination: true,
+  grouping: false,
+  loop: true,
+  preview: true,
+  columns: 4,
+  duration: 1000,
+  spacing: 10,
+  align: 'center',
+});
+
+    document.querySelectorAll('.sliderm__slide img').forEach(img => {
+        img.addEventListener('click', (e) => {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'flex';
+            modalImg.src = e.target.src;
+        });
+    });
+
+    document.getElementById('closeModal').addEventListener('click', () => {
+        const modal = document.getElementById('imageModal');
+        modal.style.display = 'none';
+    });
+
+    document.getElementById('imageModal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) {
+            e.currentTarget.style.display = 'none';
+        }
+    });
+
+    $(document).ready(function(){
+        var firstDexpert = $('.dexpert:first');
+firstDexpert.click();
+
+    });
 </script>

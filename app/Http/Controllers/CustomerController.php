@@ -190,7 +190,8 @@ public function getLeadsNotes($lead_id,$contact_user_id)
     
     $notes = LeadsNotesModel::join('users as u','lead_notes.user_id','=','u.id')
     ->join('leads as l','lead_notes.lead_id','=','l.id')
-    ->select('u.first_name','lead_notes.description','lead_notes.date_entered','lead_notes.user_id', 'l.user_id as leads_user_id')        
+    ->join('master_services as m','l.service_id','=','m.id')
+    ->select('u.first_name','lead_notes.description','m.service_name','lead_notes.date_entered','lead_notes.user_id', 'l.user_id as leads_user_id')        
     ->where('lead_notes.comm_link',$comm_link)
     ->where('lead_notes.lead_id',$lead_id)->get();
     return $notes;

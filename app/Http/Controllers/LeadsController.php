@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 use App\Models\ServicesModel;
+use App\Models\User;
 use App\Models\ContactedLeadsModel;
 use App\Models\UserServicesModel;
 use App\Models\LeadsModel;
@@ -469,9 +471,10 @@ private function arrLeads($leads = array(), $resp = 0,$loggedin_user_id = 0)
     
     $notes = LeadsNotesModel::join('users as u','lead_notes.user_id','=','u.id')
     ->join('leads as l','lead_notes.lead_id','=','l.id')
-    ->select('u.first_name','lead_notes.description','lead_notes.date_entered','lead_notes.user_id', 'l.user_id as leads_user_id')        
+    ->join('master_services as m','l.service_id','=','m.id')
+    ->select('u.first_name','lead_notes.description','m.service_name','lead_notes.date_entered','lead_notes.user_id', 'l.user_id as leads_user_id')        
     ->where('lead_notes.comm_link',$comm_link)
-    ->where('lead_notes.lead_id',$lead_id)->orderBy('lead_notes.id', 'desc')->get();
+    ->where('lead_notes.lead_id',$lead_id)->orderBy('lead_notes.id', 'asc')->get();
     return $notes;
 }
 catch(Exception $e){
@@ -551,8 +554,18 @@ catch(Exception $e){
             $lead_id = (int)$request->lead_id;
             $contacted_user_id = (int)$request->contacted_user_id;
             $expertnotes = $this->getLeadsNotes($lead_id,$contacted_user_id);
-        
-         return response()->json(["message"=>"Notes Received","expertnotes"=>$expertnotes],200);
+            $u = User::find($contacted_user_id);
+            $services = $user = UserServicesModel::where( 'user_id',$contacted_user_id)
+            ->join("master_services as u","user_services.service_id","=","u.id")
+            ->select("u.service_name")
+            ->get();
+           $templates = new TemplatesController();
+           $profile_picture = $u->profile_picture;
+           $path = strlen($profile_picture)>5?Storage::url('uploads/'.$u->profile_picture):"https://www.w3schools.com/w3images/avatar2.png";
+            $details = $templates->expertProfile($u->first_name." ".$u->last_name, $u->email, $u->contact_number, $services, $u->biograpghy, "#", "#", "#", []);
+            
+
+         return response()->json(["message"=>"Notes Received","expertnotes"=>$expertnotes, "details"=>$details,"profile_pic"=>$path,"name"=>$u->first_name." ".$u->last_name],200);
     }
     catch(Exception $e){
         return response()->json(["message"=>"There is an error : ".$e->getMessage()],500);
