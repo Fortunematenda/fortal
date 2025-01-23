@@ -25,22 +25,12 @@
                         <div class="form-card">
                             <div class="row">
                                 <div class="col-12">
-                                    <h2 class="fs-title">Which areas would you like to receive leads from?</h2>
-                                    <p class="sub-text">Tell us the areas you cover, and we'll match you with leads there.</p>
+                                    <h2 class="fs-title">Which location do you want to receive leads from?</h2>
+                                    <p class="sub-text">Let us know the area you serve, and we'll connect you with leads in that location.</p>
                                 </div>
                              
                             </div> 
                          
-                            <div class="row myrow">
-                                <div class="col-12">
-                                <label><input type="radio" name="location_select" value="all"> I serve customers nationwide</label>
-                                </div>
-                                <div class="col-12">
-                                <label>
-                                <label><input type="radio" name="location_select" value="any"> I serve customers within</label>
-                             
-                                </div>
-                            </div> 
                             
 
                             <div class="row myrow">

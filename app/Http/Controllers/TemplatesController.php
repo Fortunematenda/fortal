@@ -702,8 +702,19 @@ if ($frequent > 0) {
                     Frequent user
                 </div>";
 }
+$details .= "<div class='d-flex  flex-wrap align-items-left text-regular mt-1 text-xs-14 quote-cta-container my-4'>
+    <span class='btn-bd-primary mr-2 tw-text-base '>
+        <i class='bi bi-cash ' style='color: purple; font-size: 20px;'></i>
+    </span>
+    <span class='formatted-quote mr-2'>
+        <span class='quote-label text-grey-600 text-xs-14 mr-2 mt-2'>Project Estimated Budget:</span>
+        
+    </span>
+    <label class='Button_base__5Wcwx Button_sm__RWLp1 Button_smWithIcon__y3vYd Button_minWidth__WGVzH Button_textWhite__9w5Wn Button_bgDarkBlue__9V6YV !tw-no-underline tw-drop-shadow-[unset] !tw-px-2 !tw-min-h-[unset] tw-text-sm !tw-text-white'>R10 000</label>
+</div>
+";
 $details .= "<div class='d-flex flex-column project-details-col-project-details'>
-                <div class='project-details pt-5 data-buyer-name='>
+                <div class='project-details data-buyer-name='>
                     <div class='project-details-label'>Details</div>
                     <hr class='project-details-hr'>";
 $details .= $this->details($lead_details, $lead_images);

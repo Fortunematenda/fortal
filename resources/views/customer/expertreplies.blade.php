@@ -3,6 +3,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lea Replies</title>
+    <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJQ8l7f+K2wL3g60kF3gnm+f6X8QO5r57WfRpxVS43v7wBfeJY4p+V3joEJe" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybR12FwBfj6vvZQvi4z5BvNK1HhZ1Xc2/3pJZqLFfINkQeK6e" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0zUtb6O9yVemH7A0/Tl5PpRxmA7hP5r9pMQzF+X0ZqC5C3xZ" crossorigin="anonymous"></script>
     <style>
         
 
@@ -391,7 +395,7 @@ hr .new1 {
 
     .marquee-content {
         display: inline-flex;
-        animation: scroll 30s linear infinite;
+        animation: scroll 15s linear infinite;
     }
 
     /* Images in the marquee */
@@ -557,18 +561,21 @@ hr .new1 {
                             <span class="rating"> 4.5</span>
                             </span>
                              </div> 
-                             <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> 
-                                          <span>
-                                          <i class="bi bi-twitter"></i>
-                                            </span>
-                                             <span>
-                                             <i class="bi bi-facebook"></i>
-                                                </span> 
-                                                <span><i class="bi bi-instagram"></i>
-                                                </span>
-                                                 <span><i class="bi bi-linkedin"></i>
-                                                 </span>
-                                                  </div> 
+                            <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> 
+    <span>
+        <i class="bi bi-twitter" onclick="window.open('https://x.com', '_blank');"></i>
+    </span>
+    <span>
+        <i class="bi bi-facebook" onclick="window.open('https://facebook.com', '_blank');"></i>
+    </span>
+    <span>
+        <i class="bi bi-instagram" onclick="window.open('https://instagram.com', '_blank');"></i>
+    </span>
+    <span>
+        <i class="bi bi-linkedin" onclick="window.open('https://linkedin.com', '_blank');"></i>
+    </span>
+</div>
+
                                                   
                              <div class=" d-flex mt-2 "> 
                                
@@ -581,17 +588,18 @@ hr .new1 {
                       Our commitment lies in offering top-notch deep cleaning services at competitive rates.</p>
             </div>
                                          
-                                                     <div class="profile-photos">
+   <div class="profile-photos">
     <h2 class="section-title">Photos</h2>
-    <div class="marquee">
+    <div class="marquee" id="photo-marquee">
         <div class="marquee-content">
-            <img src="https://d1vbfnp4jhzk1f.cloudfront.net/s/modal-thumbnail/35-1479228507889087712.png!d=72Qsoe" alt="Cleaning Equipment">
-            <img src="https://d1vbfnp4jhzk1f.cloudfront.net/s/modal-thumbnail/1212-15656972151119486286.png!d=72Qsoe" alt="Cleaning Machine">
-            <img src="https://d1vbfnp4jhzk1f.cloudfront.net/s/modal_thumbnail_1119.jpg!d=72Qsoe" alt="Team at Work">
-            <img src="https://d1vbfnp4jhzk1f.cloudfront.net/s/modal_thumbnail_132.jpg!d=72Qsoe" alt="Service Van">
+            <img src="https://d1vbfnp4jhzk1f.cloudfront.net/s/modal-thumbnail/35-1479228507889087712.png!d=72Qsoe" alt="Cleaning Equipment" class="photo" />
+            <img src="https://d1vbfnp4jhzk1f.cloudfront.net/s/modal-thumbnail/1212-15656972151119486286.png!d=72Qsoe" alt="Cleaning Machine" class="photo" />
+            <img src="https://d1vbfnp4jhzk1f.cloudfront.net/s/modal_thumbnail_1119.jpg!d=72Qsoe" alt="Team at Work" class="photo" />
+            <img src="https://d1vbfnp4jhzk1f.cloudfront.net/s/modal_thumbnail_132.jpg!d=72Qsoe" alt="Service Van" class="photo" />
         </div>
     </div>
-                                                     </div> 
+</div>
+         </div> 
                                                      </div>
                                                      
 </div>

@@ -379,7 +379,7 @@ $query->where('contacted_lead.status', '=',"Pending");
         'u.date_entered', 
         'u.id', 
         'u.description', 
-        's.location',
+        'u.location',
         's.is_phone_verified',
         'u.urgent',
         'u.credits',

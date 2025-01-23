@@ -228,123 +228,118 @@
 }
 
       </style>
- 
-  
-  <div class="tabs wHRnL wUjgt" id="tabs">
-        <div class="tab profile" data-content="profile" href="#profile">Personal Info</div>
-        <div class="tab lead_settings" data-content="lead_settings" href="#lead_settings">Lead Settings</div>
-        <div class="tab services" data-content="services" href="#services">Services</div>
-        <div class="tab purchase_credits" data-content="purchase_credits" href="#purchase_credits">Credits</div>
-        <div class="tab data-privacy" data-content="data-privacy">Data & Privacy</div>
-        <div class="tab password" data-content="password"  href="#password">Security</div>
-        <div class="tab social-links" data-content="social-links"  href="#social-links">Social links</div>
-        <div class="tab notifications" data-content="notifications" href="#notifications">Notifications</div>
+<div class="tabs wHRnL wUjgt" id="tabs">
+    <div class="tab profile" data-content="profile" href="#profile">
+        Personal Info
     </div>
-  <h4 class="font-weight-bold  mb-4 cHKndY">
-        Account settings
-      </h4>
-  <div class="container light-style flex-grow-1 container-p-y iidlEb">
-  
-     
-  
-      @if(session('success'))
+    <div class="tab leads-settings" data-content="leads-settings" href="#leads-settings">
+        Lead Settings
+    </div>
+    <div class="tab services" data-content="services" href="#services">
+        Services
+    </div>
+    <div class="tab purchase_credits" data-content="purchase_credits" href="#purchase_credits">
+        Credits
+    </div>
+    <div class="tab data-privacy" data-content="data-privacy">
+        Data & Privacy
+    </div>
+    <div class="tab password" data-content="password"  href="#password">
+        Security
+    </div>
+    <div class="tab social-links" data-content="social-links"  href="#social-links">
+        Social links
+    </div>
+    <div class="tab notifications" data-content="notifications" href="#notifications">
+        Notifications
+    </div>
+</div>
+<h4 class="font-weight-bold  mb-4 cHKndY">
+    Account settings
+</h4>
+<div class="container light-style flex-grow-1 container-p-y iidlEb">
+    @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-@elseif(session('error'))
+    @elseif(session('error'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         {{ session('error') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-@endif
-
-{{-- Display Validation Errors --}}
-@if($errors->any())
+    @endif
+    {{-- Display Validation Errors --}}
+    @if($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
+            <li>
+                {{ $error }}
+            </li>
             @endforeach
         </ul>
     </div>
-@endif
-      <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+    @endif
+    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
     </form>
-
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
-    @csrf
-    @method('patch')
-    <!-- Form fields go here -->
-    
-   
-
-  
-            <div class="tab-content">
-
-             <!--General-->
-                <div class="tab-pane fade active show" id="profile">
+        @csrf
+        @method('patch')
+        <!-- Form fields go here -->
+         <div class="tab-content">
+            <!--General-->
+            <div class="tab-pane fade active show" id="profile">
                 @include('profile.partials.update-profile-information-form')
-                    <div class="card-body media align-items-center"></div>
-                        <div class="media-body ml-4"></div>
-                        <div class="card-body"></div>
-                    </div>
-
-                    <!--Password-->
-                    <div class="tab-pane fade" id="profile">
-                        <div class="card-body pb-2">
-                            @include('profile.partials.update-profile-information-form')
-                        </div>
-                    </div> 
-                    <div class="tab-pane fade" id="services">
-                        <div class="card-body pb-2">
-                            @include('profile.partials.update-services')
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="password">
-                        <div class="card-body pb-2">
-                            @include('profile.partials.update-password-form')
-                        </div>
-                    </div>
-
-                    <!--Lead Settings-->
-                    <div class="tab-pane fade" id="lead_settings">
-                        <div class="card-body pb-2">
-                            @include('profile.partials.leads-settings-form')
-                        </div>
-                    </div>
-                    <!--Purchase Credits-->
-                    <div class="tab-pane fade" id="purchase_credits">
-                        @include('profile.partials.buy-credits-form')
-                        <div class="container my-5"></div>
-                    </div>  
-                    
-                    <!--Notifications-->
-                    <div class="tab-pane fade" id="notifications">
-                    @include('profile.partials.notifications-form')
-                        <div class="container my-5"></div>
-                    </div>
-                    
-                    <div class="tab-pane fade" id="social-links">
-                    @include('profile.partials.social-links-form')
-                        <div class="container my-5"></div>
-                    </div>
+                <div class="card-body media align-items-center"></div>
+                <div class="media-body ml-4"></div>
+                <div class="card-body">
                 </div>
-              </div>
             </div>
-              </div>
+            <!--Password-->
+            <div class="tab-pane fade" id="leads-settings">
+                <div class="card-body pb-2">
+                    @include('profile.partials.leads-settings-form')
+                    
+                </div>
             </div>
-          </div>
+            <div class="tab-pane fade" id="services">
+                <div class="card-body pb-2">
+                    @include('profile.partials.update-services')
+                </div>
+            </div>
+            <div class="tab-pane fade" id="password">
+                <div class="card-body pb-2">
+                    @include('profile.partials.update-password-form')
+                </div>
+            </div>
+            <!--Lead Settings-->
+            <div class="tab-pane fade" id="lead_settings">
+                <div class="card-body pb-2">
+                    @include('profile.partials.leads-settings-form')
+                </div>
+            </div>
+            <!--Purchase Credits-->
+            <div class="tab-pane fade" id="purchase_credits">
+                @include('profile.partials.buy-credits-form')
+                <div class="container my-5"></div>
+            </div>
+
+            <div class="tab-pane fade" id="social-links">
+                @include('profile.partials.social-links-form')
+                <div class="container my-5"></div>
+            </div>
+            
+            <!--Notifications-->
+            <div class="tab-pane fade" id="notifications">
+                @include('profile.partials.notifications-form')
+                <div class="container my-5"></div>
+            </div>
+            
         </div>
-      </div>
-  
-     
-  
     </div>
-   </div>
-        </div>
-        </form>
+</form>
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>

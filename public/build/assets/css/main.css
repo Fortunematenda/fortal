@@ -372,6 +372,9 @@ body{
 }
 .m-border{
     border-left: 4px solid purple;
+    border-left: 4px solid purple;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 .navbar-nav .nav-item.active .nav-link {
     color: purple !important; /* Change to your preferred active color */

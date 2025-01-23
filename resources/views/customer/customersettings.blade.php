@@ -32,6 +32,7 @@
                                     </svg>
                                 </span>
                             </div>
+                            
                             <div class="mb-0 text-xs">
                                 Keep your details updated so that professionals can get in touch. If you no longer require the service, please close the request.
                                 <a class="text-primary text-underline d-block pt-2" href="/customer/dashboard">Go to My Requests</a>

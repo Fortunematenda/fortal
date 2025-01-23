@@ -1,4 +1,4 @@
-
+<nav>
                   <!-- Company -->
                   <div class="form-group">
                             <label class="form-label">Company</label>
@@ -37,3 +37,4 @@
       <button type="submit" class="btn btn-primary">Save</button>
         <a href="{{ route('profile.edit') }}" class="btn btn-secondary">Cancel</a>
       </div>
+      </nav>
