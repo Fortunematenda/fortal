@@ -51,13 +51,27 @@ Route::middleware('guest:sanctum')->group(function () {
 
 // Group routes for authenticated sellers/leads
 Route::middleware('auth:sanctum')->group(function () {
-    // Seller/Lead Routes
-    Route::get('/seller/dashboard', [LeadsController::class, 'showLeads'])->name('show-leads');
-    Route::get('/responses', [LeadsController::class, 'showResponses'])->name('show-responses');
+    // Seller/Lead Routes    
     Route::get('/help', [LeadsController::class, 'showHelp'])->name('help');
     Route::post('/registerlogged', [RegisteredUserController::class, 'registerLogged'])->name('registerlogged');  
     
     // Profile and Lead Updates 
+   
+    Route::get('/customer/dashboard', [CustomerController::class, 'customerdashboard'])->name('customer.dashboard');
+    Route::get('/customer/settings', [CustomerController::class, 'expertProfile'])->name('expertprofile');
+    Route::get('/customer/expertview', [CustomerController::class, 'expertView'])->name('expertview');
+    Route::get('/customer/settings', [CustomerController::class, 'customerSettings'])->name('customersettings');
+    Route::post('/customer/expertreplies', [CustomerController::class, 'expertReplies'])->name('expertreplies');
+    Route::post('/getleadnotes', [LeadsController::class, 'getLeadNotes'])->name('getleadnotes');
+    Route::post('/updateestimate', [LeadsController::class, 'updateEstimate'])->name('updateestimate');
+    Route::post('/poststatus', [LeadsController::class, 'postStatus'])->name('poststatus');
+    Route::get('/leadexperts', [LeadsController::class, 'leadExperts'])->name('leadexperts');
+    
+});
+
+Route::middleware(['role:Customer'])->group(function () {
+    Route::get('/seller/dashboard', [LeadsController::class, 'showLeads'])->name('show-leads');
+    Route::get('/responses', [LeadsController::class, 'showResponses'])->name('show-responses');
     Route::post('/update_services', [ProfileController::class, 'updateServices'])->name('update_services');
     Route::post('/getleads', [LeadsController::class, 'getUserLeads'])->name('get_leads');
     Route::post('/getresponses', [LeadsController::class, 'getUserResponses'])->name('get_responses');
@@ -74,15 +88,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/purchase/cancel', [PurchaseController::class, 'failedPurchase'])->name('purchase.cancel');   
     Route::post('/notifications/update', [ProfileController::class, 'updateNotifications'])->name('notifications.update');
     Route::post('/notifications/update', [ProfileController::class, 'subscribedNotifications'])->name('notifications.subscribed');
-    Route::get('/customer/dashboard', [CustomerController::class, 'customerdashboard'])->name('customer.dashboard');
-    Route::get('/customer/settings/', [CustomerController::class, 'expertProfile'])->name('expertprofile');
-    Route::get('/customer/expertview/', [CustomerController::class, 'expertView'])->name('expertview');
-    Route::get('/customer/settings/', [CustomerController::class, 'customerSettings'])->name('customersettings');
-    Route::post('/customer/expertreplies/', [CustomerController::class, 'expertReplies'])->name('expertreplies');
-    Route::post('/getleadnotes', [LeadsController::class, 'getLeadNotes'])->name('getleadnotes');
-    Route::post('/updateestimate', [LeadsController::class, 'updateEstimate'])->name('updateestimate');
-    Route::post('/poststatus', [LeadsController::class, 'postStatus'])->name('poststatus');
-    Route::get('/leadexperts', [LeadsController::class, 'leadExperts'])->name('leadexperts');
 });
 
 // Load authentication routes
