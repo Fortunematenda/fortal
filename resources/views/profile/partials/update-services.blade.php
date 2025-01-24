@@ -9,7 +9,7 @@
         <div>
         <x-input-label for="services" :value="__('Select Services')" />
      
-        <select class="js-example-basic-multiple mt-1 block w-full" name="services[]" multiple="multiple">
+        <select class="js-example-basic-multiple mt-1 block w-full" name="services[]" multiple="multiple" style="cursor: default;padding-left: 20px !important;padding-right: 2px ;">
         @foreach($services as $service)
     <option @if(in_array($service, $latest_services)) selected @endif>{{ $service }}</option>
 @endforeach

@@ -136,78 +136,7 @@
                         </div>
                     </div>
      
-                    <div class="pt-3">
-                        <div class="__buyerNextBarkContainer">
-                            <div class="all_pt-3__89f4A">
-                                <div class="all_col-12__aAzEV all_mx-auto__ERNKZ all_pb-3__oPpO6">
-                            <div class="all_d-flex__WrxK8 all_align-items-center__KVHPQ">
-                                <h2>
-                                 You may also need
-                                </h2>
-                                <div class="page-buttons all_d-flex__WrxK8 all_mt-2__B9L78 all_mt-md-0__hdzCb bark-carousel-buttons">
-                                    <div class="all_d-none__gqjAc all_d-md-flex__kchcM">
-                                        <div data-testid="btnPrev" data-cy="carousel-page-btn" data-cy-enabled="false" class="all_carousel-page-button__zlGq- all_border__2wTAl all_d-flex__WrxK8 all_justify-content-center__T3UG3 all_align-items-center__KVHPQ all_me-2__SToMN cursor-pointer all_disabled__01ag6">
-                                            <img class="all_img-fluid__FB1iK" alt="left arrow" width="15" height="14" title="left arrow" src="https://development-bark-static.s3-eu-west-2.amazonaws.com/s/img/frontend-v2/icons/directory-v3/back.png!d=xgKUK">
-                                        </div>
-                                        <div data-testid="btnNext" data-cy="carousel-page-btn" data-cy-enabled="true" class="all_carousel-page-button__zlGq- all_border__2wTAl all_d-flex__WrxK8 all_justify-content-center__T3UG3 all_align-items-center__KVHPQ all_me-2__SToMN cursor-pointer ">
-                                            <img class="all_img-fluid__FB1iK" alt="right arrow" width="15" height="14" title="right arrow" src="https://development-bark-static.s3-eu-west-2.amazonaws.com/s/img/frontend-v2/icons/directory-v3/forward.png!d=xgKUK">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="all_col-12__aAzEV all_mx-auto__ERNKZ">
-                        <div class="all_row__thMJD all_flex-nowrap__b4Fi6 all_carousel-row__PGcKn all_d-md-flex__kchcM" id="next-bark-carousel">
-                            <div class="all_col-4__Sc7Yb all_col-lg-3__fRtDD all_bark-carousel-item__k3eDJ " style="transform: translateX(0%);">
-                                <div class="cursor-pointer category-link all_d-flex__WrxK8 all_flex-column__5eyyf all_h-100__3DMxF" data-category-id="35" data-bark-mode="bnb-project-dash">
-                                    <div class="all_overflow-hidden__jfaju all_rounded-top__Lvd5h">
-                                        <img class="all_img-fluid__FB1iK all_rounded-top__Lvd5h all_scale-image__1X-4- all_object-fit-cover__ZMOnA" src="https://d1vbfnp4jhzk1f.cloudfront.net/s/modal-thumbnail/35-1479228507889087712.png!d=72Qsoe" alt="General Builders">
-                                    </div>
-                                    <div class="all_border__2wTAl all_br-bottom__Y6N-k all_flex-grow-1__izlZH">
-                                        <p class="all_mb-0__hrCwX all_p-3__wnB5p all_text-grey-600__UN2jF">
-                                            General Builders
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="all_col-4__Sc7Yb all_col-lg-3__fRtDD all_bark-carousel-item__k3eDJ " style="transform: translateX(0%);">
-                                <div class="cursor-pointer category-link all_d-flex__WrxK8 all_flex-column__5eyyf all_h-100__3DMxF" data-category-id="1212" data-bark-mode="bnb-project-dash">
-                                    <div class="all_overflow-hidden__jfaju all_rounded-top__Lvd5h">
-                                        <img class="all_img-fluid__FB1iK all_rounded-top__Lvd5h all_scale-image__1X-4- all_object-fit-cover__ZMOnA" src="https://d1vbfnp4jhzk1f.cloudfront.net/s/modal-thumbnail/1212-15656972151119486286.png!d=72Qsoe" alt="House Cleaning">
-                                    </div>
-                                    <div class="all_border__2wTAl all_br-bottom__Y6N-k all_flex-grow-1__izlZH">
-                                        <p class="all_mb-0__hrCwX all_p-3__wnB5p all_text-grey-600__UN2jF">
-                                            House Cleaning
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="all_col-4__Sc7Yb all_col-lg-3__fRtDD all_bark-carousel-item__k3eDJ " style="transform: translateX(0%);">
-                                <div class="cursor-pointer category-link all_d-flex__WrxK8 all_flex-column__5eyyf all_h-100__3DMxF" data-category-id="1119" data-bark-mode="bnb-project-dash">
-                                    <div class="all_overflow-hidden__jfaju all_rounded-top__Lvd5h">
-                                        <img class="all_img-fluid__FB1iK all_rounded-top__Lvd5h all_scale-image__1X-4- all_object-fit-cover__ZMOnA" src="https://d1vbfnp4jhzk1f.cloudfront.net/s/modal_thumbnail_1119.jpg!d=72Qsoe" alt="Solar Panel Installation">
-                                    </div>
-                                    <div class="all_border__2wTAl all_br-bottom__Y6N-k all_flex-grow-1__izlZH">
-                                        <p class="all_mb-0__hrCwX all_p-3__wnB5p all_text-grey-600__UN2jF">
-                                            Solar Panel Installation
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="all_col-4__Sc7Yb all_col-lg-3__fRtDD all_bark-carousel-item__k3eDJ " style="transform: translateX(0%);">
-                                <div class="cursor-pointer category-link all_d-flex__WrxK8 all_flex-column__5eyyf all_h-100__3DMxF" data-category-id="132" data-bark-mode="bnb-project-dash">
-                                    <div class="all_overflow-hidden__jfaju all_rounded-top__Lvd5h">
-                                        <img class="all_img-fluid__FB1iK all_rounded-top__Lvd5h all_scale-image__1X-4- all_object-fit-cover__ZMOnA" src="https://d1vbfnp4jhzk1f.cloudfront.net/s/modal_thumbnail_132.jpg!d=72Qsoe" alt="Moving Companies">
-                                    </div>
-                                    <div class="all_border__2wTAl all_br-bottom__Y6N-k all_flex-grow-1__izlZH">
-                                        <p class="all_mb-0__hrCwX all_p-3__wnB5p all_text-grey-600__UN2jF">
-                                            Moving Companies
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    
                         
                     </div>
                   
