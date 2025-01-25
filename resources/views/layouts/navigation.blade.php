@@ -23,8 +23,9 @@
        
     <div class="collapse navbar-collapse dixylo" id="navbarSupportedContent">
     @auth
- 
-   <ul class="navbar-nav ml-auto d-flex align-items-center">
+    <ul class="navbar-nav ml-auto d-flex align-items-center">
+    @if(session('temp_role') == "Expert")
+   
     <li class="dashboard-home nav-item px-2 py-3 py-sm-4" id="js-joyride-dashboard-home">
         <a class="text-grey-400 nav-link py-0" href="/dashboard/">Dashboard</a>
     </li>
@@ -34,6 +35,11 @@
     <li class="my-responses nav-item px-2 py-3 py-sm-4" id="js-joyride-my-responses">
         <a class="text-grey-400 nav-link py-0" href="/responses"">My Responses</a>
     </li>
+    @else
+    <li class="requests nav-item px-2 py-3 py-sm-4 active" id="js-joyride-requests">
+            <a class="text-grey-400 nav-link py-0" href="/customer/dashboard/">My Requests</a>
+        </li> 
+@endif
     <li class="nav-item dropdown notifications-dropdown py-2 d-none d-lg-block">
         <a class="notifications-dropdown-toggle" href="/seller/dashboard" id="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="ld-notifications-cont">
@@ -71,10 +77,13 @@
 <x-slot name="content" style="background-color: gray;" class="sc-1s8qip7-0 sc-hkhyta-2 ceTrJs dOiuFl">
  <div class="sc-1s8qip7-1 sc-hkhyta-11 eCavCD clCrzG">
             <div class="sc-1s8qip7-2 sc-hkhyta-0 fxLrOp">
-                Fortune Matenda
+            @auth
+        {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+            @endauth
             </div>
             
         </div>
+        @if(auth()->user()->role == "Expert")
         <div class="sc-1s8qip7-4 sc-hkhyta-12 gnCLxp hkYiXY">
                 <div class="sc-1s8qip7-16 cwXCbP">
                     <div class="sc-1s8qip7-17 hVHmYO">
@@ -88,11 +97,12 @@
                 </div>
                 <div class="sc-1s8qip7-6 sc-hkhyta-9  ">
                     <span>
-                       100
+                    {{ auth()->user()->credits_balance }}
                     </span>
                   Credits
                 </div>
             </div>
+            @endif
             <div class="sc-1s8qip7-17 hVHmYO">
             
            
@@ -143,17 +153,24 @@
 
         </div>
         <div class="sc-1s8qip7-13 sc-hkhyta-14 nWBeg igslBq">
+        @if(auth()->user()->role == "Expert")
             <a aria-label="chatai" >
                 <div class="sc-1s8qip7-18 cDRzHp">
                     
                     <div class="sc-1s8qip7-12 sc-hkhyta-6 cNLnak jHYwEm">
+                    @if(session('temp_role') == "Expert")
                   <x-dropdown-link :href="route('customer.dashboard')">
                     {{ __('Switch to Customer') }}
                       </x-dropdown-link>
+                      @else
+                      <x-dropdown-link :href="route('dashboard')">
+                    {{ __('Switch to Expert') }}
+                      </x-dropdown-link>
+                      @endif
+
                     </div>
                 </div>
             </a>  
-
             <a aria-label="my-bets" >
                 <div class="sc-1s8qip7-12 sc-hkhyta-6 cNLnak jHYwEm">
                     <x-dropdown-link :href="route('profile.edit')">
@@ -161,7 +178,15 @@
                     </x-dropdown-link>
                 </div>
             </a>
-            
+@else
+            <a aria-label="my-bets" >
+                <div class="sc-1s8qip7-12 sc-hkhyta-6 cNLnak jHYwEm">
+                    <x-dropdown-link :href="route('customersettings')">
+                        {{ __('Account Settings') }}
+                    </x-dropdown-link>
+                </div>
+            </a>
+          @endif  
              <a aria-label="chatai" >
                 <div class="sc-1s8qip7-18 cDRzHp">
                     

@@ -1,5 +1,6 @@
 
-<x-customernav>
+
+<x-app-layout>
     <link rel="stylesheet" href="{{asset('build/assets/css/main_v2-built.645e5822f3.v2.css')}}">
     <style>
         .uk-modal.uk-open {
@@ -195,7 +196,7 @@
     </div>
 
 
-    </x-customernav>
+</x-app-layout>
     <script>
         $(document).on("click",".changestatus",function(){
           let xl = $(this).attr("xl"); 

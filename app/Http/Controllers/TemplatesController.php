@@ -702,7 +702,7 @@ if ($frequent > 0) {
                     Frequent user
                 </div>";
 }
-$details .= "<div class='d-flex  flex-wrap align-items-left text-regular mt-1 text-xs-14 quote-cta-container my-4'>
+$details .= "<div class='d-flex  flex-wrap align-items-left text-regular mt-1 text-xs-14 quote-cta-container my-4 '>
     <span class='btn-bd-primary mr-2 tw-text-base '>
         <i class='bi bi-cash ' style='color: purple; font-size: 20px;'></i>
     </span>

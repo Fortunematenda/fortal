@@ -22,21 +22,17 @@ Route::get('/customer/createrequests', [CustomerController::class, 'createReques
 Route::post('/getservices', [LeadsController::class, 'getServices'])->name('getservices');
 Route::post('/getservicesquestions', [CustomerController::class, 'getServicesQuestions'])->name('getservicesquestions');
 // Group routes for authenticated users
-Route::middleware('auth')->group(function () {
-    // Profile Routes
+Route::middleware('auth')->group(function () {   
+  
+    Route::post('/help/submit', [HelpController::class, 'submit'])->name('help.submit');
+});
+
+Route::middleware(['auth', \App\Http\Middleware\Roles::class . ':Expert'])->group(function () {
+    // Your routes that require both auth and the Expert role
     Route::get('/settings', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/settings', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/settings', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/settings', [ProfileController::class, 'notifications'])->name('profile.notifications');
-  
-    // Credit Routes
-    Route::post('/buy-credits', [CreditController::class, 'buyCredits']);
-    Route::get('/buy-credits', [CreditController::class, 'showBuyCreditsPage'])->name('credits.buy');
-    Route::get('/credit/{userId}/credit-history', [CreditController::class, 'getCreditHistory'])->name('credit.history');
-    Route::get('/credit/packages', [CreditController::class, 'showPackages'])->name('credit.packages');
-    Route::get('/credit-packages', [CreditController::class, 'showCreditPackages'])->name('credit.packages');
-    Route::get('/transaction-history', [ProfileController::class, 'transactionHistory'])->name('transaction.history');
-    Route::post('/help/submit', [HelpController::class, 'submit'])->name('help.submit');
 });
 
 // Group routes for guest users
@@ -57,8 +53,7 @@ Route::middleware('auth:sanctum')->group(function () {
     
     // Profile and Lead Updates 
    
-    Route::get('/customer/dashboard', [CustomerController::class, 'customerdashboard'])->name('customer.dashboard');
-    Route::get('/customer/settings', [CustomerController::class, 'expertProfile'])->name('expertprofile');
+    Route::get('/customer/dashboard', [CustomerController::class, 'customerdashboard'])->name('customer.dashboard');   
     Route::get('/customer/expertview', [CustomerController::class, 'expertView'])->name('expertview');
     Route::get('/customer/settings', [CustomerController::class, 'customerSettings'])->name('customersettings');
     Route::post('/customer/expertreplies', [CustomerController::class, 'expertReplies'])->name('expertreplies');
@@ -69,7 +64,7 @@ Route::middleware('auth:sanctum')->group(function () {
     
 });
 
-Route::middleware(['role:Customer'])->group(function () {
+Route::middleware(['auth:sanctum', \App\Http\Middleware\Roles::class . ':Expert'])->group(function () {
     Route::get('/seller/dashboard', [LeadsController::class, 'showLeads'])->name('show-leads');
     Route::get('/responses', [LeadsController::class, 'showResponses'])->name('show-responses');
     Route::post('/update_services', [ProfileController::class, 'updateServices'])->name('update_services');
@@ -88,6 +83,12 @@ Route::middleware(['role:Customer'])->group(function () {
     Route::get('/purchase/cancel', [PurchaseController::class, 'failedPurchase'])->name('purchase.cancel');   
     Route::post('/notifications/update', [ProfileController::class, 'updateNotifications'])->name('notifications.update');
     Route::post('/notifications/update', [ProfileController::class, 'subscribedNotifications'])->name('notifications.subscribed');
+    Route::post('/buy-credits', [CreditController::class, 'buyCredits']);
+    Route::get('/buy-credits', [CreditController::class, 'showBuyCreditsPage'])->name('credits.buy');
+    Route::get('/credit/{userId}/credit-history', [CreditController::class, 'getCreditHistory'])->name('credit.history');
+    Route::get('/credit/packages', [CreditController::class, 'showPackages'])->name('credit.packages');
+    Route::get('/credit-packages', [CreditController::class, 'showCreditPackages'])->name('credit.packages');
+    Route::get('/transaction-history', [ProfileController::class, 'transactionHistory'])->name('transaction.history');
 });
 
 // Load authentication routes

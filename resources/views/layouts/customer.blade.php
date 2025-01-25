@@ -96,9 +96,11 @@
 
 <x-slot name="content" style="background-color: gray;" class="sc-1s8qip7-0 sc-hkhyta-2 ceTrJs dOiuFl">
  <div class="sc-1s8qip7-1 sc-hkhyta-11 eCavCD clCrzG">
-            <div class="sc-1s8qip7-2 sc-hkhyta-0 fxLrOp">
-                Fortune Matenda
-            </div>
+ <div class="sc-1s8qip7-2 sc-hkhyta-0 fxLrOp">
+    @auth
+        {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+    @endauth
+</div>
             
         </div>
         <div class="sc-1s8qip7-4 sc-hkhyta-12 gnCLxp fXvisv">
@@ -157,7 +159,17 @@
                     </div>
                 </div>
             </a>  
-
+@if(auth()->user()->role == "Expert")
+            <a aria-label="chatai" >
+                <div class="sc-1s8qip7-18 cDRzHp">
+                    
+                    <div class="sc-1s8qip7-12 sc-hkhyta-6 cNLnak jHYwEm">
+                  <x-dropdown-link :href="route('dashboard')">
+                    {{ __('Switch to Expert') }}
+                      </x-dropdown-link>
+                    </div>
+                </div>
+            </a>  
             <a aria-label="my-bets" href="/customer/settings/">
                 <div class="sc-1s8qip7-12 sc-hkhyta-6 cNLnak jHYwEm">
                     <x-dropdown-link :href="route('customersettings')">
@@ -165,6 +177,17 @@
                     </x-dropdown-link>
                 </div>
             </a>
+
+            @else
+            <a aria-label="my-bets" href="/customer/settings/">
+                <div class="sc-1s8qip7-12 sc-hkhyta-6 cNLnak jHYwEm">
+                    <x-dropdown-link :href="route('customersettings')">
+                        {{ __('Account Settings') }}
+                    </x-dropdown-link>
+                </div>
+            </a>
+
+            @endif
             
              <a aria-label="chatai" href="#">
                 <div class="sc-1s8qip7-18 cDRzHp">

@@ -80,4 +80,9 @@ class User extends Authenticatable
     {
         return "{$this->first_name} {$this->last_name}";
     }
+    public function hasRole($role)
+{
+    // Assuming your roles are stored in a column called `role`
+    return $this->role === $role;
+}
 }

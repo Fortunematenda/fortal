@@ -25,6 +25,7 @@ class ProfileController extends Controller
      public function openDashboard(Request $request)
      {
         $user = Auth::user();
+        session(['temp_role' => "Expert"]);
         $user = $request->user();
         $first_name = $user->first_name;
         $email = $user->email;

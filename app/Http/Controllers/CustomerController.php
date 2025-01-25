@@ -18,6 +18,7 @@ class CustomerController extends Controller
     public function customerdashboard(Request $request)
     {
         $slot = "";
+        session(['temp_role' => "Customer"]);
         $user = $request->user();
         $user_id = $user->id;
         $leads = LeadsModel::join('master_services as m', 'leads.service_id', '=', 'm.id')

@@ -3,8 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
 class Roles
@@ -19,6 +17,7 @@ class Roles
      */
     public function handle($request, Closure $next, ...$roles)
     {
+       
         $user = Auth::user();
 
         // Check if the user is authenticated
