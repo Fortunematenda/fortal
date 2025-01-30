@@ -23,15 +23,15 @@ Route::post('/getservices', [LeadsController::class, 'getServices'])->name('gets
 Route::post('/getservicesquestions', [CustomerController::class, 'getServicesQuestions'])->name('getservicesquestions');
 // Group routes for authenticated users
 Route::middleware('auth')->group(function () {   
-  
+   // Your routes that require both auth and the Expert role
+   Route::get('/settings', [ProfileController::class, 'edit'])->name('profile.edit');
+   Route::patch('/settings', [ProfileController::class, 'update'])->name('profile.update');
+   Route::delete('/settings', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/help/submit', [HelpController::class, 'submit'])->name('help.submit');
 });
 
 Route::middleware(['auth', \App\Http\Middleware\Roles::class . ':Expert'])->group(function () {
-    // Your routes that require both auth and the Expert role
-    Route::get('/settings', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/settings', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/settings', [ProfileController::class, 'destroy'])->name('profile.destroy');
+   
     Route::post('/settings', [ProfileController::class, 'notifications'])->name('profile.notifications');
 });
 

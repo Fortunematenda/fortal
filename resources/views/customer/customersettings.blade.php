@@ -1,177 +1,93 @@
-<x-customernav>
-@if (session('success'))
-    <div class="alert alert-success">
+<x-app-layout>
+
+      
+<form  action="{{ route('profile.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('Patch')
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+       <link rel="stylesheet" href="https://d3a1eo0ozlzntn.cloudfront.net/assets/css/main_v2-built.87872c72ad.v2.css">
+        <link rel="stylesheet" href="https://d1w7gvu0kpf6fl.cloudfront.net/fonts/marin-icons-032019/Marin-Icons.css">
+    
+      <link rel="stylesheet" href="{{asset('build/assets/css/main_v2-built.645e5822f3.v2.css')}}">
+
+
+      @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-@endif
- 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
-        @csrf
-        @method('patch')
+    @elseif(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+    {{-- Display Validation Errors --}}
+    @if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+            <li>
+                {{ $error }}
+            </li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <div class="card-body media align-items-center wUjgt ">
+    <img src="{{ $user->profile_picture && file_exists(public_path('storage/profile_pictures/' . $user->profile_picture)) 
+            ? asset('storage/profile_pictures/' . $user->profile_picture) 
+            : 'https://bootdey.com/img/Content/avatar/avatar1.png' }}" 
+            alt="Profile Picture" 
+            class="d-block ui-w-80">
 
-        <div class="py-5 px-2 px-md-4 col-md-8 container px-2">
-            <div class="row">
-                <div class="col-12">
-                    <h1 class="h3 mb-3">Account settings</h1>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="form">
-                        <div class="d-flex rounded bg-grey-25 p-3">
-                            <div class="">
-                                <span class="bark-svg-icon bsi-primary-primary mr-2 bsi-hover-dark-blue info-is-private">
-                                    <!-- SVG icon -->
-                                    <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <g id="Icon/info_medium" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <g id="info_medium" transform="translate(2.000000, 2.000000)" class="primary-color">
-                                                <path d="M10,0 C4.48,0 0,4.48 0,10 C0,15.52 4.48,20 10,20 C15.52,20 20,15.52 20,10 C20,4.48 15.52,0 10,0 Z M10,15 C9.45,15 9,14.55 9,14 L9,10 C9,9.45 9.45,9 10,9 C10.55,9 11,9.45 11,10 L11,14 C11,14.55 10.55,15 10,15 Z M10.05,7.5 C9.35964406,7.5 8.8,6.94035594 8.8,6.25 C8.8,5.55964406 9.35964406,5 10.05,5 C10.7403559,5 11.3,5.55964406 11.3,6.25 C11.3,6.94035594 10.7403559,7.5 10.05,7.5 Z"></path>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </span>
-                            </div>
-                            
-                            <div class="mb-0 text-xs">
-                                Keep your details updated so that professionals can get in touch. If you no longer require the service, please close the request.
-                                <a class="text-primary text-underline d-block pt-2" href="/customer/dashboard">Go to My Requests</a>
-                            </div>
-                        </div>
-
-                        <!-- Profile Picture Section -->
-                        <div class="form-stroke-container px-3 px-md-4 my-4 name-profile-picture-container">
-                            <div class="mb-3 waiting">
-                                <h4 class="setting-subsection-title">My details</h4>
-                            </div>
-                            <div class="waiting-hidden">
-                                <div class="mx-0 form-group row align-items-center">
-                                    <div class="w-auto">
-                                        <img id="profile_picture" name="profile_picture" src="https://d1w7gvu0kpf6fl.cloudfront.net/img/frontend-v2/settings/default-avatar.png" class="rounded-circle profile_picture" style="height: 100px; width:100px; object-fit: cover;">
-                                    </div>
-                                    <div id="profile_photo_div" class="col col-md-3 px-3 align-items-middle justify-content-center">
-                                        <input type="hidden" id="profile_picture" name="profile_picture" class="profile_picture_new_ref">
-                                        <input type="file" id="profile_picture_file" name="profile_picture_file" class="form-control profile_picture_file" style="visibility:hidden;position:absolute;top:-50;left:-50;" accept=".jpg,.jpeg,.png,.x-png,.tif,.tiff,.webp">
-                                        <a href="#" class="btn btn-outline-blue d-block  settings-submit profile_picture_link">
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <span class="submit-spinner spinner-border spinner-border-sm mr-3" role="status" aria-hidden="true"></span>
-                                                <span class="submit-text">Upload</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="btn font-primary my-2 btn-tertiary d-block  profile_picture_cam" id="profile_picture_cam" name="profile_picture_cam">
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <span class="d-flex">Take photo</span>
-                                            </div>
-                                        </a>
-                                        <div class="invalid-feedback"></div>
-                                    </div>
-                                </div>
-
-                                <!-- Name and Phone Section -->
-                                <div class="form-group mb-3">
-                                    <label for="profile_name">Name</label>
-                                    <input id="profile_name" name="profile_name" type="text" placeholder="Name" class="form-control">
-                                    <div class="invalid-feedback"></div>
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label for="profile_tel">Phone number</label>
-                                    <input id="profile_tel" name="profile_tel" type="text" placeholder="Telephone" class="form-control">
-                                    <div class="invalid-feedback mt-0 pt-2"></div>
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label for="profile_email">Email</label>
-                                    <input id="profile_email" name="profile_email" type="text" placeholder="Email" class="form-control">
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Password Change Section -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-stroke-container px-2 px-md-4 mb-4">
-                                    <div class="js-account-change-password waiting-hidden">
-                                        <h4 class="setting-subsection-title mb-3">Password</h4>
-                                        <div class="btn btn-outline-clear-blue btn-outline-blue border-blue px-3 py-2" data-toggle="modal" data-target="#change-password-modal">
-                                            Change password
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Save Changes Button -->
-                        <div class="row">
-                            <div class="col-12">
-                                <button id="form-manager-save" class="btn btn-primary d-block d-md-inline-block settings-submit">
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <span class="submit-spinner spinner-border spinner-border-sm mr-3" role="status" aria-hidden="true"></span>
-                                        <span class="submit-text px-3 py-2">Save changes</span>
-                                        <span class="submit-success-text px-3 py-2"></span>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="media-body ml-4 ">
+            <label for="profile_picture" class="btn btn-outline-primary">
+                {{ __('Upload Profile Picture') }}
+                <input type="file" id="profile_picture" name="profile_picture" class="account-settings-fileinput block w-full focus:ring focus:ring-indigo-200" accept="image/*">
+            </label> &nbsp;
+            <div class="text-light small mt-1">Allowed JPG, GIF, or PNG. Max size of 800K</div>
         </div>
-    </form>
-    <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                // Handling Profile Picture Upload
-                const profilePictureFileInput = document.getElementById('profile_picture_file');
-                const profilePictureLink = document.querySelector('.profile_picture_link');
-                const submitSpinner = document.querySelector('.submit-spinner');
-                const submitText = document.querySelector('.submit-text');
+    </div>
+    <hr class="border-light m-0">
 
-                // Handle the file upload button click
-                profilePictureLink.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    profilePictureFileInput.click();
-                });
+    <div class="card-body">
+        <!-- First Name -->
+        <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input type="text" id="first_name" name="first_name" class="form-control mb-1" value="{{ old('first_name', $user->first_name) }}" required autofocus autocomplete="first_name"/>
+        </div>
 
-                // When file is selected, update profile picture preview
-                profilePictureFileInput.addEventListener('change', function () {
-                    const file = profilePictureFileInput.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = function () {
-                            document.getElementById('profile_picture').src = reader.result;
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
+        <!-- Last Name -->
+        <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input type="text" id="last_name" name="last_name" class="form-control mb-1" value="{{ old('last_name', $user->last_name) }}" required />
+        </div>
 
-                // Handle profile picture upload action (simulating network request)
-                profilePictureLink.addEventListener('click', function () {
-                    submitSpinner.style.display = 'inline-block'; // Show spinner
-                    submitText.textContent = 'Uploading...'; // Change text to "Uploading..."
-                    
-                    setTimeout(function () {
-                        submitSpinner.style.display = 'none'; // Hide spinner
-                        submitText.textContent = 'Upload'; // Reset text back to "Upload"
-                        alert('Profile picture updated successfully!');
-                    }, 2000); // Simulate a 2-second upload delay
-                });
+        <!-- E-mail -->
+        <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" id="email" name="email" class="form-control mb-1" value="{{ old('email', $user->email) }}" required autocomplete="username" />
+        </div>
 
-                // Handling the Save Changes button click
-                const saveButton = document.getElementById('form-manager-save');
-                saveButton.addEventListener('click', function () {
-                    const saveButtonText = saveButton.querySelector('.submit-text');
-                    const saveButtonSpinner = saveButton.querySelector('.submit-spinner');
-                    
-                    saveButtonSpinner.style.display = 'inline-block'; // Show spinner
-                    saveButtonText.textContent = 'Saving...'; // Change text to "Saving..."
+        <!-- Contact Number -->
+        <div class="form-group">
+            <label class="form-label">Contact Number</label>
+            <input type="text" id="contact_number" name="contact_number" class="form-control mb-1" value="{{ old('contact_number', $user->contact_number) }}" />
+        </div>
+        <!-- Location -->
+        <div class="form-group">
+                            <label class="form-label">Location</label>
+                            <input type="text" id="searchLocation" name="location" class="form-control mb-1" value="{{ old('location', $user->location) }}" placeholder="Enter your location" />
+                            <input type="hidden" name="latitude" id="latitude" value="{{ old('latitude', $user->latitude) }}">
+                            <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude', $user->longitude) }}">
+                        </div>
 
-                    setTimeout(function () {
-                        saveButtonSpinner.style.display = 'none'; // Hide spinner
-                        saveButtonText.textContent = 'Save changes'; // Reset text to original
-                        alert('Changes saved successfully!');
-                    }, 3000); // Simulate a 3-second save delay
-                });
-            });
-        </script> 
-</x-customernav>
+   
+                  </div>
+    <div class="text-right mt-3">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{{ route('profile.edit') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+</x-app-layout>

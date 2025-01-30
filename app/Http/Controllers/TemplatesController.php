@@ -718,8 +718,10 @@ $details .= "<div class='d-flex flex-column project-details-col-project-details'
                     <div class='project-details-label'>Details</div>
                     <hr class='project-details-hr'>";
 $details .= $this->details($lead_details, $lead_images);
+
                     $details .= "<hr class='lead-settings-prompt-hr'>
                     <div class='lead-settings-prompt flex'></div>
+                    
                     
 
                         <div class='font-weight-regular mb-2'>Stop seeing leads with specific answers by customising your settings.</div>

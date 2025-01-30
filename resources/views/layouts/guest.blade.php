@@ -1,5 +1,17 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <style>
+        .bg-gray-100 {
+    background-image: linear-gradient(180deg, #000, #200d42 34%, #4f21a1 65%, #a46edb 82%) !important;
+}
+.bg-white {
+    background-image: linear-gradient(180deg, #000, #200d42 34%, #4f21a1 65%, #a46edb 82%) !important;
+}
+.text-gray-700 {
+    --tw-text-opacity: 1 !important;
+    color:#ffff !important;
+}
+    </style>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +28,7 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+            
             <div>
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
@@ -26,5 +39,5 @@
                 {{ $slot }}
             </div>
         </div>
-    </body>
+        </body>
 </html>

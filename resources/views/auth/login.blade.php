@@ -1,61 +1,160 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5; /* Added line-height for consistent spacing */
+        }
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to top, #6a00f4, #10002b);
+        }
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        .login-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            width: 350px;
+            border: 2px solid white;
+        }
+
+        /* Logo Container */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px; /* Increased margin for better spacing */
+        }
+
+        .logo-container img {
+            width: 80px;
+        }
+
+        .login-container h2 {
+            color: white;
+            margin-bottom: 25px; /* Increased margin for better spacing */
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0; /* Increased margin for better spacing */
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: white;
+            font-weight: bold;
+        }
+
+        .btn-google {
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-google img {
+            width: 18px;
+            margin-right: 10px;
+        }
+
+        .input-group {
+            position: relative;
+            margin: 20px 0; /* Increased margin for better spacing */
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+        }
+
+        .input-group img {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+        }
+
+        .forgot-password {
+            color: white;
+            font-size: 14px;
+            display: block;
+            margin: 20px 0; /* Increased margin for better spacing */
+        }
+
+        .register-link {
+            color: white;
+            font-size: 14px;
+            margin: 20px 0; /* Increased margin for better spacing */
+        }
+
+        .register-link a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <!-- Logo Container (At the Top) -->
+        <div class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="Company Logo">
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        <h2>Login</h2>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <!-- Email Input -->
+        <div class="input-group">
+            <input type="email" placeholder="Email" id="userEmail">
+            <i class="bi bi-envelope"></i>
         </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
+        <!-- Password Input -->
+        <div class="input-group">
+            <input type="password" placeholder="Password" id="userPassword">
+            <img src="https://cdn-icons-png.flaticon.com/512/3064/3064155.png" alt="Lock Icon">
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
+        <!-- Forgot Password Link -->
+        <a href="#" class="forgot-password">Forgot password?</a>
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
+        <!-- Login Button -->
+        <button class="btn btn-primary">Login</button>
+
+        <!-- Displaying user details -->
+        <div style="color: white; margin-top: 25px;">
+            
         </div>
+        <p class="register-link"> <a href="/customer/createrequests/">Home</a></p>
+        <!-- Register Link -->
+        <p class="register-link">Don't have an account? <a href="/profession/create/">Register as a Pro</a></p>
+    </div>
 
-        
-    </form>
-    <br><br>
-    <hr><br>
-    <div class="col-12 col-md-10 col-lg-8 mx-auto text-center mt-5">
-                    <div class="pro-account">
-                
-                        <u><a href="/customer/createrequests" tabindex="6">Looking for a service? </a></u></span></p>
-                        <u><a href="/profession/create" tabindex="6">Join as a professional</a></u></span></p>
-                    </div>
-                    <div class="signup-text">
-                     <u><a href="/" tabindex="7">Home</a></u></span></p>
-                    </div>
-                </div>
-</x-guest-layout>
+</body>
+</html>

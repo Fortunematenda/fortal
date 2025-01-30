@@ -17,6 +17,7 @@ class CustomerController extends Controller
 {
     public function customerdashboard(Request $request)
     {
+    
         $slot = "";
         session(['temp_role' => "Customer"]);
         $user = $request->user();
@@ -69,12 +70,13 @@ class CustomerController extends Controller
         return view('customer.expertview', compact('profession'));
     }
 
-    public function customerSettings()
+    public function customerSettings(Request $request)
     {
         $slot = "";
+        $user = $request->user();
         $profession = null; // Replace with actual fetching logic
 
-        return view('customer.customersettings', compact('profession'));
+        return view('customer.customersettings', compact(['profession', 'user']));
     }
     
      public function expertProfile()

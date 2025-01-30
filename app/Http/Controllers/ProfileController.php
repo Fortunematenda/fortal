@@ -122,7 +122,14 @@ class ProfileController extends Controller
         $user->profile_picture = $imageName;
         }
         $user->save(); 
-        return redirect()->route('profile.edit')->with('status', 'profile-updated')->with('success', 'Profile updated successfully!');
+        if($user->role =="Expert")
+        {
+            return redirect()->route('profile.edit')->with('status', 'profile-updated')->with('success', 'Profile updated successfully!');
+        }
+        else{
+            return redirect()->route('customersettings')->with('status', 'profile-updated')->with('success', 'Profile updated successfully!');
+        }
+        
     }
 }
 catch(Exception $e)

@@ -1,11 +1,21 @@
 
 <nav class="navbar sticky-top navbar-expand-lg bark-header  body-min-width header-shadow background-color-white py-0 bg-white border-b border-gray-100" x-data="{ open: false }" id="bark-header">
-            <a class="navbar-brand py-3" href="/dashboard/">
+     @auth
+       
+
+
+@if(session('temp_role') == "Expert") 
+<a class="navbar-brand py-3" href="/dashboard/">
             <img class="img-fluid loaded" src="{{asset('build/assets/img/fortailogo.png')}}" width="80" height="24" title="Fortai Logo" alt="Fortai Logo" data-was-processed="true">
         </a>
-    
+   
+        @else
+        <a class="navbar-brand py-3" href="/customer/dashboard/">
+            <img class="img-fluid loaded" src="{{asset('build/assets/img/fortailogo.png')}}" width="80" height="24" title="Fortai Logo" alt="Fortai Logo" data-was-processed="true">
+        </a>
        <!-- Primary Navigation Menu -->
-
+@endif
+@endauth
     
         <div class="collapsed ml-auto d-flex d-lg-none notifications-dropdown">
             <a class="notifications-dropdown-toggle" href="#" id="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -241,7 +251,7 @@
                     <a class="text-grey-400 nav-link py-0" href="/login">Login</a>
                 </li>
                             <li class="requests nav-item px-2 py-3 py-sm-4 active" id="js-joyride-requests">
-                    <a class="text-grey-400 nav-link py-0" href="/profession/create/">Join As Professional</a>
+                    <a class="text-grey-400 nav-link py-0" href="/customer/createrequests/">Home</a>
                 </li>
         @endguest
             </div>

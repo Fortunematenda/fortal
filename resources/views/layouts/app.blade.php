@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{asset('build/assets/css/main_v2-built.645e5822f3.v2.css')}}">
     <link rel="stylesheet" href="{{asset('build/assets/css/Marin-Icons.css')}}">
     <link rel="stylesheet" href="{{asset('build/assets/css/demo.css')}}">
+    
     <!--<link rel="stylesheet" href="{{asset('build/assets/css/bootstrap.min.css')}}">-->
   
     <link rel="stylesheet" href="{{asset('build/assets/css/plugins.min.css')}}">
