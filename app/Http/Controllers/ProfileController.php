@@ -15,6 +15,7 @@ use App\Models\ServicesModel;
 use App\Models\UserServicesModel;
 use App\Models\LeadsModel;
 use App\Models\ContactedLeadsModel;
+use App\Models\User;
 use App\Models\CreditsTrailModel;
 use App\Notifications\SendOtpNotification;
 use Exception;
@@ -50,11 +51,13 @@ class ProfileController extends Controller
         $latest_services = $this->getUserServices($user->id);
         $latest_services_limited = array_slice($latest_services, 0, 2);
         $number_of_leads = $this->getLeadsCount($user);
-        $contacted_lead = 0;
+        $contacted_lead = $this->getResponseLeadsCount($user->id);
+        $contacted_hired = $this->getResponseLeadsCount($user->id,2);
         $service_badge = count($latest_services)-2;
-        $unread_leads = count($this->getUnreadLeads($user->id));
-        
-        return view("dashboard",compact(["first_name","login_at","contacted_lead","greetings","profile_picture","contact_number","company_name","is_company_website","company_size","is_company_sales_team","logo","location","company_registration_number","latest_services_limited","service_badge","email","number_of_leads","unread_leads","credits_balance","new_leads_notifications","weekly_newsletter_notifications","subscribed_services_notifications","sms_notifications","biography"]));
+        $unread_leads = $this->getUnreadLeads($user);
+        $perc = $this->profileProgress($user);
+        $latestresponse = $this->getLatestResponse($user);
+        return view("dashboard",compact(["first_name","login_at","perc","contacted_lead","latestresponse","contacted_hired","greetings","profile_picture","contact_number","company_name","is_company_website","company_size","is_company_sales_team","logo","location","company_registration_number","latest_services_limited","service_badge","email","number_of_leads","unread_leads","credits_balance","new_leads_notifications","weekly_newsletter_notifications","subscribed_services_notifications","sms_notifications","biography"]));
      }
      public function edit(Request $request): View
      {
@@ -118,7 +121,9 @@ class ProfileController extends Controller
     }
 
     if ($user->isDirty()) {
+   
         if ($request->hasFile('profile_picture')) {
+          
         $user->profile_picture = $imageName;
         }
         $user->save(); 
@@ -131,6 +136,7 @@ class ProfileController extends Controller
         }
         
     }
+    //return redirect()->route('profile.edit')->with('status', 'profile-updated')->with('success', 'No changes made!'.$rr);
 }
 catch(Exception $e)
 {
@@ -455,19 +461,33 @@ $query->orderBy('ln_full.date_entered', 'desc');
     
     }
 
-    private function getUnreadLeads($user_id)
+    private function getUnreadLeads($user)
     {
         $results = LeadsModel::join('user_services as u', 'leads.service_id', '=', 'u.service_id')
         ->join('master_services as m', 'u.service_id', '=', 'm.id')
         ->join('users as s', 'leads.user_id', '=', 's.id')
         ->select('m.service_name', 'leads.user_id as lead_user_id', 'u.user_id as user_service_user_id', 'leads.service_id', 'leads.id')
-        ->where('u.user_id', $user_id)
-        ->whereNotIn('leads.id', function ($query) use ($user_id) {
+        ->selectRaw('
+            (
+                6371 * acos(
+                cos(radians('.$user->latitude.')) 
+                * cos(radians(leads.latitude)) 
+                * cos(radians(leads.longitude) - radians('.$user->longitude.')) 
+                + sin(radians('.$user->latitude.')) 
+                * sin(radians(leads.latitude))
+                )
+            ) AS distance
+        ')
+        ->where('u.user_id', $user->id)
+        ->where('leads.status', '=', 'Open')
+        ->where('u.user_id', $user->id)
+        ->whereNotIn('leads.id', function ($query) use ($user) {
             $query->select('lead_id')
                   ->from('leads_read')
-                  ->where('user_id', $user_id);
+                  ->where('user_id', $user->id);
         })
-        ->get();
+        ->havingRaw('distance <= '.$user->distance)
+        ->count();
 
     return $results;
     }
@@ -595,4 +615,102 @@ public function register(Request $request)
 
         return response()->json(['message' => 'Invalid OTP'], 400);
     }
+
+    
+    public function leadsTrend(Request $request)
+    {
+        $user = $request->user();
+    
+        try {
+            $leads = DB::table('leads as l')
+                ->join('user_services as u', 'l.service_id', '=', 'u.service_id')
+                ->join('master_services as m', 'u.service_id', '=', 'm.id')
+                ->selectRaw('DATE_FORMAT(l.date_entered, "%Y-%m") as month, DATE_FORMAT(l.date_entered, "%b") as labels, COUNT(l.id) as data')
+                ->where('u.user_id', $user->id)
+                ->whereNotNull('l.date_entered') // Ensure no NULL values
+                ->whereRaw('
+                    (
+                        6371 * acos(
+                            cos(radians(?)) 
+                            * cos(radians(l.latitude)) 
+                            * cos(radians(l.longitude) - radians(?)) 
+                            + sin(radians(?)) 
+                            * sin(radians(l.latitude))
+                        )
+                    ) <= ?
+                ', [$user->latitude, $user->longitude, $user->latitude, $user->distance])
+                ->groupByRaw('DATE_FORMAT(l.date_entered, "%Y-%m"), DATE_FORMAT(l.date_entered, "%b")') // Include all selected fields
+                ->orderBy('month', 'ASC')
+                ->limit(12)
+                ->get();
+    
+            return response()->json(["message" => "Success", "leads" => $leads], 200);
+        } catch (Exception $e) {
+            return response()->json(["message" => "Error", "error" => $e->getMessage()], 500);
+        }
+    }
+    
+    
+    
+    public function getLatestResponse($user){
+        $lead = ContactedLeadsModel::join('leads as l', 'contacted_lead.lead_id', '=', 'l.id')
+    ->join('master_services as m', 'l.service_id', '=', 'm.id')
+    ->select('l.location', 'contacted_lead.date_entered', 'l.description', 'm.service_name')
+    ->where('contacted_lead.status', 'Pending')
+    ->where('contacted_lead.user_id', $user->id)
+    ->orderByDesc('contacted_lead.id')
+    ->first();
+   return $lead;
+    }
+    private function profileProgress($user)
+    {
+        $registration_perc = 50;
+        $profilepic_perc = $user->profile_picture !== null && $user->profile_picture !== '' ?20:0;
+        $bio_perc =$user->biography !== null && $user->biography !== '' ?10:0;
+        $social_perc =$user->twitter !== null && $user->twitter !== '' ?5:0;
+        $social_perc +=$user->facebook !== null && $user->facebook !== '' ?5:0;
+        $social_perc +=$user->linkedin !== null && $user->linkedin !== '' ?5:0;
+        $social_perc +=$user->instagram !== null && $user->instagram !== '' ?5:0;
+
+        $total = $registration_perc + $profilepic_perc + $bio_perc + $social_perc;
+
+        return $total;
+
+    }
+
+    public function socialLink(Request $request)
+    {
+        $user = Auth::user();
+        return view('social', compact('user'));
+    }
+    
+    public function updateSocialLinks(Request $request)
+{
+    $user = Auth::user();
+    
+    // Validation rules for incoming data
+    $validatedData = $request->validate([
+        'facebook' => 'nullable|url',
+        'twitter' => 'nullable|url',
+        'linkedin' => 'nullable|url',
+        'instagram' => 'nullable|url',
+    ]);
+
+    try {
+       User::where('id',$user->id)->update([
+            'facebook' => $validatedData['facebook'],
+            'twitter' => $validatedData['twitter'],
+            'linkedin' => $validatedData['linkedin'],
+            'instagram' => $validatedData['instagram'],
+        ]);
+                
+        return redirect()->route('profile.edit')->with('status', 'profile-updated')->with('success', 'Social links updated successfully!');
+    } catch (\Exception $e) {
+        // Handle exception and return error message
+        
+        return redirect()->route('profile.edit')->with('status', 'profile-updated')->with('error', 'Failed to update social links!');
+    }
+}
+
+    
 }

@@ -89,6 +89,10 @@ Route::middleware(['auth:sanctum', \App\Http\Middleware\Roles::class . ':Expert'
     Route::get('/credit/packages', [CreditController::class, 'showPackages'])->name('credit.packages');
     Route::get('/credit-packages', [CreditController::class, 'showCreditPackages'])->name('credit.packages');
     Route::get('/transaction-history', [ProfileController::class, 'transactionHistory'])->name('transaction.history');
+    Route::get('/getleadstrend', [ProfileController::class, 'leadsTrend'])->name('getleadstrend');
+    Route::post('/social/update', [ProfileController::class, 'updateSocialLinks'])->name('update.sociallinks');
+
+
 });
 
 // Load authentication routes

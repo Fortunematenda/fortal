@@ -561,7 +561,8 @@ catch(Exception $e){
             ->get();
            $templates = new TemplatesController();
            $profile_picture = $u->profile_picture;
-           $path = strlen($profile_picture)>5?Storage::url('uploads/'.$u->profile_picture):"https://www.w3schools.com/w3images/avatar2.png";
+           //$path = strlen($profile_picture)>5?Storage::url('uploads/'.$u->profile_picture):"https://www.w3schools.com/w3images/avatar2.png";
+           $path = "https://www.w3schools.com/w3images/avatar2.png";
             $details = $templates->expertProfile($u->first_name." ".$u->last_name, $u->email, $u->contact_number, $services, $u->biograpghy, "#", "#", "#", []);
             
 
@@ -600,18 +601,28 @@ catch(Exception $e){
     function postStatus(Request $request)
     {
         try{
-        $lead_id = (int)$request->lead_id;
+        $lead_id = (int)$request->xl;
         $status = $request->status;
-        $hired_expert_id = (int)$request->hired_expert_id;
-        $closed_description = $request->closed_description;
+        $hired_expert_id = (int)$request->expert;
+        $closed_description = $request->description;
         $user = $request->user();
+        if($status == "hired")
+        {
+            $status = "Bought";
+        }
+        elseif($status == "unavailable")
+        {
+            $status = "Unavailable"; 
+        }
+        $details = ["status" => $status, 
+        "hired_expert_id" => $hired_expert_id, 
+        "closed_by" => $user->id,
+        "date_closed" => date("Y-m-d H:i:s"),
+        "closed_description" => $closed_description
+        ];
+      
        $updated_lead = LeadsModel::where('id',$lead_id)
-       ->update(["status" => $status, 
-       "hired_expert_id" => $hired_expert_id, 
-       "closed_by" => $user->id,
-       "date_closed" => date("Y-m-d H:i:s"),
-       "closed_description" => $closed_description
-    ]);
+       ->update($details);
     return redirect()->route('customer.dashboard')->with('status', 'updated_lead')->with('success', 'Lead updated successfully!');
    
 } catch(Exception $e)

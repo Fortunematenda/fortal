@@ -11,7 +11,7 @@ body {
   font-family: "Libre Baskerville", serif;
 }
 
-.container {
+.container1 {
   margin: 0 auto !important;
   
   white-space: nowrap;
@@ -112,6 +112,8 @@ body {
 }
 .card-2 {
   z-index: 1;
+}.btn4 {
+  z-index: 1;
 }
 .card-3 {
   left: -40px;
@@ -164,7 +166,7 @@ body {
 
 
 
-<div class="container my-5">
+<div class=" my-5">
     <div class="section-header p-4 rounded shadow-sm bg-light"  style="text-align: center;">
     <button class="btn btn-success credit-upsell-topup-submit">
             <span>You have {{$credits_balance}} Credits</span>
@@ -172,7 +174,7 @@ body {
         </button>
     </div>
 
- <div class="container mt-5">
+ <div class=" mt-5">
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
             <div class="col ">
                 <div class="card h-100 border-0 shadow-sm text-center package-standard bg-info text-white card card-1">
@@ -231,37 +233,69 @@ body {
     <!-- Transaction Log Section -->
     <div class="transaction-log-section mt-4" style="display: none;">
         <div class="container p-4 bg-light rounded shadow-sm">
-            <h4>Credit Transaction Log</h4>
-            <hr>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Description</th>
-                        <th>Credits</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($transactions as $transaction)
-                        <tr>
-                            <td>{{ $transaction->id }}</td>
-                            <td>{{ $transaction->transaction_type }}</td>
-                            <td>{{ $transaction->credits }}</td>
-                            <td>{{ $transaction->date_entered->format('d M Y H:i') }}</td>
-                        </tr>
-                    @endforeach
+        <div class="">
+                  <div class="card-header">
+                    <div class="card-head-row card-tools-still-right">
+                      <div class="card-title">Transaction History</div>
+                      <div class="card-tools">
+                        <div class="dropdown">
+                          <button class="btn btn-icon btn-clean me-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-h"></i>
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Export to PDF</a>
+                           
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body p-0">
+                    <div class="table-responsive">
+                      <!-- Projects table -->
+                      <table class="table align-items-center mb-0">
+                        <thead class="thead-light">
+                      
+                          <tr>
+                            <th scope="col">PAYMENT NUMBER</th>
+                            <th scope="col" class="text-end">DATE &amp; TIME</th>
+                            <th scope="col" class="text-end">CREDITS</th>
+                            <th scope="col" class="text-end">STATUS</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($transactions as $transaction)
+                          <tr>
+                            <th scope="row">
+                              <span class="btn btn-icon btn-round btn-success btn-sm me-2">
+                                <i class="fa fa-check"></i>
+                              </span>
+                              Payment ID #{{ $transaction->id }}
+                            </th>
+                            <td class="text-end">{{ $transaction->date_entered->format('d M Y H:i') }}</td>
+                            <td class="text-end">{{ $transaction->credits }}</td>
+                            <td class="text-end">
+                              <span class="badge {{ $transaction->transaction_type == 'Deducted' ? 'badge-danger' : 'badge-success' }}">
+                                {{ $transaction->transaction_type }}
+                                        </span>
+                            </td>
+                          </tr>
+                          @endforeach
                     @if($transactions->isEmpty())
                         <tr>
                             <td colspan="4" class="text-center">No transactions found.</td>
                         </tr>
                     @endif
-                </tbody>
-            </table>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+            
         </div>
     </div>
 </div>
-</div>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

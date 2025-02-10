@@ -1,13 +1,7 @@
 <x-app-layout>
-<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="utf-8">
-      <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
-      <!--  All snippets are MIT license http://bootdey.com/license -->
-      <title>account settings - Bootdey.com</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+    
+      
       <style type="text/css">
   
   
@@ -227,13 +221,15 @@
     font-weight: bold;
 }
 
-      </style>
+</style>
+        
+<title>account settings</title>
 <div class="tabs wHRnL wUjgt" id="tabs">
     <div class="tab profile" data-content="profile" href="#profile">
         Personal Info
     </div>
-    <div class="tab leads-settings" data-content="leads-settings" href="#leads-settings">
-        Lead Settings
+    <div class="tab photos" data-content="photos" href="#photos">
+       Photos
     </div>
     <div class="tab services" data-content="services" href="#services">
         Services
@@ -254,9 +250,12 @@
         Notifications
     </div>
 </div>
+
+
 <h4 class="font-weight-bold  mb-4 cHKndY">
     Account settings
 </h4>
+
 <div class="container light-style flex-grow-1 container-p-y iidlEb">
     @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -284,62 +283,59 @@
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
     </form>
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
-        @csrf
-        @method('patch')
-        <!-- Form fields go here -->
-         <div class="tab-content">
-            <!--General-->
-            <div class="tab-pane fade active show" id="profile">
-                @include('profile.partials.update-profile-information-form')
-                <div class="card-body media align-items-center"></div>
-                <div class="media-body ml-4"></div>
-                <div class="card-body">
-                </div>
+<form method="post" action="{{ route('profile.update') }}" class="" enctype="multipart/form-data">
+    @csrf
+    @method('patch')
+    <!-- Form fields go here -->
+     <div class="tab-content">
+        <!--General-->
+        <div class="tab-pane fade active show" id="profile">
+            @include('profile.partials.update-profile-information-form')
+           
+        </div>
+        <!--Photos-->
+        <div class="tab-pane fade" id="leads-settings">
+            <div class="card-body pb-2">
+                @include('profile.partials.leads-settings-form')
             </div>
-            <!--Password-->
-            <div class="tab-pane fade" id="leads-settings">
-                <div class="card-body pb-2">
-                    @include('profile.partials.leads-settings-form')
-                    
-                </div>
+        </div>
+         <!--Services-->
+        <div class="tab-pane fade" id="services">
+            <div class="card-body pb-2">
+                @include('profile.partials.update-services')
             </div>
-            <div class="tab-pane fade" id="services">
-                <div class="card-body pb-2">
-                    @include('profile.partials.update-services')
-                </div>
+        </div>
+        
+       
+        <!--Purchase Credits-->
+        <div class="tab-pane fade" id="purchase_credits">
+            @include('profile.partials.buy-credits-form')
+           
+        </div>
+        <!--Data Privacy-->
+        <div class="tab-pane fade" id="data-privacy">
+            @include('profile.partials.data-privacy-form')
+          
+        </div>
+         <!--Security-->
+        <div class="tab-pane fade" id="password">
+            <div class="card-body pb-2">
+                @include('profile.partials.update-password-form')
             </div>
-            <div class="tab-pane fade" id="password">
-                <div class="card-body pb-2">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
-            <!--Lead Settings-->
-            <div class="tab-pane fade" id="lead_settings">
-                <div class="card-body pb-2">
-                    @include('profile.partials.leads-settings-form')
-                </div>
-            </div>
-            <!--Purchase Credits-->
-            <div class="tab-pane fade" id="purchase_credits">
-                @include('profile.partials.buy-credits-form')
-                <div class="container my-5"></div>
-            </div>
-
-            <div class="tab-pane fade" id="social-links">
-                @include('profile.partials.social-links-form')
-                <div class="container my-5"></div>
-            </div>
-            
-            <!--Notifications-->
-            <div class="tab-pane fade" id="notifications">
-                @include('profile.partials.notifications-form')
-                <div class="container my-5"></div>
-            </div>
-            
+        </div>
+        <div class="tab-pane fade" id="social-links">
+            @include('profile.partials.social-links-form')
+         
+        </div>
+        <!--Notifications-->
+        <div class="tab-pane fade" id="notifications">
+            @include('profile.partials.notifications-form')
+           
         </div>
     </div>
+
 </form>
+</div>
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -412,5 +408,10 @@ if (tabNameCookie) {
 
 //document.cookie = `tab_name=profile; path=/`;     
   </script>
-  
+  <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap JS (required for dismiss functionality) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_Qd54wgjWo4t-Klmi3m_pz8HbHz0GQto&libraries=places&callback=initializeAutocomplete" type="text/javascript"></script>

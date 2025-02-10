@@ -45,6 +45,7 @@
     <li class="my-responses nav-item px-2 py-3 py-sm-4" id="js-joyride-my-responses">
         <a class="text-grey-400 nav-link py-0" href="/responses"">My Responses</a>
     </li>
+    
     @else
     <li class="requests nav-item px-2 py-3 py-sm-4 active" id="js-joyride-requests">
             <a class="text-grey-400 nav-link py-0" href="/customer/dashboard/">My Requests</a>
@@ -247,12 +248,16 @@
 
         @guest
         <ul class="navbar-nav ml-auto d-flex align-items-center">
-                            <li class="dashboard-home nav-item px-2 py-3 py-sm-4 " id="js-joyride-dashboard-home">
-                    <a class="text-grey-400 nav-link py-0" href="/login">Login</a>
-                </li>
-                            <li class="requests nav-item px-2 py-3 py-sm-4 active" id="js-joyride-requests">
+        <li class="requests nav-item px-2 py-3 py-sm-4 active" id="js-joyride-requests">
                     <a class="text-grey-400 nav-link py-0" href="/customer/createrequests/">Home</a>
                 </li>
+                            <li class="dashboard-home nav-item px-2 py-3 py-sm-4 " id="js-joyride-dashboard-home">
+                    <a class="text-grey-400 nav-link py-0" href="http://127.0.0.1:8000/profession/create">Join As a Pro</a>
+                </li>
+                <li class="dashboard-home nav-item px-2 py-3 py-sm-4 " id="js-joyride-dashboard-home">
+                    <a class="text-grey-400 nav-link py-0" href="/login">Login</a>
+                </li>
+                  
         @endguest
             </div>
 

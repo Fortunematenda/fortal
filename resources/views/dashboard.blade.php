@@ -64,12 +64,14 @@ font-size: 15px !important;
       display: inline-block;
     }
   </style>
+  
 </head>
   <body>
     
 
         <div class="container">
           <div class="page-inner">
+          
           <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
               <div>
                 <h3 class="fw-bold mb-3">{{$greetings}}, {{$first_name}}!</h3>
@@ -86,7 +88,7 @@ font-size: 15px !important;
                     <div class="row align-items-center">
                       <div class="col-icon">
                         <div class="icon-big text-center icon-primary bubble-shadow-small">
-                        <i class="bi bi-briefcase"></i>
+                        <i class="fas fa-luggage-cart"></i>
                         </div>
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
@@ -129,14 +131,14 @@ font-size: 15px !important;
                     <div class="row align-items-center">
                       <div class="col-icon">
                         <div class="icon-big text-center icon-info bubble-shadow-small">
-                          <i class="bi bi-people"></i>
+                          <i class="far fa-check-circle"></i>
                           
                         </div>
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
                           <p class="card-category">Responses</p>
-                          <h4 class="card-title">  {{ $contacted_lead}}</h4>
+                          <h4 class="card-title">  {{$contacted_lead}}</h4>
                           <a href="/responses/" class="pr-4 text-grey-200 hover-dark noline text-sm text-capitalize">View</a>
                         </div>
                       </div>
@@ -159,8 +161,8 @@ font-size: 15px !important;
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
                           <p class="card-category">Responses Hired</p>
-                          <h4 class="card-title">{{$unread_leads}}</h4>
-                          <a href="/seller/dashboard/" class="pr-4 text-grey-200 hover-dark noline text-sm text-capitalize">View</a>
+                          <h4 class="card-title">{{$contacted_hired}}</h4>
+                          <a href="/responses/" class="pr-4 text-grey-200 hover-dark noline text-sm text-capitalize">View</a>
                         </div>
                       </div>
                     </div>
@@ -179,18 +181,7 @@ font-size: 15px !important;
           
             <div class=" mb-0  text-primary"><a <a href="/settings/">Profile Review</a></div>
         </div>
-                        <div class="dropdown">
-                          <button class="btn btn-sm btn-label-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Export
-                          </button>
-                          
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href=#">Something else here</a>
-                          </div>
-                          
-                        </div>
+                    
                       </div>
                     </div>
                     <hr>
@@ -199,46 +190,48 @@ font-size: 15px !important;
                 
                   <div class="card-body pb-0">
                     <div class="mb-4 mt-2">
-                      <h2>97%</h2>
+                      <h2>{{$perc}}%</h2>
                       <div class="progress" style="height:8px">
-                <div class="progress-bar" role="progressbar" style="width: 97%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress-bar" role="progressbar" style="width: {{ $perc }}%;" aria-valuenow="{{ $perc }}" aria-valuemin="0" aria-valuemax="100"></div>
+
             </div>
                     </div>
                     <div class="pull-in"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                      <canvas id="dailySalesChart" width="506" height="150" style="display: block; width: 506px; height: 150px;" class="chartjs-render-monitor"></canvas>
+                      
                     </div>
                   </div>
                 </div>
-                <div class="card card-round">
-                <div class="card-body pb-0">
-                    <div class="card-title fw-bold float-end text-primary">Account Settings
-                    <a href="/settings" class="text-grey-200 noline hover-dark ">
-                                      
-                                    </a>
+
+
+                <div class="card card-primary card-round col sellerdash-col h-auto d-flex flex-column justify-content-between ">
+                  <div class="card-header">
+                    <div class="card-head-row">
+                    <div class="card-title fw-bold float-end text-primary">
+                      <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <div class=" mb-0  text-primary"><a <a href="/settings/">Ongoing Tasks</a></div>
+           
+        </div>
+                   
+                      </div>
                     </div>
                     <hr>
-                    <p class="mb-2">Standard</p>
-                 
-                    <div class="flex-wrap category-list  ">
-                                      
-                                        <div class="card-title ">
-                                        <i class="icon-big text-center icon-info bubble-shadow-small bi bi-person"></i>
-                                         </div>
-                                        <a href="/settings">
-                            Upgrade to Pro
-                          </a>
-  
-   
-                          <div class="flex-wrap category-list  ">
-                                     
-                                     <div class="badge badge-pill border border-grey-100 text-grey-800 font-weight-normal text-xs p-2 mr-2 my-auto text-truncate mw-100">
-                                           
-                                         </div>
-                                      
-                                     </div>
-                                 </div>
-                             </div>
-             </div>
+                    @if($latestresponse)
+                    <div class="card-category">Current Tasks in Progress: <b>{{$latestresponse["service_name"]}}</b> </div>
+                    <div class="card-category">Task Location: <b>{{$latestresponse["location"]}}</b></div>
+                    <div class="card-category">Task Description:<b> {{$latestresponse["description"]}}</b></div>
+                    <div class="card-category">Date:<b> {{$latestresponse["date_entered"]}}</b></div>
+                    @else
+                    <div class="card-category"><b> None</b></div>
+                    @endif
+                  </div>
+                  <hr>
+                  
+                </div>
+
+               
+
+
+             
                 </div>
                 
                 <div class="col-md-4">
@@ -251,16 +244,7 @@ font-size: 15px !important;
            
         </div>
                   
-                        <div class="dropdown">
-                          <button class="btn btn-sm btn-label-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Export
-                          </button>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href=#">Something else here</a>
-                          </div>
-                        </div>
+                 
                       </div>
                     </div>
                     <hr>
@@ -283,7 +267,7 @@ font-size: 15px !important;
                                     </div>
                   
                     <div class="pull-in"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                      <canvas id="dailySalesChart" width="506" height="150" style="display: block; width: 506px; height: 150px;" class="chartjs-render-monitor"></canvas>
+                     
                     </div>
                   </div>
                 </div>
@@ -310,6 +294,34 @@ font-size: 15px !important;
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="card card-round">
+                <div class="card-body pb-0">
+                    <div class="card-title fw-bold float-end text-primary">Account Settings
+                    <a href="/settings" class="text-grey-200 noline hover-dark ">
+                                      
+                                    </a>
+                    </div>
+                    <hr>
+                    <p class="mb-2">Standard</p>
+                 
+                    <div class="flex-wrap category-list  ">
+                                      
+                                        <div class="card-title ">
+                                        <i class="icon-big text-center icon-info bubble-shadow-small bi bi-person"></i>
+                                         </div>
+                                        
+                          <div class="flex-wrap category-list  ">
+                                     
+                                     <div class="badge badge-pill border border-grey-100 text-grey-800 font-weight-normal text-xs p-2 mr-2 my-auto text-truncate mw-100">
+                                           
+                                         </div>
+                                      
+                                     </div>
+                                 </div>
+                             </div>
+             </div>
+
                 </div>
                 
                 <div class="col-md-4">
@@ -318,38 +330,28 @@ font-size: 15px !important;
                     <div class="card-head-row">
                     <div class="card-title fw-bold float-end text-primary">
                       <div class="d-flex justify-content-between align-items-center flex-wrap">
-            <div class=" mb-0  text-primary"><a <a href="/settings/">Ongoing Tasks</a></div>
+            <div class=" mb-0  text-primary"><a <a href="/settings/">Leads Trend</a></div>
            
         </div>
-                        <div class="dropdown">
-                          <button class="btn btn-sm btn-label-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Export
-                          </button>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href=#">Something else here</a>
-                          </div>
-                        </div>
+                   
                       </div>
                     </div>
                     <hr>
-                    <div class="card-category">Current Tasks in Progress: <b>Building</b> </div>
-                    <div class="card-category">Task Location: <b>Plumstead</b></div>
-                    <div class="card-category">Task Description:<b> Builing a House</b></div>
-                    <div class="card-category">Expected Completion:<b> 11/02/2025</b></div>
-                  </div>
-                  <hr>
+                   
                   <div class="card-body pb-0">
-                    <div class="mb-4 mt-2">
-                      <h2>Graph</h2>
+                    
+                      <div class="chart-container" style="min-height: 375px"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                      <canvas id="statisticsChart" style="display: block; width: 648px; height: 375px;" width="648" height="375" class="chartjs-render-monitor"></canvas>
+                    </div>
                     </div>
                     <div class="pull-in"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                      <canvas id="dailySalesChart" width="506" height="150" style="display: block; width: 506px; height: 150px;" class="chartjs-render-monitor"></canvas>
+                  
                     </div>
                   </div>
                 </div>
                
+                
+
                   <div class="card card-round">
                   <div class="card-body pb-0">
                     <div class="card-title fw-bold float-end text-primary">
@@ -478,3 +480,115 @@ font-size: 15px !important;
     <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div></div></body></html>
 
     </x-app-layout>
+
+    <script>
+
+    $(document).ready(function() {
+      console.log("Mboro diki")
+        $.ajax({
+            url: '/getleadstrend',
+            type: 'GET',
+            data: {  }, 
+            success: function(data) {
+              console.log(data);
+                const json = data["leads"];
+                let labels =[];
+                let datam =[];
+                for(key in json)
+                {
+                  labels.push(json[key]["labels"]);
+                  datam.push(json[key]["data"]);
+                }
+              
+                createDash(labels, datam);    
+            }, 
+            error: function(xhr, status, error) {
+                console.log('Error here :'+error); // Improved error logging
+            },
+            complete: function() {
+                 console.log("done");
+                 
+            }
+        });
+    
+});
+
+function createDash(labels, data)
+{
+  var ctx = document.getElementById('statisticsChart').getContext('2d');
+
+var statisticsChart = new Chart(ctx, {
+	type: 'line',
+	data: {
+		labels: labels,
+		datasets: [{
+			label: "Active Users",
+			borderColor: 'purple',
+			pointBackgroundColor: 'rgba(241, 244, 247, 0.6)',
+			pointRadius: 0,
+			backgroundColor: 'rgba(240, 226, 226, 0.4)',
+			legendColor: '#177dff',
+			fill: true,
+			borderWidth: 2,
+			data: data
+		}]
+	},
+	options : {
+		responsive: true, 
+		maintainAspectRatio: false,
+		legend: {
+			display: false
+		},
+		tooltips: {
+			bodySpacing: 4,
+			mode:"nearest",
+			intersect: 0,
+			position:"nearest",
+			xPadding:10,
+			yPadding:10,
+			caretPadding:10
+		},
+		layout:{
+			padding:{left:5,right:5,top:15,bottom:15}
+		},
+		scales: {
+			yAxes: [{
+				ticks: {
+					fontStyle: "500",
+					beginAtZero: true,
+					maxTicksLimit: 5,
+					padding: 10
+				},
+				gridLines: {
+					drawTicks: false,
+					display: false
+				}
+			}],
+			xAxes: [{
+				gridLines: {
+					zeroLineColor: "transparent"
+				},
+				ticks: {
+					padding: 10,
+					fontStyle: "500"
+				}
+			}]
+		}, 
+		legendCallback: function(chart) { 
+			var text = []; 
+			text.push('<ul class="' + chart.id + '-legend html-legend">'); 
+			for (var i = 0; i < chart.data.datasets.length; i++) { 
+				text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>'); 
+				if (chart.data.datasets[i].label) { 
+					text.push(chart.data.datasets[i].label); 
+				} 
+				text.push('</li>'); 
+			} 
+			text.push('</ul>'); 
+			return text.join(''); 
+		}  
+	}
+});
+
+}
+    </script>

@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Preload Fonts -->
+    <link rel="stylesheet" href="{{asset('build/assets/css/uikit.min.css')}}">
     <link rel="preload" as="font" type="font/woff2" crossorigin="" href="{{asset('build/assets/fonts/gordita-medium-webfont.woff2')}}">
     <link rel="preload" as="font" type="font/woff2" crossorigin="" href="{{asset('build/assets/fonts/gordita-bold-webfont.woff2')}}">
     <link rel="preload" as="font" type="font/woff2" crossorigin="" href="{{asset('build/assets/fonts/gordita-regular-webfont.woff2')}}">
@@ -72,466 +73,11 @@
 
 <link rel="stylesheet" href="{{asset('build/assets/css/create.css')}}">
 <link rel="stylesheet" href="{{asset('build/assets/css/5a8bc88891d37fb6.css')}}">
+<link rel="stylesheet" href="{{asset('build/assets/css/f1fa6a291d39df4d.css')}}">
+<link rel="stylesheet" href="{{asset('build/assets/css/css/createrequest.css')}}">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css"/>
-<style>
-   
 
-        .container-home {
-            max-width: 600px;
-            padding: 20px;
-        }
-
-        h1 {
-            font-size: 68px;
-            font-weight: 700;
-            color:rgb(255, 255, 255);
-            margin-bottom: 10px; 
-        }
-
-        p {
-            font-size: 20px;
-            color: #1e1e1e;
-            margin-bottom: 20px;
-        }
-
-      
-
-
-        .popular {
-            font-size: 0.9rem;
-            color: #1e1e1e;
-        }
-
-        #regForm {
-  background-color: #ffffff;
-  margin: 100px auto;
-  font-family: Raleway;
-  padding: 40px;
-  width: 100%;
-  min-width: 300px;
-}
-
-.container3 {
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-    padding-right: 2rem;
-    padding-left: 2rem;
-}
-input {
-  padding: 10px;
-  width: 100%;
-  font-size: 17px;
-  font-family: Raleway;
-  border: 1px solid #aaaaaa;
-}
-
-/* Mark input boxes that gets an error on validation: */
-input.invalid {
-  background-color: #ffdddd;
-}
-
-/* Hide all steps by default: */
-.tab {
-  display: none;
-}
-
-button {
-  background-color: #04AA6D;
-  color: #ffffff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 17px;
-  font-family: Raleway;
-  cursor: pointer;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
-#prevBtn {
-  background-color: #bbbbbb;
-}
-
-
-/* Make circles that indicate the steps of the form: */
-.step {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: purple;
-  border: none;  
-  border-radius: 50%;
-  display: inline-block;
-  opacity: 0.5;
-}
-
-.step.active {
-  opacity: 0.8;
-}
-
-/* Mark the steps that are finished and valid: */
-.step.finish {
-  background-color: purple;
-}
-.uk-button-primary{
-    background-color:purple !important;
-}
-.hsd{
-    font-weight:bolder !important;
-    font-size:24px !important;
-    color:purple !important;
-}
-.hsd1{
-    font-size: 20px !important;
-}
-input[type=email], input[type=email], input[type=tel], input[type=text]{
-    border:1px solid lightgray;
-}
-label {
-    display: block !important;
-}
-.iti{
-    display: block !important;
-}
-.drop-area {
-        width: 100%;
-        max-width: 400px;
-        padding: 20px;
-        border: 2px dashed #a569bd;
-        border-radius: 10px;
-        text-align: center;
-        cursor: pointer;
-        color: #555;
-        font-size: 18px;
-    }
-    .preview-container {
-        display: flex;
-        flex-wrap: wrap;
-        margin-top: 10px;
-        margin-bottom: 20px;
-        border-bottom: 1px solid #e3c5e3;
-    }
-    .preview-image {
-        border-radius: 5px;
-    }
-    .error {
-    color: red;
-    font-size: 12px;
-    margin-top: 5px;
-    display: block;
-}
-
-.search-box {
-  position: relative;
-  width: 100%;
-  max-width: 360px;
-  height: 60px;
-  border-radius: 120px;
-  margin: 0 auto;
-}
-.search-box1 {
-  position: relative;
-  width: 100%;
-  max-width: 360px;
-  height: 60px;
-  border-radius: 120px;
-  margin: 0 auto;
-}
-.search-icon, .go-icon {
-  position: absolute;
-  top: 0;
-  height: 60px;
-  width: 86px;
-  line-height: 61px;
-  text-align: center;
-}
-.search-icon1, .go-icon {
-  position: absolute;
-  top: 0;
-  height: 60px;
-  width: 86px;
-  line-height: 61px;
-  text-align: center;
-}
-.search-icon {
-  left: 0;
-  pointer-events: none;
-  font-size: 1.22em;
-  will-change: transform;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  transform-origin: center center;
-  -webkit-transform-origin: center center;
-  -moz-transform-origin: center center;
-  -o-transform-origin: center center;
-  transition: transform 400ms 220ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
-  -webkit-transition: transform 400ms 220ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
-  -moz-transition: transform 400ms 220ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
-  -o-transition: transform 400ms 220ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
-}
-.search-icon1 {
-  left: 0;
-  pointer-events: none;
-  font-size: 1.22em;
-  will-change: transform;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  transform-origin: center center;
-  -webkit-transform-origin: center center;
-  -moz-transform-origin: center center;
-  -o-transform-origin: center center;
-  transition: transform 400ms 220ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
-  -webkit-transition: transform 400ms 220ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
-  -moz-transition: transform 400ms 220ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
-  -o-transition: transform 400ms 220ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
-}
-.si-rotate {
-  transform: rotate(0deg);
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-}
-.go-icon {
-  right: 0;
-  pointer-events: none;
-  font-size: 1.38em;
-  will-change: opacity;
-  cursor: default;
-  opacity: 0;
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transition: opacity 190ms ease-out, transform 260ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
-  -webkit-transition: opacity 190ms ease-out, transform 260ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
-  -moz-transition: opacity 190ms ease-out, transform 260ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
-  -o-transition: opacity 190ms ease-out, transform 260ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
-}
-.go-in {
-  opacity: 1;
-  pointer-events: all;
-  cursor: pointer;
-  transform: rotate(0);
-  -webkit-transform: rotate(0);
-  -moz-transform: rotate(0);
-  -o-transform: rotate(0);
-  transition: opacity 190ms ease-out, transform 260ms 20ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
-  -webkit-transition: opacity 190ms ease-out, transform 260ms 20ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
-  -moz-transition: opacity 190ms ease-out, transform 260ms 20ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
-  -o-transition: opacity 190ms ease-out, transform 260ms 20ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
-}
-.search-border {
-  display: block;
-  width: 100%;
-  max-width: 360px;
-  height: 60px;
-}
-.search-border1 {
-  display: block;
-  width: 100%;
-  max-width: 360px;
-  height: 60px;
-}
-.border {
-  fill: none;
-  stroke: #FFFFFF;
-  stroke-width: 5;
-  stroke-miterlimit: 10;
-}
-.border {
-  stroke-dasharray: 740;
-  stroke-dashoffset: 0;
-  transition: stroke-dashoffset 400ms cubic-bezier(0.600, 0.040, 0.735, 0.990);
-  -webkit-transition: stroke-dashoffset 400ms cubic-bezier(0.600, 0.040, 0.735, 0.990);
-  -moz-transition: stroke-dashoffset 400ms cubic-bezier(0.600, 0.040, 0.735, 0.990);
-  -o-transition: stroke-dashoffset 400ms cubic-bezier(0.600, 0.040, 0.735, 0.990);
-}
-.border-searching .border {
-  stroke-dasharray: 740;
-  stroke-dashoffset: 459;
-  transition: stroke-dashoffset 650ms cubic-bezier(0.755, 0.150, 0.205, 1.000);
-  -webkit-transition: stroke-dashoffset 650ms cubic-bezier(0.755, 0.150, 0.205, 1.000);
-  -moz-transition: stroke-dashoffset 650ms cubic-bezier(0.755, 0.150, 0.205, 1.000);
-  -o-transition: stroke-dashoffset 650ms cubic-bezier(0.755, 0.150, 0.205, 1.000);
-}
-
-.border1 {
-  fill: none;
-  stroke: #FFFFFF;
-  stroke-width: 5;
-  stroke-miterlimit: 10;
-}
-.border1 {
-  stroke-dasharray: 740;
-  stroke-dashoffset: 0;
-  transition: stroke-dashoffset 400ms cubic-bezier(0.600, 0.040, 0.735, 0.990);
-  -webkit-transition: stroke-dashoffset 400ms cubic-bezier(0.600, 0.040, 0.735, 0.990);
-  -moz-transition: stroke-dashoffset 400ms cubic-bezier(0.600, 0.040, 0.735, 0.990);
-  -o-transition: stroke-dashoffset 400ms cubic-bezier(0.600, 0.040, 0.735, 0.990);
-}
-.border-searching1 .border1 {
-  stroke-dasharray: 740;
-  stroke-dashoffset: 459;
-  transition: stroke-dashoffset 650ms cubic-bezier(0.755, 0.150, 0.205, 1.000);
-  -webkit-transition: stroke-dashoffset 650ms cubic-bezier(0.755, 0.150, 0.205, 1.000);
-  -moz-transition: stroke-dashoffset 650ms cubic-bezier(0.755, 0.150, 0.205, 1.000);
-  -o-transition: stroke-dashoffset 650ms cubic-bezier(0.755, 0.150, 0.205, 1.000);
-}
-#search {
-  font-family: 'Montserrat Alternates', sans-serif;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 120px;
-  border: none;
-  background: rgba(255,255,255,0);
-  padding: 0 30px 0 50px;
-  color: #FFFFFF;
-  font-size: 1.32em;
-  font-weight: 400;
-  letter-spacing: -0.015em;
-  outline: none;
-}
-#search::-webkit-input-placeholder {color: #FFFFFF;}
-#search::-moz-placeholder {color: #FFFFFF;}
-#search:-ms-input-placeholder {color: #FFFFFF;}
-#search:-moz-placeholder {color: #FFFFFF;}
-#search::-moz-selection {color: #FFFFFF; background: rgba(0,0,0,0.25);}
-#search::selection {color: #FFFFFF; background: rgba(0,0,0,0.25);}
-
-#search1 {
-  font-family: 'Montserrat Alternates', sans-serif;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 120px;
-  border: none;
-  background: rgba(255,255,255,0);
-  padding: 0 30px 0 50px;
-  color: #FFFFFF;
-  font-size: 1.32em;
-  font-weight: 400;
-  letter-spacing: -0.015em;
-  outline: none;
-}
-#search1::-webkit-input-placeholder {color: #FFFFFF;}
-#search1::-moz-placeholder {color: #FFFFFF;}
-#search1:-ms-input-placeholder {color: #FFFFFF;}
-#search1:-moz-placeholder {color: #FFFFFF;}
-#search1::-moz-selection {color: #FFFFFF; background: rgba(0,0,0,0.25);}
-#search1::selection {color: #FFFFFF; background: rgba(0,0,0,0.25);}
-
-.text-white {
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-.py-\[72px\] {
-    padding-top: 72px;
-    padding-bottom: 72px;
-}
-.bg-\[linear-gradient\(to_bottom\2c \#000\2c \#200D42_34\%\2c \#4F21A1_65\%\2c \#A46EDB_82\%\)\] {
-    background-image: linear-gradient(180deg, #000, #200d42 34%, #4f21a1 65%, #a46edb 82%);
-}
-.bg-black {
-    --tw-bg-opacity: 1;
-    background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-}
-.overflow-clip {
-    overflow: clip;
-}
-.relative {
-    position: relative;
-}
-.text-white\/70 {
-    color: hsla(0, 0%, 100%, .7);
-}
-.text-xl {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-    font-weight: 300;
-}
-
-.min-h-screen{min-height:0vh !important} 
-.text-center {
-    text-align: center;
-}
-
-element.style {
-    will-change: transform;
-    transform: translateX(-45.1567%);
-}
-
-.search-btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #fff;
-    color: #4f21a1;
-    border: none;
-    border-radius: 20px;
-    font-size: 22px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-weight: 500;
-}
-
-.search-btn i {
-  margin-right: 8px; /* Space between the icon and text */
-}
-
-.search-btn:hover {
-  background-color: #4f21a1; /* Lighter purple on hover */
-  color: white;
-}
-
-.search-btn:focus {
-  outline: none;
-}
-
-.search-btn:active {
-  background-color: #4a148c; /* Darker purple when clicked */
-}
-@media screen and (max-width: 768px) {
-  .search-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    margin: 0 auto;
-    text-align: center;
-  }
-  .btn-main{
-    width: 100%;
-  }
-  h1{
-    font-size: 50px;
-    text-align: center; 
-  }
-}
-.txtclas{
-  font-size: 24px;
-            font-weight: bold;;
-            white-space: nowrap;
-            overflow: hidden;
-            width: 25ch;
-            text-align: center;
-            min-height: 1.2em;
-}
-#text{
-  min-height: 1.2em;
-}
-</style>
  <!-- Two-Column Section with Get Started and Image -->
 
  <div class="bg-black">
@@ -549,13 +95,16 @@ element.style {
             </svg>
           </div>
           <nav class="gap-6 items-center hidden list-items-nav">
+          @auth
             <div style="opacity: 1; will-change: auto; transform: none;">
-              <a class="text-opacity-60 text-white hover:text-opacity-100 transition relative group" href="/customer/createrequests/">
+              <a class="text-opacity-60 text-white hover:text-opacity-100 transition relative group" href="/customer/dashboard/">
                 Home
                 <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-white group-hover:w-full" style="width: 0px;"></span>
               </a>
             </div>
-          
+            @endauth
+
+            @guest
             <div style="opacity: 1; will-change: auto; transform: none;">
               <a class="text-opacity-60 text-white hover:text-opacity-100 transition relative group" href="/profession/create">
                 Join As a Pro
@@ -569,13 +118,15 @@ element.style {
                   <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-white group-hover:w-full" style="width: 0px;"></span>
                 </a>
               
-          </div></div></nav>
+          </div>
+          @endguest
+        </div></nav>
         </div>
       </div>
     </div>
  <div class="container1 bg-black text-white bg-[linear-gradient(to_bottom,#000,#200D42_34%,#4F21A1_65%,#A46EDB_82%)] py-[72px] sm:py-24 relative overflow-clip">
         <!-- Left Column -->
-         <form>
+         <form style="z-index:1000 !important">
             @csrf
         <div class="left-column absolute h-[375px] w-[750px] sm:w-[1536px] sm:h-[768px] lg:w-[2400px] lg:h-[1200px] rounded-[100%] bg-black left-1/2 -translate-x-1/2 border border-[#B48CDE] bg-[radial-gradient(closest-side,#000_82%,#9560EB)] top-[calc(100%-96px)] sm:top-[calc(100%-120px)]">
           
@@ -595,19 +146,24 @@ element.style {
 <div class="search-container">
   <div class="search-box">
     <div class="search-icon"><i class="bi bi-search search-icon"></i></div>
-    <input type="text" placeholder="Service you're looking for?" id="search" autocomplete="off">
+    <input type="text" placeholder="Service you're looking for?" id="serviceTxt" autocomplete="off">
+    <input type="hidden" id="serviceID" >
     <svg class="search-border" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 671 111">
       <path class="border" d="M335.5,108.5h-280c-29.3,0-53-23.7-53-53v0c0-29.3,23.7-53,53-53h280"></path>
       <path class="border" d="M335.5,108.5h280c29.3,0,53-23.7,53-53v0c0-29.3-23.7-53-53-53h-280"></path>
     </svg>
+   
   </div>
+  <span id="search-service">
+                <ul id="inner-service" class="searched-list"></ul>
+            </span>
 </div>
 
 <div class="location-container">
   <div class="search-box1">
     <div class="search-icon1"><i class="bi bi-crosshair search-icon1"></i></div>
     <form action="" class="search-form1">
-      <input type="text" placeholder="Enter location in SA" id="search1" autocomplete="off">
+      <input type="text" placeholder="Enter location in SA" id="searchLocation" autocomplete="off">
     </form>
     <svg class="search-border1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 671 111">
       <path class="border1" d="M335.5,108.5h-280c-29.3,0-53-23.7-53-53v0c0-29.3,23.7-53,53-53h280"></path>
@@ -615,9 +171,10 @@ element.style {
     </svg>
   </div>
 </div>
-
+<input id="latitude" hidden></input>
+        <input id="longitude" hidden></input>
 <div class="btn-main">
-<button class="search-btn">
+<button class="search-btn" type="button" id="start_lead">
   <i class="bi bi-search"></i> Search
 </button>
 </div>
@@ -633,7 +190,8 @@ element.style {
         <!-- Right Column -->
         <div class="right-column">
     <div>
-        <img src="https://ideapad.ai/wp-content/uploads/2024/09/digital_marketing-1024x1024.png}}" alt="Freelance Services Image 1" height="500" width="500">
+        <img src=" {{asset('build/assets/img/digital_marketing.png')}}" alt="Homepage Image 1" height="500" width="500">
+       
     </div>
 </div>
 </div>
@@ -731,6 +289,44 @@ Save thousands of dollars in costs compared to other lead generation apps. LeadF
 </div>
 
 </div></div></div>
+<div id="modal-create" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+
+    <br/>
+    <h2 align="center" class="uk-modal-title">New lead</h2>
+
+        <form id="regForm" method="POST" action="/action_page.php" enctype="multipart/form-data">
+ 
+  <!-- One "tab" for each step in the form: -->
+  
+    <div id="insteps">
+
+    </div>
+    <div style="text-align: center;margin-left: auto; margin-right: auto; width: 50%; display:none" id="loader">
+        <img src="{{asset('build/assets/img/loader.svg')}}"/>
+    </div>
+
+  <div style="overflow:auto; margin-top:23px">
+    <div style="float:right;">
+      <button type="button" class="uk-button uk-button-default" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+      <button type="button" class="uk-button uk-button-primary" id="nextBtn" onclick="nextPrev(1)">Next</button>
+      <button type="submit" style="display:none" id="subm" class="uk-button uk-button-primary">SUBMIT</button>
+    </div>
+  </div>
+  <!-- Circles which indicates the steps of the form: -->
+  <div style="text-align:center;margin-top:40px;" id="bullets">
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+  </div>
+</form>
+
+    </div>
+</div> 
+
+<input id="isLogged" value = "{{ auth()->check() ? 'Logged' : 'Guest' }}" hidden/>
 
     <script>
  
@@ -835,20 +431,20 @@ const phoneInputField = document.querySelector("#contact_number");
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_Qd54wgjWo4t-Klmi3m_pz8HbHz0GQto&libraries=places&callback=initializeAutocomplete" type="text/javascript"></script>
 <script>
   $(document).ready(function(){
-    $("#search").focus(function() {
+    $("#serviceTxt").focus(function() {
       $(".search-box").addClass("border-searching");
       $(".search-icon").addClass("si-rotate");
-      $("#search").css('padding', '0 68px');
-      $("#search").attr('placeholder', 'Start searching...');
+      $("#serviceTxt").css('padding', '0 68px');
+      $("#serviceTxt").attr('placeholder', 'Start searching...');
     });
-    $("#search").blur(function() {
+    $("#serviceTxt").blur(function() {
       $(".search-box").removeClass("border-searching");
       $(".search-icon").removeClass("si-rotate");
-      $("#search").css('padding', '0 30px 0 50px');
-      $("#search").attr('placeholder', 'Service you\'re looking for?');
+      $("#serviceTxt").css('padding', '0 30px 0 50px');
+      $("#serviceTxt").attr('placeholder', 'Service you\'re looking for?');
      
     });
-    $("#search").keyup(function() {
+    $("#serviceTxt").keyup(function() {
         if($(this).val().length > 0) {
           $(".go-icon").addClass("go-in");
         }
@@ -857,19 +453,19 @@ const phoneInputField = document.querySelector("#contact_number");
         }
     });
 
-    $("#search1").focus(function() {
+    $("#searchLocation").focus(function() {
       $(".search-box1").addClass("border-searching1");
       $(".search-icon1").addClass("si-rotate");
-      $("#search1").css('padding', '0 68px');
-      $("#search1").attr('placeholder', 'Start searching...');
+      $("#searchLocation").css('padding', '0 68px');
+      $("#searchLocation").attr('placeholder', 'Start searching...');
     });
-    $("#search1").blur(function() {
+    $("#searchLocation").blur(function() {
       $(".search-box1").removeClass("border-searching1");
       $(".search-icon1").removeClass("si-rotate");
-      $("#search1").css('padding', '0 30px 0 50px');
-      $("#search1").attr('placeholder', 'Enter location in SA');
+      $("#searchLocation").css('padding', '0 30px 0 50px');
+      $("#searchLocation").attr('placeholder', 'Enter location in SA');
     });
-    $("#search1").keyup(function() {
+    $("#searchLocation").keyup(function() {
         if($(this).val().length > 0) {
           $(".go-icon").addClass("go-in");
         }

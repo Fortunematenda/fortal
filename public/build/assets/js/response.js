@@ -225,7 +225,7 @@ const leadsTemplate = (
 
     let txt = "<button m='" + lead_id + "' class='view_lead'>" +
               "<div class='leads-list-item-card tw-p-6 tw-mx-4 tw-border-l-4 tw-border-transparent " +
-              "tw-rounded-lg tw-bg-white hover:tw-bg-gray-50 tw-shadow-md hover:tw-shadow-lg' data-cy='lead-card-is-active-false'>" +
+              "tw-rounded-lg tw-bg-white hover:tw-bg-gray-50  hover:tw-shadow-lg' data-cy='lead-card-is-active-false'>" +
               "<div class='tw-flex tw-justify-between'>" +
               "<div class='tw-flex tw-relative LeadsListItem_blueDot__magSY'>" +
               "<div class='tw-mr-4'>" +

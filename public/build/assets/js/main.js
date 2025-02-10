@@ -252,6 +252,7 @@ function toast(icon, txt, time) {
 
 $(document).on("click", "#start_lead", function() {
     currentTab = 0;
+    
     let service_id = $("#serviceID").val();
     let location = $("#searchLocation").val();
     let longitude = $("#longitude").val();
@@ -312,7 +313,7 @@ for(key in arr)
    
     txt += "</div></div>";
 }
-let ext = "<div class='tab'><p><label>Description:</label><textarea class='textarea' placeholder='Type brief description of the project' name='brief_description'></textarea></p><p><label>Upload Photos:</label></p>";
+let ext = "<div class='tab'><p><label>Description:</label><textarea class='textarea' style='border-color:purple;border-width: 1px;padding:10px;border-radius:10px;width:80%;' placeholder='Type brief description of the project' name='brief_description'></textarea></p><p><label>Upload Photos:</label></p>";
     ext += "<div class='drop-area' id='drop-area'><p>Drag & Drop Photos Here or Click to Upload</p>";
     ext += "<input type='file' id='files' name='files' multiple accept='image/*' style='display: none;'></div>";
     ext += "<div class='preview-container' id='preview-container'></div></div>";

@@ -558,14 +558,14 @@ z-index: 10000 !important;
     <!-- Left Navigation -->
      @if(count($replyexperts)>0)
     <div class="left-nav">
-      
+      <!-- $path = strlen($img)>5?Storage::url('uploads/' . $img):"https://www.w3schools.com/w3images/avatar2.png"; -->
         <div class="client-list">
             @foreach($replyexperts as $expert)
             <div class="client-item dexpert" contacted_user_id="{{$expert->user_id}}" onclick="selectClient('{{ $expert->first_name }} {{ $expert->last_name }}')">
 
             @php
     $img = $expert->profile_picture;
-    $path = strlen($img)>5?Storage::url('uploads/' . $img):"https://www.w3schools.com/w3images/avatar2.png";
+    $path = "https://www.w3schools.com/w3images/avatar2.png";
 @endphp
 
                 <img src="{{ $path }}" alt="Profile" class="avatar" ><span class="client-name">{{$expert->first_name}} {{$expert->last_name}}</span>

@@ -59,8 +59,8 @@
   /* Selected radio button style */
   input[type="radio"]:checked + label {
     background-color: #E5F1FF;
-    border-color: #007bff;
-    color: #007bff;
+    border-color: purple;
+    color: purple;
   }
 
   /* Hover effect */
@@ -385,6 +385,7 @@
     cursor: pointer;
     font-family: 'Montserrat',Helvetica,Arial,Lucida,sans-serif;
     font-size: 20px;
+    text-align: left;
 
 }
 #inner-service {
@@ -393,13 +394,16 @@
     width: 50%;
     z-index: 3;
     padding: 2px;
-    position: absolute;
-    border: #eee 1px solid;
-    height: 200px;
-    overflow-y: auto; 
-    background-color: white;
+    position: absolute;  
+    border: #4f21a1 1px solid;
+    height: 250px;
+    overflow-y: auto;
+    background-color: #ededed;
+    border-radius: 20px;
 }
-
+#inner-service li{
+    color: #4f21a1 !important;
+  }
 
 #search-service{
     font-family: 'Montserrat',Helvetica,Arial,Lucida,sans-serif;
@@ -413,7 +417,7 @@ display: none;
     content: '\2713'; /* Unicode for the checkmark */
     font-size: 16px;
     color: white;
-    background-color: purple;
+    background-color: #4f21a1;
     border-radius: 50%;
     padding: 6px;
     width: 30px;

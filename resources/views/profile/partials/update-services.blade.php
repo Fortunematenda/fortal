@@ -3,7 +3,7 @@
  
 
 
-    <form method="post" action="{{ route('update_services') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('update_services') }}" >
         @csrf
 
         <div>

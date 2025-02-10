@@ -53,18 +53,7 @@
             <div class="" id="app" style="background-color: rgb(249, 249, 250);">
                 <div class="container tw-mx-auto">
                     <!-- Header Section -->
-                
-
-                    <!-- Project List Section -->
-                    
-                    <div class="mb-4">
-                        
-                        <div class="projectlistContainer" id="app">
-                            <div data-testid="project_list" class="tw-flex tw-flex-row tw-grid sm:tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-4">
-                                <!-- Project List Item 1 -->
-                                        
-               
-      @if(session('success'))
+                    @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -75,6 +64,17 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
+
+                    <!-- Project List Section -->
+                    
+                    <div class="mb-4">
+                        
+                        <div class="projectlistContainer" id="app">
+                            <div data-testid="project_list" class="tw-flex tw-flex-row tw-grid sm:tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-4">
+                                <!-- Project List Item 1 -->
+                                        
+               
+
 
                                 <!-- Project List Item 2 -->
                                  @forelse ($user_leads as $lead)
@@ -109,9 +109,11 @@
                                         </button>
                                         </form>
                                         @else
+                                        @if($lead["status"] == "Open")
                                         <div class="uk-alert-danger" uk-alert>
     <p>Waiting for experts</p>
 </div>
+@endif
                                         @endif
                                     </div>
                                     @if($lead["status"] == "Open")
@@ -126,7 +128,7 @@
                                     </div>
                                     @else
                                     <div class="uk-alert-primary" uk-alert>
-    <p>Unavailable</p>
+    <p>Closed</p>
 </div>
                                     @endif
                                 </div>
@@ -154,10 +156,10 @@
         <div class="uk-modal-header">
             <h2 class="uk-modal-title">Change Lead status</h2>
         </div>
-
-        <div class="uk-modal-body" style="margin: 20px;" uk-overflow-auto>
         <form method="POST" action="{{ route('poststatus') }}">
         @csrf
+        <div class="uk-modal-body" style="margin: 20px;" uk-overflow-auto>
+      
         <div class="sel">
 <h4>Who is the expert you hired? </h4>
         <div class="uk-margin">
@@ -169,18 +171,18 @@
         </div>
         <h4>Type comment </h4>
         <div class="uk-margin">
-            <textarea class="uk-textarea" rows="5" name="description" placeholder="Comment" aria-label="Textarea"></textarea>
+            <textarea class="uk-textarea" rows="5" name="description" placeholder="Comment" aria-label="Textarea" REUIRED></textarea>
         </div>
 <input id="xl" name="xl" hidden/>
 <input id="status" name="status" hidden/>
-</form>
+
         </div>
 
         <div class="uk-modal-footer uk-text-right">
             <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
             <button class="uk-button uk-button-primary" type="submit">Submit</button>
         </div>
-
+        </form>
     </div>
 </div>
 
@@ -234,7 +236,38 @@ $.ajax({
           else{
             $(".sel").hide();
           }
-        })
+        });
+
+        $(document).on("click","#updatestatus",function(){
+          let xl = $("#xl").val(); 
+          let status = $("#status").val();  
+          $("#xl").val(xl);
+          $("#status").val(status);
+
+        
+$.ajax({
+            url: "/leadexperts",
+            type: 'GET',
+            data: {xl},
+            beforeSend: function() {
+            },
+            success: function(data) {
+                data = data["xperts"];
+                for(key in data)  
+                {
+                    $("#expert").append("<option value='"+data[key]["id"]+"'>"+data[key]["first_name"]+" "+data[key]["last_name"]+"</option>")
+                }          
+               
+            }, 
+            error: function(xhr, status, error) {
+                console.error('Error:', status, error);
+            },
+            complete: function() {
+            }
+        });      
+    }); 
+
+
     </script>
 
 <!-- Add CSS for the Marquee -->

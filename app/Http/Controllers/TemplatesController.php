@@ -717,7 +717,10 @@ $details .= "<div class='d-flex flex-column project-details-col-project-details'
                 <div class='project-details data-buyer-name='>
                     <div class='project-details-label'>Details</div>
                     <hr class='project-details-hr'>";
-$details .= $this->details($lead_details, $lead_images);
+$details .="<div class='project-details-label'>Description</div>";   
+                
+$details .= $this->details($lead_details, $lead_images, $description);
+
 
                     $details .= "<hr class='lead-settings-prompt-hr'>
                     <div class='lead-settings-prompt flex'></div>
@@ -785,7 +788,7 @@ public function trail($arr)
  
 return $details;
 }
-public function details($arr=[], $images=[])
+public function details($arr=[], $images=[], $description="")
 {
     
     $details = "";
@@ -799,10 +802,13 @@ public function details($arr=[], $images=[])
         $details .= "<div class='project-details-answer text-xs pb-4'>$answer</div>";
     }
     $images = $this->displayImage($images);
+    $details .= "<div class='project-details-question text-xs text-light-grey pb-2 text-regular'>Other</div>";
+    $details .= "<div class='project-details-answer text-xs pb-4'>$description</div>";
     $details .= $images." </div></div>";
   
    return $details;
 }
+
 public function notes($lead_id,$arr=[])
 {
      $details = "";

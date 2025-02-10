@@ -10,11 +10,13 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Rules;
 use App\Notifications\SendOtpNotification;
 use Illuminate\View\View;
+use App\Models\Otp;
+use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 
 class RegisteredUserController extends Controller
 {
@@ -53,6 +55,13 @@ class RegisteredUserController extends Controller
                 'email' => ['required', 'string', 'email', 'max:255'],
                 'password' => ['nullable', 'confirmed', Password::defaults()],
             ]);
+            $isuser = User::where('email', $request->email)->first();
+            if ($isuser) {
+                return response()->json([
+                    "message" => "Account already exists, please <a href='/login'>signin</a>",
+                    "status" => "duplicate"
+                ], 500);
+            }
            }
           
 
@@ -119,32 +128,51 @@ class RegisteredUserController extends Controller
                     'entered_by' => $user->id,
                 ]);
             }
-           
-/*
-            // Generating and sending OTP
-            $otp = rand(100000, 999999); // Generate a 6-digit OTP
-            Session::put('otp', $otp);
-            Session::put('otp_user_id', $user->id);
+
+            $otp = rand(1000, 9999);
+
+// Store OTP in the database
+Otp::create([
+    'user_id' => $user->id,
+    'otp' => $otp,
+    'expires_at' => Carbon::now()->addMinutes(10) // OTP expires in 10 minutes
+]);
+
+// Store OTP in session (optional)
+Session::put('otp', $otp);
+Session::put('otp_user_id', $user->id);
+
+// Send OTP to the user's email
+$user->notify(new SendOtpNotification($otp));
+
+return response()->json([
+    'status' => 'success_otp',
+    'message' => 'OTP sent to your email.',
+    'redirect_url' => route('verify.otp.form')
+], 200);
+
             
             // Send OTP to the user's email
             $user->notify(new SendOtpNotification($otp));
-            return redirect()->route("verify.otp.form")->with(["message', 'OTP sent to your email."], 200);
+            return response()->json([
+                'status' => 'success_otp',
+                'message' => 'OTP sent to your email.',
+                'redirect_url' => route('verify.otp.form')
+            ], 200);
             
-*/
+
 
         event(new Registered($user));
         Auth::login($user);
           return response()->json([
-            "message" => "Success",
-            "user"=>$user,
-            "latitude"=>$request->latitude,
-            "longitude"=>$request->longitude,
+            "message" => "Congratulations for signing up you can now view your leads!!!!",
+            'status' => 'success_login',
             "redirect_url" => route('customer.dashboard')
         ], 200);       
        
         
         } catch (\Exception $e) {
-            return response()->json(["message" => "Error: " . $e->getMessage()], 500);
+            return response()->json(["message" => "Error: " . $e->getMessage(), 'status' => 'error'], 500);
         }
     }
 
@@ -215,8 +243,18 @@ class RegisteredUserController extends Controller
 public function verifyOtp(Request $request)
 {
     $request->validate([
-        'otp' => 'required|numeric',
+        'otp' => 'required|digits:4',
     ]);
+    $userId = (int)Session::get('otp_user_id');
+
+    $otpRecord = Otp::where('user_id', $userId)
+        ->where('otp', $request->otp)
+        ->where('is_used', false)
+        ->where('expires_at', '>=', Carbon::now())
+        ->first();
+
+        if ($otpRecord) {
+            $otpRecord->update(['is_used' => true]); // Mark OTP as used
 
     $inputOtp = $request->input('otp');
     $sessionOtp = Session::get('otp');
@@ -230,6 +268,10 @@ public function verifyOtp(Request $request)
 
         return redirect()->route('dashboard')->with('message', 'Account verified successfully!');
     }
+    else{
+        return redirect()->route('verify.otp.form')->with('error', 'Invalid OTP. Please try again.');  
+    }
+}
 
     return redirect()->route('verify.otp.form')->with('error', 'Invalid OTP. Please try again.');
 }

@@ -133,7 +133,8 @@
                         </div> 
                         <input type="button" name="next" id="submit_create_profile" class="next action-button" value="Submit" /> 
                         <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-<p align="center" id="loader" style="display:none"><img  height="50" width="50" src="{{asset('build/assets/img/loader.gif')}}"></p>
+<p align="center" id="loader" style="display:none"><img  height="50" width="50" src="{{asset('build/assets/img/loader.svg')}}"></p>
+<p align="center" id="info" style="display:none"></p>
                     </fieldset>
                     <fieldset>
                         <div class="form-card">

@@ -34,7 +34,7 @@ $(document).ready(function(){
     var urlObj = new URL(url);
    serviceName = urlObj.searchParams.get("service");
     service_id = urlObj.pathname.split('/')[3];
-console.log(serviceName)
+
     $("#mservice").text(serviceName);
     
     setProgressBar(current);
@@ -95,9 +95,9 @@ console.log(serviceName)
                 execute = true;
             }
             });
-// Initialize HERE Maps API
+
 platform = new H.service.Platform({
-    apikey: '0i96U6UU1rKvZazleCxLsJDqyRjXxVlFdUCQc8gb3go' // Use your actual HERE API Key
+    apikey: '0i96U6UU1rKvZazleCxLsJDqyRjXxVlFdUCQc8gb3go' 
 });
 
 // Get Geocoding service and DOM elements
@@ -110,6 +110,7 @@ suggestionsList = document.getElementById('suggestions');
 
     
     $(".next").click(function(){
+        $("#info").hide();
         if (execute === false) {
             return false;
         }
@@ -174,7 +175,7 @@ suggestionsList = document.getElementById('suggestions');
         let last_name = $("#last_name").val();
         let contact_number = $("#contact_number").val();
         let location = $("#searchLocation").val();
-        let biography = $("#biography").val();
+        let biography = "";
         let latitude = $("#latitude").val();
         let longitude = $("#longitude").val();
         let distance = $("#distance").val();
@@ -186,7 +187,7 @@ suggestionsList = document.getElementById('suggestions');
         let is_company_sales_team = $('input[name="sales_team"]:checked').val();
         let is_company_website = $('input[name="website"]:checked').val();
         let company_size = $('input[name="company_size"]:checked').val();
-        let location_select = $('input[name="location_select"]:checked').val();
+        let location_select = 1;
         var _token = $('input[name="_token"]').val();
         if(password.length<6)
             {
@@ -200,7 +201,7 @@ suggestionsList = document.getElementById('suggestions');
         const obj = {
             first_name,last_name,contact_number,location,latitude,longitude,distance,email,password,password_confirmation,company_name,is_company_website,company_size,is_company_sales_team,is_company_social_media,location_select,_token,service_id,biography
         }
-  console.log(obj);
+
   
             $.ajax({
                 url: '/register',
@@ -212,10 +213,10 @@ suggestionsList = document.getElementById('suggestions');
                 success: function(response) {
                     console.log(response);
                    
-                    if(response.message === "Success")
+                    if(response.status === "success_login")
                     {
                         //window.location.href = '/dashboard';                        
-                        toast("success","Congratulations for signing up you can now view your leads!!!!",10000);
+                        toast("success",response.message,10000);
                         current_fs = $(".next").parent();
                         next_fs = $(".next").parent().next();
                         $("#confirm").addClass("active");
@@ -236,6 +237,35 @@ suggestionsList = document.getElementById('suggestions');
                         setProgressBar(++current);
                      
                     }
+                    else if(response.status === "success_otp")
+                    {
+                        toast("success",response.message,10000);
+                        current_fs = $(".next").parent();
+                        next_fs = $(".next").parent().next();
+                        $("#confirm").addClass("active");
+                        
+                        next_fs.show();
+                        current_fs.animate({opacity: 0}, {
+                        step: function(now) {
+                        opacity = 1 - now;
+                        
+                        current_fs.css({
+                        'display': 'none',
+                        'position': 'relative'
+                        });
+                        next_fs.css({'opacity': opacity});
+                        },
+                        duration: 500
+                        });
+                        setProgressBar(++current);
+                        window.location.href = response.redirect_url;
+                    }
+                    else if(response.status === "success_otp")
+                        {
+                            toast("danger",'Account already exists, please signin',5000);  
+                            $("#info").show(); 
+                            $("#info").html(response.message);
+                        }
                 else{
                     toast("danger",'Error : '+response.message,5000);   
                 }
