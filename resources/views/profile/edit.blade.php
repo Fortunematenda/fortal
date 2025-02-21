@@ -252,9 +252,7 @@
 </div>
 
 
-<h4 class="font-weight-bold  mb-4 cHKndY">
-    Account settings
-</h4>
+
 
 <div class="container light-style flex-grow-1 container-p-y iidlEb">
     @if(session('success'))
@@ -287,16 +285,16 @@
     @csrf
     @method('patch')
     <!-- Form fields go here -->
-     <div class="tab-content">
+     <div class="tab-content" >
         <!--General-->
         <div class="tab-pane fade active show" id="profile">
             @include('profile.partials.update-profile-information-form')
            
         </div>
         <!--Photos-->
-        <div class="tab-pane fade" id="leads-settings">
+        <div class="tab-pane fade" id="photos">
             <div class="card-body pb-2">
-                @include('profile.partials.leads-settings-form')
+                @include('profile.partials.photos-form')
             </div>
         </div>
          <!--Services-->
@@ -308,7 +306,7 @@
         
        
         <!--Purchase Credits-->
-        <div class="tab-pane fade" id="purchase_credits">
+        <div class="tab-pane fade" id="purchase_credits" style=" justify-content: center;" >
             @include('profile.partials.buy-credits-form')
            
         </div>

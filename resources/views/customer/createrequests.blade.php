@@ -60,6 +60,23 @@
         </main>
     </div>
 
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/67b3271e45f68c1909a69513/1ik9t1k3o';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+ 
+
     <!-- Scripts -->
     <script type="text/javascript" charset="utf-8" src="{{asset('build/assets/js/jquery.min.js')}}"></script>
     <script type="text/javascript" charset="utf-8" src="{{asset('build/assets/js/main.js')}}"></script>
@@ -86,8 +103,11 @@
           <div class="relative cursor-pointer" tabindex="0" style="opacity: 1; will-change: auto; transform: none;">
           <div class="max-w-12">
   <div class="absolute w-full top-2 bottom-0 bg-[linear-gradient(to_right,#F87BFF,#FB92CF,#FFDD98,#C2F0B1,#2FD8FE)] blur-md"></div>
+  <a class="navbar-brand py-3" href="/profession/create">
   <img alt="LeadFinder Logo" loading="lazy" width="200" height="100" decoding="async" data-nimg="1" class="h-12 w-100 max-w-none relative" srcset="\build\assets\img\fortailogo.png 1x, \build\assets\img\fortailogo.png 2x" src="\build\assets\img\fortailogo.png" style="">
+</a>
 </div>
+
           </div>
           <div class="border border-white border-opacity-30 h-10 w-10 inline-flex justify-center items-center rounded-lg close-button-nav" style="opacity: 1; will-change: auto; transform: none;">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="text-white">
@@ -132,21 +152,21 @@
           
            
         </div>
-        <h1>Get the Best Services, <br>Hassle-Free!</h1>
+        <h1 class="uk-animation-scale-down">Get the Best Services, <br>Hassle-Free!</h1>
         
         <div class="stars absolute top-0 left-0 w-full h-[900px]" style="opacity: 1; will-change: auto;"></div>
    
-       <div class="txtclas">
+       <div class="txtclas uk-animation-slide-left">
         <p id="text" class="text-center text-xl mt-2 max-w-md bg-[linear-gradient(to_right,#F87AFF,#FB93D0,#FFDD99,#C3F0B2,#2FD8FE)] text-transparent bg-clip-text [-webkit-background-clip:text]">
         Find Trusted Experts Instantly!
         </p>
         </div>
         <div class="row" style="display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
 
-<div class="search-container">
+<div class="search-container ">
   <div class="search-box">
     <div class="search-icon"><i class="bi bi-search search-icon"></i></div>
-    <input type="text" placeholder="Service you're looking for?" id="serviceTxt" autocomplete="off">
+    <input type="text" class="uk-animation-slide-left" placeholder="Service you're looking for?" id="serviceTxt" autocomplete="off">
     <input type="hidden" id="serviceID" >
     <svg class="search-border" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 671 111">
       <path class="border" d="M335.5,108.5h-280c-29.3,0-53-23.7-53-53v0c0-29.3,23.7-53,53-53h280"></path>
@@ -159,7 +179,7 @@
             </span>
 </div>
 
-<div class="location-container">
+<div class="location-container uk-animation-slide-bottom">
   <div class="search-box1">
     <div class="search-icon1"><i class="bi bi-crosshair search-icon1"></i></div>
     <form action="" class="search-form1">
@@ -173,7 +193,7 @@
 </div>
 <input id="latitude" hidden></input>
         <input id="longitude" hidden></input>
-<div class="btn-main">
+<div class="btn-main uk-animation-slide-bottom">
 <button class="search-btn" type="button" id="start_lead">
   <i class="bi bi-search"></i> Search
 </button>
@@ -188,7 +208,7 @@
 
         
         <!-- Right Column -->
-        <div class="right-column">
+        <div class="right-column uk-animation-slide-right">
     <div>
         <img src=" {{asset('build/assets/img/digital_marketing.png')}}" alt="Homepage Image 1" height="500" width="500">
        
@@ -197,15 +217,15 @@
 </div>
 
 <div class="bg-black text-white py-[72px] sm:py-24" style="opacity: 1; transform: none; will-change: auto;">
-  <div class="container"><h2 class="text-xl text-center text-white/70" style="opacity: 1; transform: none; will-change: auto;">
+  <div class="container uk-animation-slide-right"><h2 class="text-xl text-center text-white/70" style="opacity: 1; transform: none; will-change: auto;">
 Trusted By The Best Organisations in South Africa
 </h2>
 <div class="flex overflow-hidden mt-9 relative before:content-[''] after:content-[''] before:z-10 before:absolute after:absolute before:h-full after:h-full before:w-5 after:w-5 after:right-0 before:left-0 before:top-0 after:top-0 before:bg-[linear-gradient(to_right,#000,rgb(0,0,0,0))] after:bg-[linear-gradient(to_left,#000,rgb(0,0,0,0))]">
-<div class="flex gap-16 flex-none pl-14" style="will-change: transform; transform: translateX(-37.8767%);">
+<div class="flex gap-16 flex-none pl-14" style="will-change: transform; transform: translateX(-30.1033%);">
   <div class="flex-none">
     <img alt="Shopido Logo" loading="lazy" width="505" height="331" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/Shopido.png 1x, /build/assets/img/Shopido.png 2x" src="/build/assets/img/Shopido.png" style="">
   </div>
-  <div class="flex-none" style="will-change: auto; filter: brightness(1); transform: none;">
+  <div class="flex-none">
     <img alt="Genius Logo" loading="lazy" width="1172" height="213" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/Genius.png 1x, /build/assets/img/Genius.png 2x" src="/build/assets/img/Genius.png" style="">
   </div>
   <div class="flex-none">
@@ -229,7 +249,7 @@ Trusted By The Best Organisations in South Africa
   <div class="flex-none">
     <img alt="Genius Logo" loading="lazy" width="1172" height="213" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/Genius.png 1x, /build/assets/img/Genius.png 2x" src="/build/assets/img/Genius.png" style="">
   </div>
-  <div class="flex-none" style="will-change: auto; filter: brightness(1); transform: none;">
+  <div class="flex-none" >
     <img alt="Level Up Logo" loading="lazy" width="727" height="236" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/LevelUp.png 1x, /build/assets/img/LevelUp.png 2x" src="/build/assets/img/LevelUp.png" style="">
   </div>
   <div class="flex-none">
@@ -244,6 +264,7 @@ Trusted By The Best Organisations in South Africa
   <div class="flex-none">
     <img alt="Rocket Digital Logo" loading="lazy" width="1155" height="216" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/RocketDigital.png 1x, /build/assets/img/RocketDigital.dc6e0ee8.png 2x" src="/build/assets/img/RocketDigital.dc6e0ee8.png" style="">
   </div>
+  
 </div>
 </div>
 </div>
@@ -284,8 +305,7 @@ Save thousands of dollars in costs compared to other lead generation apps. LeadF
         </p>
       </div>
       <div class="flex justify-center overflow-hidden" style="opacity: 0.5; transform: perspective(800px) rotateX(15deg);">
-        <div style="transform: scale(0.95);"><img alt="The product screenshot" loading="lazy" width="2878" height="1603" decoding="async" data-nimg="1" class="mt-14 rounded-xl max-w-[1092px] w-full shadow-2xl" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fapp-screen.376399b0.png&amp;w=3840&amp;q=75 1x" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fapp-screen.376399b0.png&amp;w=3840&amp;q=75" style="filter: drop-shadow(rgba(93, 44, 171, 0.3) 0px 0px 20px);">
- </div>
+        
 </div>
 
 </div></div></div>

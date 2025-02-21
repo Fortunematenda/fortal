@@ -21,6 +21,9 @@ use App\Models\LeadsTrailModel;
 use App\Models\TrailsModel;
 use App\Models\LeadsNotesModel;
 use App\Models\LeadsReadModel;
+use Illuminate\Support\Facades\Mail;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Exception;
 
 class LeadsController extends Controller
@@ -341,8 +344,8 @@ private function arrLeads($leads = array(), $resp = 0,$loggedin_user_id = 0)
                 $balance = $credits_balance - $credits;
                 $user->credits_balance = $balance;
                 $user->save();
-                $description = "Hello [Client's Name],
-                My name is Fortune, and I’ve received your task from Fortai. I’d be delighted to assist you with it.
+                $description = "Hi<br>,
+                My name is ".$user->first_name.", and I’ve received your task from Fortai. I’d be delighted to assist you with it.
                 When would you be available for a quick chat to discuss the details? Please let me know a time that works best for you.
                 Looking forward to your response.";
                 $lead = LeadsModel::where('id',$lead_id)->first();
@@ -421,13 +424,23 @@ private function arrLeads($leads = array(), $resp = 0,$loggedin_user_id = 0)
         return $maskedPhone;
     }
 
-    public function goToEmail(Request $request){
-        $user = $request->user();
-        $full_name = $user->first_name." ".$user->last_name;
-        $message = "Hi ".$user->first_name.",<br/><br/>I found your job on Fortai and wanted to reach out and say hello..<br/><br/>It looks like a perfect match for what I do - 
-        I'd love to help you make it happen. Do you have time for a quick call today?<br/><br/>All the best<br/><br/>".$full_name;
-        return view('leads.compose-email',compact(["message"]));
-    }
+    public function goToEmail(Request $request)
+{
+    $user = $request->user();
+    $end = false;
+    $id = $request->id;
+    $customer = new CustomerController();
+    $lead_id = $customer->decryptNumber($id, "tenhg");
+    $lead = LeadsModel::join('users as u', 'leads.user_id', '=', 'u.id')->where("leads.id",$lead_id)->first();
+    $fullName = $user->first_name . " " . $user->last_name;
+    $first_name = $lead->first_name;
+    $message = "Hi $first_name,<br/><br/>I found your job on Fortai and wanted to reach out and say hello.<br/><br/>
+                It looks like a perfect match for what I do - I'd love to help you make it happen. 
+                Do you have time for a quick call today?<br/><br/>All the best,<br/><br/>" . $fullName;
+
+    return view('leads.compose-email', compact("message", "end","id"));
+}
+
     public function addLeadsTrail(Request $request)
     {
         try{
@@ -560,13 +573,17 @@ catch(Exception $e){
             ->select("u.service_name")
             ->get();
            $templates = new TemplatesController();
+           $customer = new CustomerController();
+           $images = $customer->getImages($contacted_user_id);
+           $ratings = $customer->getReviews($contacted_user_id);
+           //$images = [];
            $profile_picture = $u->profile_picture;
            //$path = strlen($profile_picture)>5?Storage::url('uploads/'.$u->profile_picture):"https://www.w3schools.com/w3images/avatar2.png";
            $path = "https://www.w3schools.com/w3images/avatar2.png";
-            $details = $templates->expertProfile($u->first_name." ".$u->last_name, $u->email, $u->contact_number, $services, $u->biograpghy, "#", "#", "#", []);
+            $details = $templates->expertProfile($u->first_name." ".$u->last_name, $u->email, $u->contact_number, $services, $u->biograpghy, $u->facebook, $u->twitter, $u->linkedin, $images, $ratings);
             
 
-         return response()->json(["message"=>"Notes Received","expertnotes"=>$expertnotes, "details"=>$details,"profile_pic"=>$path,"name"=>$u->first_name." ".$u->last_name],200);
+         return response()->json(["message"=>"Notes Received","expertnotes"=>$expertnotes, "details"=>$details,"xxx"=>$contacted_user_id,"profile_pic"=>$path,"name"=>$u->first_name." ".$u->last_name],200);
     }
     catch(Exception $e){
         return response()->json(["message"=>"There is an error : ".$e->getMessage()],500);
@@ -589,12 +606,16 @@ catch(Exception $e){
                 "estimate_type" => $estimate_type,
                 "estimate_message" => $estimate_message,
             ]);
-        
-        
-         return response()->json(["message"=>"Lead Updated","contacted_lead"=>$contacted_lead],200);
+            $lead = LeadsModel::find($lead_id);
+        $description = "Hi, estimate sent for R".$estimate_amount." / ".$estimate_type;
+        $note = LeadsNotesModel::create(["lead_id"=>$lead_id,"description"=>$description,"entered_by"=>$user->id,"user_id"=>$user->id,"comm_link"=>$lead->user_id."_".$user->id]);
+            $customer = new CustomerController();
+            $customer->addLeadTrail($user->id, $lead_id,6);
+
+         return response()->json(["message"=>"Lead Updated","status"=>"success","contacted_lead"=>$contacted_lead],200);
     }
     catch(Exception $e){
-        return response()->json(["message"=>"There is an error : ".$e->getMessage()],500);
+        return response()->json(["message"=>"There is an error : ".$e->getMessage(),"status"=>"error",],500);
     }
     }
 
@@ -648,5 +669,37 @@ catch(Exception $e){
 }
 
     }
+
+    public function sendEmail(Request $request)
+    {
+        try {
+            $user = $request->user();
+            $request->validate([
+                'editordata' => 'required|string'
+            ]);
+            $end = true;
+            $customer = new CustomerController();
+            $lead_id = $customer->decryptNumber($request->knn, "tenhg");
+            $lead = LeadsModel::join('users as u', 'leads.user_id', '=', 'u.id')->where("leads.id",$lead_id)->first();
+            $emailContent = $request->editordata;
+            $recipientEmail = $lead->email; // Change to actual recipient
     
+            Mail::send([], [], function ($message) use ($recipientEmail, $emailContent) {
+                $message->to($recipientEmail)
+                        ->subject("New Email from Fortai")
+                        ->html($emailContent); // Correct way to send HTML content
+            });
+            
+            $customer->addLeadTrail($user->id, $lead_id,1);
+    
+            $message = "Email sent successfully!";
+            return view('leads.compose-email', compact("message", "end"));
+    
+        } catch (\Exception $e) {
+            return redirect()->route('customersettings')
+                ->with('status', 'fail-email')
+                ->with('error', 'Failed to send email')
+                ->with('end', false);
+        }
+    }
 }

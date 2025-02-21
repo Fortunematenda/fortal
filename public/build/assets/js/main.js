@@ -60,12 +60,7 @@ function purchaseCredits(element) {
     const pricePerCredit = element.getAttribute('data-price-per-credit');
     let _token = $('input[name="_token"]').val(); // CSRF token
 
-    // Logging the values for debugging
-    console.log('Plan ID:', planId);
-    console.log('Discount:', discount);
-    console.log('Discount Price:', discountPrice);
-    console.log('Number of Credits:', nCredits);
-    console.log('Price per Credit:', pricePerCredit);
+ 
 
     // Check if any required field is not defined
     if (!planId || !discount || !discountPrice || !nCredits || !pricePerCredit) {
@@ -499,14 +494,28 @@ $(document).ready(function() {
             beforeSend: function() {
                 $("#loader").show();
             },
-            success: function(data) {
-                console.log(data);
-               if (data.redirect_url) {
-                $("#prevBtn").hide();
-               $("#nextBtn").hide();
-               $("#subm").hide();
-                window.location.href = data.redirect_url;
-            }
+            success: function(response) {
+                console.log(response);
+                if(response.status === "success_login")
+                    {
+                        $("#prevBtn").hide();
+                        $("#nextBtn").hide();
+                        $("#subm").hide();
+                         window.location.href = response.redirect_url;
+                    }
+                    else if(response.status === "success_otp")
+                        {
+                           $("#prevBtn").hide();
+                           $("#nextBtn").hide();
+                            $("#subm").hide();
+                             window.location.href = response.redirect_url;
+                        }
+                   
+                    
+                    else{
+                        toast("danger",'Error : '+response.message,5000);   
+                    }
+          
                
             }, 
             error: function(xhr, status, error) {

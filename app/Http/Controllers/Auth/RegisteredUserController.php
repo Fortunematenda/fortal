@@ -25,10 +25,12 @@ class RegisteredUserController extends Controller
         try {
             $role = "Customer";
             $distance = '0';
+            $dashboard_url = "customer.dashboard";
             if(!isset($request->formData))
             {
                 $role = "Expert";
                 $distance = $request->distance;
+                $dashboard_url = "dashboard";
             }
             
             // Validating the incoming request
@@ -87,7 +89,7 @@ class RegisteredUserController extends Controller
 
                 ]
             );
- 
+
             // Assigning the service
             if(isset($request->formData))
             {
@@ -95,6 +97,7 @@ class RegisteredUserController extends Controller
                 $data = $request->formData;
                 $service_id = (int)$request->service_id;
                 $description = $request->brief_description;
+                $description = empty($description)?"N/A":$description;
                 $estimate_quote = (double)$request->estimate_quote;
                 $urgent = (int)$request->urgent;
                 
@@ -102,9 +105,18 @@ class RegisteredUserController extends Controller
                 $longitude = $request->longitude;
                 $latitude = $request->latitude;
                 $location = $request->location;
-                
+               
                 $customer = new CustomerController();
+                $num_leads = $customer->getLeadsNumber($user->id);
+                if($num_leads > 1)
+                {
+                    return response()->json([
+                        'status' => 'leads_limit',
+                        'message' => 'Daily leads limit reached!'
+                    ], 200);
+                }
                 $lead = $customer->createLead($user->id, $service_id, $user->id, $description, $estimate_quote, $urgent, $hiring_decision,$longitude,$latitude,$location);
+
               
                 $customer->addLeadService($data,$lead->id,$user->id);
          
@@ -120,6 +132,7 @@ class RegisteredUserController extends Controller
        
                 // Save form data to the database (example)
                 $data = $request->except('files');
+               
             }
             else{
                 UserServicesModel::create([
@@ -128,8 +141,7 @@ class RegisteredUserController extends Controller
                     'entered_by' => $user->id,
                 ]);
             }
-
-            $otp = rand(1000, 9999);
+ $otp = rand(1000, 9999);
 
 // Store OTP in the database
 Otp::create([
@@ -141,6 +153,7 @@ Otp::create([
 // Store OTP in session (optional)
 Session::put('otp', $otp);
 Session::put('otp_user_id', $user->id);
+Session::put('dashboard_url', $dashboard_url);
 
 // Send OTP to the user's email
 $user->notify(new SendOtpNotification($otp));
@@ -151,14 +164,6 @@ return response()->json([
     'redirect_url' => route('verify.otp.form')
 ], 200);
 
-            
-            // Send OTP to the user's email
-            $user->notify(new SendOtpNotification($otp));
-            return response()->json([
-                'status' => 'success_otp',
-                'message' => 'OTP sent to your email.',
-                'redirect_url' => route('verify.otp.form')
-            ], 200);
             
 
 
@@ -191,6 +196,7 @@ return response()->json([
                 $data = $request->formData;
                 $service_id = (int)$request->service_id;
                 $description = $request->brief_description;
+                $description = empty($description)?"N/A":$description;
                 $estimate_quote = (double)$request->estimate_quote;
                 $urgent = (int)$request->urgent;
                 
@@ -200,6 +206,15 @@ return response()->json([
                 $location = $request->location;
                 
                 $customer = new CustomerController();
+                $num_leads = $customer->getLeadsNumber($user->id);
+                if($num_leads > 1)
+                {
+                    return response()->json([
+                        'status' => 'leads_limit',
+                        'message' => 'Daily leads limit reached!'
+                        
+                    ], 200);
+                }
                 $lead = $customer->createLead($user->id, $service_id, $user->id, $description, $estimate_quote, $urgent, $hiring_decision,$longitude,$latitude,$location);
               
                 $customer->addLeadService($data,$lead->id,$user->id);
@@ -227,6 +242,7 @@ return response()->json([
 
           return response()->json([
             "message" => "Success",
+            "status"=>"success_login",
             "redirect_url" => route('customer.dashboard')
         ], 200);       
        
@@ -259,6 +275,7 @@ public function verifyOtp(Request $request)
     $inputOtp = $request->input('otp');
     $sessionOtp = Session::get('otp');
     $userId = Session::get('otp_user_id');
+    $dashboard_url = Session::get('dashboard_url');
 
     if ($inputOtp == $sessionOtp) {
         Session::forget('otp');
@@ -266,7 +283,7 @@ public function verifyOtp(Request $request)
 
         Auth::loginUsingId($userId);
 
-        return redirect()->route('dashboard')->with('message', 'Account verified successfully!');
+        return redirect()->route($dashboard_url)->with('message', 'Account verified successfully!');
     }
     else{
         return redirect()->route('verify.otp.form')->with('error', 'Invalid OTP. Please try again.');  

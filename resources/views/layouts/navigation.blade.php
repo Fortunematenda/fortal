@@ -15,6 +15,8 @@
         </a>
        <!-- Primary Navigation Menu -->
 @endif
+
+
 @endauth
     
         <div class="collapsed ml-auto d-flex d-lg-none notifications-dropdown">
@@ -72,7 +74,13 @@
             <div class="d-inline-flex text-white justify-content-center align-items-center">
                                                                     <div class="elite-pro d-inline-flex justify-content-center align-items-center">
                                         <span class="w-0"></span>
-                                    <img class="img-fluid default-avatar default-avatar-36 elite-pro-border elite-pro-border-sm ml-3 mr-1 loading" alt="Rachfort Solutions" width="32" height="32" title="Rachfort Solutions" src="./Bark.com - Leads_files/667b472a2a569.png!d=Wm3hl" srcset="https://d1k8hez1mxkuxw.cloudfront.net/s/avatar_v2/bmMOaP/logo/667b472a2a569.png!d=Wm3hl 1x, https://d1k8hez1mxkuxw.cloudfront.net/s/avatar_v2/bmMOaP/logo/667b472a2a569.png!d=N0quzn 2x" data-was-processed="true">
+                                        <img class="img-fluid default-avatar default-avatar-36 elite-pro-border elite-pro-border-sm ml-3 mr-1 loading" 
+    alt="Rachfort Solutions" width="32" height="32" title="Rachfort Solutions"  
+    src="{{ isset($user) && $user->profile_picture && file_exists(public_path('storage/profile_pictures/' . $user->profile_picture)) 
+            ? asset('storage/profile_pictures/' . $user->profile_picture) 
+            : 'https://bootdey.com/img/Content/avatar/avatar1.png' }}" 
+    data-was-processed="true">
+
                                         
                                         <div class="d-none default-avatar default-avatar-36 bg-heliotrope text-white ml-3 mr-1 justify-content-center align-items-center elite-pro-border elite-pro-border-sm">
                                             R
@@ -153,13 +161,7 @@
         
 
 
-        <div class="sc-1s8qip7-8 sc-hkhyta-13 MPbvU KoFio">
-            <div class="sc-1s8qip7-10 sc-hkhyta-5 jIbDI knOKru">
-            <a href="/customer/expertreplies/">
-                Let's Chat
-            </div>
-            
-        </div>
+        
         <div class="sc-1s8qip7-11 sc-hkhyta-10 kpsRoH qQMnI">
 
         </div>

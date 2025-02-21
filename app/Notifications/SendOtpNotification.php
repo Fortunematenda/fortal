@@ -33,7 +33,7 @@ class SendOtpNotification extends Notification
         return (new MailMessage)
                     ->line('Your OTP is: ' . $this->otp)
                     ->line('Please use this OTP to complete your verification.')
-                    ->action('Verify', url('/verify-otp')) // Optional: Add a verification link
+                   // ->action('Verify', url('/verify-otp')) // Optional: Add a verification link
                     ->line('Thank you for using our application!');
     }
 

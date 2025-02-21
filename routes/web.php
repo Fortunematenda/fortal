@@ -10,9 +10,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HelpController;
 
 // Home route
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [CustomerController::class, 'createRequest'])->name('createrequests');
 
 
 // Dashboard route with middleware for authenticated users
@@ -61,6 +59,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/updateestimate', [LeadsController::class, 'updateEstimate'])->name('updateestimate');
     Route::post('/poststatus', [LeadsController::class, 'postStatus'])->name('poststatus');
     Route::get('/leadexperts', [LeadsController::class, 'leadExperts'])->name('leadexperts');
+    Route::post('/addleadnote', [LeadsController::class, 'postNote'])->name('addleadnote');
     
 });
 
@@ -74,9 +73,9 @@ Route::middleware(['auth:sanctum', \App\Http\Middleware\Roles::class . ':Expert'
     Route::post('/getresponsedetails', [LeadsController::class, 'getResponseDetails'])->name('getresponsedetails');
     Route::post('/opencontacts', [LeadsController::class, 'openContacts'])->name('open_contacts');
     Route::post('/notinterested', [LeadsController::class, 'notInterested'])->name('not_interested');
-    Route::get('/gotoemail', [LeadsController::class, 'goToEmail'])->name('gotoemail');
-    Route::post('/addleadstrail', [LeadsController::class, 'addLeadsTrail'])->name('addleadstrail');
-    Route::post('/addleadnote', [LeadsController::class, 'postNote'])->name('addleadnote');
+    Route::get('/gotoemail/{id}', [LeadsController::class, 'goToEmail'])->name('gotoemail');
+    Route::post('/send-email', [LeadsController::class, 'sendEmail'])->name('send.email');
+    Route::post('/addleadstrail', [LeadsController::class, 'addLeadsTrail'])->name('addleadstrail');    
     Route::post('/updatestatus', [LeadsController::class, 'updateStatus'])->name('updatestatus');
     Route::post('/purchase', [PurchaseController::class,'purchase'])->name('purchase');
     Route::get('/purchase/success', [PurchaseController::class, 'successPurchase'])->name('purchase.success');
@@ -91,8 +90,9 @@ Route::middleware(['auth:sanctum', \App\Http\Middleware\Roles::class . ':Expert'
     Route::get('/transaction-history', [ProfileController::class, 'transactionHistory'])->name('transaction.history');
     Route::get('/getleadstrend', [ProfileController::class, 'leadsTrend'])->name('getleadstrend');
     Route::post('/social/update', [ProfileController::class, 'updateSocialLinks'])->name('update.sociallinks');
-
-
+    Route::post('/upload_photos', [ProfileController::class, 'uploadPhotos'])->name('upload_photos');
+    Route::post('/deletephoto', [ProfileController::class, 'deletePhoto'])->name('deletephoto');
+    Route::post('/postrating', [CustomerController::class, 'insertRatings'])->name('postrating');
 });
 
 // Load authentication routes

@@ -215,7 +215,7 @@ suggestionsList = document.getElementById('suggestions');
                    
                     if(response.status === "success_login")
                     {
-                        //window.location.href = '/dashboard';                        
+                        window.location.href = '/dashboard';                        
                         toast("success",response.message,10000);
                         current_fs = $(".next").parent();
                         next_fs = $(".next").parent().next();
@@ -260,7 +260,7 @@ suggestionsList = document.getElementById('suggestions');
                         setProgressBar(++current);
                         window.location.href = response.redirect_url;
                     }
-                    else if(response.status === "success_otp")
+                    else if(response.status === "duplicate")
                         {
                             toast("danger",'Account already exists, please signin',5000);  
                             $("#info").show(); 

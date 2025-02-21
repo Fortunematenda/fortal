@@ -131,11 +131,21 @@ class TemplatesController extends Controller
             </div>";
             return $details;
         }   
-
-    
+        private function safeBase64Encode($data) {
+            return str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($data));
+        }
+        private function encryptNumber($number, $key)
+        {
+            $cipher = "AES-256-CBC";
+            $ivLength = openssl_cipher_iv_length($cipher);
+            $iv = openssl_random_pseudo_bytes($ivLength);
+            $encrypted = openssl_encrypt($number, $cipher, $key, 0, $iv);
+            
+            return $this->safeBase64Encode($iv . $encrypted); // Store IV with encrypted data
+        }
   
   public function showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status,$leads_trail,$leads_notes,$lead_details,$lead_images,$lastresponded){
-     
+     $enid = $this->encryptNumber($lead_id, "tenhg");
     $details = " <div class='col-12 col-md-7 col-lg right-panel fixed-height-column scroll-touch h-100 d-block'
                 id='main-project-container' style='max-height: 870px;'>
                 <div class='right-panel-wrapper ml-lg-4'>
@@ -305,7 +315,7 @@ $details .= "<div class='toolbar-container my-4 pt-1 text-md-sm w-100 w-md-auto'
   
             $details .= "<div><a href='#modal-whatsapp' class='Button_base__5Wcwx Button_sm__RWLp1 Button_smWithIcon__y3vYd Button_minWidth__WGVzH Button_textWhite__9w5Wn Button_bgDarkBlue__9V6YV !tw-no-underline tw-drop-shadow-[unset] !tw-px-2 !tw-min-h-[unset] tw-text-sm !tw-text-white btnDetails whatsap' contact_number='$contact_number' uk-toggle><i class='bi bi-whatsapp'></i> Send Whatsapp</a>";
 
-            $details .= "<a href='/gotoemail' target='_blank' class='Button_base__5Wcwx Button_sm__RWLp1 Button_smWithIcon__y3vYd Button_minWidth__WGVzH Button_textWhite__9w5Wn Button_bgDarkBlue__9V6YV !tw-no-underline tw-drop-shadow-[unset] !tw-px-2 !tw-min-h-[unset] tw-text-sm !tw-text-white btnDetails'><i class='bi bi-envelope'></i> Send Email</a>";
+            $details .= "<a href='/gotoemail/$enid' target='_blank' class='Button_base__5Wcwx Button_sm__RWLp1 Button_smWithIcon__y3vYd Button_minWidth__WGVzH Button_textWhite__9w5Wn Button_bgDarkBlue__9V6YV !tw-no-underline tw-drop-shadow-[unset] !tw-px-2 !tw-min-h-[unset] tw-text-sm !tw-text-white btnDetails'><i class='bi bi-envelope'></i> Send Email</a>";
             
             $details .= "<a href='#modal-sms' class='Button_base__5Wcwx Button_sm__RWLp1 Button_smWithIcon__y3vYd Button_minWidth__WGVzH Button_textWhite__9w5Wn Button_bgDarkBlue__9V6YV !tw-no-underline tw-drop-shadow-[unset] !tw-px-2 !tw-min-h-[unset] tw-text-sm !tw-text-white btnDetails' uk-toggle><i class='bi bi-chat-left'></i> Send SMS</a><div>";
         
@@ -361,20 +371,20 @@ $details .= "<div class='toolbar-container my-4 pt-1 text-md-sm w-100 w-md-auto'
         $details .= "
         <div id='response-sections' class='mt-4'>
             <ul class='nav nav-tabs mb-3 uk-tab tab-container' id='response-sections-tabs' role='tablist'>
-                <li class='pr-1 pr-sm-2 mr-1 mr-sm-3'>
-                    <span class='nav-link nav-item active px-1 text-sm text-sm-md' data-tab='activities'>Activity</span>
+               <li class='pr-1 pr-sm-2 mr-1 mr-sm-3'>
+                    <span class='nav-link nav-item active px-1 text-sm text-sm-md' data-tab='details'>Lead Details</span>
                 </li>
                 <li class='pr-1 pr-sm-2 mr-1 mr-sm-3'>
-                    <span class='nav-link nav-item px-1 text-sm text-sm-md' data-tab='details'>Lead Details</span>
+                    <span class='nav-link nav-item  px-1 text-sm text-sm-md' data-tab='activities'>Activity</span>
                 </li>
                 <li class='pr-1 pr-sm-2 mr-1 mr-sm-3'>
                     <span class='nav-link nav-item px-1 text-sm text-sm-md' data-tab='notes' role='tab'>My Notes</span>
                 </li>
             </ul>";
 
-         $details .="<ul class='uk-margin' id='my-id'><li class='tab-content active' id='activities'>";   
+         $details .="<ul class='uk-margin' id='my-id'><li class='tab-content ' id='activities'>";   
          $details .= $this->trail($leads_trail); 
-         $details .= "</li><li class='tab-content' id='details'>";  
+         $details .= "</li><li class='tab-content active' id='details'>";  
          $details .= $this->details($lead_details,$lead_images); 
          $details .= "</li><li class='tab-content' id='notes'>";
          $details .= $this->notes($lead_id,$leads_notes);
@@ -863,34 +873,92 @@ public function displayImage($imrarr){
     $details .= "</div>";
 return $details;
 }
-public function expertProfile($name, $email, $contact_number, $services, $bio, $facebook, $twitter, $linkedin, $images){
+public function expertProfile($name, $email, $contact_number, $services, $bio, $facebook, $twitter, $linkedin, $images,$reviews_arr=[]){
     $details = "<div class='profile-container'> <div class='content'>";
-    $details .= "<section class='about'><h3>About</h3><ul class='info-list'><li><span>Name:</span> $name</li>";
+    $details .= "<section class='text-xl font-bold text-gray-800 mb-4 about'><h3>About</h3><ul class='info-list'><li><span>Name:</span> $name</li>";
     $details .= "<li><span>Email:</span> $email</li><li><span>Phone:</span> $contact_number</li></ul></section>";
 
-    $details .= "<section class='skills'><h3>Skills</h3><ul>";
+    $details .= "<section class='text-xl font-bold text-gray-800 mb-4 skills'><h3>Skills</h3><ul>";
     foreach($services as $service)
     {
         $details .= "<li>".$service["service_name"]."</li>";
     }
     $details .= "</ul></section><br>";
 
-    $details .= "<section class='bio'><h3>Bio</h3><p>$bio</p></section><br>";
+    $details .= "<section class='text-xl font-bold text-gray-800 mb-4 bio'><h3>Bio</h3><p>$bio</p></section><br>";
 
-    $details .= "<section class='social'><h3>Social Media</h3><div>";
+    $details .= "<section class='text-xl font-bold text-gray-800 mb-4 social'><h3>Social Media</h3><div>";
     $details .= "<a href='$facebook' class='uk-icon-button uk-margin-small-right' uk-icon='instagram'><i class='bi bi-facebook'></i></a>";
     $details .= "<a href='$twitter' class='uk-icon-button  uk-margin-small-right' uk-icon='facebook'><i class='bi bi-twitter-x'></i></a>";
     $details .= "<a href='$linkedin' class='uk-icon-button' uk-icon='youtube'><i class='bi bi-linkedin'></i></a></div></section><br/>";
 
-    $details .= "<section class='photos'><h3>Photos</h3><div id='exampe-slider' class='sliderm'><div class='sliderm__slider'><div class='sliderm__slides'>";
+    $details .= "<section class='text-xl font-bold text-gray-800 mb-4 photos'><h3>Photos</h3><div id='exampe-slider' class='sliderm'><div class='sliderm__slider'><div class='sliderm__slides'>";
+    
       foreach($images as $image)
     {
         $img = $image->image_name;
         $path = Storage::url('uploads/'.$img);
-        $details .= "<div class='sliderm__slide'><img src='".$path."' /></div>";
+        $details .= "<div class='sliderm__slide'><img src='".$path."'  height='150'/></div>";
     }
-    $details .=  "</div></div></div></section></div></div>";  
+    $reviews = $this->reviews($reviews_arr);    
+    $details .=  "</div></div></div></section><br><section class='text-xl font-bold text-gray-800 mb-4 photos'>
+     <div id='reviews' class='mt-2'>  
+            $reviews
+            <ul id='reviewList' class='mt-2 space-y-2'></ul>
+        </div>
+    <h3>Leave a Review</h3></section>
+    <div class='bg-white p-6 rounded-lg shadow-lg w-full max-w-lg'>
+
+        <!-- Star Rating -->
+        <div class='flex items-center mb-4'>
+            <span class='text-gray-600 mr-2'>Your Rating:</span>
+            <div class='flex space-x-1'>
+                <span class='cursor-pointer text-gray-400 text-2xl' onclick='setRating(1)'>★</span>
+                <span class='cursor-pointer text-gray-400 text-2xl' onclick='setRating(2)'>★</span>
+                <span class='cursor-pointer text-gray-400 text-2xl' onclick='setRating(3)'>★</span>
+                <span class='cursor-pointer text-gray-400 text-2xl' onclick='setRating(4)'>★</span>
+                <span class='cursor-pointer text-gray-400 text-2xl' onclick='setRating(5)'>★</span>
+            </div>
+        </div>
+
+        <!-- Comment Box -->
+        <textarea id='comment' class='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500' rows='4' placeholder='Write your review...'></textarea>
+
+        <!-- Submit Button -->
+        <button onclick='submitReview()' class='bg-blue-600 text-white py-2 px-4 rounded-lg mt-3 w-full hover:bg-blue-700' style='background-color:purple !important'>Submit Review</button>
+
+        <!-- Display Reviews -->
+        <div id='reviews' class='mt-6'>
+           
+    </div></div></div>";  
        
     return $details;
+}
+
+private function reviews($reviews)
+{
+    $details = "";
+    foreach($reviews as $review)
+    {
+    $rating = (int)$review["rating"];
+    $comment = $review["comment"];
+    $date_entered = $review['date_entered'];
+        $first_name = $review['first_name'];
+        $formattedDate = date('j F Y', strtotime($date_entered));
+    $remaining = 5-$rating;
+
+    $details .= " <div class='border p-3 rounded-lg bg-gray-50 mt-2'><div class='flex space-x-1'>";
+    for($i=0;$i<$rating;$i++)
+    {
+        $details .= "<span class='text-yellow-400 text-2xl'>★</span>";
+    }
+    for($i=0;$i<$remaining;$i++)
+    {
+        $details .= "<span class='text-gray-400 text-2xl'>★</span>";
+    }         
+            $details .= "</div><p class='text-gray-400 text-xs'>$first_name - $formattedDate</p> $comment</div>";
+
+}
+            return $details;
 }
 }

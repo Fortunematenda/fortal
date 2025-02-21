@@ -30,7 +30,7 @@ class ProfileUpdateRequest extends FormRequest
             'is_company_website' => ['boolean'],
             'company_size' => ['nullable', 'in:Self-employed,Sole Trader,2-10,11-50,51-200,200+'],
             'is_company_sales_team' => ['boolean'],
-            'contact_number' => ['nullable', 'string', 'max:15'],
+            'contact_number' => ['nullable', 'string', 'regex:/^\+27\d{9}$/','size:12' ],
             'email' => ['required','string','email','max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],

@@ -37,10 +37,18 @@
                             Your requests
       </h4>
 
-                            <button class="Button_base__iY8s5 Button_lg__GH03D Button_minWidth__2dpSx Button_textBlue__796NH Button_bgLightBlue__0RMHv __btnPlaceRequest tw-border-0">
+                            <button class="Button_base__iY8s5 Button_lg__GH03D Button_minWidth__2dpSx Button_textBlue__796NH Button_bgLightBlue__0RMHv __btnPlaceRequest tw-border-0 mr-3">
                                 <span class="button-main">
                                     <span class="child-container Button_childContainer__ytwFQ">
-                                    <a href="{{ route('createrequests') }}" class="text-gray">Place new request</a>
+                                    <a href="{{ route('createrequests') }}" class="text-gray">Create new lead</a>
+                                    </span>
+                                </span>
+                            </button>
+
+                            <button class="Button_base__iY8s5 Button_lg__GH03D Button_minWidth__2dpSx Button_textBlue__796NH Button_bgLightBlue__0RMHv __btnPlaceRequest tw-border-0">
+                                <span class="button-main">
+                                    <span class="child-container Button_childContainer__ytwFQ" >
+                                    <a href="{{ route('profile.update') }}" class="text-gray">Become an Expert</a>
                                     </span>
                                 </span>
                             </button>
@@ -307,4 +315,14 @@ $.ajax({
             transform: translateX(-100%);
         }
     }
+
+    .Button_bgLightBlue__0RMHv {
+  
+    border-color: rgb(168 93 203) !important;
+   
+}
+.Button_textBlue__796NH {
+    
+    color: rgb(176 45 241) !important;
+}
 </style>

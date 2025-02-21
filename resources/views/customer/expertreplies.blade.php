@@ -1,14 +1,13 @@
-
-<x-customernav>
+<x-app-layout>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lea Replies</title>
     <!-- Bootstrap CSS -->
- 
+ <script>console.log("fumm");</script>
 <link rel="stylesheet" href="https://sliderm.com/dist/1.0.8/sliderm.css">
 <script src="https://sliderm.com/dist/1.0.8/sliderm.js">console.log("dzdz");</script>
-
+<script>console.log("fff");</script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJQ8l7f+K2wL3g60kF3gnm+f6X8QO5r57WfRpxVS43v7wBfeJY4p+V3joEJe" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybR12FwBfj6vvZQvi4z5BvNK1HhZ1Xc2/3pJZqLFfINkQeK6e" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0zUtb6O9yVemH7A0/Tl5PpRxmA7hP5r9pMQzF+X0ZqC5C3xZ" crossorigin="anonymous"></script>
@@ -131,7 +130,9 @@
         .chat-header .header-right .header-icon:hover {
             color: #f1c40f;
         }
-
+.text-yellow-400{
+    color:#f1c40f !important;
+}
     
 
 .avatar {
@@ -212,7 +213,7 @@
             display: inline-block;
             padding: 8px 12px;
             border-radius: 10px;
-            background-color: grey;
+            background-color: #eee;
         }
 
         .message.user p {
@@ -591,7 +592,7 @@ z-index: 10000 !important;
         <div class="chat-body" id="chat-body">
          
         </div>
-
+       
         <!-- Input Area -->
         <div class="chat-input">
             <input type="text" id="user-input" placeholder="Type a message..." />
@@ -620,7 +621,7 @@ z-index: 10000 !important;
         <div class="uk-modal-body infod" uk-overflow-auto>
       
         </div>
-
+       
 
     </div>
 </div>
@@ -712,8 +713,7 @@ z-index: 10000 !important;
     }
 
 </script>
-</x-customernav>
-
+</x-app-layout>
 <script>
     $(document).on('click','.dexpert',function(){
         let lead_id = $("#xkk").val();
@@ -765,6 +765,7 @@ z-index: 10000 !important;
             },
             complete: function() {
                 $("#loader").hide();
+                activateSlide();
             }
         });
 
@@ -800,9 +801,91 @@ z-index: 10000 !important;
         });    
 });
 
-</script>
-<script>
-    const sliderm = new Sliderm('#exampe-slider', {
+
+ 
+
+    document.getElementById('closeModal').addEventListener('click', () => {
+        const modal = document.getElementById('imageModal');
+        modal.style.display = 'none';
+    });
+
+    document.getElementById('imageModal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) {
+            e.currentTarget.style.display = 'none';
+        }
+    });
+
+    $(document).ready(function(){
+        var firstDexpert = $('.dexpert:first');
+firstDexpert.click();
+
+    });
+
+
+  
+        let currentRating = 0;
+
+        function setRating(rating) {
+            currentRating = rating;
+            let stars = document.querySelectorAll("span.cursor-pointer");
+            stars.forEach((star, index) => {
+                star.style.color = index < rating ? "#facc15" : "#d1d5db"; // Yellow for selected stars
+            });
+        }
+
+        function submitReview() {
+        
+            let comment = document.getElementById("comment").value;
+            if (currentRating === 0 || comment.trim() === "") {
+                alert("Please provide a rating and a comment.");
+                return;
+            }
+
+            let lead_id = $("#xkk").val();
+        let contacted_user_id = $("#uuus").val();
+        let _token = $('input[name="_token"]').val(); 
+       
+        const obj = {
+            lead_id,
+            contacted_user_id,
+            comment,
+            _token,
+            rating:currentRating
+        };
+
+        $.ajax({
+            url: '/postrating',
+            type: 'POST',
+            data: obj, // Send data in one object
+            beforeSend: function() {
+            },
+            success: function(data) {
+              
+                if(data.status === "success")     
+                {
+            let reviewList = document.getElementById("reviewList");
+            let newReview = document.createElement("li");
+            newReview.className = "border p-3 rounded-lg bg-gray-50";
+            newReview.innerHTML = `<strong>⭐ ${currentRating} Stars</strong> - ${comment}`;
+
+            reviewList.appendChild(newReview);
+            document.getElementById("comment").value = ""; // Clear input
+            setRating(0); // Reset stars
+                }       
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', status, error); // Improved error logging
+            },
+            complete: function() {
+                //$("#loader").hide();
+            }
+        });    
+
+           
+        }
+
+       function activateSlide(){
+            const sliderm = new Sliderm('#exampe-slider', {
   arrow: true,
   pagination: true,
   grouping: false,
@@ -822,21 +905,6 @@ z-index: 10000 !important;
             modalImg.src = e.target.src;
         });
     });
-
-    document.getElementById('closeModal').addEventListener('click', () => {
-        const modal = document.getElementById('imageModal');
-        modal.style.display = 'none';
-    });
-
-    document.getElementById('imageModal').addEventListener('click', (e) => {
-        if (e.target === e.currentTarget) {
-            e.currentTarget.style.display = 'none';
         }
-    });
 
-    $(document).ready(function(){
-        var firstDexpert = $('.dexpert:first');
-firstDexpert.click();
-
-    });
 </script>

@@ -39,6 +39,8 @@ $(document).on('click','#send_estimate',function() {
 
     const obj = {_token,lead_id, estimate_amount, estimate_type, respond_textarea_field};
     getJSONResponse("updateestimate",obj).then((data) => {
+      
+        toast(data.status,data.message,5000);
     }).catch((error) => {
         console.error('Failed to update lead:', error);  // Handle the error here
     });         

@@ -11,6 +11,10 @@ use App\Models\LeadsServiceModel;
 use App\Models\LeadsNotesModel;
 use App\Models\ContactedLeadsModel;
 use App\Models\ImagesModel;
+use App\Models\RatingsModel;
+use App\Models\LeadsTrailModel;
+use App\Models\TrailsModel;
+use App\Services\FirebasePushNotification;
 use Exception;
 use DateTime;
 class CustomerController extends Controller
@@ -59,6 +63,8 @@ class CustomerController extends Controller
     public function createRequest()
     {
         $slot = "";
+        $deviceToken = "eR0NvHjI0EhiotmltA-2Ex:APA91bHMb6-BN8hOgHOl14lnwBX9KO3D-fSF0ch45mQLgJyYLcUEpv3fKxfZqTXovTT4fGFP9hev9AouNpUM8ATaCRUBcF3nIgtHQnhzo4Wz9C10c38RFG8";
+        FirebasePushNotification::sendNotification("Hello!", "This is a test push notification.", $deviceToken);
         return view('customer.createrequests',compact(["slot"]));
     }
 
@@ -245,4 +251,104 @@ catch(Exception $e){
 }
 }
 
+public function getLeadsNumber($user_id){
+    $date = date("Y-m-d");
+    return LeadsModel::where("user_id",$user_id)->where("date_entered", "LIKE", "%$date%")->count();
+}
+
+public function getImages($user_id, $category="Profile")
+{
+    $images = ImagesModel::where("user_id",$user_id)->where("category",$category)->get();
+    return  $images;
+}
+
+public function getReviews($user_id)
+{
+    $ratings = RatingsModel::join("users as u", "ratings.to_user_id", "=", "u.id")
+        ->where("ratings.to_user_id", $user_id)
+        ->select(
+            "ratings.from_user_id",
+            "ratings.to_user_id",
+            "ratings.lead_id",
+            "ratings.rating",
+            "ratings.date_entered",
+            "ratings.comment",
+            "u.first_name"
+        )
+        ->get();
+
+    return $ratings;
+}
+
+
+public function insertRatings(Request $request)
+{
+    try {
+        // Validate request data
+        $request->validate([
+            'contacted_user_id' => 'required|integer|exists:users,id',
+            'lead_id' => 'required|integer|exists:leads,id',
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'nullable|string|max:500',
+        ]);
+
+        // Get the authenticated user
+        $user = $request->user();
+        $user_id = $user->id;
+
+        // Extract request data
+        $to_user_id = $request->contacted_user_id;
+        $lead_id = $request->lead_id;
+        $rating = $request->rating;
+        $comment = $request->comment;
+
+        // Create rating record
+        $ratings = RatingsModel::create([
+            'from_user_id' => $user_id,
+            'to_user_id' => $to_user_id,
+            'lead_id' => $lead_id,
+            'rating' => $rating,
+            'comment' => $comment,
+        ]);
+
+        return response()->json([
+            "message" => "Review posted successfully",
+            "status" => "success",
+            "ratings" => $ratings
+        ], 200);
+    }  catch (Exception $e) {
+        return response()->json([
+            "message" => "An error occurred",
+            "status" => "error",
+            "error" => $e->getMessage(),
+        ], 500);
+    }
+}
+
+public function addLeadTrail($user_id, $lead_id,$trail_id)
+{
+    $fixed_trail = TrailsModel::where('id',$trail_id)->first();
+    $description = $fixed_trail["trail"];
+    $trail = LeadsTrailModel::create([
+        'lead_id'=>$lead_id, 
+        'user_id'=>$user_id, 
+        'description'=>$description, 
+        'entered_by'=>$user_id
+                ]);
+                return $trail;
+}
+private function safeBase64Decode($data) {
+    $data = str_replace(['-', '_'], ['+', '/'], $data);
+    return base64_decode($data);
+}
+public function decryptNumber($encryptedData, $key)
+{
+    $cipher = "AES-256-CBC";
+    $encryptedData = $this->safeBase64Decode($encryptedData);
+    $ivLength = openssl_cipher_iv_length($cipher);
+    $iv = substr($encryptedData, 0, $ivLength);
+    $encrypted = substr($encryptedData, $ivLength);
+    
+    return openssl_decrypt($encrypted, $cipher, $key, 0, $iv);
+}
 }

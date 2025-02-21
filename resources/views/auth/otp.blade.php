@@ -42,6 +42,7 @@
         <input type="text" id="otp" name="otp" hidden/>
         <button type="submit">Verify OTP</button>
       </form>
+      <p>OTP sent to your email</p>
     </div>
   </body>
 </html>

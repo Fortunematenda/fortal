@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use App\Models\ServicesModel;
 use App\Models\UserServicesModel;
+use App\Models\ImagesModel;
 use App\Models\LeadsModel;
 use App\Models\ContactedLeadsModel;
 use App\Models\User;
@@ -65,8 +67,11 @@ class ProfileController extends Controller
          $services = ServicesModel::pluck('service_name')->toArray();
          $latest_services = $this->getUserServices($user->id);
          $transactions = $this->getCreditHistory($user->id);
-         
-     
+
+         $customer = new CustomerController();
+         $images = $customer->getImages($user->id);
+         $reviews = $customer->getReviews($user->id);
+     //print_r($images);
          return view('profile.edit', [
              'user' => $user,
              'services' => $services,
@@ -86,6 +91,8 @@ class ProfileController extends Controller
              'logo' =>$user->logo,
              'transactions'=>$transactions,
              'credits_balance'=>$user->credits_balance,
+             'images'=>$images,
+             'reviews'=>$reviews,
              
          ]);
      }
@@ -712,5 +719,93 @@ public function register(Request $request)
     }
 }
 
-    
+public function uploadPhotos(Request $request)
+{
+    try {
+        $user = $request->user();
+        $uploadedFiles = [];
+
+        // Validate the request to ensure files are images and required
+        $request->validate([
+            'files.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // 2MB limit per file
+        ]);
+
+        if (!$request->hasFile('files')) {
+            return redirect()->route('profile.edit')
+                ->with('status', 'upload_photos')
+                ->with('error', 'No photos attached!');
+        }
+
+        // Handle file uploads
+        $customer = new CustomerController();
+        $images = $customer->getImages($user->id);
+        if(count($images)>7)
+        {
+            return redirect()->route('profile.edit')
+            ->with('status', 'limit_photos')
+            ->with('error', 'Failed to upload, limit exeeded');
+        }
+        $files = is_array($request->file('files')) ? $request->file('files') : [$request->file('files')];
+$cc=0;
+        foreach ($files as $file) {
+            if($cc>7)
+            {
+                break;
+            }
+            $path = $file->store('uploads', 'public');
+            $uploadedFiles[] = $path;
+            $imageName = basename($path);
+
+            $customer->insertImages($imageName, "Profile", $user->id, $user->id, $user->id);
+            $cc++;
+        }
+       
+        return redirect()->route('profile.edit')
+        ->with('status', 'upload_photos')
+        ->with('success', 'Photos uploaded successfully!');
+        
+
+    } catch (\Exception $e) {
+        return redirect()->route('profile.edit')
+            ->with('status', 'upload_photos')
+            ->with('error', 'Failed to upload photos6: ' . $e->getMessage());
+    }
+}
+
+public function deletePhoto(Request $request)
+{
+    try {
+        // Find the image by ID
+        $image = ImagesModel::find($request->id);
+
+        // Check if the image exists
+        if (!$image) {
+            return response()->json(["status" => "error", "message" => "Image not found"], 404);
+        }
+
+        // Delete the file from storage
+        if (Storage::exists('public/uploads/' . $image->image_name)) {
+            Storage::delete('public/uploads/' . $image->image_name);
+        }
+
+        // Delete the database record
+        $image->delete();
+
+        return response()->json([
+            "status" => "success",
+            "message" => "Image successfully deleted",
+            "image_id" => $request->id
+        ], 200);
+
+    } catch (Exception $e) {
+        return response()->json([
+            "status" => "error",
+            "message" => "There was an error deleting the image",
+            "error" => $e->getMessage()
+        ], 500);
+    }
+
+
+
+}
 }
