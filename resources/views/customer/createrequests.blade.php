@@ -220,56 +220,72 @@ s0.parentNode.insertBefore(s1,s0);
   <div class="container uk-animation-slide-right"><h2 class="text-xl text-center text-white/70" style="opacity: 1; transform: none; will-change: auto;">
 Trusted By The Best Organisations in South Africa
 </h2>
-<div class="flex overflow-hidden mt-9 relative before:content-[''] after:content-[''] before:z-10 before:absolute after:absolute before:h-full after:h-full before:w-5 after:w-5 after:right-0 before:left-0 before:top-0 after:top-0 before:bg-[linear-gradient(to_right,#000,rgb(0,0,0,0))] after:bg-[linear-gradient(to_left,#000,rgb(0,0,0,0))]">
-<div class="flex gap-16 flex-none pl-14" style="will-change: transform; transform: translateX(-30.1033%);">
-  <div class="flex-none">
-    <img alt="Shopido Logo" loading="lazy" width="505" height="331" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/Shopido.png 1x, /build/assets/img/Shopido.png 2x" src="/build/assets/img/Shopido.png" style="">
-  </div>
-  <div class="flex-none">
-    <img alt="Genius Logo" loading="lazy" width="1172" height="213" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/Genius.png 1x, /build/assets/img/Genius.png 2x" src="/build/assets/img/Genius.png" style="">
-  </div>
-  <div class="flex-none">
-    <img alt="Level Up Logo" loading="lazy" width="727" height="236" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/LevelUp.png 1x, /build/assets/img/LevelUp.png 2x" src="/build/assets/img/LevelUp.png" style="">
-  </div>
-  <div class="flex-none">
-    <img alt="Scoutbird Logo" loading="lazy" width="586" height="295" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/Scoutbird.png 1x, /build/assets/img/Scoutbird.png 2x" src="/build/assets/img/Scoutbird.png" style="">
-  </div>
-  <div class="flex-none">
-    <img alt="Mobiosoft Logo" loading="lazy" width="745" height="163" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/Mobiosoft.png 1x, /build/assets/img/Mobiosoft.png 2x" src="/build/assets/img/Mobiosoft.png" style="">
-  </div>
-  <div class="flex-none">
-    <img alt="Big Leap Logo" loading="lazy" width="913" height="273" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/BigLeap.png 1x, /build/assets/img/BigLeap.png 2x" src="/build/assets/img/BigLeap.png" style="">
-  </div>
-  <div class="flex-none">
-    <img alt="Rocket Digital Logo" loading="lazy" width="1155" height="216" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/RocketDigital.png 1x, /build/assets/img/RocketDigital.png 2x" src="/build/assets/img/RocketDigital.png" style="">
-  </div>
-  <div class="flex-none">
-    <img alt="Shopido Logo" loading="lazy" width="505" height="331" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/Shopido.png 1x, /build/assets/img/Shopido.png 2x" src="/build/assets/img/Shopido.png" style="">
-  </div>
-  <div class="flex-none">
-    <img alt="Genius Logo" loading="lazy" width="1172" height="213" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/Genius.png 1x, /build/assets/img/Genius.png 2x" src="/build/assets/img/Genius.png" style="">
-  </div>
-  <div class="flex-none" >
-    <img alt="Level Up Logo" loading="lazy" width="727" height="236" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/LevelUp.png 1x, /build/assets/img/LevelUp.png 2x" src="/build/assets/img/LevelUp.png" style="">
-  </div>
-  <div class="flex-none">
-    <img alt="Scoutbird Logo" loading="lazy" width="586" height="295" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/Scoutbird.png 1x, /build/assets/img/Scoutbird.png 2x" src="/build/assets/img/Scoutbird.png" style="">
-  </div>
-  <div class="flex-none">
-    <img alt="Mobiosoft Logo" loading="lazy" width="745" height="163" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/Mobiosoft.png 1x, /build/assets/img/Mobiosoft.png 2x" src="/build/assets/img/Mobiosoft.png" style="">
-  </div>
-  <div class="flex-none">
-    <img alt="Big Leap Logo" loading="lazy" width="913" height="273" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/BigLeap.png 1x, /build/assets/img/BigLeap.png 2x" src="/build/assets/img/BigLeap.png" style="">
-  </div>
-  <div class="flex-none">
-    <img alt="Rocket Digital Logo" loading="lazy" width="1155" height="216" decoding="async" data-nimg="1" class="h-8 w-auto transition-opacity hover:opacity-100 opacity-70" srcset="/build/assets/img/RocketDigital.png 1x, /build/assets/img/RocketDigital.dc6e0ee8.png 2x" src="/build/assets/img/RocketDigital.dc6e0ee8.png" style="">
-  </div>
-  
+<style>
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .marquee {
+    animation: marquee 20s linear infinite;
+    animation-delay: 0s; /* Start immediately */
+    /* Do not preserve the end state between page loads */
+    animation-fill-mode: forwards;
+    will-change: transform;
+  }
+</style>
+
+<div class="flex overflow-hidden mt-9 relative w-full before:content-[''] after:content-[''] before:z-10 before:absolute after:absolute before:h-full after:h-full before:w-5 after:w-5 after:right-0 before:left-0 before:top-0 after:top-0 before:bg-[linear-gradient(to_right,#000,rgba(0,0,0,0))] after:bg-[linear-gradient(to_left,#000,rgba(0,0,0,0))]">
+<div class="marquee-container">
+        <div class="marquee-content" id="marqueeContent">
+            <!-- Images will be dynamically inserted here using JavaScript -->
+        </div>
+    </div>
+
+    <!-- UIkit JS (if needed for other UIkit components) -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.15/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.15/dist/js/uikit-icons.min.js"></script>
 </div>
 </div>
 </div>
+<div id="features" class="bg-black text-white py-[72px] sm:py-24" style="opacity: 1; will-change: auto;">
+  <div class="container">
+    <h2 class="text-center text-3xl md:text-4xl md:max-w-[648px] mx-auto font-bold tracking-tighter" style="opacity: 1; transform: none; will-change: auto;">
+      Everything You Need
+    </h2>
+    <div class="max-w-xl mx-auto" style="opacity: 1; transform: none; will-change: auto;">
+      <p class="text-center mt-5 text-xl text-white/70">
+      Looking for Reliable and Professional Services?
+      </p>
+      </div>
+      <div class="mt-16 flex flex-col sm:flex-row gap-4" style="opacity: 1; will-change: auto;">
+        <div class="border border-white/30 px-5 py-10 text-center rounded-xl sm:flex-1 relative" style="opacity: 1; transform: none; will-change: auto;">
+          
+          <div class="absolute inset-0 border-2 border-purple-400 rounded-xl" 
+     style="mask-image: radial-gradient(100px 100px at 309px -908px, black, );
+            background-image: url('/build/assets/img/electrician.jpg');
+            background-size: cover;
+            background-position: center;">
 </div>
-<div id="features" class="bg-black text-white py-[72px] sm:py-24" style="opacity: 1; will-change: auto;"><div class="container"><h2 class="text-center text-3xl md:text-4xl md:max-w-[648px] mx-auto font-bold tracking-tighter" style="opacity: 1; transform: none; will-change: auto;">Everything You Need</h2><div class="max-w-xl mx-auto" style="opacity: 1; transform: none; will-change: auto;"><p class="text-center mt-5 text-xl text-white/70">Whether you are a small company or a large enterprise, we have all the essential tools you will ever need for lead generation.</p></div><div class="mt-16 flex flex-col sm:flex-row gap-4" style="opacity: 1; will-change: auto;"><div class="border border-white/30 px-5 py-10 text-center rounded-xl sm:flex-1 relative" style="opacity: 1; transform: none; will-change: auto;"><div class="absolute inset-0 border-2 border-purple-400 rounded-xl" style="mask-image: radial-gradient(100px 100px at 309px -908px, black, transparent);"></div><div class="inline-flex h-14 w-14 bg-white text-black justify-center items-center rounded-lg" style="transform: none; will-change: transform;"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="h-6 w-6" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M501.1 395.7L384 278.6c-23.1-23.1-57.6-27.6-85.4-13.9L192 158.1V96L64 0 0 64l96 128h62.1l106.6 106.6c-13.6 27.8-9.2 62.3 13.9 85.4l117.1 117.1c14.6 14.6 38.2 14.6 52.7 0l52.7-52.7c14.5-14.6 14.5-38.2 0-52.7zM331.7 225c28.3 0 54.9 11 74.9 31l19.4 19.4c15.8-6.9 30.8-16.5 43.8-29.5 37.1-37.1 49.7-89.3 37.9-136.7-2.2-9-13.5-12.1-20.1-5.5l-74.4 74.4-67.9-11.3L334 98.9l74.4-74.4c6.6-6.6 3.4-17.9-5.7-20.2-47.4-11.7-99.6.9-136.6 37.9-28.5 28.5-41.9 66.1-41.2 103.6l82.1 82.1c8.1-1.9 16.5-2.9 24.7-2.9zm-103.9 82l-56.7-56.7L18.7 402.8c-25 25-25 65.5 0 90.5s65.5 25 90.5 0l123.6-123.6c-7.6-19.9-9.9-41.6-5-62.7zM64 472c-13.2 0-24-10.8-24-24 0-13.3 10.7-24 24-24s24 10.7 24 24c0 13.2-10.7 24-24 24z"></path></svg></div><h3 class="mt-6 font-bold" style="opacity: 0; will-change: auto;">Complete Suite</h3><p class="mt-2 text-white/70" style="opacity: 0; will-change: auto;">LeadFinder includes multiple lead generation tools that you can use to grow your business.</p></div><div class="border border-white/30 px-5 py-10 text-center rounded-xl sm:flex-1 relative" style="opacity: 1; transform: none; will-change: auto;"><div class="absolute inset-0 border-2 border-purple-400 rounded-xl" style="mask-image: radial-gradient(100px 100px at 309px -1190px, black, transparent);"></div><div class="inline-flex h-14 w-14 bg-white text-black justify-center items-center rounded-lg" style="transform: none; will-change: transform;"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 640 512" class="h-6 w-6" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M471.1 96C405 96 353.3 137.3 320 174.6 286.7 137.3 235 96 168.9 96 75.8 96 0 167.8 0 256s75.8 160 168.9 160c66.1 0 117.8-41.3 151.1-78.6 33.3 37.3 85 78.6 151.1 78.6 93.1 0 168.9-71.8 168.9-160S564.2 96 471.1 96zM168.9 320c-40.2 0-72.9-28.7-72.9-64s32.7-64 72.9-64c38.2 0 73.4 36.1 94 64-20.4 27.6-55.9 64-94 64zm302.2 0c-38.2 0-73.4-36.1-94-64 20.4-27.6 55.9-64 94-64 40.2 0 72.9 28.7 72.9 64s-32.7 64-72.9 64z"></path></svg>
+
+          <h3 class="mt-6 font-bold" style="opacity: 0; will-change: auto;">
+            Complete Suite
+          </h3>
+          <p class="mt-2 text-white/70" style="opacity: 0; will-change: auto;">
+            LeadFinder includes multiple lead generation tools that you can use to grow your business.
+          </p>
+        </div>
+        <div class="border border-white/30 px-5 py-10 text-center rounded-xl sm:flex-1 relative" style="opacity: 1; transform: none; will-change: auto;">
+         
+          <div class="absolute inset-0 border-2 border-purple-400 rounded-xl" 
+     style="mask-image: radial-gradient(100px 100px at 309px -908px, black, );
+            background-image: url('/build/assets/img/wifitech.jpg');
+            background-size: cover;
+            background-position: center;">
 </div>
 <h3 class="mt-6 font-bold" style="opacity: 0; will-change: auto;">
 Unlimited Leads
@@ -279,12 +295,13 @@ Save thousands of dollars in costs compared to other lead generation apps. LeadF
 </p>
 </div>
 <div class="border border-white/30 px-5 py-10 text-center rounded-xl sm:flex-1 relative" style="opacity: 1; transform: none; will-change: auto;">
-  <div class="absolute inset-0 border-2 border-purple-400 rounded-xl" style="mask-image: radial-gradient(100px 100px at 309px -1520px, black, transparent);"></div>
-  <div class="inline-flex h-14 w-14 bg-white text-black justify-center items-center rounded-lg" style="transform: none; will-change: transform;">
-    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="h-6 w-6" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-      <path d="M167.02 309.34c-40.12 2.58-76.53 17.86-97.19 72.3-2.35 6.21-8 9.98-14.59 9.98-11.11 0-45.46-27.67-55.25-34.35C0 439.62 37.93 512 128 512c75.86 0 128-43.77 128-120.19 0-3.11-.65-6.08-.97-9.13l-88.01-73.34zM457.89 0c-15.16 0-29.37 6.71-40.21 16.45C213.27 199.05 192 203.34 192 257.09c0 13.7 3.25 26.76 8.73 38.7l63.82 53.18c7.21 1.8 14.64 3.03 22.39 3.03 62.11 0 98.11-45.47 211.16-256.46 7.38-14.35 13.9-29.85 13.9-45.99C512 20.64 486 0 457.89 0z"></path>
-    </svg>
-  </div>
+  
+  <div class="absolute inset-0 border-2 border-purple-400 rounded-xl" 
+     style="mask-image: radial-gradient(100px 100px at 309px -908px, black, );
+            background-image: url('/build/assets/img/handyman.jpg');
+            background-size: cover;
+            background-position: center;">
+</div>
   <h3 class="mt-6 font-bold" style="opacity: 0; will-change: auto;">
     Beautiful &amp; Minimal
   </h3>
@@ -301,7 +318,7 @@ Save thousands of dollars in costs compared to other lead generation apps. LeadF
       </h2>
       <div class="max-w-xl mx-auto" style="opacity: 1; transform: none; will-change: auto;">
         <p class="text-xl text-center text-white/70 mt-5">
-          Find highly-targeted leads that you can easily export to start your marketing and sales outreach.
+        Professional solutions designed to connect you with the right experts
         </p>
       </div>
       <div class="flex justify-center overflow-hidden" style="opacity: 0.5; transform: perspective(800px) rotateX(15deg);">
@@ -530,3 +547,76 @@ const phrases = [
 
         typeEffect();
 </script>
+
+    <style>
+        /* Marquee container */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            background: black;
+            padding: 10px 0;
+        }
+
+        /* Marquee inner wrapper */
+        .marquee-content {
+            display: flex;
+            gap: 40px; /* Adjust spacing between images */
+            animation: scrollMarquee 30s linear infinite;
+        }
+
+        /* Marquee animation */
+        @keyframes scrollMarquee {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Image styles */
+        .marquee-content img {
+            height: 30px; /* Adjust image height */
+            width: auto;
+        }
+    </style>
+    <script>
+        // Array of image sources
+        const imageSources = [
+            '/build/assets/img/bluedoglogo.png',
+            '/build/assets/img/Genius.png',
+            '/build/assets/img/LevelUp.png',
+            '/build/assets/img/Scoutbird.png',
+            '/build/assets/img/bluedoglogo.png',
+            '/build/assets/img/Mobiosoft.png',
+            '/build/assets/img/RocketDigital.png',
+            '/build/assets/img/Shopido.png',
+            '/build/assets/img/bluedoglogo.png',
+            '/build/assets/img/Genius.png',
+            '/build/assets/img/LevelUp.png',
+            '/build/assets/img/Scoutbird.png',
+            '/build/assets/img/bluedoglogo.png',
+            '/build/assets/img/Mobiosoft.png',
+            '/build/assets/img/RocketDigital.png',
+            '/build/assets/img/Shopido.png'
+            
+        ];
+
+        // Get the marquee content container
+        const marqueeContent = document.getElementById('marqueeContent');
+
+        // Loop through the imageSources array and create img elements
+        imageSources.forEach(src => {
+            // Create the image element
+            const imgElement = document.createElement('img');
+            imgElement.src = src;
+            imgElement.alt = src.split('/').pop().split('.')[0] + " Logo"; // Set alt text from file name
+            
+            // Append the image to the marquee container
+            marqueeContent.appendChild(imgElement);
+
+           
+        });
+    </script>

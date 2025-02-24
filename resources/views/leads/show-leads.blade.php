@@ -15,6 +15,54 @@ hr {
     border-top-width: 1px;
     margin: 10px 0 10px 0px !important;
 }
+.lead-list, .lead-details{
+    transition: all 0.3s ease-in-out;
+}
+.back-button{
+    display: none;
+ }
+@media (max-width: 768px){
+    .lead-list {
+        width: 100%;
+    }
+    .lead-details {
+        width: 100%;
+        display: none;
+    }
+    .lead-details.active{
+        display: block;
+    }
+ .back-button{
+    display: block;
+ }
+}
+.back-button {
+  position: relative;
+  padding: 10px 20px 10px 40px;
+  font-size: 10px;
+  color: #ffffff;
+  background-color: #1a191a;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: purple;
+}
+
+.back-button:before {
+  content: "\2190"; /* Unicode for left arrow */
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #ffffff;
+}
+
     </style>
 
     <div class="sticky-top enquiriesbanner">
@@ -83,7 +131,7 @@ hr {
 
                     <div class="row no-gutters">
                         <!-- Leads list  -->
-                        <div class="dashboard-projects col-12 col-md-5 col-lg-4 col-xl projects-column fixed-height-column overflow-auto scroll-touch leads-list-container border-right bg-grey-50"
+                        <div class="dashboard-projects col-12 col-md-5 col-lg-4 col-xl projects-column fixed-height-column overflow-auto scroll-touch leads-list-container border-right bg-grey-50 lead-list"
                             id="dashboard-projects" style="max-height: 870px;">
                             <input type="hidden" id="js-show-new-header" name="js-show-new-header" value="0">
 
@@ -242,14 +290,13 @@ hr {
                         </div>
 
 
-
                         <!-- Right panel  -->
 
 
-                        <div class="col-12 col-md-7 col-lg right-panel fixed-height-column overflow-auto scroll-touch h-100 d-block js-dashboard-right-container" style="max-height: 870px;"><br>
+                        <div class="col-12 col-md-7 col-lg right-panel fixed-height-column overflow-auto scroll-touch h-100 d-block js-dashboard-right-container lead-details" style="max-height: 870px;"><br>
 
 <div class="right-panel-wrapper ml-lg-4">
-    <div class="project-details-project-container" style="display: block; opacity: 1;">
+    <div class="project-details-project-container">
         <div class="w-100 project-details-grid-container">
             <div class="tw-w-full tw-flex tw-justify-center tw-items-center tw-py-4 loader" style="display:none">
                 <div role="status" class="tw-flex" data-cy="loading-spinner" style="width: 22px; height: 22px;">

@@ -100,6 +100,11 @@ $(document).on('click','.view_lead',function() {
    let lead_id = $(this).attr("m");  
    const obj = {_token,lead_id};
    let details = ""; 
+   
+       // Only call displayLeads on desktop/tablet (viewport width > 768px)
+       if ($(window).width() <= 768) {
+        showDetails();
+    }
 
    getHTMLResponse("leaddetails",obj).then((data) => {
     details = data;
@@ -118,7 +123,7 @@ const displayLeads = (json,count_total,befirst_count,urgent_count) =>{
     $(".matching_leads1").text(count_total);
     $("#be_first").text(befirst_count);
     $("#my_urgent").text(urgent_count);
- 
+   
 
     for(key in json)
         {
@@ -142,12 +147,15 @@ const displayLeads = (json,count_total,befirst_count,urgent_count) =>{
         }
         if(json.length>0 && page === 1)
             {
-               
+                
                 let _token = $('input[name="_token"]').val();
                 let lead_idu =json[0]["lead_id"];
                 
                 let details = "";
-    
+        // Only call displayLeads on desktop/tablet (viewport width > 768px)
+        if ($(window).width() > 768) {
+            displayLeads(leadsArr, count_total, befirst_count, urgent_count);
+        
                 getHTMLResponse("leaddetails",{_token,lead_id:lead_idu}).then((data) => {
                     details = data;
                     $("#show_details").html(details);
@@ -155,6 +163,7 @@ const displayLeads = (json,count_total,befirst_count,urgent_count) =>{
                     details = 'There is an error : '+error;  // Handle the error here
                 });    
                    $("#show_details").html(details);
+            }
                    $('.view_lead').removeClass('m-border');
                    $('.view_lead:first-child').addClass('m-border');
             }
@@ -308,10 +317,11 @@ else{
 };
 
 const fetchLeads = () => {
+   
     if (isLoading || lastPage) return;
 
     isLoading = true;
-
+    console.log("MM")
     $(".loader").show();
     var _token = $('input[name="_token"]').val();
     const obj = {_token,page,filter, sortdistance};
@@ -339,3 +349,22 @@ const fetchLeads = () => {
     console.error('Failed to fetch leads:', error); 
 });      
 };
+
+
+function showDetails(){
+    document.querySelector(".lead-list").style.display = "none";
+    document.querySelector(".lead-details").classList.add("active");
+    document.querySelector(".lead-details").style.setProperty("display", "block", "important");
+   
+}
+
+function showList(){
+  
+    document.querySelector(".lead-list").style.display = "block";
+    document.querySelector(".lead-details").classList.remove("active");
+    document.querySelector(".lead-details").style.setProperty("display", "none", "important");
+    $(".lead-details").hide();
+   
+    
+    
+}

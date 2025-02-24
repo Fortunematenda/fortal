@@ -30,8 +30,10 @@
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 10px;
+    color: purple;
   }
 
+  
   /* Radio button container */
   .options-container {
     display: flex;
@@ -174,8 +176,12 @@
 }
 
 .fieldlabels {
-    color: gray;
-    text-align: left
+    color: purple;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+   
 }
 
 #progressbar {
@@ -267,6 +273,11 @@
     font-size: 4em;
     color: #5f0969;
     padding-right: 10px;
+}
+p {
+    font-size: 20px ;
+    color: #5f0969  ;
+    margin-bottom: 20px !important;
 }
 
 .left-column p {

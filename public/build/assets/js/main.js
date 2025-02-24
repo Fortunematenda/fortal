@@ -315,7 +315,7 @@ let ext = "<div class='tab'><p><label>Description:</label><textarea class='texta
 
     ext += "<div class='tab'><p><label><b>Estimated budget</b></label><input type='text' id='estimate_quote' name='estimate_quote' placeholder='R 0.00'></p>";
     ext += "<p><label><b><input type='checkbox' id='urgent' name='urgent' value='1'> Is it urgent?</b></label></p>";
-    ext += "<p><label><b><input type='checkbox' id='hiring_decision' name='hiring_decision' value='1'> Hiring Decision Made?</b></label></p><hr/></div>";
+    ext += "<p><label><b><input type='checkbox' id='hiring_decision' name='hiring_decision' value='1'> Ready to Hire?</b></label></p><hr/></div>";
 
 ext += "<div class='tab'>";
 if(isLogged !== "Logged")

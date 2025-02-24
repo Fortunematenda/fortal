@@ -478,9 +478,20 @@ return $details;
 
   public function showLeadsDetails($lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$masked_email,$masked_contact_number,$lead_details,$lead_images){
     $details = "<div class='project-top'>";
-
+    $details .= " 
+    <a class='text-dark-blue d-flex d-md-none align-items-center back-to-list pl-4' href='javascript:void(0)' onclick='showList()'>
+        <span class='fortai-svg-icon bsi-primary-dark-blue bsi-xs'>
+           <i class='bi bi-arrow-left'></i>
+        </span>
+        <span class='pl-2'>
+            Back to list
+        </span>
+    </a><hr>";
+    
     $details .= "
+      
         <div class='d-flex flew-row flex-wrap justify-content-between align-items-center pb-2 w-100 project-details-grid-container'>
+      
             <div class='project-name-location pr-3 pt-2'>
                 <h4 class='mb-0 bol'>
                     <span class='buyer_name'><i class='bi bi-person-circle'></i> $first_name</span>
@@ -717,7 +728,7 @@ $details .= "<div class='d-flex  flex-wrap align-items-left text-regular mt-1 te
         <i class='bi bi-cash ' style='color: purple; font-size: 20px;'></i>
     </span>
     <span class='formatted-quote mr-2'>
-        <span class='quote-label text-grey-600 text-xs-14 mr-2 mt-2'>Project Estimated Budget:</span>
+        <span class='quote-label text-grey-600 text-xs-14 mr-2 mt-2'> Budget:</span>
         
     </span>
     <label class='Button_base__5Wcwx Button_sm__RWLp1 Button_smWithIcon__y3vYd Button_minWidth__WGVzH Button_textWhite__9w5Wn Button_bgDarkBlue__9V6YV !tw-no-underline tw-drop-shadow-[unset] !tw-px-2 !tw-min-h-[unset] tw-text-sm !tw-text-white'>R10 000</label>
